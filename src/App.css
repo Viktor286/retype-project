@@ -1,0 +1,89 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 50s linear;
+  height: 17vmin;
+  pointer-events: none;
+  margin: 0 0 20px 0;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+section.codingArea{
+  text-align: left;
+  font-size: 1.8rem;
+}
+
+span.await {
+  color: #e3fcff;
+}
+
+span.tab {
+  font-size: 1.5rem;
+  margin: 0 7px 0 0;
+  color: #3d4148;
+}
+
+span.lineBreak {
+  margin: 0 5px;
+  color: #464d5a;
+}
+
+span.lineBreak::after {
+  content: "\A";
+  white-space: pre;
+}
+
+span.ok {
+  color: #505050;
+}
+
+span.mistake {
+  color: #f19c83;
+  background-color: #573430;
+}
+
+span.cursor {
+  text-decoration: underline;
+  background-color: #8d8649;
+  color: #ffffff;
+}
+
+span.cursor.mistake{
+  background-color: #dc3c54;
+}
+
+span.cursor.ok{
+  color: #ffffff;
+  background-color: #489940;
+}
+
+span.lineBreak.cursor, span.tab.cursor {
+  color: #ffffff;
+  text-decoration: none;
+}
+
