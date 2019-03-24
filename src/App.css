@@ -10,7 +10,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #202227;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -43,8 +43,8 @@ span.await {
 }
 
 span.tab {
-  font-size: 1.5rem;
-  margin: 0 7px 0 0;
+  /*font-size: 1.5rem;*/
+  margin: 0 4px 0 0;
   color: #3d4148;
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import localTestText from "./testData/bfs-level-memo";
+import localTestText from "./testData/redux-101";
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,11 @@ class App extends Component {
 
     this.staticState = {
       mainTextSample: importedText,
-      mainTextSampleArr: importedTextAsArray
+      mainTextSampleArr: importedTextAsArray,
+      keysAmount: 0,
+      keysSuccess: 0,
+      keysLeft: 0,
+      linesSuccess: 0
     };
 
     this.state = {
@@ -96,13 +100,15 @@ class App extends Component {
   };
 
   globalKeyHandler = e => {
-    if (e.keyCode === 9) {
-      e.preventDefault(); // prevent tab behavior
+    if (
+      e.keyCode === 9 || // prevent tab behavior
+      e.keyCode === 32 // space
+    ) {
+      e.preventDefault(); //
     }
 
     // console.log('globalKeyHandler ', e);
-    // console.log('globalKeyHandler ', e.key);
-    // console.log('globalKeyHandler ', e.keyCode);
+    // console.log(e.key, e.keyCode);
 
     const cursor = this.state.cursorIndex;
 
@@ -119,6 +125,8 @@ class App extends Component {
     // Skip some keys
     if (
       e.keyCode === 38 || // up
+      e.keyCode === 33 || // page up
+      e.keyCode === 34 || // page down
       e.keyCode === 40 || // down
       e.keyCode === 16 || // shift
       e.keyCode === 17 || // control
@@ -183,6 +191,13 @@ class App extends Component {
 
   componentDidMount() {
     document.addEventListener("keydown", this.globalKeyHandler);
+    this.staticState.keysAmount = this.staticState.mainTextSampleArr.length;
+  }
+
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    let { keysAmount } = this.staticState;
+    this.staticState.keysSuccess = this.state.stat.filter(x => x === 1).length;
+    this.staticState.keysLeft = keysAmount - this.staticState.keysSuccess;
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -220,7 +235,7 @@ class App extends Component {
     // tab character output case
     if (char.charCodeAt(0) === 9) {
       cssClasses[cssClasses.length] = "tab";
-      displayChar = "⟼";
+      displayChar = "⇥";
     }
 
     return (
@@ -236,6 +251,9 @@ class App extends Component {
         <header className="App-header" onKeyDown={this.globalKeyHandler}>
           <img src={logo} className="App-logo" alt="logo" />
           <div>{this.state.isComplete ? <h1>Complete!</h1> : null}</div>
+          <div>
+            Done: {this.staticState.keysSuccess}, ({this.staticState.keysLeft})
+          </div>
           <section className="codingArea">
             {this.staticState.mainTextSampleArr.map(this.renderCodingArea)}
           </section>
