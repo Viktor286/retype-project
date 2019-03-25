@@ -1,7 +1,7 @@
 // TODO: Add code input functionality on browser localstorage or IndexedDB with UI on https://prismjs.com/
 // TODO: Strings recognition: total history string/characters count
 // TODO: words recognition for stats and for ctrl+arr move
-// TODO: Enlarged stats: overall chars, AMP, EPM, WPM,
+// TODO: Enlarged stats: overall chars, AMP, EPM, WPM, Current/Average Speed, Accuracy, Mistakes, Backspaces etc
 // TODO: Backup codeSamples and account
 // TODO: Change fontsize and font
 // TODO: timerBar with captured best and medium result from speed of others

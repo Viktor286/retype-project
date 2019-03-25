@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import localTestText from "./testData/redux-101";
+import localTestText from "./testData/bfs-level-memo";
 
 class App extends Component {
   constructor(props) {
@@ -15,16 +15,17 @@ class App extends Component {
     this.staticState = {
       mainTextSample: importedText,
       mainTextSampleArr: importedTextAsArray,
-      keysAmount: 0,
-      keysSuccess: 0,
-      keysLeft: 0,
-      linesSuccess: 0
+      keysAmount: importedTextAsArray.length
     };
 
     this.state = {
       cursorIndex: 0,
       stat: initialStat,
-      isComplete: false
+      isComplete: false,
+      keysLeft: 0,
+      keysSuccess: 0,
+      keysLeftPercent: 0,
+      linesSuccess: 0
     };
   }
 
@@ -80,10 +81,17 @@ class App extends Component {
         }
 
         updateStateObj["stat"] = newStat;
+
+        let keysSuccess = newStat.filter(x => x === 1).length;
+        updateStateObj["keysSuccess"] = keysSuccess;
+        updateStateObj["keysLeft"] = this.staticState.keysAmount - keysSuccess;
+        updateStateObj["keysLeftPercent"] = parseInt(
+          keysSuccess / (this.staticState.keysAmount / 100),
+          10
+        );
       }
 
       updateStateObj["cursorIndex"] = nextCursorIndex;
-
       return updateStateObj;
     });
   };
@@ -191,14 +199,9 @@ class App extends Component {
 
   componentDidMount() {
     document.addEventListener("keydown", this.globalKeyHandler);
-    this.staticState.keysAmount = this.staticState.mainTextSampleArr.length;
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {
-    let { keysAmount } = this.staticState;
-    this.staticState.keysSuccess = this.state.stat.filter(x => x === 1).length;
-    this.staticState.keysLeft = keysAmount - this.staticState.keysSuccess;
-  }
+  componentWillUpdate(nextProps, nextState, nextContext) {}
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log('UPD State -> ', this.state);
@@ -251,10 +254,18 @@ class App extends Component {
         <header className="App-header" onKeyDown={this.globalKeyHandler}>
           <img src={logo} className="App-logo" alt="logo" />
           <div>{this.state.isComplete ? <h1>Complete!</h1> : null}</div>
-          <div>
-            Done: {this.staticState.keysSuccess}, ({this.staticState.keysLeft})
+
+          <div className="statPanelNumbers">
+            {this.state.keysSuccess}
+            <span className="keysLeft"> / {this.state.keysLeft}</span>
           </div>
+
           <section className="codingArea">
+            <div id="progressbar">
+              <div style={{ width: this.state.keysLeftPercent + "%" }}>
+                &nbsp;
+              </div>
+            </div>
             {this.staticState.mainTextSampleArr.map(this.renderCodingArea)}
           </section>
         </header>
