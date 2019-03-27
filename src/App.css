@@ -117,3 +117,46 @@ div.statPanelNumbers{
   font-size: 1.4rem;
   color: #8eb9d1;
 }
+
+
+section.explorer {
+  background-color: #262b2f;
+    position: fixed;
+  top: 40px;
+}
+
+div.controls {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 40px;
+}
+
+div.controls button {
+  background-color: #262b2f;
+  color: #8eb9d1;
+  padding: 10px 20px;
+  border: 1px solid #333333;
+  cursor: pointer;
+  outline: none;
+}
+
+div.controls button:hover {
+  color: #9ccae2;
+}
+
+div.codeSampleItem {
+  color: #8eb9d1;
+  border: 1px solid #333333;
+  padding: 10px 20px;
+}
+
+div.codeSampleItem span {
+  cursor: pointer;
+}
+
+div.codeSampleItem span.active {
+  color: white;
+  cursor: text;
+  /*pointer-events: none;*/
+}

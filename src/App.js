@@ -1,32 +1,25 @@
 import React, { Component } from "react";
+
+import CodeSampleExplorer from "./components/CodeSampleExplorer";
+import CodeSampleControls from "./components/CodeSampleControls";
+
+import MockDB from "./components/MockDB";
 import logo from "./logo.svg";
 import "./App.css";
-import localTestText from "./testData/bfs-level-memo";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    const importedText = localTestText;
-
-    const importedTextAsArray = importedText.split("");
-    const initialStat = new Array(importedTextAsArray.length).fill(0);
-
     this.staticState = {
-      mainTextSample: importedText,
-      mainTextSampleArr: importedTextAsArray,
-      keysAmount: importedTextAsArray.length
+      codeSampleList: MockDB.map(elm => ({
+        id: elm.id,
+        title: elm.title
+      }))
     };
 
-    this.state = {
-      cursorIndex: 0,
-      stat: initialStat,
-      isComplete: false,
-      keysLeft: 0,
-      keysSuccess: 0,
-      keysLeftPercent: 0,
-      linesSuccess: 0
-    };
+    const initialCodeSample = MockDB[0];
+    this.state = Object.assign({}, initialCodeSample.state);
   }
 
   updateCodingAreaState = (cursor, action) => {
@@ -84,9 +77,9 @@ class App extends Component {
 
         let keysSuccess = newStat.filter(x => x === 1).length;
         updateStateObj["keysSuccess"] = keysSuccess;
-        updateStateObj["keysLeft"] = this.staticState.keysAmount - keysSuccess;
+        updateStateObj["keysLeft"] = this.state.keysAmount - keysSuccess;
         updateStateObj["keysLeftPercent"] = parseInt(
-          keysSuccess / (this.staticState.keysAmount / 100),
+          keysSuccess / (this.state.keysAmount / 100),
           10
         );
       }
@@ -97,7 +90,7 @@ class App extends Component {
   };
 
   getGoNextCursor = prevCursorIndex => {
-    const textSampleLen = this.staticState.mainTextSample.length - 1;
+    const textSampleLen = this.state.mainTextSample.length - 1;
     return prevCursorIndex < textSampleLen
       ? prevCursorIndex + 1
       : prevCursorIndex;
@@ -120,7 +113,7 @@ class App extends Component {
 
     const cursor = this.state.cursorIndex;
 
-    if (cursor > this.staticState.mainTextSampleArr.length) {
+    if (cursor > this.state.mainTextSampleArr.length) {
       // check mistakes
 
       // all complete
@@ -128,7 +121,7 @@ class App extends Component {
       return true;
     }
 
-    const currentChar = this.staticState.mainTextSampleArr[cursor];
+    const currentChar = this.state.mainTextSampleArr[cursor];
 
     // Skip some keys
     if (
@@ -248,9 +241,78 @@ class App extends Component {
     );
   };
 
+  changeCodeSampleHandler = e => {
+    const newCodeSampleId = e.target.dataset.id;
+    const newCodeSample = MockDB.filter(elm => elm.id === newCodeSampleId)[0];
+
+    // save state in DB
+    for (let idx in MockDB) {
+      if (MockDB[idx].id === this.state.currentCodeSampleId) {
+        MockDB[idx].state = Object.assign({}, this.state);
+      }
+    }
+
+    // update active state
+    this.setState(() => newCodeSample.state);
+  };
+
+  controlsResetHandler = e => {
+    e.preventDefault();
+    // e.target
+
+    this.setState(() => {
+      return {
+        cursorIndex: 0,
+        stat: new Array(this.state.keysAmount).fill(0),
+        isComplete: false,
+        keysLeft: 0,
+        keysSuccess: 0,
+        keysLeftPercent: 0,
+        linesSuccess: 0
+      };
+    });
+  };
+
+  controlsPrevHandler = e => {
+    e.preventDefault();
+    let targetId = "";
+    for (let idx in MockDB) {
+      if (MockDB[idx].id === this.state.currentCodeSampleId) {
+        targetId =
+          MockDB[(parseInt(idx, 10) + MockDB.length - 1) % MockDB.length].id;
+      }
+    }
+    let mimicEvent = { target: { dataset: { id: targetId } } };
+    this.changeCodeSampleHandler(mimicEvent);
+  };
+
+  controlsNextHandler = e => {
+    e.preventDefault();
+    let targetId = "";
+    for (let idx in MockDB) {
+      if (MockDB[idx].id === this.state.currentCodeSampleId) {
+        targetId = MockDB[(parseInt(idx, 10) + 1) % MockDB.length].id;
+      }
+    }
+    let mimicEvent = { target: { dataset: { id: targetId } } };
+    this.changeCodeSampleHandler(mimicEvent);
+  };
+
   render() {
     return (
       <div className="App">
+        <CodeSampleControls
+          controlsResetHandler={this.controlsResetHandler}
+          controlsPrevHandler={this.controlsPrevHandler}
+          controlsNextHandler={this.controlsNextHandler}
+        />
+
+        <CodeSampleExplorer
+          codeSampleList={this.staticState.codeSampleList}
+          currentCodeSampleId={this.state.currentCodeSampleId}
+          changeCodeSampleHandler={this.changeCodeSampleHandler}
+        />
+
         <header className="App-header" onKeyDown={this.globalKeyHandler}>
           <img src={logo} className="App-logo" alt="logo" />
           <div>{this.state.isComplete ? <h1>Complete!</h1> : null}</div>
@@ -266,7 +328,7 @@ class App extends Component {
                 &nbsp;
               </div>
             </div>
-            {this.staticState.mainTextSampleArr.map(this.renderCodingArea)}
+            {this.state.mainTextSampleArr.map(this.renderCodingArea)}
           </section>
         </header>
       </div>
