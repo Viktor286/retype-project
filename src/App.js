@@ -32,37 +32,37 @@ class App extends Component {
   updateCodingAreaState = (cursor, action) => {
     let currentCharStateCode = 0;
 
-    this.setState(prev => {
+    this.setState(prevState => {
       // Move cursor
       let nextCursorIndex = 0; // default
 
       if (action === "delete") {
-        nextCursorIndex = this.getGoNextCursor(prev.codeArea.cursorIndex);
+        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
         currentCharStateCode = 0; // reset state
       }
 
       if (action === "backspace") {
-        nextCursorIndex = this.getGoPrevCursor(prev.codeArea.cursorIndex);
+        nextCursorIndex = this.getGoPrevCursor(prevState.codeArea.cursorIndex);
         currentCharStateCode = 0; // reset state
       }
 
       if (action === "match") {
-        nextCursorIndex = this.getGoNextCursor(prev.codeArea.cursorIndex);
+        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
         currentCharStateCode = 1; // ok state
       }
 
       if (action === "mistake") {
-        nextCursorIndex = this.getGoNextCursor(prev.codeArea.cursorIndex);
+        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
         currentCharStateCode = 2; // mistake state
       }
 
       if (action === "one-forward") {
-        nextCursorIndex = this.getGoNextCursor(prev.codeArea.cursorIndex);
+        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
         currentCharStateCode = null; // no-change state
       }
 
       if (action === "one-backward") {
-        nextCursorIndex = this.getGoPrevCursor(prev.codeArea.cursorIndex);
+        nextCursorIndex = this.getGoPrevCursor(prevState.codeArea.cursorIndex);
         currentCharStateCode = null; // no-change state
       }
 
@@ -70,7 +70,7 @@ class App extends Component {
       let updateStateObj = {};
 
       if (currentCharStateCode !== null) {
-        const newStat = prev.characterCorrectness.map.slice(0);
+        const newStat = prevState.characterCorrectness.map.slice(0);
 
         if (action === "backspace") {
           newStat[cursor - 1] = currentCharStateCode;
@@ -81,9 +81,9 @@ class App extends Component {
         }
 
         const keysSuccess = newStat.filter(x => x === 1).length;
-        const keysLeft = this.state.currentCodeSample.contentLen - keysSuccess;
+        const keysLeft = prevState.currentCodeSample.contentLen - keysSuccess;
         const keysLeftPercent = parseInt(
-          keysSuccess / (this.state.currentCodeSample.contentLen / 100),
+          keysSuccess / (prevState.currentCodeSample.contentLen / 100),
           10
         );
 
@@ -122,6 +122,16 @@ class App extends Component {
 
     const cursor = this.state.codeArea.cursorIndex;
     const currentChar = this.state.currentCodeSample.contentAsArray[cursor];
+
+    if (e.keyCode === 37 && e.ctrlKey) {
+      this.controlsPrevHandler(e);
+      return true;
+    }
+
+    if (e.keyCode === 39 && e.ctrlKey) {
+      this.controlsNextHandler(e);
+      return true;
+    }
 
     // Skip some keys
     if (
@@ -265,23 +275,11 @@ class App extends Component {
 
         <header className="App-header" onKeyDown={this.globalKeyHandler}>
           <img src={logo} className="App-logo" alt="logo" />
-          <div>
-            {this.state.characterCorrectness.isComplete ? (
-              <h1>Complete!</h1>
-            ) : null}
-          </div>
 
-          <div className="statPanelNumbers">
-            {this.state.characterCorrectness.keysSuccess}
-            <span className="keysLeft">
-              {" "}
-              / {this.state.characterCorrectness.keysLeft}
-            </span>
-          </div>
-
-          <section className="codingArea">
+          <section id="bottomPanel">
             <div id="progressbar">
               <div
+                className="bar"
                 style={{
                   width: this.state.characterCorrectness.keysLeftPercent + "%"
                 }}
@@ -289,6 +287,25 @@ class App extends Component {
                 &nbsp;
               </div>
             </div>
+
+            <div className="statPanelNumbers">
+              <span className="statusText">
+                {this.state.characterCorrectness.isComplete ? (
+                  <span className="complete">Complete!</span>
+                ) : (
+                  <span className="progress">In progress:</span>
+                )}
+              </span>
+
+              {this.state.characterCorrectness.keysSuccess}
+              <span className="keysLeft">
+                {" "}
+                / {this.state.characterCorrectness.keysLeft}
+              </span>
+            </div>
+          </section>
+
+          <section className="codingArea">
             {this.state.currentCodeSample.contentAsArray.map(
               this.renderCodingArea
             )}

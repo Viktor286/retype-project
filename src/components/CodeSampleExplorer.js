@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/CodeSampleExplorer.css";
 
 class CodeSampleExplorer extends React.Component {
   constructor(props) {

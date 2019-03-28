@@ -10,6 +10,7 @@ import new_node_event from "../testData/new-node-event";
 import for_in_for from "../testData/for-in-for";
 import max_profit_job_seq from "../testData/max-profit-job-seq";
 import getters from "../testData/getters";
+import redux_from_scratch from "../testData/redux-from-scratch";
 
 class CodeSample {
   constructor({ title, content, mainCategory }) {
@@ -87,6 +88,11 @@ let codeSamplesDataBase = [
     title: "Getters",
     content: getters,
     mainCategory: "JS Core"
+  }),
+  new CodeSample({
+    title: "Redux from scratch",
+    content: redux_from_scratch,
+    mainCategory: "Patterns"
   }),
   new CodeSample({
     title: "BFS level memo",
