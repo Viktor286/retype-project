@@ -3,9 +3,15 @@ import React from "react";
 const CodingArea = ({
   cursorIndex,
   characterCorrectnessMap,
-  currentCodeSampleAsArr
+  currentCodeSampleAsArr,
+  codeSampleTitle,
+  mainCategory
 }) => (
   <section className="codingArea">
+    <h2>
+      {codeSampleTitle}
+      <div className="mainCategory">({mainCategory})</div>
+    </h2>
     {currentCodeSampleAsArr.map((char, idx) => {
       let displayChar = char;
 

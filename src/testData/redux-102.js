@@ -29,7 +29,6 @@ const ListItem = ({ dispatch, id, description, amount, createdAt }) => (
 );
 
 const ListItemWithDispatch = connect()(ListItem);
-// without mapReduxStoreToProp return Component with added dispatch function into props
 
 const IndexComponent = (props) => {
 \tconsole.log('IndexComponent props: ', props)
@@ -68,15 +67,15 @@ const ReduxProvider = (
 \t<Provider store={reduxStore}>
 \t\t<BrowserRouter>
 \t\t\t<Switch>
-\t\t\t\t<Route path="/" exact={true} component={connect(mapReduxStoreToProp)(IndexComponent)} />
+\t\t\t\t<Route
+\t\t\t\t\tpath="/" exact={true}
+\t\t\t\t\tcomponent={connect(mapReduxStoreToProp)(IndexComponent)} />
 \t\t\t</Switch>
 \t\t</BrowserRouter>
 \t</Provider>
 );
 
 ReactDOM.render(ReduxProvider, document.getElementById('app'));
-
-// --------runtime -----
 
 reduxStore.subscribe(() => {
 \tconsole.log('New state change: ', reduxStore.getState());
@@ -86,8 +85,13 @@ reduxStore.subscribe(() => {
 \tconsole.log('visibleExpenses: ', visibleExpenses);
 })
 
-const expenseOne = reduxStore.dispatch(addExpense({ description: 'Rent', amount: 1000, createdAt: 1 }));
-const expenseTwo = reduxStore.dispatch(addExpense({ description: 'Coffee', amount: 3000, createdAt: 2 }));
+const expenseOne = reduxStore.dispatch(
+\taddExpense({ description: 'Rent', amount: 1000, createdAt: 1 })
+);
+
+const expenseTwo = reduxStore.dispatch(
+\taddExpense({ description: 'Coffee', amount: 3000, createdAt: 2 })
+);
 
 const removeExpenseOne = reduxStore.dispatch(removeExpense(expenseOne.expense.id));
 reduxStore.dispatch(editExpense(expenseTwo.expense.id, { amount: 99999 }));

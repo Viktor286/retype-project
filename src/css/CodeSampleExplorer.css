@@ -3,6 +3,9 @@ section.explorer {
     position: fixed;
     top: 80px;
     font-size: .7rem;
+    border: 1px solid #3d4b53;
+    padding: 10px;
+    z-index: 801;
 }
 
 div.controls {
@@ -27,8 +30,11 @@ div.controls button:hover {
 
 div.codeSampleItem {
     color: #8eb9d1;
-    border: 1px solid #333333;
-    padding: 10px 20px;
+    /* border: 1px solid #333333; */
+    padding: 6px 10px;
+    text-align: left;
+    width: 180px;
+    font-size: .8rem;
 }
 
 div.codeSampleItem span {

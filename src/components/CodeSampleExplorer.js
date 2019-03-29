@@ -2,10 +2,6 @@ import React from "react";
 import "../css/CodeSampleExplorer.css";
 
 class CodeSampleExplorer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     // console.log("this.props.codeSampleList ", this.props.codeSampleList);
     return (

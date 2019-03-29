@@ -25,11 +25,14 @@ class CodeSample {
 
     this.initialState = {
       codeArea: {
-        cursorIndex: 0
+        cursorIndex: 0,
+        timeCountingDelay: 0
       },
 
       currentCodeSample: {
         id: this.id,
+        title: this.title,
+        mainCategory: this.mainCategory,
         content: this.content,
         contentAsArray,
         contentLen
@@ -40,7 +43,8 @@ class CodeSample {
         keysLeft: contentLen,
         keysSuccess: 0,
         keysLeftPercent: 0,
-        isComplete: false
+        isComplete: false,
+        timeCounted: 0
       }
     };
 

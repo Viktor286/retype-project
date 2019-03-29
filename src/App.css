@@ -4,7 +4,7 @@
 
 .App-logo {
     animation: App-logo-spin infinite 50s linear;
-    height: 17vmin;
+    height: 13vmin;
     pointer-events: none;
     margin: 0 0 20px 0;
 }
@@ -37,6 +37,19 @@ section.codingArea {
     text-align: left;
     font-size: 1.8rem;
     margin: 0 0 190px 0;
+}
+
+section.codingArea h2 {
+    font-weight: normal;
+    text-align: center;
+    font-size: 2.1rem;
+    margin: 5px 0 15px;
+}
+
+section.codingArea h2 div.mainCategory{
+    font-size: 1.1rem;
+    color: #6a7487;
+    margin: 0 10px;
 }
 
 span.await {
@@ -98,6 +111,41 @@ section#bottomPanel {
     height: 60px;
 }
 
+section#bottomPanel.complete {
+    background-color: #1d7053;
+}
+
+#progressbar {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #1a1f23;
+    border-top: 1px solid #3e4a52;
+    height: 7px;
+}
+
+#progressbar > div.bar {
+    background-color: #67b7e6;
+    width: 0%;
+    height: 100%;
+    border-radius: 0;
+    transition-property: width;
+    transition-duration: 0s;
+    transition-delay: 0ms;
+    transition-timing-function: linear;
+}
+
+div.timerStats {
+    top: 8px;
+    left: 0;
+    position: absolute;
+    font-size: 1.6rem;
+    color: #c5eaff;
+    width: 105px;
+    /*background-color: #202227;*/
+}
+
 div.statPanelNumbers {
     top: 6px;
     left: calc(50% - 150px);
@@ -124,25 +172,3 @@ span.keysLeft {
     color: #619bcc;
 }
 
-#progressbar {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: #1a1f23;
-    border-radius: 0;
-    border-top: 1px solid #3e4a52;
-    margin: 0;
-    height: 7px;
-}
-
-#progressbar > div.bar {
-    background-color: #67b7e6;
-    width: 0%;
-    height: 100%;
-    border-radius: 0;
-    transition-property: width;
-    transition-duration: 0s;
-    transition-delay: 0ms;
-    transition-timing-function: linear;
-}

@@ -5,6 +5,8 @@ import CodeSampleControls from "./components/CodeSampleControls";
 import ControlPanel from "./components/ControlPanel";
 import CodingArea from "./components/CodingArea";
 
+import { jsonObjCopy } from "./functions/misc";
+
 import MockDB from "./components/MockDB";
 import logo from "./logo.svg";
 import "./App.css";
@@ -18,7 +20,7 @@ class App extends Component {
     const initialCodeSample = MockDB[randomIdx];
 
     // Init state
-    this.state = this.jsonObjCopy(initialCodeSample.state);
+    this.state = jsonObjCopy(initialCodeSample.state);
 
     // Short static version of state for navigation comp
     this.staticState = {
@@ -28,8 +30,6 @@ class App extends Component {
       }))
     };
   }
-
-  jsonObjCopy = obj => JSON.parse(JSON.stringify(obj));
 
   updateCodingAreaState = (cursor, action) => {
     let currentCharStateCode = 0;
@@ -90,6 +90,7 @@ class App extends Component {
         );
 
         updateStateObj.characterCorrectness = {
+          ...prevState.characterCorrectness,
           map: newStat,
           keysLeft,
           keysSuccess,
@@ -98,7 +99,12 @@ class App extends Component {
         };
       }
 
-      updateStateObj.codeArea = { cursorIndex: nextCursorIndex };
+      updateStateObj.codeArea = {
+        ...prevState.codeArea,
+        cursorIndex: nextCursorIndex,
+        timeCountingDelay: 5000
+      };
+
       return updateStateObj;
     });
   };
@@ -187,7 +193,7 @@ class App extends Component {
     }
 
     if (e.keyCode === 37) {
-      // back
+      // backward
       this.updateCodingAreaState(cursor, "one-backward");
       return true;
     }
@@ -228,6 +234,31 @@ class App extends Component {
 
   componentDidMount() {
     document.addEventListener("keydown", this.globalKeyHandler);
+
+    setInterval(() => {
+      // decrease timeCountingDelay if not null
+      if (this.state.codeArea.timeCountingDelay > 0) {
+        this.setState(prev => {
+          let exports = {};
+
+          exports.codeArea = {
+            ...prev.codeArea,
+            timeCountingDelay: prev.codeArea.timeCountingDelay - 1000
+          };
+
+          if (!prev.characterCorrectness.isComplete) {
+            exports.characterCorrectness = {
+              ...prev.characterCorrectness,
+              timeCounted: prev.characterCorrectness.timeCounted + 1000
+            };
+          }
+
+          return exports;
+        });
+      }
+
+      // other timer actions
+    }, 1000);
   }
 
   componentWillUpdate(nextProps, nextState, nextContext) {}
@@ -243,7 +274,7 @@ class App extends Component {
     // save state in DB
     for (let idx in MockDB) {
       if (MockDB[idx].id === this.state.currentCodeSample.id) {
-        MockDB[idx].state = this.jsonObjCopy(this.state);
+        MockDB[idx].state = jsonObjCopy(this.state);
       }
     }
 
@@ -301,15 +332,17 @@ class App extends Component {
 
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-
           <ControlPanel
             keysSuccess={this.state.characterCorrectness.keysSuccess}
             keysLeft={this.state.characterCorrectness.keysLeft}
             keysLeftPercent={this.state.characterCorrectness.keysLeftPercent}
             isComplete={this.state.characterCorrectness.isComplete}
+            timeCounted={this.state.characterCorrectness.timeCounted}
           />
 
           <CodingArea
+            codeSampleTitle={this.state.currentCodeSample.title}
+            mainCategory={this.state.currentCodeSample.mainCategory}
             currentCodeSampleAsArr={this.state.currentCodeSample.contentAsArray}
             cursorIndex={this.state.codeArea.cursorIndex}
             characterCorrectnessMap={this.state.characterCorrectness.map}
