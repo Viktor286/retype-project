@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import CodeSampleExplorer from "./components/CodeSampleExplorer";
 import CodeSampleControls from "./components/CodeSampleControls";
+import ControlPanel from "./components/ControlPanel";
+import CodingArea from "./components/CodingArea";
 
 import MockDB from "./components/MockDB";
 import logo from "./logo.svg";
@@ -113,25 +115,49 @@ class App extends Component {
   };
 
   globalKeyHandler = e => {
-    if (
-      e.keyCode === 9 || // prevent tab behavior
-      e.keyCode === 32 // space
-    ) {
-      e.preventDefault(); //
-    }
+    console.log("e.keyCode ", e.keyCode);
 
-    const cursor = this.state.codeArea.cursorIndex;
-    const currentChar = this.state.currentCodeSample.contentAsArray[cursor];
-
+    // Set custom shortcuts
     if (e.keyCode === 37 && e.ctrlKey) {
+      // ctrl+left key
       this.controlsPrevHandler(e);
       return true;
     }
 
     if (e.keyCode === 39 && e.ctrlKey) {
+      // ctrl+right key
       this.controlsNextHandler(e);
       return true;
     }
+
+    // Prevent keys
+    if (
+      e.keyCode === 9 || // prevent tab behavior
+      e.keyCode === 32 // prevent space behavior
+    ) {
+      e.preventDefault(); //
+    }
+
+    // Ctrl + space: page down
+    if (e.keyCode === 32 && e.ctrlKey) {
+      const pageSize = parseInt(window.innerHeight, 10) - 100;
+      window.scroll(0, window.scrollY + pageSize);
+      return true;
+    }
+
+    if (e.keyCode === 32 && e.shiftKey) {
+      const pageSize = parseInt(window.innerHeight, 10) - 100;
+      window.scroll(0, window.scrollY - pageSize);
+      return true;
+    }
+
+    // Bypass other Ctrl shortcut group
+    if (e.ctrlKey) {
+      return true;
+    }
+
+    const cursor = this.state.codeArea.cursorIndex;
+    const currentChar = this.state.currentCodeSample.contentAsArray[cursor];
 
     // Skip some keys
     if (
@@ -273,88 +299,25 @@ class App extends Component {
           changeCodeSampleHandler={this.changeCodeSampleHandler}
         />
 
-        <header className="App-header" onKeyDown={this.globalKeyHandler}>
+        <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
 
-          <section id="bottomPanel">
-            <div id="progressbar">
-              <div
-                className="bar"
-                style={{
-                  width: this.state.characterCorrectness.keysLeftPercent + "%"
-                }}
-              >
-                &nbsp;
-              </div>
-            </div>
+          <ControlPanel
+            keysSuccess={this.state.characterCorrectness.keysSuccess}
+            keysLeft={this.state.characterCorrectness.keysLeft}
+            keysLeftPercent={this.state.characterCorrectness.keysLeftPercent}
+            isComplete={this.state.characterCorrectness.isComplete}
+          />
 
-            <div className="statPanelNumbers">
-              <span className="statusText">
-                {this.state.characterCorrectness.isComplete ? (
-                  <span className="complete">Complete!</span>
-                ) : (
-                  <span className="progress">In progress:</span>
-                )}
-              </span>
-
-              {this.state.characterCorrectness.keysSuccess}
-              <span className="keysLeft">
-                {" "}
-                / {this.state.characterCorrectness.keysLeft}
-              </span>
-            </div>
-          </section>
-
-          <section className="codingArea">
-            {this.state.currentCodeSample.contentAsArray.map(
-              this.renderCodingArea
-            )}
-          </section>
+          <CodingArea
+            currentCodeSampleAsArr={this.state.currentCodeSample.contentAsArray}
+            cursorIndex={this.state.codeArea.cursorIndex}
+            characterCorrectnessMap={this.state.characterCorrectness.map}
+          />
         </header>
       </div>
     );
   }
-
-  renderCodingArea = (char, idx) => {
-    let displayChar = char;
-
-    // Markup
-    let cssClasses = ["char"];
-
-    if (this.state.codeArea.cursorIndex === idx) {
-      cssClasses[cssClasses.length] = "cursor";
-    }
-
-    if (this.state.characterCorrectness.map[idx] === 0) {
-      cssClasses[cssClasses.length] = "await";
-    }
-
-    if (this.state.characterCorrectness.map[idx] === 1) {
-      cssClasses[cssClasses.length] = "ok";
-    }
-
-    if (this.state.characterCorrectness.map[idx] === 2) {
-      cssClasses[cssClasses.length] = "mistake";
-    }
-
-    // 'enter' character output case
-    if (char.charCodeAt(0) === 10) {
-      cssClasses[cssClasses.length] = "lineBreak";
-      displayChar = "↵";
-    }
-
-    // tab character output case
-    if (char.charCodeAt(0) === 9) {
-      cssClasses[cssClasses.length] = "tab";
-      displayChar = "⇥";
-    }
-
-    return (
-      <span key={idx} className={cssClasses.join(" ")}>
-        {displayChar}
-      </span>
-    );
-  };
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.globalKeyHandler);
