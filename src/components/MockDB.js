@@ -44,6 +44,8 @@ class CodeSample {
         keysSuccess: 0,
         keysLeftPercent: 0,
         isComplete: false,
+        cpm: 0,
+        apm: 0,
         timeCounted: 0
       }
     };

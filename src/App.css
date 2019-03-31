@@ -142,8 +142,8 @@ div.timerStats {
     position: absolute;
     font-size: 1.6rem;
     color: #c5eaff;
-    width: 105px;
-    /*background-color: #202227;*/
+    width: 205px;
+    background-color: #202227;
 }
 
 div.statPanelNumbers {

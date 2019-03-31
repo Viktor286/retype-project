@@ -32,8 +32,11 @@ class Example {
 
 const obj3 = new Example();
 console.log(obj3.hello); // "world"
-console.log(Object.getOwnPropertyDescriptor(obj3, "hello")); // undefined
 console.log(
-\tObject.getOwnPropertyDescriptor(Object.getPrototypeOf(obj3), "hello")
+\tObject.getOwnPropertyDescriptor(obj3, "hello")
+); // undefined
+console.log(
+\tObject.getOwnPropertyDescriptor(
+\tObject.getPrototypeOf(obj3), "hello")
 );
 `;

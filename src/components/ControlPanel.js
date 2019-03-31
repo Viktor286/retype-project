@@ -6,7 +6,8 @@ const ControlPanel = ({
   keysLeft,
   keysLeftPercent,
   isComplete,
-  timeCounted
+  timeCounted,
+  cpm
 }) => (
   <section id="bottomPanel" className={isComplete ? "complete" : null}>
     <div id="progressbar">
@@ -19,7 +20,9 @@ const ControlPanel = ({
         &nbsp;
       </div>
     </div>
-    <div className={"timerStats"}>{millisecondsToTime(timeCounted)}</div>
+    <div className="timerStats">
+      {millisecondsToTime(timeCounted)}, CPM {cpm}
+    </div>
     <div className="statPanelNumbers">
       <span className={"statusText"}>
         {isComplete ? (

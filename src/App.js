@@ -4,6 +4,7 @@ import CodeSampleExplorer from "./components/CodeSampleExplorer";
 import CodeSampleControls from "./components/CodeSampleControls";
 import ControlPanel from "./components/ControlPanel";
 import CodingArea from "./components/CodingArea";
+import { codingAreaModifier } from "./App/codingAreaModifier";
 
 import { jsonObjCopy } from "./functions/misc";
 
@@ -31,93 +32,10 @@ class App extends Component {
     };
   }
 
-  updateCodingAreaState = (cursor, action) => {
-    let currentCharStateCode = 0;
-
+  updateCodingAreaState = action => {
     this.setState(prevState => {
-      // Move cursor
-      let nextCursorIndex = 0; // default
-
-      if (action === "delete") {
-        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
-        currentCharStateCode = 0; // reset state
-      }
-
-      if (action === "backspace") {
-        nextCursorIndex = this.getGoPrevCursor(prevState.codeArea.cursorIndex);
-        currentCharStateCode = 0; // reset state
-      }
-
-      if (action === "match") {
-        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
-        currentCharStateCode = 1; // ok state
-      }
-
-      if (action === "mistake") {
-        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
-        currentCharStateCode = 2; // mistake state
-      }
-
-      if (action === "one-forward") {
-        nextCursorIndex = this.getGoNextCursor(prevState.codeArea.cursorIndex);
-        currentCharStateCode = null; // no-change state
-      }
-
-      if (action === "one-backward") {
-        nextCursorIndex = this.getGoPrevCursor(prevState.codeArea.cursorIndex);
-        currentCharStateCode = null; // no-change state
-      }
-
-      // update updateStateObj
-      let updateStateObj = {};
-
-      if (currentCharStateCode !== null) {
-        const newStat = prevState.characterCorrectness.map.slice(0);
-
-        if (action === "backspace") {
-          newStat[cursor - 1] = currentCharStateCode;
-        }
-
-        if (action !== "backspace") {
-          newStat[cursor] = currentCharStateCode;
-        }
-
-        const keysSuccess = newStat.filter(x => x === 1).length;
-        const keysLeft = prevState.currentCodeSample.contentLen - keysSuccess;
-        const keysLeftPercent = parseInt(
-          keysSuccess / (prevState.currentCodeSample.contentLen / 100),
-          10
-        );
-
-        updateStateObj.characterCorrectness = {
-          ...prevState.characterCorrectness,
-          map: newStat,
-          keysLeft,
-          keysSuccess,
-          keysLeftPercent,
-          isComplete: keysLeft <= 0
-        };
-      }
-
-      updateStateObj.codeArea = {
-        ...prevState.codeArea,
-        cursorIndex: nextCursorIndex,
-        timeCountingDelay: 5000
-      };
-
-      return updateStateObj;
+      return codingAreaModifier(prevState, action);
     });
-  };
-
-  getGoNextCursor = prevCursorIndex => {
-    const textSampleLen = this.state.currentCodeSample.contentLen - 1;
-    return prevCursorIndex < textSampleLen
-      ? prevCursorIndex + 1
-      : prevCursorIndex;
-  };
-
-  getGoPrevCursor = prevCursorIndex => {
-    return prevCursorIndex > 0 ? prevCursorIndex - 1 : prevCursorIndex;
   };
 
   globalKeyHandler = e => {
@@ -188,31 +106,31 @@ class App extends Component {
     // Arrows back/forward
     if (e.keyCode === 39) {
       // forward
-      this.updateCodingAreaState(cursor, "one-forward");
+      this.updateCodingAreaState({ type: "one-forward", cursor });
       return true;
     }
 
     if (e.keyCode === 37) {
       // backward
-      this.updateCodingAreaState(cursor, "one-backward");
+      this.updateCodingAreaState({ type: "one-backward", cursor });
       return true;
     }
 
     if (e.keyCode === 8) {
       // backspace
-      this.updateCodingAreaState(cursor, "backspace");
+      this.updateCodingAreaState({ type: "backspace", cursor });
       return true;
     }
 
     if (e.keyCode === 46) {
       // delete
-      this.updateCodingAreaState(cursor, "delete");
+      this.updateCodingAreaState({ type: "delete", cursor });
       return true;
     }
 
     if (e.keyCode === 13 && currentChar && currentChar.charCodeAt(0) === 10) {
       // enter
-      this.updateCodingAreaState(cursor, "match");
+      this.updateCodingAreaState({ type: "match", cursor });
       return true;
     }
 
@@ -220,16 +138,16 @@ class App extends Component {
       // if tab char is expecting
       if (e.keyCode === 9 || e.keyCode === 32) {
         // tab or space will be ok
-        this.updateCodingAreaState(cursor, "match");
+        this.updateCodingAreaState({ type: "match", cursor });
         return true;
       }
     }
 
     // Detect match or mistake
-    this.updateCodingAreaState(
-      cursor,
-      e.key === currentChar ? "match" : "mistake"
-    );
+    this.updateCodingAreaState({
+      type: e.key === currentChar ? "match" : "mistake",
+      cursor
+    });
   };
 
   componentDidMount() {
@@ -247,9 +165,15 @@ class App extends Component {
           };
 
           if (!prev.characterCorrectness.isComplete) {
+            const timeCounted = prev.characterCorrectness.timeCounted + 1000;
+            const cpm = Math.round(
+              prev.characterCorrectness.keysSuccess / (timeCounted / 1000 / 60)
+            );
+
             exports.characterCorrectness = {
               ...prev.characterCorrectness,
-              timeCounted: prev.characterCorrectness.timeCounted + 1000
+              timeCounted,
+              cpm
             };
           }
 
@@ -338,6 +262,7 @@ class App extends Component {
             keysLeftPercent={this.state.characterCorrectness.keysLeftPercent}
             isComplete={this.state.characterCorrectness.isComplete}
             timeCounted={this.state.characterCorrectness.timeCounted}
+            cpm={this.state.characterCorrectness.cpm}
           />
 
           <CodingArea
