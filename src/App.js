@@ -16,7 +16,6 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.CodeSampleExplorer = React.createRef();
     this.state = {};
   }
 
@@ -71,13 +70,49 @@ class App extends Component {
     }, 1000);
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {}
+  codeSampleExplorerHandler = action => {
+    const { codeSamples } = this.props;
+    let targetId = "";
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // console.log('UPD State -> ', this.state);
-  }
+    switch (action.type) {
+      case "RESET_SAMPLE":
+        this.changeCodeSampleHandler(action.id, true);
+        break;
 
-  changeCodeSampleHandler = (e, id, reset = false) => {
+      case "DISPLAY_TARGET_SAMPLE":
+        this.changeCodeSampleHandler(action.id);
+        break;
+
+      case "DISPLAY_NEXT_SAMPLE":
+        for (let idx in codeSamples) {
+          if (codeSamples[idx].activeState.currentCodeSample.id === action.id) {
+            targetId =
+              codeSamples[(parseInt(idx, 10) + 1) % codeSamples.length]
+                .activeState.currentCodeSample.id;
+          }
+        }
+        this.changeCodeSampleHandler(targetId);
+        break;
+
+      case "DISPLAY_PREV_SAMPLE":
+        for (let idx in codeSamples) {
+          if (codeSamples[idx].activeState.currentCodeSample.id === action.id) {
+            targetId =
+              codeSamples[
+                (parseInt(idx, 10) + codeSamples.length - 1) %
+                  codeSamples.length
+              ].activeState.currentCodeSample.id;
+          }
+        }
+        this.changeCodeSampleHandler(targetId);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  changeCodeSampleHandler = (id, reset = false) => {
     const { codeSamples } = this.props;
 
     const newCodeSample = codeSamples.filter(
@@ -108,8 +143,7 @@ class App extends Component {
         <div className="App">
           <CodeSampleExplorer
             currentCodeSampleId={this.state.currentCodeSample.id}
-            changeCodeSampleHandler={this.changeCodeSampleHandler}
-            ref={this.CodeSampleExplorer}
+            codeSampleExplorerHandler={this.codeSampleExplorerHandler}
           />
 
           <header className="App-header">
@@ -143,19 +177,19 @@ class App extends Component {
     // Set custom shortcuts
     if (e.keyCode === 37 && e.ctrlKey) {
       // ctrl+left key
-      // this.CodeSampleExplorer.current.controlsPrevHandler(
-      //   e,
-      //   this.state.currentCodeSample.id
-      // );
+      this.codeSampleExplorerHandler({
+        type: "DISPLAY_PREV_SAMPLE",
+        id: this.state.currentCodeSample.id
+      });
       return true;
     }
 
     if (e.keyCode === 39 && e.ctrlKey) {
       // ctrl+right key
-      // this.CodeSampleExplorer.current.controlsNextHandler(
-      //   e,
-      //   this.state.currentCodeSample.id
-      // );
+      this.codeSampleExplorerHandler({
+        type: "DISPLAY_NEXT_SAMPLE",
+        id: this.state.currentCodeSample.id
+      });
       return true;
     }
 
@@ -255,9 +289,4 @@ class App extends Component {
 
 const mapStateToProps = state => ({ codeSamples: state.codeSamples });
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { forwardRef: true }
-)(App);
+export default connect(mapStateToProps)(App);

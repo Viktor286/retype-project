@@ -4,11 +4,7 @@ import "../css/CodeSampleExplorer.css";
 
 class CodeSampleExplorer extends React.Component {
   render() {
-    const {
-      codeSamples,
-      currentCodeSampleId,
-      changeCodeSampleHandler
-    } = this.props;
+    const { codeSamples, currentCodeSampleId } = this.props;
 
     const displayCodeSamples = codeSamples.map(
       ({ initialState: { currentCodeSample } }) => {
@@ -22,7 +18,7 @@ class CodeSampleExplorer extends React.Component {
                 <span>[{contentLen}]</span>
               </span>
             ) : (
-              <span onClick={e => changeCodeSampleHandler(e, id)}>
+              <span onClick={e => this.controlsSelectHandler(e, id)}>
                 {title}&nbsp;
                 <span>[{contentLen}]</span>
               </span>
@@ -59,45 +55,24 @@ class CodeSampleExplorer extends React.Component {
     );
   }
 
-  controlsResetHandler = (e, currentCodeSampleId) => {
+  controlsSelectHandler = (e, id) => {
     e.preventDefault();
-    this.props.changeCodeSampleHandler(e, currentCodeSampleId, true);
+    this.props.codeSampleExplorerHandler({ type: "DISPLAY_TARGET_SAMPLE", id });
   };
 
-  controlsPrevHandler = (e, currentCodeSampleId) => {
-    const { codeSamples } = this.props;
+  controlsResetHandler = (e, id) => {
     e.preventDefault();
-    let targetId = "";
-    for (let idx in codeSamples) {
-      if (
-        codeSamples[idx].activeState.currentCodeSample.id ===
-        currentCodeSampleId
-      ) {
-        targetId =
-          codeSamples[
-            (parseInt(idx, 10) + codeSamples.length - 1) % codeSamples.length
-          ].activeState.currentCodeSample.id;
-      }
-    }
-    this.props.changeCodeSampleHandler(e, targetId);
+    this.props.codeSampleExplorerHandler({ type: "RESET_SAMPLE", id });
   };
 
-  controlsNextHandler = (e, currentCodeSampleId) => {
+  controlsPrevHandler = (e, id) => {
     e.preventDefault();
-    const { codeSamples } = this.props;
+    this.props.codeSampleExplorerHandler({ type: "DISPLAY_PREV_SAMPLE", id });
+  };
 
-    let targetId = "";
-    for (let idx in codeSamples) {
-      if (
-        codeSamples[idx].activeState.currentCodeSample.id ===
-        currentCodeSampleId
-      ) {
-        targetId =
-          codeSamples[(parseInt(idx, 10) + 1) % codeSamples.length].activeState
-            .currentCodeSample.id;
-      }
-    }
-    this.props.changeCodeSampleHandler(e, targetId);
+  controlsNextHandler = (e, id) => {
+    e.preventDefault();
+    this.props.codeSampleExplorerHandler({ type: "DISPLAY_NEXT_SAMPLE", id });
   };
 }
 
