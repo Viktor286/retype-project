@@ -2,12 +2,14 @@ import React from "react";
 import { millisecondsToTime } from "../functions/misc";
 
 const ControlPanel = ({
-  keysSuccess,
-  keysLeft,
-  keysLeftPercent,
-  isComplete,
-  timeCounted,
-  cpm
+  characterCorrectness: {
+    keysSuccess,
+    keysLeft,
+    keysLeftPercent,
+    isComplete,
+    timeCounted,
+    cpm
+  }
 }) => (
   <section id="bottomPanel" className={isComplete ? "complete" : null}>
     <div id="progressbar">

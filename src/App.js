@@ -1,35 +1,23 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import CodeSampleExplorer from "./components/CodeSampleExplorer";
-import CodeSampleControls from "./components/CodeSampleControls";
 import ControlPanel from "./components/ControlPanel";
 import CodingArea from "./components/CodingArea";
 import { codingAreaModifier } from "./App/codingAreaModifier";
 
+import codeSamplesDataBase from "./testData/MockDB";
+
 import { jsonObjCopy } from "./functions/misc";
 
-import MockDB from "./components/MockDB";
 import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
-
-    // Pick random initial codeSample object with included state
-    const randomIdx = parseInt(Math.random() * MockDB.length, 10);
-    const initialCodeSample = MockDB[randomIdx];
-
-    // Init state
-    this.state = jsonObjCopy(initialCodeSample.state);
-
-    // Short static version of state for navigation comp
-    this.staticState = {
-      codeSampleList: MockDB.map(elm => ({
-        id: elm.id,
-        title: elm.title
-      }))
-    };
+    this.CodeSampleExplorer = React.createRef();
+    this.state = {};
   }
 
   updateCodingAreaState = action => {
@@ -38,19 +26,136 @@ class App extends Component {
     });
   };
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({ type: "INIT_COLLECTION", collection: codeSamplesDataBase });
+
+    // Pick random initial codeSample object with included state
+    const randomIdx = parseInt(Math.random() * codeSamplesDataBase.length, 10);
+    const initialCodeSample = codeSamplesDataBase[randomIdx];
+
+    // Init state
+    this.setState(() => jsonObjCopy(initialCodeSample.activeState));
+
+    document.addEventListener("keydown", this.globalKeyHandler);
+
+    setInterval(() => {
+      // decrease timeCountingDelay if not null
+      if (this.state.codeArea.timeCountingDelay > 0) {
+        this.setState(prev => {
+          let exports = {};
+
+          exports.codeArea = {
+            ...prev.codeArea,
+            timeCountingDelay: prev.codeArea.timeCountingDelay - 1000
+          };
+
+          if (!prev.characterCorrectness.isComplete) {
+            const timeCounted = prev.characterCorrectness.timeCounted + 1000;
+            const cpm = Math.round(
+              prev.characterCorrectness.keysSuccess / (timeCounted / 1000 / 60)
+            );
+
+            exports.characterCorrectness = {
+              ...prev.characterCorrectness,
+              timeCounted,
+              cpm
+            };
+          }
+
+          return exports;
+        });
+      }
+
+      // other timer actions
+    }, 1000);
+  }
+
+  componentWillUpdate(nextProps, nextState, nextContext) {}
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // console.log('UPD State -> ', this.state);
+  }
+
+  changeCodeSampleHandler = (e, id, reset = false) => {
+    const { codeSamples } = this.props;
+
+    const newCodeSample = codeSamples.filter(
+      ({ initialState }) => initialState.currentCodeSample.id === id
+    )[0];
+
+    if (!reset) {
+      // save state in DB
+      for (let idx in codeSamples) {
+        if (
+          codeSamples[idx].initialState.currentCodeSample.id ===
+          this.state.currentCodeSample.id
+        ) {
+          codeSamples[idx].activeState = jsonObjCopy(this.state);
+        }
+      }
+      // Update active to next codeSample state
+      this.setState(() => newCodeSample.activeState);
+    } else {
+      // Reset to initialState
+      this.setState(() => newCodeSample.initialState);
+    }
+  };
+
+  render() {
+    if (this.state.hasOwnProperty("currentCodeSample")) {
+      return (
+        <div className="App">
+          <CodeSampleExplorer
+            currentCodeSampleId={this.state.currentCodeSample.id}
+            changeCodeSampleHandler={this.changeCodeSampleHandler}
+            ref={this.CodeSampleExplorer}
+          />
+
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <ControlPanel
+              characterCorrectness={this.state.characterCorrectness}
+            />
+
+            <CodingArea
+              currentCodeSample={this.state.currentCodeSample}
+              cursorIndex={this.state.codeArea.cursorIndex}
+              characterCorrectnessMap={this.state.characterCorrectness.map}
+            />
+          </header>
+        </div>
+      );
+    } else {
+      return <div className="App">loading...</div>;
+    }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.globalKeyHandler);
+  }
+
   globalKeyHandler = e => {
-    console.log("e.keyCode ", e.keyCode);
+    const cursor = this.state.codeArea.cursorIndex;
+    const currentChar = this.state.currentCodeSample.contentAsArray[cursor];
+    // console.log("e.keyCode ", e.keyCode);
 
     // Set custom shortcuts
     if (e.keyCode === 37 && e.ctrlKey) {
       // ctrl+left key
-      this.controlsPrevHandler(e);
+      // this.CodeSampleExplorer.current.controlsPrevHandler(
+      //   e,
+      //   this.state.currentCodeSample.id
+      // );
       return true;
     }
 
     if (e.keyCode === 39 && e.ctrlKey) {
       // ctrl+right key
-      this.controlsNextHandler(e);
+      // this.CodeSampleExplorer.current.controlsNextHandler(
+      //   e,
+      //   this.state.currentCodeSample.id
+      // );
       return true;
     }
 
@@ -79,9 +184,6 @@ class App extends Component {
     if (e.ctrlKey) {
       return true;
     }
-
-    const cursor = this.state.codeArea.cursorIndex;
-    const currentChar = this.state.currentCodeSample.contentAsArray[cursor];
 
     // Skip some keys
     if (
@@ -149,137 +251,13 @@ class App extends Component {
       cursor
     });
   };
-
-  componentDidMount() {
-    document.addEventListener("keydown", this.globalKeyHandler);
-
-    setInterval(() => {
-      // decrease timeCountingDelay if not null
-      if (this.state.codeArea.timeCountingDelay > 0) {
-        this.setState(prev => {
-          let exports = {};
-
-          exports.codeArea = {
-            ...prev.codeArea,
-            timeCountingDelay: prev.codeArea.timeCountingDelay - 1000
-          };
-
-          if (!prev.characterCorrectness.isComplete) {
-            const timeCounted = prev.characterCorrectness.timeCounted + 1000;
-            const cpm = Math.round(
-              prev.characterCorrectness.keysSuccess / (timeCounted / 1000 / 60)
-            );
-
-            exports.characterCorrectness = {
-              ...prev.characterCorrectness,
-              timeCounted,
-              cpm
-            };
-          }
-
-          return exports;
-        });
-      }
-
-      // other timer actions
-    }, 1000);
-  }
-
-  componentWillUpdate(nextProps, nextState, nextContext) {}
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // console.log('UPD State -> ', this.state);
-  }
-
-  changeCodeSampleHandler = e => {
-    const newCodeSampleId = e.target.dataset.id;
-    const newCodeSample = MockDB.filter(elm => elm.id === newCodeSampleId)[0];
-
-    // save state in DB
-    for (let idx in MockDB) {
-      if (MockDB[idx].id === this.state.currentCodeSample.id) {
-        MockDB[idx].state = jsonObjCopy(this.state);
-      }
-    }
-
-    // update active state
-    this.setState(() => newCodeSample.state);
-  };
-
-  controlsResetHandler = e => {
-    e.preventDefault();
-    const currentCodeSample = MockDB.filter(
-      elm => elm.id === this.state.currentCodeSample.id
-    )[0];
-    this.setState(() => currentCodeSample.initialState);
-  };
-
-  controlsPrevHandler = e => {
-    e.preventDefault();
-    let targetId = "";
-    for (let idx in MockDB) {
-      if (MockDB[idx].id === this.state.currentCodeSample.id) {
-        targetId =
-          MockDB[(parseInt(idx, 10) + MockDB.length - 1) % MockDB.length].id;
-      }
-    }
-    let mimicEvent = { target: { dataset: { id: targetId } } };
-    this.changeCodeSampleHandler(mimicEvent);
-  };
-
-  controlsNextHandler = e => {
-    e.preventDefault();
-    let targetId = "";
-    for (let idx in MockDB) {
-      if (MockDB[idx].id === this.state.currentCodeSample.id) {
-        targetId = MockDB[(parseInt(idx, 10) + 1) % MockDB.length].id;
-      }
-    }
-    let mimicEvent = { target: { dataset: { id: targetId } } };
-    this.changeCodeSampleHandler(mimicEvent);
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <CodeSampleControls
-          controlsResetHandler={this.controlsResetHandler}
-          controlsPrevHandler={this.controlsPrevHandler}
-          controlsNextHandler={this.controlsNextHandler}
-        />
-
-        <CodeSampleExplorer
-          codeSampleList={this.staticState.codeSampleList}
-          currentCodeSampleId={this.state.currentCodeSample.id}
-          changeCodeSampleHandler={this.changeCodeSampleHandler}
-        />
-
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <ControlPanel
-            keysSuccess={this.state.characterCorrectness.keysSuccess}
-            keysLeft={this.state.characterCorrectness.keysLeft}
-            keysLeftPercent={this.state.characterCorrectness.keysLeftPercent}
-            isComplete={this.state.characterCorrectness.isComplete}
-            timeCounted={this.state.characterCorrectness.timeCounted}
-            cpm={this.state.characterCorrectness.cpm}
-          />
-
-          <CodingArea
-            codeSampleTitle={this.state.currentCodeSample.title}
-            mainCategory={this.state.currentCodeSample.mainCategory}
-            currentCodeSampleAsArr={this.state.currentCodeSample.contentAsArray}
-            cursorIndex={this.state.codeArea.cursorIndex}
-            characterCorrectnessMap={this.state.characterCorrectness.map}
-          />
-        </header>
-      </div>
-    );
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.globalKeyHandler);
-  }
 }
 
-export default App;
+const mapStateToProps = state => ({ codeSamples: state.codeSamples });
+
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { forwardRef: true }
+)(App);

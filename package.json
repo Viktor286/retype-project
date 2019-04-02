@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "lodash.throttle": "^4.1.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-redux": "^6.0.1",
     "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "shortid": "^2.2.14",
     "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lodash": "^4.17.11"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -22,5 +27,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {}
 }

@@ -1,26 +1,23 @@
-import uuid from "uuid";
+// import uuid from "uuid";
+import shortid from "shortid";
 
 // temp global store (indexedDB in future)
-import html_form_collection from "../testData/html-form-collection";
-import redux_101 from "../testData/redux-101";
-import redux_102 from "../testData/redux-102";
-import bfs_level_memo from "../testData/bfs-level-memo";
-import dom_list from "../testData/dom-list";
-import new_node_event from "../testData/new-node-event";
-import for_in_for from "../testData/for-in-for";
-import max_profit_job_seq from "../testData/max-profit-job-seq";
-import getters from "../testData/getters";
-import redux_from_scratch from "../testData/redux-from-scratch";
+import html_form_collection from "./html-form-collection";
+import redux_101 from "./redux-101";
+import redux_102 from "./redux-102";
+import bfs_level_memo from "./bfs-level-memo";
+import dom_list from "./dom-list";
+import new_node_event from "./new-node-event";
+import for_in_for from "./for-in-for";
+import max_profit_job_seq from "./max-profit-job-seq";
+import getters from "./getters";
+import redux_from_scratch from "./redux-from-scratch";
 
 class CodeSample {
   constructor({ title, content, mainCategory }) {
-    this.title = title;
-    this.content = content;
-    this.mainCategory = mainCategory;
-    this.createdAt = new Date().getTime();
-    this.id = uuid();
-
-    const contentAsArray = this.content.split("");
+    const createdAt = new Date().getTime();
+    const id = shortid.generate();
+    const contentAsArray = content.split("");
     const contentLen = contentAsArray.length;
 
     this.initialState = {
@@ -30,12 +27,13 @@ class CodeSample {
       },
 
       currentCodeSample: {
-        id: this.id,
-        title: this.title,
-        mainCategory: this.mainCategory,
-        content: this.content,
+        id,
+        title,
+        mainCategory,
+        content,
         contentAsArray,
-        contentLen
+        contentLen,
+        createdAt
       },
 
       characterCorrectness: {
@@ -45,12 +43,22 @@ class CodeSample {
         keysLeftPercent: 0,
         isComplete: false,
         cpm: 0,
-        apm: 0,
         timeCounted: 0
+      },
+
+      userStat: {
+        currentCompletion: {
+          cpm: 0,
+          timeCounted: 0,
+          backspaces: 0,
+          mistakes: 0,
+          timestamp: 0
+        },
+        completionsHistory: []
       }
     };
 
-    this.state = JSON.parse(JSON.stringify(this.initialState));
+    this.activeState = JSON.parse(JSON.stringify(this.initialState));
   }
 }
 
