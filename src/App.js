@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import CodeSampleExplorer from "./components/CodeSampleExplorer";
 import ControlPanel from "./components/ControlPanel";
@@ -29,9 +30,30 @@ class App extends Component {
     const { dispatch } = this.props;
     dispatch({ type: "INIT_COLLECTION", collection: codeSamplesDataBase });
 
-    // Pick random initial codeSample object with included state
-    const randomIdx = parseInt(Math.random() * codeSamplesDataBase.length, 10);
-    const initialCodeSample = codeSamplesDataBase[randomIdx];
+    // init codeSample
+    let initialCodeSample = {};
+
+    // Get the codeSample info from URL of router if exist
+    const codeSampleAlias = this.getCodeSampleAliasFromRouterURL();
+
+    if (
+      codeSampleAlias &&
+      codeSampleAlias.length > 0 &&
+      codeSampleAlias !== "/"
+    ) {
+      initialCodeSample = codeSamplesDataBase.filter(
+        elm => elm.initialState.currentCodeSample.alias === codeSampleAlias
+      )[0];
+    }
+
+    if (!this.isCodeSampleObjectValidById(initialCodeSample)) {
+      // ELSE, pick random initial codeSample object with included state
+      const randomIdx = parseInt(
+        Math.random() * codeSamplesDataBase.length,
+        10
+      );
+      initialCodeSample = codeSamplesDataBase[randomIdx];
+    }
 
     // Init state
     this.setState(() => jsonObjCopy(initialCodeSample.activeState));
@@ -69,6 +91,36 @@ class App extends Component {
       // other timer actions
     }, 1000);
   }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const prevCodeSampleAlias = this.getCodeSampleAliasFromRouterURL(prevProps);
+    const nextCodeSampleAlias = this.getCodeSampleAliasFromRouterURL();
+
+    if (prevCodeSampleAlias !== nextCodeSampleAlias) {
+      // find id in codeSamples collection
+      const nextCodeSampleObj = this.props.codeSamples.filter(
+        codeSample =>
+          codeSample.initialState.currentCodeSample.alias ===
+          nextCodeSampleAlias
+      )[0];
+
+      if (this.isCodeSampleObjectValidById(nextCodeSampleObj)) {
+        this.changeCodeSampleHandler(
+          nextCodeSampleObj.initialState.currentCodeSample.id
+        );
+      }
+    }
+  }
+
+  isCodeSampleObjectValidById = codeSample => {
+    return (
+      codeSample &&
+      codeSample.hasOwnProperty("initialState") &&
+      codeSample.initialState.hasOwnProperty("currentCodeSample") &&
+      codeSample.initialState.currentCodeSample.hasOwnProperty("id") &&
+      codeSample.initialState.currentCodeSample.id.length > 0
+    );
+  };
 
   codeSampleExplorerHandler = action => {
     const { codeSamples } = this.props;
@@ -112,7 +164,23 @@ class App extends Component {
     }
   };
 
+  getCodeSampleAliasFromRouterURL = props => {
+    // // alternative way is to use pathname, which could be faster
+    // const pathname = props
+    //   ? props.location.pathname
+    //   : this.props.location.pathname;
+    // return pathname.slice(6); // '/code/' = 6 chars
+
+    return props
+      ? props.match.params.codesample
+      : this.props.match.params.codesample;
+  };
+
   changeCodeSampleHandler = (id, reset = false) => {
+    if (!id) {
+      return true;
+    }
+
     const { codeSamples } = this.props;
 
     const newCodeSample = codeSamples.filter(
@@ -130,7 +198,15 @@ class App extends Component {
         }
       }
       // Update active to next codeSample state
-      this.setState(() => newCodeSample.activeState);
+
+      this.setState(
+        () => newCodeSample.activeState,
+        () => {
+          this.props.history.push(
+            newCodeSample.initialState.currentCodeSample.alias
+          );
+        }
+      );
     } else {
       // Reset to initialState
       this.setState(() => newCodeSample.initialState);
@@ -151,7 +227,6 @@ class App extends Component {
             <ControlPanel
               characterCorrectness={this.state.characterCorrectness}
             />
-
             <CodingArea
               currentCodeSample={this.state.currentCodeSample}
               cursorIndex={this.state.codeArea.cursorIndex}
@@ -289,4 +364,4 @@ class App extends Component {
 
 const mapStateToProps = state => ({ codeSamples: state.codeSamples });
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../css/CodeSampleExplorer.css";
+import { NavLink } from "react-router-dom";
+
+// <Link to="/asd">My test link</Link>
 
 class CodeSampleExplorer extends React.Component {
   render() {
@@ -8,21 +11,12 @@ class CodeSampleExplorer extends React.Component {
 
     const displayCodeSamples = codeSamples.map(
       ({ initialState: { currentCodeSample } }) => {
-        const { id, title, contentLen } = currentCodeSample;
-        const isCurrentCodeSample = currentCodeSampleId === id;
+        const { id, title, contentLen, alias } = currentCodeSample;
         return (
           <div key={id} className="codeSampleItem">
-            {isCurrentCodeSample ? (
-              <span className="active">
-                {title}&nbsp;
-                <span>[{contentLen}]</span>
-              </span>
-            ) : (
-              <span onClick={e => this.controlsSelectHandler(e, id)}>
-                {title}&nbsp;
-                <span>[{contentLen}]</span>
-              </span>
-            )}
+            <NavLink to={`/code/${alias}`} activeClassName="active">
+              {title}&nbsp;<span>[{contentLen}]</span>
+            </NavLink>
           </div>
         );
       }
@@ -55,10 +49,10 @@ class CodeSampleExplorer extends React.Component {
     );
   }
 
-  controlsSelectHandler = (e, id) => {
-    e.preventDefault();
-    this.props.codeSampleExplorerHandler({ type: "DISPLAY_TARGET_SAMPLE", id });
-  };
+  // controlsSelectHandler = (e, id) => {
+  //   e.preventDefault();
+  //   this.props.codeSampleExplorerHandler({ type: "DISPLAY_TARGET_SAMPLE", id });
+  // };
 
   controlsResetHandler = (e, id) => {
     e.preventDefault();

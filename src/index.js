@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import combinedReducers from "./reducers/combinedReducers";
 import "./Globals.css";
 import "./index.css";
@@ -12,7 +15,12 @@ const store = createStore(combinedReducers);
 
 const Main = (
   <Provider store={store}>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/" exact={true} component={App} />
+        <Route path="/code/:codesample" component={App} />
+      </Switch>
+    </Router>
   </Provider>
 );
 

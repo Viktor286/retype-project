@@ -24,25 +24,31 @@ div.controls button {
     outline: none;
 }
 
-div.controls button:hover {
-    color: #9ccae2;
-}
-
 div.codeSampleItem {
     color: #8eb9d1;
     /* border: 1px solid #333333; */
     padding: 6px 10px;
     text-align: left;
-    width: 180px;
+    width: 200px;
     font-size: .8rem;
 }
 
-div.codeSampleItem span {
-    cursor: pointer;
+div.codeSampleItem a {
+    font-size: .7rem;
+    background-color: #262b2f;
+    color: #8eb9d1;
+    padding: 5px 10px;
+    border: 1px solid #333333;
+    display: block;
+    margin: 0;
 }
 
-div.codeSampleItem span.active {
+div.codeSampleItem a:hover {
+    color: #9ccae2;
+}
+
+div.codeSampleItem a.active {
     color: white;
-    cursor: text;
-    /*pointer-events: none;*/
+    pointer-events: none;
+    text-decoration: none;
 }

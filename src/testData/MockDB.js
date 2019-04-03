@@ -14,7 +14,7 @@ import getters from "./getters";
 import redux_from_scratch from "./redux-from-scratch";
 
 class CodeSample {
-  constructor({ title, content, mainCategory }) {
+  constructor({ title, content, mainCategory, alias }) {
     const createdAt = new Date().getTime();
     const id = shortid.generate();
     const contentAsArray = content.split("");
@@ -29,6 +29,7 @@ class CodeSample {
       currentCodeSample: {
         id,
         title,
+        alias,
         mainCategory,
         content,
         contentAsArray,
@@ -66,51 +67,61 @@ let codeSamplesDataBase = [
   new CodeSample({
     title: "HTML Form Collection",
     content: html_form_collection,
+    alias: "html-form-collection",
     mainCategory: "DOM API"
   }),
   new CodeSample({
     title: "Redux 101",
     content: redux_101,
+    alias: "redux-101",
     mainCategory: "Redux"
   }),
   new CodeSample({
     title: "Redux 102",
     content: redux_102,
+    alias: "redux-102",
     mainCategory: "Redux"
   }),
   new CodeSample({
     title: "DOM List",
     content: dom_list,
+    alias: "dom-list",
     mainCategory: "DOM API"
   }),
   new CodeSample({
     title: "New node event",
     content: new_node_event,
+    alias: "new-node-event",
     mainCategory: "Node"
   }),
   new CodeSample({
     title: "Double For Loop",
     content: for_in_for,
+    alias: "double-for-loop",
     mainCategory: "JS Core"
   }),
   new CodeSample({
     title: "Max profit job seq",
     content: max_profit_job_seq,
+    alias: "max-profit-job-seq",
     mainCategory: "Algorithms"
   }),
   new CodeSample({
     title: "Getters",
     content: getters,
+    alias: "getters",
     mainCategory: "JS Core"
   }),
   new CodeSample({
     title: "Redux from scratch",
     content: redux_from_scratch,
+    alias: "redux-from-scratch",
     mainCategory: "Patterns"
   }),
   new CodeSample({
     title: "BFS level memo",
     content: bfs_level_memo,
+    alias: "bfs-level-memo",
     mainCategory: "Binary Tries"
   })
 ];
