@@ -12,6 +12,7 @@ import for_in_for from "./for-in-for";
 import max_profit_job_seq from "./max-profit-job-seq";
 import getters from "./getters";
 import redux_from_scratch from "./redux-from-scratch";
+import fast from "./fast";
 
 class CodeSample {
   constructor({ title, content, mainCategory, alias }) {
@@ -44,14 +45,16 @@ class CodeSample {
         keysLeftPercent: 0,
         isComplete: false,
         cpm: 0,
-        timeCounted: 0
+        timeCounted: 0,
+        corrections: 0,
+        mistakes: 0
       },
 
       userStat: {
-        currentCompletion: {
+        lastCompletion: {
           cpm: 0,
           timeCounted: 0,
-          backspaces: 0,
+          corrections: 0,
           mistakes: 0,
           timestamp: 0
         },
@@ -123,6 +126,12 @@ let codeSamplesDataBase = [
     content: bfs_level_memo,
     alias: "bfs-level-memo",
     mainCategory: "Binary Tries"
+  }),
+  new CodeSample({
+    title: "Fast",
+    content: fast,
+    alias: "fast",
+    mainCategory: "Misc"
   })
 ];
 

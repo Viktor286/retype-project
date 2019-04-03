@@ -111,9 +111,6 @@ section#bottomPanel {
     height: 60px;
 }
 
-section#bottomPanel.complete {
-    background-color: #1d7053;
-}
 
 #progressbar {
     width: 100%;
@@ -143,7 +140,18 @@ div.timerStats {
     font-size: 1.6rem;
     color: #c5eaff;
     width: 205px;
-    background-color: #202227;
+    background-color: #262b2f;
+}
+
+div.todayStats {
+    top: 8px;
+    right: 0;
+    position: absolute;
+    font-size: 1.6rem;
+    color: #c5eaff;
+    width: 270px;
+    /*background-color: #202227;*/
+    background-color: #262b2f;
 }
 
 div.statPanelNumbers {
@@ -170,5 +178,16 @@ span.statusText .complete{
 
 span.keysLeft {
     color: #619bcc;
+}
+
+
+section#bottomPanel.complete {
+    background-color: #1d7053;
+}
+
+
+section#bottomPanel.complete div.todayStats,
+section#bottomPanel.complete div.timerStats {
+    background-color: #1d7053;
 }
 

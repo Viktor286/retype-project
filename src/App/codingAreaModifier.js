@@ -2,6 +2,8 @@ const codingAreaModifier = (prevState, { cursor, type: actionType }) => {
   const codeSampleLen = prevState.currentCodeSample.contentLen;
   let currentCharStateCode = 0;
   let nextCursorIndex = 0; // default
+  let mistakes = prevState.characterCorrectness.mistakes;
+  let corrections = prevState.characterCorrectness.corrections;
 
   if (actionType === "delete") {
     nextCursorIndex = getGoNextCursor(
@@ -9,11 +11,13 @@ const codingAreaModifier = (prevState, { cursor, type: actionType }) => {
       codeSampleLen
     );
     currentCharStateCode = 0; // reset state
+    ++corrections;
   }
 
   if (actionType === "backspace") {
     nextCursorIndex = getGoPrevCursor(prevState.codeArea.cursorIndex);
     currentCharStateCode = 0; // reset state
+    ++corrections;
   }
 
   if (actionType === "match") {
@@ -30,6 +34,7 @@ const codingAreaModifier = (prevState, { cursor, type: actionType }) => {
       codeSampleLen
     );
     currentCharStateCode = 2; // mistake state
+    ++mistakes;
   }
 
   if (actionType === "one-forward") {
@@ -72,7 +77,25 @@ const codingAreaModifier = (prevState, { cursor, type: actionType }) => {
       keysLeft,
       keysSuccess,
       keysLeftPercent,
-      isComplete: keysLeft <= 0
+      isComplete: keysLeft <= 0,
+      corrections, // char overwrite doesnt count yet
+      mistakes
+    };
+
+    const { cpm, timeCounted } = updateStateObj.characterCorrectness;
+    updateStateObj.userStat = {
+      ...updateStateObj.userStat,
+      lastCompletion: {
+        cpm,
+        timeCounted,
+        corrections,
+        mistakes,
+        timestamp: new Date().getTime()
+      }
+    };
+  } else {
+    updateStateObj.characterCorrectness = {
+      ...prevState.characterCorrectness
     };
   }
 

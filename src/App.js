@@ -7,6 +7,8 @@ import ControlPanel from "./components/ControlPanel";
 import CodingArea from "./components/CodingArea";
 import { codingAreaModifier } from "./App/codingAreaModifier";
 
+import updateTodaySessionUserStat from "./actions/userStat";
+
 import codeSamplesDataBase from "./testData/MockDB";
 
 import { jsonObjCopy } from "./functions/misc";
@@ -21,14 +23,30 @@ class App extends Component {
   }
 
   updateCodingAreaState = action => {
+    const { dispatch, userStat } = this.props;
+
+    if (this.state.characterCorrectness.isComplete) {
+      return true;
+    }
+
     this.setState(prevState => {
-      return codingAreaModifier(prevState, action);
+      const newCodingAreaState = codingAreaModifier(prevState, action);
+
+      if (
+        !prevState.characterCorrectness.isComplete &&
+        newCodingAreaState.characterCorrectness.isComplete
+      ) {
+        dispatch(updateTodaySessionUserStat(newCodingAreaState, userStat));
+      }
+
+      return newCodingAreaState;
     });
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({ type: "INIT_COLLECTION", collection: codeSamplesDataBase });
+    // INIT_USERSTAT
 
     // init codeSample
     let initialCodeSample = {};
@@ -214,6 +232,7 @@ class App extends Component {
   };
 
   render() {
+    const { userStat } = this.props;
     if (this.state.hasOwnProperty("currentCodeSample")) {
       return (
         <div className="App">
@@ -226,6 +245,7 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <ControlPanel
               characterCorrectness={this.state.characterCorrectness}
+              userStat={userStat}
             />
             <CodingArea
               currentCodeSample={this.state.currentCodeSample}
@@ -362,6 +382,9 @@ class App extends Component {
   };
 }
 
-const mapStateToProps = state => ({ codeSamples: state.codeSamples });
+const mapStateToProps = state => ({
+  codeSamples: state.codeSamples,
+  userStat: state.userStat
+});
 
 export default withRouter(connect(mapStateToProps)(App));

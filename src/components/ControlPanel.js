@@ -9,6 +9,9 @@ const ControlPanel = ({
     isComplete,
     timeCounted,
     cpm
+  },
+  userStat: {
+    todayCompleted: { timeCountedSum, cpmAverage, keysSuccessSum }
   }
 }) => (
   <section id="bottomPanel" className={isComplete ? "complete" : null}>
@@ -24,6 +27,9 @@ const ControlPanel = ({
     </div>
     <div className="timerStats">
       {millisecondsToTime(timeCounted)}, CPM {cpm}
+    </div>
+    <div className="todayStats">
+      {millisecondsToTime(timeCountedSum)}, CPM {cpmAverage}, {keysSuccessSum}
     </div>
     <div className="statPanelNumbers">
       <span className={"statusText"}>
