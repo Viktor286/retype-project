@@ -33,6 +33,10 @@ div.codeSampleItem {
     font-size: .8rem;
 }
 
+div.codeSampleItem.complete {
+
+}
+
 div.codeSampleItem a {
     font-size: .7rem;
     background-color: #262b2f;
@@ -43,12 +47,26 @@ div.codeSampleItem a {
     margin: 0;
 }
 
-div.codeSampleItem a:hover {
-    color: #9ccae2;
-}
 
 div.codeSampleItem a.active {
     color: white;
     pointer-events: none;
     text-decoration: none;
+    background-color: #374b5e;
+}
+
+
+div.codeSampleItem a:hover {
+    color: #9ccae2;
+}
+
+div.codeSampleItem.complete a {
+    color: #c7ecdd;
+    text-decoration: none;
+    background-color: #1d7053;
+}
+
+div.codeSampleItem.complete a.active {
+    color: white;
+    background-color: #41ac80;
 }

@@ -37,6 +37,10 @@ class App extends Component {
         newCodingAreaState.characterCorrectness.isComplete
       ) {
         dispatch(updateTodaySessionUserStat(newCodingAreaState, userStat));
+        dispatch({
+          type: "MARK_CS_COMPLETE",
+          id: this.state.currentCodeSample.id
+        });
       }
 
       return newCodingAreaState;

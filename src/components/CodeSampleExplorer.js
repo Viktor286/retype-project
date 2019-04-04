@@ -8,14 +8,21 @@ import { NavLink } from "react-router-dom";
 class CodeSampleExplorer extends React.Component {
   render() {
     const { codeSamples, currentCodeSampleId } = this.props;
-
     const displayCodeSamples = codeSamples.map(
-      ({ initialState: { currentCodeSample } }) => {
+      ({
+        initialState: { currentCodeSample },
+        activeState: { characterCorrectness }
+      }) => {
         const { id, title, contentLen, alias } = currentCodeSample;
+        const { isComplete } = characterCorrectness;
         return (
-          <div key={id} className="codeSampleItem">
+          <div
+            key={id}
+            className={"codeSampleItem" + (isComplete ? " complete" : "")}
+          >
             <NavLink to={`/code/${alias}`} activeClassName="active">
-              {title}&nbsp;<span>[{contentLen}]</span>
+              {title}&nbsp;
+              <span>[{contentLen}]</span>
             </NavLink>
           </div>
         );
