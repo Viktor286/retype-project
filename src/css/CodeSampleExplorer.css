@@ -1,92 +1,1 @@
-section.sidePanel {
-  background-color: #1c1e22;
-  font-size: 0.7rem;
-  border-right: 1px solid #3d4b53;
-  padding: 10px;
-  width: 250px;
-  min-width: 250px;
-  z-index: 801;
-}
-
-section.explorer {
-  position: fixed;
-  /*background-color: #262b2f;*/
-  font-size: 0.7rem;
-  /*border: 1px solid #3d4b53;*/
-  z-index: 801;
-  width: 230px;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
-
-section.explorer h1 {
-  color: white;
-  font-size: 1rem;
-  margin: 10px 0 10px 10px;
-}
-
-div.codeSampleItem {
-  color: #8eb9d1;
-  /* border: 1px solid #333333; */
-  padding: 6px 10px;
-  text-align: left;
-  /*width: 200px;*/
-  font-size: 0.8rem;
-}
-
-div.codeSampleItem.complete {
-}
-
-div.codeSampleItem a {
-  font-size: 0.85rem;
-  color: #8eb9d1;
-  padding: 5px 10px;
-  /*border: 1px solid #333333;*/
-  border-radius: 2px;
-  display: block;
-  margin: 0;
-}
-
-div.codeSampleItem a.active {
-  color: white;
-  pointer-events: none;
-  text-decoration: none;
-  background-color: #374b5e;
-}
-
-div.codeSampleItem a:hover {
-  color: #9ccae2;
-  background-color: #262b2f;
-}
-
-div.codeSampleItem.complete a {
-  color: #c7ecdd;
-  text-decoration: none;
-  background-color: #1d7053;
-}
-
-div.codeSampleItem.complete a.active {
-  color: white;
-  background-color: #41ac80;
-}
-
-div.controls {
-  /*position: fixed;*/
-  /*left: 0;*/
-  /*top: 40px;*/
-  height: 40px;
-}
-
-div.controls button {
-  background-color: #262b2f;
-  color: #8eb9d1;
-  padding: 10px 20px;
-  border: 1px solid #333333;
-  cursor: pointer;
-  outline: none;
-}
-
-div.controls button:hover {
-  background-color: #2f3d49;
-}
+section.sidePanel {  font-size: 0.7rem;  z-index: 801;  width: 250px;  min-width: 250px;  padding: 10px;  border-right: 1px solid #3d4b53;  background-color: #1c1e22;}section.explorer {  font-size: 0.7rem;  position: fixed;  z-index: 801;  width: 230px;  margin: 0;  padding: 0;  text-align: left;  border: 1px solid #3d4b53;  /*background-color: #262b2f;*/}section.explorer h1 {  font-size: 1rem;  margin: 10px 0 10px 10px;  color: white;}div.codeSampleItem {  font-size: 0.8rem;  padding: 6px 10px;  text-align: left;  color: #8eb9d1;  /* border: 1px solid #333333; */}div.codeSampleItem a {  font-size: 0.85rem;  display: block;  margin: 0;  padding: 5px 10px;  color: #8eb9d1;  border-radius: 2px;  /*border: 1px solid #333333;*/}div.codeSampleItem a.active {  text-decoration: none;  pointer-events: none;  color: white;  background-color: #374b5e;}div.codeSampleItem a:hover {  color: #9ccae2;  background-color: #262b2f;}div.codeSampleItem.complete a {  text-decoration: none;  color: #c7ecdd;  background-color: #1d7053;}div.codeSampleItem.complete a.active {  color: white;  background-color: #41ac80;}div.controls {  height: 40px;}div.controls button {  padding: 10px 20px;  cursor: pointer;  color: #8eb9d1;  border: 1px solid #333;  outline: none;  background-color: #262b2f;}div.controls button:hover {  background-color: #2f3d49;}

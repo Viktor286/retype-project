@@ -1,35 +1,43 @@
 .App {
-  text-align: center;
   display: flex;
+
+  text-align: center;
 }
 
 section.codeSample {
   display: flex;
+  overflow: hidden;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
-  color: white;
-  overflow: hidden;
+
   width: 100%;
+  min-height: 100vh;
+
+  color: white;
 }
 
 section.codeSample h2 {
-  margin: 5px 0 15px;
-  text-align: center;
   font-size: 2.1rem;
   font-weight: normal;
+
+  margin: 5px 0 15px;
+
+  text-align: center;
 }
 
 section.codeSample h2 div.mainCategory {
-  margin: 0 10px;
-  color: #6a7487;
   font-size: 1.1rem;
+
+  margin: 0 10px;
+
+  color: #6a7487;
 }
 
 .App-logo {
   height: 13vmin;
   margin: 0 0 20px 0;
+
   animation: App-logo-spin infinite 50s linear;
   pointer-events: none;
 }
