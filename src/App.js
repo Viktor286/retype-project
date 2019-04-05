@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import CodeSampleExplorer from "./components/CodeSampleExplorer";
-import ControlPanel from "./components/ControlPanel";
+import InfoPanel from "./components/InfoPanel";
 import CodingArea from "./components/CodingArea";
 import { codingAreaModifier } from "./App/codingAreaModifier";
 
@@ -15,7 +15,7 @@ import codeSamplesDataBase from "./testData/MockDB";
 import { jsonObjCopy } from "./functions/misc";
 
 import logo from "./logo.svg";
-import "./App.css";
+import "./css/App.css";
 
 class App extends Component {
   constructor(props) {
@@ -141,7 +141,7 @@ class App extends Component {
 
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <ControlPanel
+            <InfoPanel
               characterCorrectness={this.state.characterCorrectness}
               userStat={userStat}
             />

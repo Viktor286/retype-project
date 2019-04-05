@@ -1,72 +1,69 @@
 section.explorer {
-    background-color: #262b2f;
-    position: fixed;
-    top: 80px;
-    font-size: .7rem;
-    border: 1px solid #3d4b53;
-    padding: 10px;
-    z-index: 801;
+  background-color: #262b2f;
+  position: fixed;
+  top: 80px;
+  font-size: 0.7rem;
+  border: 1px solid #3d4b53;
+  padding: 10px;
+  z-index: 801;
 }
 
 div.controls {
-    position: fixed;
-    left: 0;
-    top: 40px;
-    height: 40px;
+  position: fixed;
+  left: 0;
+  top: 40px;
+  height: 40px;
 }
 
 div.controls button {
-    background-color: #262b2f;
-    color: #8eb9d1;
-    padding: 10px 20px;
-    border: 1px solid #333333;
-    cursor: pointer;
-    outline: none;
+  background-color: #262b2f;
+  color: #8eb9d1;
+  padding: 10px 20px;
+  border: 1px solid #333333;
+  cursor: pointer;
+  outline: none;
 }
 
 div.codeSampleItem {
-    color: #8eb9d1;
-    /* border: 1px solid #333333; */
-    padding: 6px 10px;
-    text-align: left;
-    width: 200px;
-    font-size: .8rem;
+  color: #8eb9d1;
+  /* border: 1px solid #333333; */
+  padding: 6px 10px;
+  text-align: left;
+  width: 200px;
+  font-size: 0.8rem;
 }
 
 div.codeSampleItem.complete {
-
 }
 
 div.codeSampleItem a {
-    font-size: .7rem;
-    background-color: #262b2f;
-    color: #8eb9d1;
-    padding: 5px 10px;
-    border: 1px solid #333333;
-    display: block;
-    margin: 0;
+  font-size: 0.7rem;
+  background-color: #262b2f;
+  color: #8eb9d1;
+  padding: 5px 10px;
+  border: 1px solid #333333;
+  display: block;
+  margin: 0;
 }
-
 
 div.codeSampleItem a.active {
-    color: white;
-    pointer-events: none;
-    text-decoration: none;
-    background-color: #374b5e;
+  color: white;
+  pointer-events: none;
+  text-decoration: none;
+  background-color: #374b5e;
 }
 
-
 div.codeSampleItem a:hover {
-    color: #9ccae2;
+  color: #9ccae2;
 }
 
 div.codeSampleItem.complete a {
-    color: #c7ecdd;
-    text-decoration: none;
-    background-color: #1d7053;
+  color: #c7ecdd;
+  text-decoration: none;
+  background-color: #1d7053;
 }
 
 div.codeSampleItem.complete a.active {
-    color: white;
-    background-color: #41ac80;
+  color: white;
+  background-color: #41ac80;
 }

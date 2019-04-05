@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import combinedReducers from "./reducers/combinedReducers";
-import "./Globals.css";
+import "./css/Globals.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
