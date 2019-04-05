@@ -1,9 +1,5 @@
 import React from "react";
 
-// codeSampleTitle={this.state.currentCodeSample.title}
-// mainCategory={this.state.currentCodeSample.mainCategory}
-// currentCodeSampleAsArr={this.state.currentCodeSample.contentAsArray}
-
 const CodingArea = ({
   cursorIndex,
   characterCorrectnessMap,

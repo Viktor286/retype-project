@@ -1,6 +1,15 @@
 const codeSampleDefault = [];
 
-const codeSamples = (state = codeSampleDefault, action) => {
+export const codeSamplesIndex = (state = codeSampleDefault, action) => {
+  switch (action.type) {
+    case "INIT_COLLECTION":
+      return action.collection.map(elm => elm.activeState.currentCodeSample.id);
+    default:
+      return state;
+  }
+};
+
+export const codeSamples = (state = codeSampleDefault, action) => {
   switch (action.type) {
     case "INIT_COLLECTION":
       return action.collection;
@@ -37,5 +46,3 @@ const codeSamples = (state = codeSampleDefault, action) => {
       return state;
   }
 };
-
-export default codeSamples;

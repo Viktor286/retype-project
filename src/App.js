@@ -189,7 +189,7 @@ class App extends Component {
   };
 
   codeSampleExplorerHandler = action => {
-    const { codeSamples } = this.props;
+    const { codeSamples, codeSamplesIndex } = this.props;
     let targetId = "";
 
     switch (action.type) {
@@ -202,24 +202,22 @@ class App extends Component {
         break;
 
       case "DISPLAY_NEXT_SAMPLE":
-        for (let idx in codeSamples) {
-          if (codeSamples[idx].activeState.currentCodeSample.id === action.id) {
-            targetId =
-              codeSamples[(parseInt(idx, 10) + 1) % codeSamples.length]
-                .activeState.currentCodeSample.id;
+        for (let idx in codeSamplesIndex) {
+          if (codeSamplesIndex[idx] === action.id) {
+            const next = (parseInt(idx, 10) + 1) % codeSamplesIndex.length;
+            targetId = codeSamples[next].activeState.currentCodeSample.id;
           }
         }
         this.changeCodeSampleHandler(targetId);
         break;
 
       case "DISPLAY_PREV_SAMPLE":
-        for (let idx in codeSamples) {
-          if (codeSamples[idx].activeState.currentCodeSample.id === action.id) {
-            targetId =
-              codeSamples[
-                (parseInt(idx, 10) + codeSamples.length - 1) %
-                  codeSamples.length
-              ].activeState.currentCodeSample.id;
+        for (let idx in codeSamplesIndex) {
+          if (codeSamplesIndex[idx] === action.id) {
+            const prev =
+              (parseInt(idx, 10) + codeSamplesIndex.length - 1) %
+              codeSamplesIndex.length;
+            targetId = codeSamples[prev].activeState.currentCodeSample.id;
           }
         }
         this.changeCodeSampleHandler(targetId);
@@ -235,7 +233,7 @@ class App extends Component {
       return true;
     }
 
-    const { codeSamples } = this.props;
+    const { codeSamples, codeSamplesIndex } = this.props;
 
     const newCodeSample = codeSamples.filter(
       ({ initialState }) => initialState.currentCodeSample.id === id
@@ -243,16 +241,13 @@ class App extends Component {
 
     if (!reset) {
       // save state in DB
-      for (let idx in codeSamples) {
-        if (
-          codeSamples[idx].initialState.currentCodeSample.id ===
-          this.state.currentCodeSample.id
-        ) {
+      for (let idx in codeSamplesIndex) {
+        if (codeSamplesIndex[idx] === this.state.currentCodeSample.id) {
           codeSamples[idx].activeState = jsonObjCopy(this.state);
         }
       }
-      // Update active to next codeSample state
 
+      // Update active to next codeSample state
       this.setState(
         () => newCodeSample.activeState,
         () => {
@@ -386,8 +381,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  codeSamples: state.codeSamples,
-  userStat: state.userStat
+  ...state
 });
 
 export default withRouter(

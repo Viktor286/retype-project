@@ -3,16 +3,11 @@ import { connect } from "react-redux";
 import "../css/CodeSampleExplorer.css";
 import { NavLink } from "react-router-dom";
 
-// <Link to="/asd">My test link</Link>
-
 class CodeSampleExplorer extends React.Component {
   render() {
     const { codeSamples, currentCodeSampleId } = this.props;
     const displayCodeSamples = codeSamples.map(
-      ({
-        initialState: { currentCodeSample },
-        activeState: { characterCorrectness }
-      }) => {
+      ({ activeState: { characterCorrectness, currentCodeSample } }) => {
         const { id, title, contentLen, alias } = currentCodeSample;
         const { isComplete } = characterCorrectness;
         return (
