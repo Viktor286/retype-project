@@ -134,23 +134,32 @@ class App extends Component {
     if (this.state.hasOwnProperty("currentCodeSample")) {
       return (
         <div className="App">
-          <CodeSampleExplorer
-            currentCodeSampleId={this.state.currentCodeSample.id}
-            codeSampleExplorerHandler={this.codeSampleExplorerHandler}
-          />
-
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <InfoPanel
-              characterCorrectness={this.state.characterCorrectness}
-              userStat={userStat}
+          <section className="sidePanel">
+            <CodeSampleExplorer
+              currentCodeSampleId={this.state.currentCodeSample.id}
+              codeSampleExplorerHandler={this.codeSampleExplorerHandler}
             />
+          </section>
+
+          <section className={"codeSample"}>
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>
+              {this.state.currentCodeSample.title}
+              <div className="mainCategory">
+                ({this.state.currentCodeSample.mainCategory})
+              </div>
+            </h2>
             <CodingArea
               currentCodeSample={this.state.currentCodeSample}
               cursorIndex={this.state.codeArea.cursorIndex}
               characterCorrectnessMap={this.state.characterCorrectness.map}
             />
-          </header>
+          </section>
+
+          <InfoPanel
+            characterCorrectness={this.state.characterCorrectness}
+            userStat={userStat}
+          />
         </div>
       );
     } else {

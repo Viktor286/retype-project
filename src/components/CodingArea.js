@@ -4,17 +4,9 @@ import "../css/CodingArea.css";
 const CodingArea = ({
   cursorIndex,
   characterCorrectnessMap,
-  currentCodeSample: {
-    contentAsArray: currentCodeSampleAsArr,
-    title: codeSampleTitle,
-    mainCategory
-  }
+  currentCodeSample: { contentAsArray: currentCodeSampleAsArr }
 }) => (
   <section className="codingArea">
-    <h2>
-      {codeSampleTitle}
-      <div className="mainCategory">({mainCategory})</div>
-    </h2>
     {currentCodeSampleAsArr.map((char, idx) => {
       let displayChar = char;
 

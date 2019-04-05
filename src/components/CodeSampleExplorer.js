@@ -25,7 +25,8 @@ class CodeSampleExplorer extends React.Component {
     );
 
     return (
-      <div>
+      <section className="explorer">
+        <h1>Today's Playlist:</h1>
         <div className="controls">
           <button
             className="prevCodeSample"
@@ -37,7 +38,7 @@ class CodeSampleExplorer extends React.Component {
             className="resetCodeSample"
             onClick={e => this.controlsResetHandler(e, currentCodeSampleId)}
           >
-            Reset
+            Revert
           </button>
           <button
             className="nextCodeSample"
@@ -46,8 +47,8 @@ class CodeSampleExplorer extends React.Component {
             Next
           </button>
         </div>
-        <section className="explorer">{displayCodeSamples}</section>
-      </div>
+        {displayCodeSamples}
+      </section>
     );
   }
 

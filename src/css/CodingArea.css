@@ -1,21 +1,8 @@
 section.codingArea {
   position: relative;
-  margin: 0 0 190px 0;
+  margin: 0 50px 190px;
   text-align: left;
   font-size: 1.8rem;
-}
-
-section.codingArea h2 {
-  margin: 5px 0 15px;
-  text-align: center;
-  font-size: 2.1rem;
-  font-weight: normal;
-}
-
-section.codingArea h2 div.mainCategory {
-  margin: 0 10px;
-  color: #6a7487;
-  font-size: 1.1rem;
 }
 
 span.await {
