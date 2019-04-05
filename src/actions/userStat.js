@@ -1,4 +1,7 @@
-const updateTodaySessionUserStat = (newCodingAreaState, prevUserStat) => {
+export const updateTodaySessionUserStat = (
+  newCodingAreaState,
+  prevUserStat
+) => {
   const { todayCompleted: prevTodayCompletion } = prevUserStat;
 
   const {
@@ -24,4 +27,7 @@ const updateTodaySessionUserStat = (newCodingAreaState, prevUserStat) => {
   };
 };
 
-export default updateTodaySessionUserStat;
+export const updateCodeSampleAsComplete = codeSampleId => ({
+  type: "MARK_CS_COMPLETE",
+  id: codeSampleId
+});

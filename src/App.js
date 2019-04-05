@@ -7,7 +7,8 @@ import ControlPanel from "./components/ControlPanel";
 import CodingArea from "./components/CodingArea";
 import { codingAreaModifier } from "./App/codingAreaModifier";
 
-import updateTodaySessionUserStat from "./actions/userStat";
+import * as userStatActions from "./actions/userStat";
+import * as codeSamplesActions from "./actions/codeSamples";
 
 import codeSamplesDataBase from "./testData/MockDB";
 
@@ -23,7 +24,11 @@ class App extends Component {
   }
 
   updateCodingAreaState = action => {
-    const { dispatch, userStat } = this.props;
+    const {
+      userStat,
+      updateTodaySessionUserStat,
+      updateCodeSampleAsComplete
+    } = this.props;
 
     if (this.state.characterCorrectness.isComplete) {
       return true;
@@ -33,14 +38,12 @@ class App extends Component {
       const newCodingAreaState = codingAreaModifier(prevState, action);
 
       if (
+        // that codeSample has just been completed
         !prevState.characterCorrectness.isComplete &&
         newCodingAreaState.characterCorrectness.isComplete
       ) {
-        dispatch(updateTodaySessionUserStat(newCodingAreaState, userStat));
-        dispatch({
-          type: "MARK_CS_COMPLETE",
-          id: this.state.currentCodeSample.id
-        });
+        updateTodaySessionUserStat(newCodingAreaState, userStat);
+        updateCodeSampleAsComplete(this.state.currentCodeSample.id);
       }
 
       return newCodingAreaState;
@@ -48,15 +51,16 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({ type: "INIT_COLLECTION", collection: codeSamplesDataBase });
+    const { initCollection } = this.props;
+
     // INIT_USERSTAT
+    initCollection(codeSamplesDataBase);
 
     // init codeSample
     let initialCodeSample = {};
 
     // Get the codeSample info from URL of router if exist
-    const codeSampleAlias = this.getCodeSampleAliasFromRouterURL();
+    const codeSampleAlias = this.props.match.params.codesample;
 
     if (
       codeSampleAlias &&
@@ -80,8 +84,10 @@ class App extends Component {
     // Init state
     this.setState(() => jsonObjCopy(initialCodeSample.activeState));
 
+    // Add global key listener
     document.addEventListener("keydown", this.globalKeyHandler);
 
+    // Set time tracking
     setInterval(() => {
       // decrease timeCountingDelay if not null
       if (this.state.codeArea.timeCountingDelay > 0) {
@@ -115,8 +121,46 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const prevCodeSampleAlias = this.getCodeSampleAliasFromRouterURL(prevProps);
-    const nextCodeSampleAlias = this.getCodeSampleAliasFromRouterURL();
+    // Update CodeSample relying to current URL (router)
+    this.updateCodeSampleFromCurrentURL(prevProps);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.globalKeyHandler);
+  }
+
+  render() {
+    const { userStat } = this.props;
+    if (this.state.hasOwnProperty("currentCodeSample")) {
+      return (
+        <div className="App">
+          <CodeSampleExplorer
+            currentCodeSampleId={this.state.currentCodeSample.id}
+            codeSampleExplorerHandler={this.codeSampleExplorerHandler}
+          />
+
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <ControlPanel
+              characterCorrectness={this.state.characterCorrectness}
+              userStat={userStat}
+            />
+            <CodingArea
+              currentCodeSample={this.state.currentCodeSample}
+              cursorIndex={this.state.codeArea.cursorIndex}
+              characterCorrectnessMap={this.state.characterCorrectness.map}
+            />
+          </header>
+        </div>
+      );
+    } else {
+      return <div className="App">loading...</div>;
+    }
+  }
+
+  updateCodeSampleFromCurrentURL = prevProps => {
+    const prevCodeSampleAlias = prevProps.match.params.codesample;
+    const nextCodeSampleAlias = this.props.match.params.codesample;
 
     if (prevCodeSampleAlias !== nextCodeSampleAlias) {
       // find id in codeSamples collection
@@ -132,7 +176,7 @@ class App extends Component {
         );
       }
     }
-  }
+  };
 
   isCodeSampleObjectValidById = codeSample => {
     return (
@@ -186,18 +230,6 @@ class App extends Component {
     }
   };
 
-  getCodeSampleAliasFromRouterURL = props => {
-    // // alternative way is to use pathname, which could be faster
-    // const pathname = props
-    //   ? props.location.pathname
-    //   : this.props.location.pathname;
-    // return pathname.slice(6); // '/code/' = 6 chars
-
-    return props
-      ? props.match.params.codesample
-      : this.props.match.params.codesample;
-  };
-
   changeCodeSampleHandler = (id, reset = false) => {
     if (!id) {
       return true;
@@ -234,39 +266,6 @@ class App extends Component {
       this.setState(() => newCodeSample.initialState);
     }
   };
-
-  render() {
-    const { userStat } = this.props;
-    if (this.state.hasOwnProperty("currentCodeSample")) {
-      return (
-        <div className="App">
-          <CodeSampleExplorer
-            currentCodeSampleId={this.state.currentCodeSample.id}
-            codeSampleExplorerHandler={this.codeSampleExplorerHandler}
-          />
-
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <ControlPanel
-              characterCorrectness={this.state.characterCorrectness}
-              userStat={userStat}
-            />
-            <CodingArea
-              currentCodeSample={this.state.currentCodeSample}
-              cursorIndex={this.state.codeArea.cursorIndex}
-              characterCorrectnessMap={this.state.characterCorrectness.map}
-            />
-          </header>
-        </div>
-      );
-    } else {
-      return <div className="App">loading...</div>;
-    }
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.globalKeyHandler);
-  }
 
   globalKeyHandler = e => {
     const cursor = this.state.codeArea.cursorIndex;
@@ -391,4 +390,9 @@ const mapStateToProps = state => ({
   userStat: state.userStat
 });
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { ...userStatActions, ...codeSamplesActions }
+  )(App)
+);
