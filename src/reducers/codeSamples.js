@@ -15,8 +15,14 @@ export const codeSamples = (state = codeSampleDefault, action) => {
       return action.collection;
 
     case "UPDATE_CS_ELEMENT":
-      // TODO scope limitation for const & let;
-      return;
+      return [
+        ...state.slice(0, action.targetIndex),
+        {
+          ...state[action.targetIndex],
+          activeState: action.activeState
+        },
+        ...state.slice(action.targetIndex + 1)
+      ];
 
     case "MARK_CS_COMPLETE":
       let currentCodeSampleIndex = 0;

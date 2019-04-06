@@ -8,7 +8,14 @@ export const updateCodeSampleAsComplete = codeSampleId => ({
   id: codeSampleId
 });
 
-export const updateCodeSampleElement = activeState => ({
-  type: "UPDATE_CS_ELEMENT",
-  activeState
-});
+export const updateCodeSampleElement = (activeState, codeSamplesIndex) => {
+  const targetIndex = codeSamplesIndex.findIndex(
+    id => activeState.currentCodeSample.id === id
+  );
+
+  return {
+    type: "UPDATE_CS_ELEMENT",
+    activeState,
+    targetIndex
+  };
+};

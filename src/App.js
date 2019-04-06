@@ -154,7 +154,6 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // Update CodeSample relying to current URL (router)
-    console.log("componentDidUpdate ");
     this.updateCodeSampleFromCurrentURL(prevProps);
   }
 
@@ -203,6 +202,7 @@ class App extends Component {
   updateCodeSampleFromCurrentURL = prevProps => {
     const prevCodeSampleAlias = prevProps.match.params.codesample;
     const currentCodeSampleAlias = this.props.match.params.codesample;
+    // console.log(`/${prevCodeSampleAlias} -> /${currentCodeSampleAlias}`);
 
     if (prevCodeSampleAlias !== currentCodeSampleAlias) {
       // find id in codeSamples collection
@@ -213,7 +213,6 @@ class App extends Component {
       )[0];
 
       if (this.isCodeSampleObjectValidById(nextCodeSampleObj)) {
-        console.log("[URL] UPDATE ");
         this.changeCodeSampleHandler(
           nextCodeSampleObj.initialState.currentCodeSample.id
         );
@@ -237,13 +236,13 @@ class App extends Component {
 
     switch (action.type) {
       case "RESET_SAMPLE":
-        console.log("RESET_SAMPLE ");
+        // console.log("RESET_SAMPLE ");
         this.changeCodeSampleHandler(action.id, true);
         break;
 
       case "DISPLAY_TARGET_SAMPLE":
-        console.log("DISPLAY_TARGET_SAMPLE");
-        this.changeCodeSampleHandler(action.id);
+        // console.log("DISPLAY_TARGET_SAMPLE");
+        this.updateCodeSampleURLRoute(action.id);
         break;
 
       case "DISPLAY_NEXT_SAMPLE":
@@ -253,8 +252,8 @@ class App extends Component {
             targetId = codeSamples[next].activeState.currentCodeSample.id;
           }
         }
-        console.log("DISPLAY_NEXT_SAMPLE");
-        this.changeCodeSampleHandler(targetId);
+        // console.log("DISPLAY_NEXT_SAMPLE");
+        this.updateCodeSampleURLRoute(targetId);
         break;
 
       case "DISPLAY_PREV_SAMPLE":
@@ -266,8 +265,8 @@ class App extends Component {
             targetId = codeSamples[prev].activeState.currentCodeSample.id;
           }
         }
-        console.log("DISPLAY_PREV_SAMPLE");
-        this.changeCodeSampleHandler(targetId);
+        // console.log("DISPLAY_PREV_SAMPLE");
+        this.updateCodeSampleURLRoute(targetId);
         break;
 
       default:
@@ -275,47 +274,45 @@ class App extends Component {
     }
   };
 
+  updateCodeSampleURLRoute = id => {
+    if (!id) {
+      return true;
+    }
+    const { codeSamples, codeSamplesIndex } = this.props;
+    const targetIndex = codeSamplesIndex.findIndex(elm => elm === id);
+    this.props.history.push(
+      codeSamples[targetIndex].activeState.currentCodeSample.alias
+    );
+  };
+
   changeCodeSampleHandler = (id, reset = false) => {
-    console.log(">> changeCodeSampleHandler ");
     if (!id) {
       return true;
     }
 
-    const { codeSamples, codeSamplesIndex } = this.props;
+    const {
+      codeSamples,
+      codeSamplesIndex,
+      updateCodeSampleElement
+    } = this.props;
 
     const targetCodeSample = codeSamples.filter(
       ({ initialState }) => initialState.currentCodeSample.id === id
     )[0];
 
-    // save state in redux store without update
-    // TODO: need fix
-    for (let idx in codeSamplesIndex) {
-      if (codeSamplesIndex[idx] === this.state.currentCodeSample.id) {
-        codeSamples[idx].activeState = jsonObjCopy(this.state);
-      }
-    }
+    // save state in redux store
+    updateCodeSampleElement(this.state, codeSamplesIndex);
 
     const newState = !reset
       ? jsonObjCopy(targetCodeSample.activeState)
       : jsonObjCopy(targetCodeSample.initialState);
 
-    this.setState(
-      () => newState,
-      () => {
-        // const aliasURL =
-        //   "/code/" + targetCodeSample.initialState.currentCodeSample.alias;
-        // window.history.pushState({ urlPath: aliasURL }, "", aliasURL);
-        this.props.history.push(
-          targetCodeSample.initialState.currentCodeSample.alias
-        );
-      }
-    );
+    this.setState(() => newState);
   };
 
   globalKeyHandler = e => {
     const cursor = this.state.codeArea.cursorIndex;
     const currentChar = this.state.currentCodeSample.contentAsArray[cursor];
-    // console.log("e.keyCode ", e.keyCode);
 
     // Set custom shortcuts
     if (e.keyCode === 37 && e.ctrlKey) {
