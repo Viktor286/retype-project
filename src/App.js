@@ -10,9 +10,10 @@ import { codingAreaModifier } from "./App/codingAreaModifier";
 import * as userStatActions from "./actions/userStat";
 import * as codeSamplesActions from "./actions/codeSamples";
 
-import codeSamplesDataBase from "./testData/MockDB";
+import codeSamplesBuiltInDemoPlaylist from "./data/codeSamplesDemoPlaylist";
+import initialUserStat from "./data/initialUserStat";
 
-import { jsonObjCopy } from "./functions/misc";
+import { jsonObjCopy, logLocalStorageStat } from "./functions/misc";
 
 import logo from "./logo.svg";
 import "./css/App.css";
@@ -50,39 +51,70 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
-    const { initCollection } = this.props;
-
-    // INIT_USERSTAT
-    initCollection(codeSamplesDataBase);
-
-    // init codeSample
-    let initialCodeSample = {};
+  getIndexForPlaylistStart = codeSamplesPlaylist => {
+    let initialCodeSampleIdx = 0;
 
     // Get the codeSample info from URL of router if exist
-    const codeSampleAlias = this.props.match.params.codesample;
+    const codeSampleURLAlias = this.props.match.params.codesample;
 
-    if (
-      codeSampleAlias &&
-      codeSampleAlias.length > 0 &&
-      codeSampleAlias !== "/"
-    ) {
-      initialCodeSample = codeSamplesDataBase.filter(
-        elm => elm.initialState.currentCodeSample.alias === codeSampleAlias
-      )[0];
-    }
-
-    if (!this.isCodeSampleObjectValidById(initialCodeSample)) {
-      // ELSE, pick random initial codeSample object with included state
-      const randomIdx = parseInt(
-        Math.random() * codeSamplesDataBase.length,
+    if (codeSampleURLAlias && codeSampleURLAlias.length > 0) {
+      initialCodeSampleIdx = codeSamplesPlaylist.findIndex(
+        cs => cs.initialState.currentCodeSample.alias === codeSampleURLAlias
+      );
+    } else {
+      // As a fallback, pick random CS for startup
+      initialCodeSampleIdx = parseInt(
+        Math.random() * codeSamplesPlaylist.length,
         10
       );
-      initialCodeSample = codeSamplesDataBase[randomIdx];
     }
 
-    // Init state
+    return initialCodeSampleIdx;
+  };
+
+  componentDidMount() {
+    const {
+      initPlaylistForCodeSampleExplorer,
+      initTodaySessionUserStat
+    } = this.props;
+
+    localStorage.clear();
+
+    // Init codeSamples collection (localStorage or localData)
+    const LS_codeSamplesPlaylist = localStorage.getItem("codeSamplesPlaylist");
+    let codeSamplesPlaylist;
+    try {
+      codeSamplesPlaylist = JSON.parse(LS_codeSamplesPlaylist);
+      if (!codeSamplesPlaylist) throw Error("codeSamplesPlaylist");
+    } catch (e) {
+      codeSamplesPlaylist = codeSamplesBuiltInDemoPlaylist;
+      localStorage.setItem(
+        "codeSamplesPlaylist",
+        JSON.stringify(codeSamplesPlaylist)
+      );
+    }
+
+    // Define userStat collection (localStorage or localData)
+    const LS_userStat = localStorage.getItem("userStat");
+    let userStat;
+    try {
+      userStat = JSON.parse(LS_userStat);
+      if (!userStat) throw Error("userStat");
+    } catch (e) {
+      userStat = initialUserStat;
+      localStorage.setItem("userStat", JSON.stringify(userStat));
+    }
+
+    // INIT Playlist & Userstat for redux state
+    initPlaylistForCodeSampleExplorer(codeSamplesPlaylist);
+    initTodaySessionUserStat(userStat);
+
+    // INIT CS component state
+    const initialCodeSample =
+      codeSamplesPlaylist[this.getIndexForPlaylistStart(codeSamplesPlaylist)];
     this.setState(() => jsonObjCopy(initialCodeSample.activeState));
+
+    logLocalStorageStat();
 
     // Add global key listener
     document.addEventListener("keydown", this.globalKeyHandler);
@@ -122,6 +154,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // Update CodeSample relying to current URL (router)
+    console.log("componentDidUpdate ");
     this.updateCodeSampleFromCurrentURL(prevProps);
   }
 
@@ -169,17 +202,18 @@ class App extends Component {
 
   updateCodeSampleFromCurrentURL = prevProps => {
     const prevCodeSampleAlias = prevProps.match.params.codesample;
-    const nextCodeSampleAlias = this.props.match.params.codesample;
+    const currentCodeSampleAlias = this.props.match.params.codesample;
 
-    if (prevCodeSampleAlias !== nextCodeSampleAlias) {
+    if (prevCodeSampleAlias !== currentCodeSampleAlias) {
       // find id in codeSamples collection
       const nextCodeSampleObj = this.props.codeSamples.filter(
         codeSample =>
           codeSample.initialState.currentCodeSample.alias ===
-          nextCodeSampleAlias
+          currentCodeSampleAlias
       )[0];
 
       if (this.isCodeSampleObjectValidById(nextCodeSampleObj)) {
+        console.log("[URL] UPDATE ");
         this.changeCodeSampleHandler(
           nextCodeSampleObj.initialState.currentCodeSample.id
         );
@@ -203,10 +237,12 @@ class App extends Component {
 
     switch (action.type) {
       case "RESET_SAMPLE":
+        console.log("RESET_SAMPLE ");
         this.changeCodeSampleHandler(action.id, true);
         break;
 
       case "DISPLAY_TARGET_SAMPLE":
+        console.log("DISPLAY_TARGET_SAMPLE");
         this.changeCodeSampleHandler(action.id);
         break;
 
@@ -217,6 +253,7 @@ class App extends Component {
             targetId = codeSamples[next].activeState.currentCodeSample.id;
           }
         }
+        console.log("DISPLAY_NEXT_SAMPLE");
         this.changeCodeSampleHandler(targetId);
         break;
 
@@ -229,6 +266,7 @@ class App extends Component {
             targetId = codeSamples[prev].activeState.currentCodeSample.id;
           }
         }
+        console.log("DISPLAY_PREV_SAMPLE");
         this.changeCodeSampleHandler(targetId);
         break;
 
@@ -238,37 +276,40 @@ class App extends Component {
   };
 
   changeCodeSampleHandler = (id, reset = false) => {
+    console.log(">> changeCodeSampleHandler ");
     if (!id) {
       return true;
     }
 
     const { codeSamples, codeSamplesIndex } = this.props;
 
-    const newCodeSample = codeSamples.filter(
+    const targetCodeSample = codeSamples.filter(
       ({ initialState }) => initialState.currentCodeSample.id === id
     )[0];
 
-    if (!reset) {
-      // save state in DB
-      for (let idx in codeSamplesIndex) {
-        if (codeSamplesIndex[idx] === this.state.currentCodeSample.id) {
-          codeSamples[idx].activeState = jsonObjCopy(this.state);
-        }
+    // save state in redux store without update
+    // TODO: need fix
+    for (let idx in codeSamplesIndex) {
+      if (codeSamplesIndex[idx] === this.state.currentCodeSample.id) {
+        codeSamples[idx].activeState = jsonObjCopy(this.state);
       }
-
-      // Update active to next codeSample state
-      this.setState(
-        () => newCodeSample.activeState,
-        () => {
-          this.props.history.push(
-            newCodeSample.initialState.currentCodeSample.alias
-          );
-        }
-      );
-    } else {
-      // Reset to initialState
-      this.setState(() => newCodeSample.initialState);
     }
+
+    const newState = !reset
+      ? jsonObjCopy(targetCodeSample.activeState)
+      : jsonObjCopy(targetCodeSample.initialState);
+
+    this.setState(
+      () => newState,
+      () => {
+        // const aliasURL =
+        //   "/code/" + targetCodeSample.initialState.currentCodeSample.alias;
+        // window.history.pushState({ urlPath: aliasURL }, "", aliasURL);
+        this.props.history.push(
+          targetCodeSample.initialState.currentCodeSample.alias
+        );
+      }
+    );
   };
 
   globalKeyHandler = e => {

@@ -2,17 +2,17 @@
 import shortid from "shortid";
 
 // temp global store (indexedDB in future)
-import html_form_collection from "./html-form-collection";
-import redux_101 from "./redux-101";
-import redux_102 from "./redux-102";
-import bfs_level_memo from "./bfs-level-memo";
-import dom_list from "./dom-list";
-import new_node_event from "./new-node-event";
-import for_in_for from "./for-in-for";
-import max_profit_job_seq from "./max-profit-job-seq";
-import getters from "./getters";
-import redux_from_scratch from "./redux-from-scratch";
-import fast from "./fast";
+import html_form_collection from "./demo/html-form-collection";
+import redux_101 from "./demo/redux-101";
+import redux_102 from "./demo/redux-102";
+import bfs_level_memo from "./demo/bfs-level-memo";
+import dom_list from "./demo/dom-list";
+import new_node_event from "./demo/new-node-event";
+import for_in_for from "./demo/for-in-for";
+import max_profit_job_seq from "./demo/max-profit-job-seq";
+import getters from "./demo/getters";
+import redux_from_scratch from "./demo/redux-from-scratch";
+import fast from "./demo/fast";
 
 class CodeSample {
   constructor({ title, content, mainCategory, alias }) {

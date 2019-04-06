@@ -14,6 +14,10 @@ export const codeSamples = (state = codeSampleDefault, action) => {
     case "INIT_COLLECTION":
       return action.collection;
 
+    case "UPDATE_CS_ELEMENT":
+      // TODO scope limitation for const & let;
+      return;
+
     case "MARK_CS_COMPLETE":
       let currentCodeSampleIndex = 0;
 

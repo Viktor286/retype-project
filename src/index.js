@@ -1,17 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
 import { Provider } from "react-redux";
+import configureStore from "./configureStore";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import combinedReducers from "./reducers/combinedReducers";
 import "./css/Globals.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-const store = createStore(combinedReducers);
+const store = configureStore();
 
 const Main = (
   <Provider store={store}>

@@ -1,3 +1,8 @@
+export const initTodaySessionUserStat = userStat => ({
+  type: "INIT_USERSTAT",
+  userStat
+});
+
 export const updateTodaySessionUserStat = (
   newCodingAreaState,
   prevUserStat
@@ -26,8 +31,3 @@ export const updateTodaySessionUserStat = (
     }
   };
 };
-
-export const updateCodeSampleAsComplete = codeSampleId => ({
-  type: "MARK_CS_COMPLETE",
-  id: codeSampleId
-});
