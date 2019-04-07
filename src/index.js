@@ -5,11 +5,17 @@ import configureStore from "./configureStore";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import "./css/Globals.css";
-import "./index.css";
 import App from "./App";
+
+import "./css/Globals.css";
 import * as serviceWorker from "./serviceWorker";
 
+window.debugLogConfig = {
+  "redux-log": 0,
+  changeCodeSample: 1,
+  codeSampleComplete: 1,
+  saveCodeSamplesPlaylistToLS: 1
+};
 const store = configureStore();
 
 const Main = (

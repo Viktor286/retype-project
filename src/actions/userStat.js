@@ -17,7 +17,7 @@ export const updateTodaySessionUserStat = (
   } = newCodingAreaState.userStat.lastCompletion;
 
   return {
-    type: "UPDATE_TODAY_COMPLETION",
+    type: "UPDATE_TODAY_COMPLETION_STAT",
     todayCompleted: {
       timeCountedSum: prevTodayCompletion.timeCountedSum + newTimeCounted,
       cpmAverage: prevTodayCompletion.cpmAverage

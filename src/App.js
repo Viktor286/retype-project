@@ -13,7 +13,7 @@ import * as codeSamplesActions from "./actions/codeSamples";
 import codeSamplesBuiltInDemoPlaylist from "./data/codeSamplesDemoPlaylist";
 import initialUserStat from "./data/initialUserStat";
 
-import { jsonObjCopy, logLocalStorageStat } from "./functions/misc";
+import { jsonObjCopy, logLocalStorageStat, debugLog } from "./functions/misc";
 
 import logo from "./logo.svg";
 import "./css/App.css";
@@ -28,7 +28,8 @@ class App extends Component {
     const {
       userStat,
       updateTodaySessionUserStat,
-      updateCodeSampleAsComplete
+      updateCodeSampleElement,
+      codeSamplesIndex
     } = this.props;
 
     if (this.state.characterCorrectness.isComplete) {
@@ -43,12 +44,30 @@ class App extends Component {
         !prevState.characterCorrectness.isComplete &&
         newCodingAreaState.characterCorrectness.isComplete
       ) {
+        debugLog({ event: "codeSampleComplete", color: "violet" }, prevState);
+
         updateTodaySessionUserStat(newCodingAreaState, userStat);
-        updateCodeSampleAsComplete(this.state.currentCodeSample.id);
+
+        let activeStateCompleted = jsonObjCopy(this.state);
+        activeStateCompleted.characterCorrectness.isComplete = true;
+        updateCodeSampleElement(activeStateCompleted, codeSamplesIndex);
+        // TODO redux middleware to save to localStore by flag
       }
 
       return newCodingAreaState;
     });
+  };
+
+  saveCodeSamplesPlaylistToLS = () => {
+    const codeSamplesPlaylist = this.props.codeSamples;
+    debugLog(
+      { event: "saveCodeSamplesPlaylistToLS", color: "red" },
+      codeSamplesPlaylist
+    );
+    localStorage.setItem(
+      "codeSamplesPlaylist",
+      JSON.stringify(codeSamplesPlaylist)
+    );
   };
 
   getIndexForPlaylistStart = codeSamplesPlaylist => {
@@ -286,6 +305,8 @@ class App extends Component {
   };
 
   changeCodeSampleHandler = (id, reset = false) => {
+    debugLog({ event: "changeCodeSample", color: "orange" }, id, reset);
+
     if (!id) {
       return true;
     }

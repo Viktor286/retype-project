@@ -42,4 +42,17 @@ const logLocalStorageStat = () => {
   console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
 };
 
-export { millisecondsToTime, jsonObjCopy, logLocalStorageStat };
+const debugLog = (...args) => {
+  const [log, ...params] = args;
+  const { event, color } = log;
+
+  const logOutput = params => {
+    if (window.debugLogConfig[event]) {
+      console.log(`%c[${event}]`, `color: ${color}`, ...params);
+    }
+  };
+
+  logOutput(params);
+};
+
+export { millisecondsToTime, jsonObjCopy, logLocalStorageStat, debugLog };

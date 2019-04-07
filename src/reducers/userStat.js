@@ -5,7 +5,7 @@ const userStat = (state = userStatDefault, action) => {
     case "INIT_USERSTAT":
       return action.userStat;
 
-    case "UPDATE_TODAY_COMPLETION":
+    case "UPDATE_TODAY_COMPLETION_STAT":
       return { ...state, todayCompleted: action.todayCompleted };
 
     default:
