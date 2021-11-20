@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import configureStore from "./configureStore";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import App from "./App";
 
 import "./css/Globals.css";
@@ -20,12 +18,7 @@ const store = configureStore();
 
 const Main = (
   <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route path="/" exact={true} component={App} />
-        <Route path="/code/:codesample" component={App} />
-      </Switch>
-    </Router>
+        <App />
   </Provider>
 );
 
