@@ -1,5 +1,4 @@
-import React from "react";
-import "../css/CodingArea.css";
+import "./index.css";
 
 const CodingArea = ({
   cursorIndex,

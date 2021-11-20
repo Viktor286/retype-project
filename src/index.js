@@ -2,10 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import configureStore from "./configureStore";
-
-import App from "./App";
-
-import "./css/Globals.css";
+import CodeTrainerApp from "./CodeTrainerApp";
+import "./Globals.css";
 import * as serviceWorker from "./serviceWorker";
 
 window.debugLogConfig = {
@@ -18,7 +16,7 @@ const store = configureStore();
 
 const Main = (
   <Provider store={store}>
-        <App />
+        <CodeTrainerApp />
   </Provider>
 );
 

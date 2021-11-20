@@ -1,8 +1,7 @@
-import React from "react";
-import { millisecondsToTime } from "../functions/misc";
-import "../css/InfoPanel.css";
+import { millisecondsToTime } from "../../functions/misc";
+import "./index.css";
 
-const InfoPanel = ({
+const Index = ({
   characterCorrectness: {
     keysSuccess,
     keysLeft,
@@ -43,4 +42,4 @@ const InfoPanel = ({
   );
 };
 
-export default InfoPanel;
+export default Index;
