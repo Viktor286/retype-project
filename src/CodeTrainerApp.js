@@ -25,10 +25,13 @@ class CodeTrainerApp extends Component {
       initTodaySessionUserStat
     } = this.props;
 
-    fetchGithubResource(window.location.pathname).then(({content, name}) => {
+    fetchGithubResource(window.location.pathname).then(githubResource => {
+      const {content, name, html_url} = githubResource;
+
       if (!content || !name) {
         return;
       }
+      console.log('githubResource', githubResource);
 
       // TODO: extract codeAreaInitializer
       // Create code sample to render
@@ -36,7 +39,8 @@ class CodeTrainerApp extends Component {
         title: name,
         content: decodeURIComponent(escape(window.atob(content))).replaceAll('  ', '\t'),
         alias: name,
-        mainCategory: "DOM API"
+        mainCategory: "DOM API",
+        html_url
       });
 
       // Define userStat collection (localStorage or localData)
@@ -116,10 +120,16 @@ class CodeTrainerApp extends Component {
               speed coder typing trainer
             </div>
             <ul>
+              <li><a href="TheAlgorithms/C/blob/master/leetcode/src/1.c">TheAlgorithms/C/blob/master/leetcode/src/1.c</a></li>
+              <li><a href="TheAlgorithms/Go/blob/master/dynamic/fibonacci.go">TheAlgorithms/Go/blob/master/dynamic/fibonacci.go</a></li>
               <li><a href="facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js">facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js</a></li>
               <li><a href="numpy/numpy/blob/main/numpy/typing/_array_like.py">numpy/numpy/blob/main/numpy/typing/_array_like.py</a></li>
+              <li><a href="AppFlowy-IO/appflowy/blob/main/backend/src/application.rs">AppFlowy-IO/appflowy/blob/main/backend/src/application.rs</a></li>
               <li><a href="Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts">Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts</a></li>
             </ul>
+            <div className="mainCategory">
+              Don't forget to checkout <br /><a href="https://github.com/trending?since=weekly">trending repos and developers</a>
+            </div>
           </h2>
         </section>
       </div>

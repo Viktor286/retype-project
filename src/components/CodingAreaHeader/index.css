@@ -38,6 +38,6 @@ section.codingAreaHeader h2 {
 
 section.codingAreaHeader h2 div.mainCategory {
     font-size: 1.1rem;
-    margin: 0 10px;
+    margin: 0 10px 30px 10px;
     color: #6a7487;
 }

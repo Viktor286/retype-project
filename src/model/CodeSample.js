@@ -1,7 +1,7 @@
 import {jsonObjCopy} from "../utils/misc";
 
 export default class CodeSample {
-  constructor({ title, content, mainCategory, alias }) {
+  constructor({ title, content, mainCategory, alias, html_url }) {
     const contentAsArray = content.split("");
     const contentLen = contentAsArray.length;
 
@@ -19,7 +19,8 @@ export default class CodeSample {
         content,
         contentAsArray,
         contentLen,
-        createdAt: new Date().getTime()
+        createdAt: new Date().getTime(),
+        html_url
       },
 
       characterCorrectness: {
