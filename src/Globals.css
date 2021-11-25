@@ -22,3 +22,11 @@ code {
     display: flex;
     text-align: center;
 }
+
+a {
+    color: #9ccae2;
+}
+
+a:hover, a:focus {
+    color: #ffffff;
+}

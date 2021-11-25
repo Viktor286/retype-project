@@ -111,10 +111,15 @@ class CodeTrainerApp extends Component {
         <section className={"codingAreaHeader"}>
           <img src={logo} className="App-logo" alt="logo"/>
           <h2>
-            Retype Github
+            Github Retype
             <div className="mainCategory">
               speed coder typing trainer
             </div>
+            <ul>
+              <li><a href="facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js">facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js</a></li>
+              <li><a href="numpy/numpy/blob/main/numpy/typing/_array_like.py">numpy/numpy/blob/main/numpy/typing/_array_like.py</a></li>
+              <li><a href="Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts">Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts</a></li>
+            </ul>
           </h2>
         </section>
       </div>
