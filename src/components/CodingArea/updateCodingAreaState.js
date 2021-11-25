@@ -1,5 +1,5 @@
 import {codingAreaModifier} from "./codingAreaModifier";
-import {debugLog, jsonObjCopy} from "../../functions/misc";
+import {debugLog, jsonObjCopy} from "../../utils/misc";
 
 export default function updateCodingAreaState({ action, codeTrainer }) {
   const {

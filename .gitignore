@@ -15,6 +15,7 @@ notes.txt
 /build
 .firebaserc
 firebase.json
+src/firebaseConfig.js
 
 # misc
 .DS_Store

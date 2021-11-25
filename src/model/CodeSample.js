@@ -1,7 +1,7 @@
+import {jsonObjCopy} from "../utils/misc";
+
 export default class CodeSample {
   constructor({ title, content, mainCategory, alias }) {
-    const createdAt = new Date().getTime();
-    const id = Math.random().toString(36).slice(2);
     const contentAsArray = content.split("");
     const contentLen = contentAsArray.length;
 
@@ -12,14 +12,14 @@ export default class CodeSample {
       },
 
       currentCodeSample: {
-        id,
+        id: Math.random().toString(36).slice(2),
         title,
         alias,
         mainCategory,
         content,
         contentAsArray,
         contentLen,
-        createdAt
+        createdAt: new Date().getTime()
       },
 
       characterCorrectness: {
@@ -46,6 +46,6 @@ export default class CodeSample {
       }
     };
 
-    this.activeState = JSON.parse(JSON.stringify(this.initialState));
+    this.activeState = jsonObjCopy(this.initialState);
   }
 }

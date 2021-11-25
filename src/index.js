@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import {initializeApp} from "firebase/app";
+import {firebaseConfig} from "./firebaseConfig";
+import {Provider} from "react-redux";
 import configureStore from "./configureStore";
 import CodeTrainerApp from "./CodeTrainerApp";
 import "./Globals.css";
@@ -12,11 +14,14 @@ window.debugLogConfig = {
   codeSampleComplete: 1,
   saveCodeSamplesPlaylistToLS: 1
 };
+
+initializeApp(firebaseConfig);
+
 const store = configureStore();
 
 const Main = (
   <Provider store={store}>
-        <CodeTrainerApp />
+    <CodeTrainerApp/>
   </Provider>
 );
 

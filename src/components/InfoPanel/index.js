@@ -1,4 +1,4 @@
-import { millisecondsToTime } from "../../functions/misc";
+import { millisecondsToTime } from "../../utils/misc";
 import "./index.css";
 
 const Index = ({
