@@ -1,17 +1,18 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import InfoPanel from "./components/InfoPanel";
-import CodeSample from "./model/CodeSample";
-import CodingArea from "./components/CodingArea";
-import CodingAreaHeader from "./components/CodingAreaHeader";
-import keydownGlobalController from "./keydownGlobalController";
-import * as userStatActions from "./model/TodaySessionUserStat";
-import initialUserStat from "./model/initialUserStat";
-import {jsonObjCopy, logLocalStorageStat} from "./utils/misc";
-import {fetchGithubResource} from "./modules/fetchGithubResource";
+import InfoPanel from "../InfoPanel";
+import CodeSample from "../../model/CodeSample";
+import CodingArea from "../CodingArea";
+import CodingAreaHeader from "../CodingAreaHeader";
+import keydownGlobalController from "../../keydownGlobalController";
+import * as userStatActions from "../../model/TodaySessionUserStat";
+import initialUserStat from "../../model/initialUserStat";
+import {jsonObjCopy, logLocalStorageStat} from "../../utils/misc";
+import {fetchGithubResource} from "../../modules/fetchGithubResource";
 
-import "./Globals.css";
-import logo from "./logo.svg";
+import "../../Globals.css";
+import "./index.css";
+import logo from "../../logo.svg";
 
 class CodeTrainerApp extends Component {
   constructor(props) {
@@ -112,7 +113,7 @@ class CodeTrainerApp extends Component {
   render() {
     if (window.location.pathname === '/') {
       return <div className="CodeTrainerApp">
-        <section className={"codingAreaHeader"}>
+        <section className={"landingContent"}>
           <section>
             <img src={logo} className="App-logo" alt="logo"/>
             <h2>Github Retype
@@ -141,9 +142,9 @@ class CodeTrainerApp extends Component {
           </section>
 
           <section>
-            <h2>Learn new programming languages quickly</h2>
-            <p>The world has plenty of different code syntax nowadays and sometimes you need to quickly switch gears between something like python and javascript.</p>
-            <p>Just a couple of exercise per day will help you to quickly adapt a new programing language and get the feeling of smooth "syntax flow" more easily.</p>
+            <h2>Learn new programming languages and APIs quickly</h2>
+            <p>The world has plenty of different code syntax and specific frameworks nowadays and sometimes you need to quickly switch gears between something like python's django and javascript's react.</p>
+            <p>Just a couple of exercise per day will help you to quickly adapt a new programing language or new framework pattern and get the feeling of smooth "syntax flow" more easily.</p>
           </section>
 
           <section>
@@ -169,6 +170,11 @@ class CodeTrainerApp extends Component {
             <p>Github is awesome community to discover new ideas, approaches, trends. <br />So, don't forget to checkout <a href="https://github.com/trending?since=weekly">trending repos and developers</a> out there.</p>
           </section>
 
+          <section>
+            <h2>Create your own typing playlist</h2>
+            <p>Make your own training program as files in your github repository and get your own custom coding exercises.</p>
+          </section>
+
           {/*if you are beginer, its important to learn first the correct hand and fingers placement (https://www.typing.com/)*/}
 
         </section>
@@ -184,7 +190,7 @@ class CodeTrainerApp extends Component {
             <CodingArea
               currentCodeSample={this.state.currentCodeSample}
               cursorIndex={this.state.codeArea.cursorIndex}
-              characterCorrectnessMap={this.state.characterCorrectness.map}
+              characterCorrectness={this.state.characterCorrectness}
             />
           </CodingAreaHeader>
           <InfoPanel

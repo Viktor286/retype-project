@@ -1,6 +1,10 @@
 import { millisecondsToTime } from "../../utils/misc";
 import "./index.css";
 
+function markBodyAsComplete() {
+  window.document.body.classList.add('completed');
+}
+
 const Index = ({
   characterCorrectness: {
     keysSuccess,
@@ -14,6 +18,10 @@ const Index = ({
     todayCompleted: { timeCountedSum, cpmAverage, keysSuccessSum }
   }
 }) => {
+  if (isComplete) {
+    markBodyAsComplete();
+  }
+
   const progress = keysLeftPercent + "%";
 
   return (

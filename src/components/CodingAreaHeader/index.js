@@ -4,7 +4,7 @@ import "./index.css";
 export default function CodingAreaHeader({currentCodeSample, children}) {
   const u = new URL(currentCodeSample.html_url);
   return <section className={"codingAreaHeader"}>
-    <img src={logo} className="App-logo" alt="logo"/>
+    <a href="/"><img src={logo} className="App-logo" alt="logo"/></a>
     <h2>
       {u.pathname}
       <div className="mainCategory">

@@ -1,63 +1,74 @@
 section.codingArea {
-  font-size: 1.8rem;
-
-  position: relative;
-
-  margin: 0 50px 190px;
-
-  text-align: left;
+    font-size: 1.8rem;
+    position: relative;
+    margin: 0 50px 190px;
+    background-color: hsl(223deg 10% 15%);;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: left;
 }
 
+body.completed section.codingArea {
+    background-color: hsl(155deg 13% 18%);
+    /*background-color: hsl(160deg 10% 15%);*/
+}
+
+
 span.await {
-  color: #e3fcff;
+    color: #e3fcff;
 }
 
 span.tab {
-  /*font-size: 1.5rem;*/
-  margin: 0 4px 0 0;
+    /*font-size: 1.5rem;*/
+    margin: 0 4px 0 0;
 
-  color: #3d4148;
+    color: #3d4148;
 }
 
 span.lineBreak {
-  margin: 0 5px;
+    margin: 0 5px;
 
-  color: #464d5a;
+    color: #464d5a;
 }
 
 span.lineBreak::after {
-  content: "\A";
-  white-space: pre;
+    content: "\A";
+    white-space: pre;
 }
 
 span.ok {
-  color: #505050;
+    color: hsl(217deg 11% 27%);
 }
 
+body.completed span.ok {
+    color: hsl(145deg 33% 84%);
+}
+
+
 span.mistake {
-  color: #f19c83;
-  background-color: #573430;
+    color: #f19c83;
+    background-color: #573430;
 }
 
 span.cursor {
-  text-decoration: underline;
+    text-decoration: underline;
 
-  color: #fff;
-  background-color: #8d8649;
+    color: #fff;
+    background-color: #8d8649;
 }
 
 span.cursor.mistake {
-  background-color: #dc3c54;
+    background-color: #dc3c54;
 }
 
 span.cursor.ok {
-  color: #fff;
-  background-color: #489940;
+    color: #fff;
+    background-color: #489940;
 }
 
 span.lineBreak.cursor,
 span.tab.cursor {
-  text-decoration: none;
+    text-decoration: none;
 
-  color: #fff;
+    color: #fff;
 }

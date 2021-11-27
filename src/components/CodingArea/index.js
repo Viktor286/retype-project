@@ -2,10 +2,11 @@ import "./index.css";
 
 const CodingArea = ({
   cursorIndex,
-  characterCorrectnessMap,
+  characterCorrectness,
   currentCodeSample: { contentAsArray: currentCodeSampleAsArr }
-}) => (
-  <section className="codingArea">
+}) => {
+  const { map: characterCorrectnessMap } = characterCorrectness;
+  return <section className="codingArea">
     {currentCodeSampleAsArr.map((char, idx) => {
       let displayChar = char;
 
@@ -47,6 +48,6 @@ const CodingArea = ({
       );
     })}
   </section>
-);
+};
 
 export default CodingArea;

@@ -4,7 +4,7 @@ import {initializeApp} from "firebase/app";
 import {firebaseConfig} from "./firebaseConfig";
 import {Provider} from "react-redux";
 import configureStore from "./configureStore";
-import CodeTrainerApp from "./CodeTrainerApp";
+import CodeTrainerApp from "./components/CodeTrainerApp/CodeTrainerApp";
 import "./Globals.css";
 import * as serviceWorker from "./serviceWorker";
 

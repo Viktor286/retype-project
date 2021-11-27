@@ -10,7 +10,11 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #202227;
+    background-color: hsl(223deg 10% 12%);;
+}
+
+body.completed {
+    background-color: hsl(180deg 10% 12%);;
 }
 
 code {
@@ -24,9 +28,13 @@ code {
 }
 
 a {
-    color: #9ccae2;
+    color: #9ce0e2;
 }
 
 a:hover, a:focus {
     color: #ffffff;
+}
+
+a.green {
+    color:#00bcb4;
 }
