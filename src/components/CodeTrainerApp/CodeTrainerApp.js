@@ -175,7 +175,10 @@ class CodeTrainerApp extends Component {
             <p>Make your own training program as files in your github repository and get your own custom coding exercises.</p>
           </section>
 
-          {/*if you are beginer, its important to learn first the correct hand and fingers placement (https://www.typing.com/)*/}
+          <section>
+            <h2>General typing skill required!</h2>
+            <p>If you are new in tying and want to learn how increase your level in touch typing, there are several great resources to start: <a href="https://www.typing.com/" target="_blank">one</a>, <a href="https://www.ratatype.com/learn/" target="_blank">two</a>, <a href="https://www.keybr.com/" target="_blank">three</a></p>
+          </section>
 
         </section>
       </div>
