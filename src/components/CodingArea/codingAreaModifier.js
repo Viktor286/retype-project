@@ -1,3 +1,10 @@
+const CHAR_STATE = {
+  NO_CHANGE: null,
+  RESET: 0,
+  SUCCESS: 1,
+  MISTAKE: 2,
+};
+
 const codingAreaModifier = (prevState, { cursor, type: actionType }) => {
   const codeSampleLen = prevState.currentCodeSample.contentLen;
   let currentCharStateCode = 0;
@@ -6,54 +13,54 @@ const codingAreaModifier = (prevState, { cursor, type: actionType }) => {
   let corrections = prevState.characterCorrectness.corrections;
 
   if (actionType === "delete") {
-    nextCursorIndex = getGoNextCursor(
+    nextCursorIndex = getNextCursor(
       prevState.codeArea.cursorIndex,
       codeSampleLen
     );
-    currentCharStateCode = 0; // reset state
+    currentCharStateCode = CHAR_STATE.RESET;
     ++corrections;
   }
 
   if (actionType === "backspace") {
-    nextCursorIndex = getGoPrevCursor(prevState.codeArea.cursorIndex);
-    currentCharStateCode = 0; // reset state
+    nextCursorIndex = getPrevCursor(prevState.codeArea.cursorIndex);
+    currentCharStateCode = CHAR_STATE.RESET;
     ++corrections;
   }
 
   if (actionType === "match") {
-    nextCursorIndex = getGoNextCursor(
+    nextCursorIndex = getNextCursor(
       prevState.codeArea.cursorIndex,
       codeSampleLen
     );
-    currentCharStateCode = 1; // ok state
+    currentCharStateCode = CHAR_STATE.SUCCESS;
   }
 
   if (actionType === "mistake") {
-    nextCursorIndex = getGoNextCursor(
+    nextCursorIndex = getNextCursor(
       prevState.codeArea.cursorIndex,
       codeSampleLen
     );
-    currentCharStateCode = 2; // mistake state
+    currentCharStateCode = CHAR_STATE.MISTAKE;
     ++mistakes;
   }
 
   if (actionType === "one-forward") {
-    nextCursorIndex = getGoNextCursor(
+    nextCursorIndex = getNextCursor(
       prevState.codeArea.cursorIndex,
       codeSampleLen
     );
-    currentCharStateCode = null; // no-change state
+    currentCharStateCode = CHAR_STATE.NO_CHANGE;
   }
 
   if (actionType === "one-backward") {
-    nextCursorIndex = getGoPrevCursor(prevState.codeArea.cursorIndex);
-    currentCharStateCode = null; // no-change state
+    nextCursorIndex = getPrevCursor(prevState.codeArea.cursorIndex);
+    currentCharStateCode = CHAR_STATE.NO_CHANGE;
   }
 
   // update updateStateObj
   let updateStateObj = {};
 
-  if (currentCharStateCode !== null) {
+  if (currentCharStateCode !== CHAR_STATE.NO_CHANGE) {
     const newStat = prevState.characterCorrectness.map.slice(0);
 
     if (actionType === "backspace") {
@@ -108,13 +115,13 @@ const codingAreaModifier = (prevState, { cursor, type: actionType }) => {
   return updateStateObj;
 };
 
-const getGoNextCursor = (prevCursorIndex, contentLen) => {
+const getNextCursor = (prevCursorIndex, contentLen) => {
   return prevCursorIndex < contentLen - 1
     ? prevCursorIndex + 1
     : prevCursorIndex;
 };
 
-const getGoPrevCursor = prevCursorIndex => {
+const getPrevCursor = prevCursorIndex => {
   return prevCursorIndex > 0 ? prevCursorIndex - 1 : prevCursorIndex;
 };
 

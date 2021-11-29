@@ -1,52 +1,18 @@
-import {jsonObjCopy} from "../utils/misc";
+export default function CreateCodeSample({ title, content, mainCategory, alias, html_url }) {
+  const adjustedContent = decodeURIComponent(escape(window.atob(content))).replaceAll('  ', '\t');
+  const contentAsArray = adjustedContent.split("");
+  const contentLen = contentAsArray.length;
 
-export default class CodeSample {
-  constructor({ title, content, mainCategory, alias, html_url }) {
-    const contentAsArray = content.split("");
-    const contentLen = contentAsArray.length;
-
-    this.initialState = {
-      codeArea: {
-        cursorIndex: 0,
-        timeCountingDelay: 0
-      },
-
-      currentCodeSample: {
-        id: Math.random().toString(36).slice(2),
-        title,
-        alias,
-        mainCategory,
-        content,
-        contentAsArray,
-        contentLen,
-        createdAt: new Date().getTime(),
-        html_url
-      },
-
-      characterCorrectness: {
-        map: new Array(contentLen).fill(0),
-        keysLeft: contentLen,
-        keysSuccess: 0,
-        keysLeftPercent: 0,
-        isComplete: false,
-        cpm: 0,
-        timeCounted: 0,
-        corrections: 0,
-        mistakes: 0
-      },
-
-      userStat: {
-        lastCompletion: {
-          cpm: 0,
-          timeCounted: 0,
-          corrections: 0,
-          mistakes: 0,
-          timestamp: 0
-        },
-        completionsHistory: []
-      }
-    };
-
-    this.activeState = jsonObjCopy(this.initialState);
-  }
+  return {
+    id: Math.random().toString(36).slice(2),
+    title,
+    alias,
+    mainCategory,
+    content: adjustedContent,
+    contentAsArray,
+    contentLen,
+    createdAt: new Date().getTime(),
+    html_url
+  };
 }
+

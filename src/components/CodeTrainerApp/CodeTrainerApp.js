@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import InfoPanel from "../InfoPanel";
-import CodeSample from "../../model/CodeSample";
+import CodingSession from "../../model/CodingSession";
+import CreateCodeSample from "../../model/CodeSample";
 import CodingArea from "../CodingArea";
 import CodingAreaHeader from "../CodingAreaHeader";
 import keydownGlobalController from "../../keydownGlobalController";
@@ -36,12 +37,17 @@ class CodeTrainerApp extends Component {
 
       // TODO: extract codeAreaInitializer
       // Create code sample to render
-      const codeSample = new CodeSample({
+      const codeSample = CreateCodeSample({
         title: name,
-        content: decodeURIComponent(escape(window.atob(content))).replaceAll('  ', '\t'),
+        content,
         alias: name,
         mainCategory: "DOM API",
         html_url
+      });
+
+      const initialCodingSession = new CodingSession({
+        content: codeSample.content,
+        currentCodeSample: codeSample,
       });
 
       // Define userStat collection (localStorage or localData)
@@ -60,7 +66,7 @@ class CodeTrainerApp extends Component {
       initTodaySessionUserStat(userStat);
 
       // INIT component state
-      this.setState(() => jsonObjCopy(codeSample.activeState));
+      this.setState(() => jsonObjCopy(initialCodingSession.activeState));
 
       logLocalStorageStat();
 
@@ -155,7 +161,7 @@ class CodeTrainerApp extends Component {
               <li><a href="facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js">facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js</a></li>
               <li><a href="numpy/numpy/blob/main/numpy/typing/_array_like.py">numpy/numpy/blob/main/numpy/typing/_array_like.py</a></li>
               <li><a href="AppFlowy-IO/appflowy/blob/main/backend/src/application.rs">AppFlowy-IO/appflowy/blob/main/backend/src/application.rs</a></li>
-              <li><a href="Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts">Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts</a></li>
+              <li><a href="Viktor286/code-samples/blob/master/src/Engineering/Types.ts">Viktor286/code-samples/blob/master/src/Engineering/Types.ts</a></li>
             </ul>
           </section>
 
@@ -177,7 +183,7 @@ class CodeTrainerApp extends Component {
 
           <section>
             <h2>General typing skill required!</h2>
-            <p>If you are new in tying in general and if you want to learn how increase your level of touch typing, there is several great resources to start with: <a href="https://www.typing.com/" target="_blank">one</a>, <a href="https://www.ratatype.com/learn/" target="_blank">two</a>, <a href="https://www.keybr.com/" target="_blank">three</a></p>
+            <p>If you are new in tying in general and if you want to learn how increase your level of touch typing, there is several great resources to start with: <a href="https://www.typing.com/" target="_blank" rel="noreferrer">one</a>, <a href="https://www.ratatype.com/learn/" target="_blank" rel="noreferrer">two</a>, <a href="https://www.keybr.com/" target="_blank" rel="noreferrer">three</a></p>
           </section>
 
         </section>
