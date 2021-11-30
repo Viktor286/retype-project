@@ -2,12 +2,7 @@ import {codingAreaModifier} from "./codingAreaModifier";
 import {debugLog, jsonObjCopy} from "../../utils/misc";
 
 export default function updateCodingAreaState({ action, codeTrainer }) {
-  const {
-    userStat,
-    updateTodaySessionUserStat,
-  } = codeTrainer.props;
-
-  if (codeTrainer.state.characterCorrectness.isComplete) {
+  if (codeTrainer.characterCorrectness.isComplete) {
     return true;
   }
 
@@ -21,9 +16,9 @@ export default function updateCodingAreaState({ action, codeTrainer }) {
     ) {
       debugLog({event: "codeSampleComplete", color: "violet"}, prevState);
 
-      updateTodaySessionUserStat(newCodingAreaState, userStat);
+      // updateTodaySessionUserStat(newCodingAreaState, userStat);
 
-      let activeStateCompleted = jsonObjCopy(codeTrainer.state);
+      let activeStateCompleted = jsonObjCopy(codeTrainer);
       activeStateCompleted.characterCorrectness.isComplete = true;
       // TODO redux middleware to save to localStore by flag
     }

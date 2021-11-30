@@ -15,4 +15,3 @@ export default function CreateCodeSample({ title, content, mainCategory, alias, 
     html_url
   };
 }
-

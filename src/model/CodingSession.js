@@ -37,6 +37,7 @@ export default class CodingSession {
       }
     };
 
+    // TODO: collapse "activeState" pattern
     this.activeState = jsonObjCopy(this.initialState);
   }
 }

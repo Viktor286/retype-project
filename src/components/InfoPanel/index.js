@@ -14,9 +14,9 @@ const Index = ({
     timeCounted,
     cpm
   },
-  userStat: {
-    todayCompleted: { timeCountedSum, cpmAverage, keysSuccessSum }
-  }
+  // userStat: {
+    // todayCompleted: { timeCountedSum, cpmAverage, keysSuccessSum }
+  // }
 }) => {
   if (isComplete) {
     markBodyAsComplete();
@@ -44,7 +44,7 @@ const Index = ({
         <span className="keysLeft"> / {keysLeft}</span>
       </div>
       <div className="todayStats">
-        {millisecondsToTime(timeCountedSum)}, CPM {cpmAverage}, {keysSuccessSum}
+        {/*{millisecondsToTime(timeCountedSum)}, CPM {cpmAverage}, {keysSuccessSum}*/}
       </div>
     </section>
   );

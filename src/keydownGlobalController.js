@@ -1,8 +1,8 @@
 import updateCodingAreaState from './components/CodingArea/updateCodingAreaState'
 
 export default function keydownGlobalController({keydownEvent: e, codeTrainer}) {
-  const cursor = codeTrainer.state.codeArea.cursorIndex;
-  const currentChar = codeTrainer.state.currentCodeSample.contentAsArray[cursor];
+  const cursor = codeTrainer.codeArea.cursorIndex;
+  const currentChar = codeTrainer.currentCodeSample.contentAsArray[cursor];
 
   // Prevent keys
   if (

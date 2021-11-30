@@ -1,9 +1,8 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import {initializeApp} from "firebase/app";
 import {firebaseConfig} from "./firebaseConfig";
 import {Provider} from "react-redux";
-import configureStore from "./configureStore";
+import initStore from "./model/redux";
 import CodeTrainerApp from "./components/CodeTrainerApp/CodeTrainerApp";
 import "./Globals.css";
 import * as serviceWorker from "./serviceWorker";
@@ -17,7 +16,7 @@ window.debugLogConfig = {
 
 initializeApp(firebaseConfig);
 
-const store = configureStore();
+const store = initStore();
 
 const Main = (
   <Provider store={store}>

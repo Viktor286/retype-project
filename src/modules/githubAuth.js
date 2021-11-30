@@ -3,15 +3,13 @@ import { getAuth, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 export const signInGithubWithPopup = async () => {
   const provider = new GithubAuthProvider();
   const auth = getAuth();
-  signInWithPopup(auth, provider)
+  return signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a GitHub Access Token. You can use it to access the GitHub API.
       // const credential = GithubAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
-      console.log('result', result);
       // The signed-in user info.
-      const user = result.user;
-      console.log('user', user);
+      return result.user;
     }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
@@ -22,5 +20,4 @@ export const signInGithubWithPopup = async () => {
     const credential = GithubAuthProvider.credentialFromError(error);
     console.log('error', error);
   });
-
 }
