@@ -1,12 +1,11 @@
-import React from "react";
-import logo from "../../logo.svg";
 import "./index.css";
+import {svgLogo} from "../CodingAreaHeader/topIconIndex";
 
 export default function LandingPage() {
   return <div className="CodeTrainerApp">
     <section className={"landingContent"}>
       <section>
-        <img src={logo} className="App-logo" alt="logo"/>
+        <div dangerouslySetInnerHTML={{__html: svgLogo}} className="main-app-logo"/>
         <h2>Github Retype
           <div className="mainCategory">
             speed code typing trainer

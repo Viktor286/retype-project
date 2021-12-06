@@ -1,3 +1,9 @@
+.main-app-logo {
+    color: #9cc4e2;
+    margin: 40px 0 20px 0;
+    padding: 15px;
+}
+
 section.landingContent {
     display: flex;
     overflow: hidden;

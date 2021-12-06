@@ -18,6 +18,12 @@ export const signInGithubWithPopup = async () => {
     const email = error.email;
     // The AuthCredential type that was used.
     const credential = GithubAuthProvider.credentialFromError(error);
-    console.log('error', error);
+    console.log('error', {
+      error,
+      errorCode,
+      errorMessage,
+      email,
+      credential
+    });
   });
 }

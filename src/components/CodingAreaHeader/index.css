@@ -1,17 +1,34 @@
-.App-logo {
-    height: 13vmin;
-    margin: 0 0 20px 0;
+.app-logo {
+    color: #9cc4e2;
+    margin: 40px 0 20px 0;
+    border-radius: 50%;
+    padding: 15px;
+    border: 1px #284a64 dashed;
+    opacity: 1;
+    transition: opacity .5s linear;
+}
 
-    animation: App-logo-spin infinite 50s linear;
+a.app-logo.hiding {
+    opacity: 0;
+}
+
+.app-logo svg {
+    height: 100px;
+    width: 100px;
+    margin: 3px 0 0 0;
+    padding: 0;
+    line-height: 100;
+
+    animation: app-logo-spin infinite 50s linear;
     pointer-events: none;
 }
 
-@keyframes App-logo-spin {
+@keyframes app-logo-spin {
     from {
         transform: rotate(0deg);
     }
     to {
-        transform: rotate(360deg);
+        transform: rotate(720deg);
     }
 }
 
