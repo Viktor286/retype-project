@@ -1,5 +1,8 @@
 export default function CreateCodeSample({ title, content, mainCategory, alias, html_url }) {
-  const adjustedContent = decodeURIComponent(escape(window.atob(content))).replaceAll('  ', '\t');
+  // todo: optimize text adjustment
+  const adjustedContent_one = decodeURIComponent(escape(window.atob(content))).replaceAll('  ', '\t');
+  const adjustedContent_two = adjustedContent_one.replaceAll(/ *\t */igm, '\t');
+  const adjustedContent = adjustedContent_two.replaceAll(/ *\n */igm, '\n');
   const contentAsArray = adjustedContent.split("");
   const contentLen = contentAsArray.length;
 

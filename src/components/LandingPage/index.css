@@ -1,7 +1,11 @@
 .main-app-logo {
     color: #9cc4e2;
-    margin: 40px 0 20px 0;
-    padding: 15px;
+    margin: 40px 0 0 0;
+}
+
+.main-app-logo svg {
+    height: 150px;
+    width: 200px;
 }
 
 section.landingContent {
