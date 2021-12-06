@@ -14,6 +14,11 @@ window.debugLogConfig = {
   saveCodeSamplesPlaylistToLS: 1
 };
 
+window.codeTrainerApp = {
+  codeSample: undefined,
+  correctness: undefined,
+};
+
 initializeApp(firebaseConfig);
 
 const store = initStore();

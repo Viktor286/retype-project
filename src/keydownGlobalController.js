@@ -1,9 +1,18 @@
-import updateCodingAreaState from './components/CodingArea/updateCodingAreaState'
+import {
+  DELETE,
+  BACKSPACE,
+  MATCH,
+  MISTAKE,
+  ONE_FORWARD,
+  ONE_BACKWARD,
+  updateCorrectness
+} from "./model/redux/correctness";
 
-export default function keydownGlobalController({keydownEvent: e, codeTrainer}) {
-  const cursor = codeTrainer.codeArea.cursorIndex;
-  const currentChar = codeTrainer.currentCodeSample.contentAsArray[cursor];
+export default function keydownGlobalController({keydownEvent: e, dispatch, store, codeSample}) {
+  const state = store.getState();
+  const {correctness: {cursorIndex: cursor}} = state;
 
+  const currentChar = codeSample.contentAsArray[cursor];
   // Prevent keys
   if (
     e.keyCode === 9 || // prevent tab behavior
@@ -54,31 +63,31 @@ export default function keydownGlobalController({keydownEvent: e, codeTrainer}) 
   // Arrows back/forward
   if (e.keyCode === 39) {
     // forward
-    updateCodingAreaState({action: {type: "one-forward", cursor}, codeTrainer});
+    dispatch(updateCorrectness(ONE_FORWARD, cursor));
     return true;
   }
 
   if (e.keyCode === 37) {
     // backward
-    updateCodingAreaState({action: {type: "one-backward", cursor}, codeTrainer});
+    dispatch(updateCorrectness(ONE_BACKWARD, cursor));
     return true;
   }
 
   if (e.keyCode === 8) {
     // backspace
-    updateCodingAreaState({action: {type: "backspace", cursor}, codeTrainer});
+    dispatch(updateCorrectness(BACKSPACE, cursor));
     return true;
   }
 
   if (e.keyCode === 46) {
     // delete
-    updateCodingAreaState({action: {type: "delete", cursor}, codeTrainer});
+    dispatch(updateCorrectness(DELETE, cursor));
     return true;
   }
 
   if (e.keyCode === 13 && currentChar && currentChar.charCodeAt(0) === 10) {
     // enter
-    updateCodingAreaState({action: {type: "match", cursor}, codeTrainer});
+    dispatch(updateCorrectness(MATCH, cursor));
     return true;
   }
 
@@ -86,16 +95,11 @@ export default function keydownGlobalController({keydownEvent: e, codeTrainer}) 
     // if tab char is expecting
     if (e.keyCode === 9 || e.keyCode === 32) {
       // tab or space will be ok
-      updateCodingAreaState({action: {type: "match", cursor}, codeTrainer});
+      dispatch(updateCorrectness(MATCH, cursor));
       return true;
     }
   }
 
   // Detect match or mistake
-  updateCodingAreaState({
-    action: {
-      type: e.key === currentChar ? "match" : "mistake",
-      cursor
-    }, codeTrainer
-  });
+  dispatch(updateCorrectness(e.key === currentChar ? MATCH : MISTAKE, cursor));
 }

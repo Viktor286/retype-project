@@ -5,7 +5,6 @@ const CodingArea = ({
   characterCorrectness,
   currentCodeSample: { contentAsArray: currentCodeSampleAsArr }
 }) => {
-  const { map: characterCorrectnessMap } = characterCorrectness;
   return <section className="codingArea">
     {currentCodeSampleAsArr.map((char, idx) => {
       let displayChar = char;
@@ -17,15 +16,15 @@ const CodingArea = ({
         cssClasses.push("cursor");
       }
 
-      if (characterCorrectnessMap[idx] === 0) {
+      if (characterCorrectness[idx] === 0) {
         cssClasses.push("await");
       }
 
-      if (characterCorrectnessMap[idx] === 1) {
+      if (characterCorrectness[idx] === 1) {
         cssClasses.push("ok");
       }
 
-      if (characterCorrectnessMap[idx] === 2) {
+      if (characterCorrectness[idx] === 2) {
         cssClasses.push("mistake");
       }
 

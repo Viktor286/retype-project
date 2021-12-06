@@ -1,20 +1,26 @@
 import React, {useEffect, useState, useRef} from "react";
+import {useSelector, useDispatch, useStore} from "react-redux";
+import {initCorrectness} from "../../model/redux/correctness";
 import CreateCodeSample from "../../model/CodeSample";
-import CodingSession from "../../model/CodingSession";
-// import keydownGlobalController from "../../keydownGlobalController";
+import keydownGlobalController from "../../keydownGlobalController";
 import {fetchGithubResource} from "../../modules/fetchGithubResource";
 import InfoPanel from "../InfoPanel";
 import CodingArea from "../CodingArea";
 import LandingPage from "../LandingPage";
 import CodingAreaHeader from "../CodingAreaHeader";
-import {jsonObjCopy, logLocalStorageStat} from "../../utils/misc";
 
 import "../../Globals.css";
 
 export default function CodeTrainerApp() {
-  const [trainerApp, setTrainerApp] = useState({});
   const [codeSample, setCodeSample] = useState({});
-  let { current: isCodeSampleInit } = useRef(false);
+  const dispatch = useDispatch();
+  const store = useStore();
+  const correctness = useSelector(state => state.correctness);
+  const { map, cursorIndex } = correctness;
+  let {current} = useRef({
+    keydownGlobalControllerInit: false,
+    globalControllerPayload: {dispatch, store}
+  });
 
   useEffect(() => {
     fetchGithubResource(window.location.pathname).then(githubResource => {
@@ -32,33 +38,23 @@ export default function CodeTrainerApp() {
         html_url
       });
 
+      window.codeTrainerApp.codeSample = codeSample;
       setCodeSample(codeSample);
     });
   }, []);
 
   useEffect(() => {
-    if (codeSample.content) {
-      const initialCodingSession = new CodingSession({
-        content: codeSample.content,
-        currentCodeSample: codeSample,
-      });
-
-      // INIT component state
-      setTrainerApp(() => jsonObjCopy(initialCodingSession.activeState));
-
-      logLocalStorageStat();
+    console.log('INIT useEffect');
+    if (codeSample.content && !current.keydownGlobalControllerInit) {
+      current.globalControllerPayload.dispatch(initCorrectness(codeSample.contentLen));
+      const keydownHandler = e => keydownGlobalController({keydownEvent: e, codeSample, ...current.globalControllerPayload})
+      document.addEventListener("keydown", keydownHandler);
+      current.keydownGlobalControllerInit = true;
+      return () => {
+        document.removeEventListener("keydown", keydownHandler);
+      }
     }
-  }, [codeSample]);
-
-  useEffect(() => {
-    // Init and consecutive trainerApp updates
-    if (!isCodeSampleInit && trainerApp.currentCodeSample?.content) {
-      isCodeSampleInit = true;
-      // document.addEventListener("keydown", e => keydownGlobalController({keydownEvent: e, codeTrainer: trainerApp}));
-    } else {
-      console.log('trainerApp', trainerApp);
-    }
-  }, [trainerApp]);
+  }, [codeSample, current]);
 
 // Set time tracking
   // setInterval(() => {
@@ -96,18 +92,18 @@ export default function CodeTrainerApp() {
     return <LandingPage/>;
   }
 
-  if (trainerApp.hasOwnProperty("currentCodeSample")) {
+  if (map.length > 0) {
     return (
       <div className="CodeTrainerApp">
-        <CodingAreaHeader currentCodeSample={trainerApp.currentCodeSample}>
+        <CodingAreaHeader currentCodeSample={codeSample}>
           <CodingArea
-            currentCodeSample={trainerApp.currentCodeSample}
-            cursorIndex={trainerApp.codeArea.cursorIndex}
-            characterCorrectness={trainerApp.characterCorrectness}
+            currentCodeSample={codeSample}
+            cursorIndex={cursorIndex}
+            characterCorrectness={map}
           />
         </CodingAreaHeader>
         <InfoPanel
-          characterCorrectness={trainerApp.characterCorrectness}
+          correctness={correctness}
         />
       </div>
     );

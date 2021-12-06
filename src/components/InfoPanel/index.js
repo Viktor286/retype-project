@@ -1,38 +1,38 @@
-import { millisecondsToTime } from "../../utils/misc";
+// import { millisecondsToTime } from "../../utils/misc";
 import "./index.css";
 
 function markBodyAsComplete() {
   window.document.body.classList.add('completed');
 }
 
-const Index = ({
-  characterCorrectness: {
-    keysSuccess,
-    keysLeft,
-    keysLeftPercent,
-    isComplete,
-    timeCounted,
-    cpm
-  },
-  // userStat: {
-    // todayCompleted: { timeCountedSum, cpmAverage, keysSuccessSum }
-  // }
-}) => {
-  if (isComplete) {
-    markBodyAsComplete();
-  }
+function unmarkBodyAsComplete() {
+  window.document.body.classList.remove('completed');
+}
 
-  const progress = keysLeftPercent + "%";
+const InfoPanel = ({correctness}) => {
+
+  const {
+    correctAmount,
+    keysLeft,
+    keysCompletedPercent,
+    isComplete,
+    mistakes,
+    corrections,
+  } = correctness
+
+  isComplete ? markBodyAsComplete() : unmarkBodyAsComplete();
+
+  const progress = keysCompletedPercent + "%";
 
   return (
     <section className={"infoPanel" + (isComplete ? " complete" : "")}>
       <div className="progressbar">
-        <div className="bar" style={{ width: progress }}>
+        <div className="bar" style={{width: progress}}>
           &nbsp;
         </div>
       </div>
       <div className="currentStats">
-        {millisecondsToTime(timeCounted)}, CPM {cpm}
+        {/*{millisecondsToTime(timeCounted)}, CPM {cpm}*/}
       </div>
       <div className="currentStatus">
         <span className={"text"}>
@@ -40,8 +40,8 @@ const Index = ({
             {isComplete ? "Complete!" : "In progress:"}
           </span>
         </span>
-        {keysSuccess}
-        <span className="keysLeft"> / {keysLeft}</span>
+        correct: {correctAmount} /&nbsp;
+        <span className="keysLeft">left: {keysLeft} / mistakes: {mistakes} / corrections: {corrections}</span>
       </div>
       <div className="todayStats">
         {/*{millisecondsToTime(timeCountedSum)}, CPM {cpmAverage}, {keysSuccessSum}*/}
@@ -50,4 +50,4 @@ const Index = ({
   );
 };
 
-export default Index;
+export default InfoPanel;
