@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import {useSelector, useDispatch, useStore} from "react-redux";
 import {initCorrectness} from "../../model/redux/correctness";
 import CreateCodeSample from "../../model/CodeSample";
-import keydownGlobalController from "../../keydownGlobalController";
+import keydownGlobalController from "./keydownGlobalController";
 import {fetchGithubResource} from "../../modules/fetchGithubResource";
 import InfoPanel from "../InfoPanel";
 import CodingArea from "../CodingArea";
@@ -46,7 +46,8 @@ export default function CodeTrainerApp() {
   useEffect(() => {
     console.log('INIT useEffect');
     if (codeSample.content && !current.keydownGlobalControllerInit) {
-      current.globalControllerPayload.dispatch(initCorrectness(codeSample.contentLen));
+      current.globalControllerPayload.dispatch(initCorrectness());
+
       const keydownHandler = e => keydownGlobalController({keydownEvent: e, codeSample, ...current.globalControllerPayload})
       document.addEventListener("keydown", keydownHandler);
       current.keydownGlobalControllerInit = true;

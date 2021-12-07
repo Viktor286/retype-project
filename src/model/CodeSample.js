@@ -13,6 +13,7 @@ export default function CreateCodeSample({ title, content, mainCategory, alias, 
     mainCategory,
     content: adjustedContent,
     contentAsArray,
+    skipArray: Array(17).fill(0).concat(Array(67).fill(1)).concat(Array(1).fill(0)).concat(Array(50).fill(1)),
     contentLen,
     createdAt: new Date().getTime(),
     html_url

@@ -6,7 +6,7 @@ import {
   ONE_FORWARD,
   ONE_BACKWARD,
   updateCorrectness
-} from "./model/redux/correctness";
+} from "../../model/redux/correctness";
 
 export default function keydownGlobalController({keydownEvent: e, dispatch, store, codeSample}) {
   const state = store.getState();
