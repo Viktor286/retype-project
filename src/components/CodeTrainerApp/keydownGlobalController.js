@@ -9,10 +9,6 @@ import {
 } from "../../model/redux/correctness";
 
 export default function keydownGlobalController({keydownEvent: e, dispatch, store, codeSample}) {
-  const state = store.getState();
-  const {correctness: {cursorIndex: cursor}} = state;
-
-  const currentChar = codeSample.contentAsArray[cursor];
   // Prevent keys
   if (
     e.keyCode === 9 || // prevent tab behavior
@@ -63,31 +59,36 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
   // Arrows back/forward
   if (e.keyCode === 39) {
     // forward
-    dispatch(updateCorrectness(ONE_FORWARD, cursor));
+    dispatch(updateCorrectness(ONE_FORWARD));
     return true;
   }
 
   if (e.keyCode === 37) {
     // backward
-    dispatch(updateCorrectness(ONE_BACKWARD, cursor));
+    dispatch(updateCorrectness(ONE_BACKWARD));
     return true;
   }
 
   if (e.keyCode === 8) {
     // backspace
-    dispatch(updateCorrectness(BACKSPACE, cursor));
+    dispatch(updateCorrectness(BACKSPACE));
     return true;
   }
 
   if (e.keyCode === 46) {
     // delete
-    dispatch(updateCorrectness(DELETE, cursor));
+    dispatch(updateCorrectness(DELETE));
     return true;
   }
 
-  if (e.keyCode === 13 && currentChar && currentChar.charCodeAt(0) === 10) {
+  // Special cases with enter, tab and space
+  const state = store.getState();
+  const {correctness: {cursorIndex: cursor}} = state;
+  const currentChar = codeSample.contentAsArray[cursor];
+
+  if (e.keyCode === 13 && currentChar.charCodeAt(0) === 10) {
     // enter
-    dispatch(updateCorrectness(MATCH, cursor));
+    dispatch(updateCorrectness(MATCH));
     return true;
   }
 
@@ -95,11 +96,11 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
     // if tab char is expecting
     if (e.keyCode === 9 || e.keyCode === 32) {
       // tab or space will be ok
-      dispatch(updateCorrectness(MATCH, cursor));
+      dispatch(updateCorrectness(MATCH));
       return true;
     }
   }
 
   // Detect match or mistake
-  dispatch(updateCorrectness(e.key === currentChar ? MATCH : MISTAKE, cursor));
+  dispatch(updateCorrectness(e.key === currentChar ? MATCH : MISTAKE));
 }

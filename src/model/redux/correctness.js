@@ -28,9 +28,8 @@ export const initCorrectness = () => ({
   type: INIT,
 });
 
-export const updateCorrectness = (type, cursor) => ({
+export const updateCorrectness = type => ({
   type,
-  cursor
 });
 
 const CHAR_STATE = {
@@ -103,7 +102,7 @@ const correctnessReducer = (state = initialState, action) => {
   let newMap;
   let stats = {};
   const codeSample = window.codeTrainerApp?.codeSample || {};
-  const {cursor} = action;
+  const {cursorIndex: cursor} = state;
 
   switch (action.type) {
     case INIT:
