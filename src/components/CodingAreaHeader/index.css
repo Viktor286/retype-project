@@ -2,7 +2,7 @@
     color: #9cc4e2;
     margin: 40px 0 20px 0;
     border-radius: 50%;
-    padding: 15px;
+    padding: 17px;
     border: 1px #284a64 dashed;
     opacity: 1;
     transition: opacity .5s linear;
@@ -13,8 +13,9 @@ a.app-logo.hiding {
 }
 
 .app-logo svg {
-    height: 100px;
-    width: 100px;
+    overflow: hidden;
+    height: 70px;
+    width: 70px;
     margin: 3px 0 0 0;
     padding: 0;
     line-height: 100;
@@ -49,12 +50,24 @@ section.codingAreaHeader h2 {
     font-size: 2.1rem;
     font-weight: normal;
 
-    margin: 5px 0 15px;
+    margin: 5px 0;
     text-align: center;
 }
 
 section.codingAreaHeader h2 div.mainCategory {
     font-size: 1.1rem;
-    margin: 0 10px 30px 10px;
+    margin: 10px;
     color: #6a7487;
 }
+
+section.codingAreaHeader h2 div.mainCategory a > img {
+    width: 1.7rem;
+    filter: invert(48%) sepia(79%) saturate(150%) hue-rotate(126deg) brightness(118%) contrast(119%);
+    position: absolute;
+    margin-left: -1.95rem;
+}
+
+section.codingAreaHeader h2 div.mainCategory a:hover > img {
+    filter: invert(85%);
+}
+
