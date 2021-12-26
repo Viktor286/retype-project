@@ -84,7 +84,7 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
   // Special cases with enter, tab and space
   const state = store.getState();
   const {correctness: {cursorIndex: cursor}} = state;
-  const currentChar = codeSample.contentAsArray[cursor];
+  const currentChar = codeSample.contentAs2dArray[cursor[0]][cursor[1]];
 
   if (e.keyCode === 13 && currentChar.charCodeAt(0) === 10) {
     // enter

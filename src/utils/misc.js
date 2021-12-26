@@ -1,4 +1,4 @@
-const millisecondsToTime = ms => {
+export const millisecondsToTime = ms => {
   let seconds = ms / 1000;
   let minutes = parseInt(seconds / 60, 10);
   seconds = seconds % 60;
@@ -24,9 +24,9 @@ const millisecondsToTime = ms => {
   return strHours + strMinutes + strSeconds;
 };
 
-const jsonObjCopy = obj => JSON.parse(JSON.stringify(obj));
+export const jsonObjCopy = obj => JSON.parse(JSON.stringify(obj));
 
-const logLocalStorageStat = () => {
+export const logLocalStorageStat = () => {
   console.log("------ LocalStorageStat ------");
   let _lsTotal = 0,
     _xLen,
@@ -42,7 +42,7 @@ const logLocalStorageStat = () => {
   console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
 };
 
-const debugLog = (...args) => {
+export const debugLog = (...args) => {
   const [log, ...params] = args;
   const { event, color } = log;
 
@@ -54,5 +54,3 @@ const debugLog = (...args) => {
 
   logOutput(params);
 };
-
-export { millisecondsToTime, jsonObjCopy, logLocalStorageStat, debugLog };

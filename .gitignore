@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 .idea
-notes.txt
 
 # dependencies
 /node_modules
@@ -13,9 +12,11 @@ notes.txt
 
 # production
 /build
+/storage
 .firebaserc
 firebase.json
-src/firebaseConfig.js
+/src/modules/firebase/firebaseConfig.js
+/public/lib/s
 
 # misc
 .DS_Store

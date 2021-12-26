@@ -29,7 +29,7 @@ export default function LandingPage() {
         <h2>Use "Github Retype" to exercise any open source code file from the largest repository in the world! <br />Python, Javascript, PHP, Java, C, C++ — all top programming languages.</h2>
         <p>Add "rt" or "retype" text after the "github" domain name before ".com" to get github file as code typing trainer session.</p>
         {/* eslint-disable no-script-url */}
-        <p>Or use bookmarklet to easy switch between github and retype: <pre>{"javascript: window.location.href = window.location.href.replace(/github(retype)?.com/, function(match, s) {return s ? %27github.com%27 : %27githubretype.com%27})"}</pre></p>
+        <p>Or use bookmarklet to easy switch between github and retype: </p><pre>{"javascript: window.location.href = window.location.href.replace(/github(retype)?.com/, function(match, s) {return s ? %27github.com%27 : %27githubretype.com%27})"}</pre>
         {/* cool image example */}
       </section>
 

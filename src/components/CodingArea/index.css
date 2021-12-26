@@ -2,41 +2,85 @@ section.codingArea {
     font-size: 1.8rem;
     position: relative;
     margin: 0 50px 190px;
-    background-color: hsl(223deg 10% 15%);;
-    padding: 50px;
+    background-color: hsl(223deg 5% 12%);
+    padding: 20px 30px 20px;
     border-radius: 20px;
     text-align: left;
+    max-width: 80%;
+    overflow: hidden;
 }
 
 body.completed section.codingArea {
-    background-color: hsl(155deg 13% 18%);
+    background-color: hsl(158deg 4% 14%);
+    /*background-color: hsl(223deg 8% 13%);*/
+    /*background-color: hsl(155deg 13% 18%);*/
     /*background-color: hsl(160deg 10% 15%);*/
 }
 
 
-span.await {
-    color: #e3fcff;
+div.line {
+    display: flex;
 }
 
-span.tab {
-    /*font-size: 1.5rem;*/
-    margin: 0 4px 0 0;
+div.line .code {
+    display: block;
+}
 
-    color: #3d4148;
+div.line.active {
+    background-color: hsl(200deg 14% 15%);
+}
+
+div.line.active span.ok {
+    color: hsl(217deg 15% 34%);
+}
+
+/* Char Sections */
+span.char {
+    padding: 0 0 0 0;
+}
+
+span.char.skip {
+    color: hsl(199deg 10% 44%);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+
+div.char.lineNum {
+    color: hsl(214deg 20% 25%);
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 300;
+    width: 50px;
+    margin-right: 15px;
+}
+
+div.line.active div.char.lineNum {
+    color: hsl(214deg 20% 50%);
+}
+
+/*span.char.await {*/
+/*    color: #e3fcff;*/
+/*}*/
+
+span.char.tab, span.char.lineBreak {
+    color: hsl(208deg 20% 50%);
+}
+
+span.char.tab {
+    margin: 0 5px 0 0;
 }
 
 span.lineBreak {
     margin: 0 5px;
-
-    color: #464d5a;
 }
 
-span.lineBreak::after {
-    content: "\A";
-    white-space: pre;
-}
+/*span.lineBreak::after {*/
+/*    content: "\A";*/
+/*    white-space: pre;*/
+/*}*/
 
-span.ok {
+span.char.ok {
     color: hsl(217deg 11% 27%);
 }
 

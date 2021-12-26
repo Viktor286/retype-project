@@ -4,9 +4,10 @@
  * */
 
 const initialState = {
+  cursorIndex: [0, 0],
+  prevCharState: undefined,
+  correctAs2dArray: [[]],
   correctAmount: 0,
-  cursorIndex: 0,
-  map: [],
   keysLeft: 0,
   keysCompletedPercent: 0,
   isComplete: false,
@@ -39,11 +40,17 @@ const CHAR_STATE = {
   MISTAKE: 2,
 };
 
+export function initEmptyContent2dArray(contentAs2dArray) {
+  const emptyContentAs2dArray = new Array(contentAs2dArray.length);
+  for (let i = 0; i < contentAs2dArray.length; i++) {
+    emptyContentAs2dArray[i] = new Array(contentAs2dArray[i].length).fill(0);
+  }
+  return emptyContentAs2dArray;
+}
 
 // prev
-function resolveStats(command, prevCharState, newCharState, state, codeSample) {
-  let {correctAmount, mistakes, corrections} = state;
-  const {contentLen} = codeSample;
+function resolveStats(command, state, prevCharState, totalChars) {
+  let {correctAmount, mistakes, corrections } = state;
 
   switch (command) {
     case DELETE:
@@ -84,80 +91,102 @@ function resolveStats(command, prevCharState, newCharState, state, codeSample) {
       break;
 
     default:
-      // pass
+    // pass
   }
 
   return {
-    keysLeft: contentLen - correctAmount,
-    keysCompletedPercent: parseInt(correctAmount / (contentLen / 100), 10),
+    keysLeft: totalChars - correctAmount,
+    keysCompletedPercent: parseInt(correctAmount / (totalChars / 100), 10),
     correctAmount,
     mistakes,
     corrections,
-    isComplete: correctAmount === contentLen,
+    isComplete: correctAmount === totalChars,
   }
 }
 
 // Reducer
 const correctnessReducer = (state = initialState, action) => {
-  let newMap;
   let stats = {};
   const codeSample = window.codeTrainerApp?.codeSample || {};
   const {cursorIndex: cursor} = state;
 
   switch (action.type) {
-    case INIT:
+    case INIT: {
       return {
         ...state,
-        map: new Array(codeSample.contentLen).fill(0),
+        correctAs2dArray: initEmptyContent2dArray(codeSample.contentAs2dArray),
+        cursorIndex: codeSample.skipMask2dArray[0][0] > 0 ? getNextCursor(cursor, codeSample) : cursor,
       };
-    case DELETE:
-      newMap = state.map.slice(0);
-      newMap[cursor] = CHAR_STATE.RESET;
+    }
+    case DELETE: {
+      const [line, char] = cursor;
+      const lineAsArr = state.correctAs2dArray[line].slice(0);
 
-      stats = resolveStats(DELETE, state.map[cursor], newMap[cursor], state, codeSample);
+      const prevCharState = lineAsArr[char];
+      lineAsArr[char] = CHAR_STATE.RESET;
+
+      stats = resolveStats(DELETE, state, prevCharState, codeSample.totalChars);
 
       return {
         ...state,
         ...stats,
+        prevCharState,
         cursorIndex: getNextCursor(cursor, codeSample),
-        map: newMap,
+        correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
-    case BACKSPACE:
-      newMap = state.map.slice(0);
-      newMap[cursor] = CHAR_STATE.RESET;
+    }
 
-      stats = resolveStats(BACKSPACE, state.map[cursor], newMap[cursor], state, codeSample);
+    case BACKSPACE: {
+      const [line, char] = cursor;
+      const lineAsArr = state.correctAs2dArray[line].slice(0);
+
+      const prevCharState = lineAsArr[char];
+      lineAsArr[char] = CHAR_STATE.RESET;
+
+      stats = resolveStats(BACKSPACE, state, prevCharState, codeSample.totalChars);
 
       return {
         ...state,
         ...stats,
+        prevCharState,
         cursorIndex: getPrevCursor(cursor, codeSample),
-        map: newMap,
+        correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
-    case MATCH:
-      newMap = state.map.slice(0);
-      newMap[cursor] = CHAR_STATE.SUCCESS;
+    }
+    case MATCH: {
+      const [line, char] = cursor;
+      const lineAsArr = state.correctAs2dArray[line].slice(0);
 
-      stats = resolveStats(MATCH, state.map[cursor], newMap[cursor], state, codeSample);
+      const prevCharState = lineAsArr[char];
+      lineAsArr[char] = CHAR_STATE.SUCCESS;
+
+      stats = resolveStats(MATCH, state, prevCharState, codeSample.totalChars);
 
       return {
         ...state,
         ...stats,
+        prevCharState,
         cursorIndex: getNextCursor(cursor, codeSample),
-        map: newMap,
+        correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
-    case MISTAKE:
-      newMap = state.map.slice(0);
-      newMap[cursor] = CHAR_STATE.MISTAKE;
+    }
+    case MISTAKE: {
+      const [line, char] = cursor;
+      const lineAsArr = state.correctAs2dArray[line].slice(0);
 
-      stats = resolveStats(MISTAKE, state.map[cursor], newMap[cursor], state, codeSample);
+      const prevCharState = lineAsArr[char];
+      lineAsArr[char] = CHAR_STATE.MISTAKE;
+
+      stats = resolveStats(MISTAKE, state, prevCharState, codeSample.totalChars);
 
       return {
         ...state,
         ...stats,
+        prevCharState,
         cursorIndex: getNextCursor(cursor, codeSample),
-        map: newMap,
+        correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
+    }
     case ONE_FORWARD:
       return {
         ...state,
@@ -178,47 +207,107 @@ const correctnessReducer = (state = initialState, action) => {
   }
 };
 
-function getNextCursor(prevCursorIndex, codeSample) {
-  const {contentLen, skipArray} = codeSample;
+function isContentBoundaryRight(line, char, contentLinesLen, currentLineLen) {
+  return line === contentLinesLen - 1 && char + 1 >= currentLineLen;
+}
 
-  if (prevCursorIndex + 1 >= contentLen) {
-    return contentLen - 1;
+function isLineBoundaryRight(char, currentLineLen) {
+  return char + 1 >= currentLineLen;
+}
+
+function isContentBoundaryLeft(line, char) {
+  return line === 0 && char - 1 < 0;
+}
+
+function isLineBoundaryLeft(char) {
+  return char - 1 < 0;
+}
+
+function getNextCursor(prevCursorIndex, codeSample) {
+  const {skipMask2dArray, contentLinesLen} = codeSample;
+  const [line, char] = prevCursorIndex;
+  let currentLineLen = codeSample.contentAs2dArray[line].length;
+
+  // End boundary
+  if (isContentBoundaryRight(line, char, contentLinesLen, currentLineLen)) {
+    return [line, currentLineLen - 1]; // todo: should we have final "complete" string?
   }
 
-  let nextCursor = prevCursorIndex + 1;
+  // Move next
+  let nextCursor = isLineBoundaryRight(char, currentLineLen) ? [line + 1, 0] : [line, char + 1];
 
-  if (skipArray[nextCursor]) {
-    const len = skipArray.length;
-    for (let i=nextCursor; i < len; i++) {
-      if (skipArray[i] === 0 || i === len-1) {
-        nextCursor = i;
-        break;
+  // Skip comments
+  let nextSkipMask = skipMask2dArray[nextCursor[0]][nextCursor[1]];
+  if (nextSkipMask > 0) {
+    let [line, char] = nextCursor;
+    while (nextSkipMask !== 0) {
+      currentLineLen = codeSample.contentAs2dArray[line].length;
+      if (line >= contentLinesLen - 1) {
+        if (char >= currentLineLen - 1) {
+          return getPrevCursor([line, char], codeSample); // todo: prevent infinity traversing when entire file commented
+        } else {
+          char++;
+        }
+      } else {
+        if (isLineBoundaryRight(char, currentLineLen)) {
+          line++;
+          char = 0;
+        } else {
+          char++;
+        }
       }
+      nextSkipMask = skipMask2dArray[line][char];
     }
+    nextCursor = [line, char];
+  }
+  return nextCursor;
+}
+
+function getPrevCursor(prevCursorIndex, codeSample) {
+  const {skipMask2dArray} = codeSample;
+  const [line, char] = prevCursorIndex;
+
+  // Start boundary
+  if (isContentBoundaryLeft(line, char)) {
+    return [0, 0];
+  }
+
+  let nextCursor = isLineBoundaryLeft(char) ? [line - 1, codeSample.contentAs2dArray[line - 1].length - 1] : [line, char - 1];
+
+  // Skip comments
+  let nextSkipMask = skipMask2dArray[nextCursor[0]][nextCursor[1]];
+  if (nextSkipMask > 0) {
+    let [line, char] = nextCursor;
+    while (nextSkipMask !== 0) {
+      if (line < 1) {
+        if (char - 1 < 0) {
+          return getNextCursor([line, char], codeSample); // todo: prevent infinity traversing when entire file commented
+        } else {
+          char--;
+        }
+      } else {
+        if (isLineBoundaryLeft(char)) {
+          line--;
+          char = codeSample.contentAs2dArray[line].length - 1;
+        } else {
+          char--;
+        }
+      }
+
+      nextSkipMask = skipMask2dArray[line][char];
+    }
+    nextCursor = [line, char];
   }
 
   return nextCursor;
 }
 
-function getPrevCursor(prevCursorIndex, codeSample) {
-  const {skipArray} = codeSample;
-
-  if (prevCursorIndex - 1 < 0) {
-    return 0;
-  }
-
-  let nextCursor = prevCursorIndex - 1;
-
-  if (skipArray[nextCursor]) {
-    for (let i=nextCursor; i >= 0; i--) {
-      if (skipArray[i] === 0) {
-        nextCursor = i;
-        break;
-      }
-    }
-  }
-
-  return nextCursor;
+export function insertElementIntoArray2dCopy(array, position, element) {
+  return [
+    ...array.slice(0, position),
+    element,
+    ...array.slice(position + 1),
+  ];
 }
 
 export const correctness = (state = initialState, action) => {
