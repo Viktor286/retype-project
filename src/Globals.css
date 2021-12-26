@@ -1,5 +1,14 @@
+html {
+    font-size: 11px;
+}
+
 * {
     box-sizing: border-box;
+}
+
+:root {
+    --base-color: hsl(223, 6%, 10%);
+    --success-color: hsl(180, 10%, 12%);
 }
 
 body {
@@ -10,11 +19,14 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: hsl(223deg 10% 12%);;
+    background-color: var(--base-color);
+    transition-duration: 0s;
+    transition-property: background-color;
+    transition-timing-function: linear;
 }
 
 body.completed {
-    background-color: hsl(180deg 10% 12%);;
+    /*background-color: var(--success-color);*/
 }
 
 code {
@@ -47,4 +59,8 @@ ul {
 
 ul li {
     margin: 0 0 10px 0;
+}
+
+.copyright {
+    color: white;
 }
