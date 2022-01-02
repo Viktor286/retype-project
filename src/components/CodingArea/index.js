@@ -95,6 +95,12 @@ function CodingChar({char, charNumInLine, charCorrectness, lineSkipMask, isActiv
   // Markup
   let cssClasses = ["char"];
 
+  // tab character output case
+  if (char.charCodeAt(0) === 9) {
+    cssClasses.push("tab");
+    displayChar = "⇥";
+  }
+
   // Return early if skip
   if (lineSkipMask[charNumInLine] > 0) {
     cssClasses.push("skip");
@@ -107,11 +113,7 @@ function CodingChar({char, charNumInLine, charCorrectness, lineSkipMask, isActiv
     displayChar = "↵";
   }
 
-  // tab character output case
-  if (char.charCodeAt(0) === 9) {
-    cssClasses.push("tab");
-    displayChar = "⇥";
-  }
+
 
   if (isActive) {
     cssClasses.push("cursor");

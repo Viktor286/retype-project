@@ -1,4 +1,4 @@
-import {splitTextLines} from "../utils/text";
+import {splitTextLines, spacesIntoTabs} from "../utils/text";
 import {initEmptyContent2dArray} from "./redux/correctness";
 import {getTokens} from "token-resolver";
 
@@ -6,19 +6,10 @@ export default async function CreateCodeSample({fileName, content, html_url}) {
   let text = decodeURIComponent(escape(window.atob(content)));
   if (text.length > 10000) text = text.slice(0, 10000);
 
-  // Adjust some trash cases
-  const adjustedContent_one = text.replaceAll('  ', '\t');
-  const adjustedContent = adjustedContent_one.replaceAll(/ *(\n|\t) */igm, '$1');
+  let contentAsLines = splitTextLines(text);
+  contentAsLines = spacesIntoTabs(contentAsLines);
 
-  // Convert chars into workable data structures.
-  let contentAsLines = splitTextLines(adjustedContent);
-
-  const contentAs2dArray = contentAsLines.map((line, i) => {
-    // Make text adjustments
-    const adjustedLine_one = line.replaceAll('  ', '\t');
-    const adjustedLine = adjustedLine_one.replaceAll(/ *(\n|\t) */igm, '$1');
-    return adjustedLine.split('');
-  });
+  const contentAs2dArray = contentAsLines.map(line => line.split(''));
 
   const tokensAs2dArray = await getTokens(contentAsLines, fileName);
 
@@ -51,6 +42,7 @@ export function parseSkipMask(contentAs2dArray, tokensAs2dArray) {
   let skipMask2dArr = initEmptyContent2dArray(contentAs2dArray);
 
   for (let ln = 0; ln < tokensAs2dArray.length; ln++) {
+    // Parse skipable tokens
     for (let tn = 0; tn < tokensAs2dArray[ln].length; tn++) {
       const t = tokensAs2dArray[ln][tn];
       if (t.tokenType === 1) {
@@ -66,6 +58,28 @@ export function parseSkipMask(contentAs2dArray, tokensAs2dArray) {
           ...skipMask2dArr[ln].slice(end, skipMask2dArr[ln].length - 1),
         ];
       }
+    }
+
+    // Special cases:
+    // Remove tabs completely
+    let c = 0;
+    let skipMask = 0;
+    while (c < skipMask2dArr[ln].length) {
+      if (contentAs2dArray[ln][c] === '\t') {
+        skipMask2dArr[ln][c] = ++skipMask;
+        c++;
+      } else {
+        break;
+      }
+    }
+
+    // In case the the last char in the line is "\n", replace it like it was the last char in comment
+    if (
+      skipMask2dArr[ln][skipMask2dArr[ln].length - 2] === 3 &&
+      contentAs2dArray[ln][contentAs2dArray[ln].length - 1] === '\n'
+    ) {
+      skipMask2dArr[ln][skipMask2dArr[ln].length - 2] = 2;
+      skipMask2dArr[ln][skipMask2dArr[ln].length - 1] = 3;
     }
   }
 

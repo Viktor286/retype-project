@@ -46,6 +46,13 @@ span.char.skip {
     font-size: 1.4rem;
 }
 
+span.char.tab.skip {
+    color: hsl(217deg 11% 27%);
+    font-style: inherit;
+    font-size: 1.8rem;
+    font-weight: inherit;
+}
+
 div.char.lineNum {
     color: hsl(214deg 20% 25%);
     font-size: 1.4rem;
