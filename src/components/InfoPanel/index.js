@@ -1,5 +1,6 @@
 // import { millisecondsToTime } from "../../utils/misc";
 import "./index.css";
+import TimelineTimer from "../TimelineTimer";
 
 function markBodyAsComplete() {
   window.document.body.classList.add('completed');
@@ -9,12 +10,11 @@ function unmarkBodyAsComplete() {
   window.document.body.classList.remove('completed');
 }
 
-const InfoPanel = ({correctness}) => {
+const InfoPanel = ({correctness, totalChars}) => {
 
   const {
     correctAmount,
     keysLeft,
-    keysCompletedPercent,
     isComplete,
     mistakes,
     corrections,
@@ -22,15 +22,9 @@ const InfoPanel = ({correctness}) => {
 
   isComplete ? markBodyAsComplete() : unmarkBodyAsComplete();
 
-  const progress = keysCompletedPercent + "%";
-
   return (
     <section className={"infoPanel" + (isComplete ? " complete" : "")}>
-      <div className="progressbar">
-        <div className="bar" style={{width: progress}}>
-          &nbsp;
-        </div>
-      </div>
+      <TimelineTimer totalChars={totalChars} isComplete={correctness.isComplete} keysCompletedPercent={correctness.keysCompletedPercent} staleTimeout={correctness.staleTimeout}/>
       <div className="currentStats">
         {/*{millisecondsToTime(timeCounted)}, CPM {cpm}*/}
       </div>
@@ -44,7 +38,7 @@ const InfoPanel = ({correctness}) => {
         <span className="keysLeft">left: {keysLeft} / mistakes: {mistakes} / corrections: {corrections}</span>
       </div>
       <div className="todayStats">
-        {/*{millisecondsToTime(timeCountedSum)}, CPM {cpmAverage}, {keysSuccessSum}*/}
+        1:10 CPM 20, 313
       </div>
     </section>
   );

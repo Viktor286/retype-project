@@ -13,6 +13,7 @@ const initialState = {
   isComplete: false,
   mistakes: 0,
   corrections: 0,
+  staleTimeout: 999,
 };
 
 // Actions
@@ -23,10 +24,16 @@ export const MATCH = "MATCH";
 export const MISTAKE = "MISTAKE";
 export const ONE_FORWARD = "ONE_FORWARD";
 export const ONE_BACKWARD = "ONE_BACKWARD";
+export const INCREMENT_STALE = "INCREMENT_STALE";
 // export const JUMP_TO = "JUMP_TO";
 
 export const initCorrectness = () => ({
   type: INIT,
+});
+
+export const incrementStaleTimeout = (amount = 1) => ({
+  type: INCREMENT_STALE,
+  amount
 });
 
 export const updateCorrectness = type => ({
@@ -50,7 +57,7 @@ export function initEmptyContent2dArray(contentAs2dArray) {
 
 // prev
 function resolveStats(command, state, prevCharState, totalChars) {
-  let {correctAmount, mistakes, corrections } = state;
+  let {correctAmount, mistakes, corrections } = state || {};
 
   switch (command) {
     case DELETE:
@@ -91,16 +98,19 @@ function resolveStats(command, state, prevCharState, totalChars) {
       break;
 
     default:
-    // pass
+      return {
+        staleTimeout: 0,
+      }
   }
 
   return {
     keysLeft: totalChars - correctAmount,
-    keysCompletedPercent: parseInt(correctAmount / (totalChars / 100), 10),
+    keysCompletedPercent: correctAmount / (totalChars / 100),
     correctAmount,
     mistakes,
     corrections,
     isComplete: correctAmount === totalChars,
+    staleTimeout: 0,
   }
 }
 
@@ -118,6 +128,14 @@ const correctnessReducer = (state = initialState, action) => {
         cursorIndex: codeSample.skipMask2dArray[0][0] > 0 ? getNextCursor(cursor, codeSample) : cursor,
       };
     }
+
+    case INCREMENT_STALE: {
+      return {
+        ...state,
+        staleTimeout: state.staleTimeout + action.amount
+      };
+    }
+
     case DELETE: {
       const [line, char] = cursor;
       const lineAsArr = state.correctAs2dArray[line].slice(0);
@@ -190,16 +208,19 @@ const correctnessReducer = (state = initialState, action) => {
     case ONE_FORWARD:
       return {
         ...state,
+        ...resolveStats(),
         cursorIndex: getNextCursor(cursor, codeSample),
       };
     case ONE_BACKWARD:
       return {
         ...state,
+        ...resolveStats(),
         cursorIndex: getPrevCursor(cursor, codeSample),
       };
     // case JUMP_TO:
     //   return {
     //     ...state,
+    //     ...resolveStats(),
     //     cursorIndex: cursor,
     //   };
     default:

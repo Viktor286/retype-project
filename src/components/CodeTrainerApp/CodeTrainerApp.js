@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {useSelector, useDispatch, useStore} from "react-redux";
-import {initCorrectness} from "../../model/redux/correctness";
+import {incrementStaleTimeout, initCorrectness} from "../../model/redux/correctness";
 import CreateCodeSample from "../../model/CodeSample";
 import keydownGlobalController from "./keydownGlobalController";
 import {fetchGithubResource} from "../../modules/fetchGithubResource";
@@ -18,7 +18,9 @@ export default function CodeTrainerApp() {
   const correctness = useSelector(state => state.correctness);
   const { correctAs2dArray, cursorIndex } = correctness;
   let {current} = useRef({
-    keydownGlobalControllerInit: false,
+    keydownHandler: undefined,
+    pageInactiveHandler: undefined,
+    staleTimeoutCounter: undefined,
     globalControllerPayload: {dispatch, store}
   });
 
@@ -42,17 +44,32 @@ export default function CodeTrainerApp() {
   }, []);
 
   useEffect(() => {
-    if (codeSample.id && !current.keydownGlobalControllerInit) {
+    // Setup keyboard handlers
+    if (codeSample.id && !current.keydownHandler) {
+      // Setup GlobalController
       current.globalControllerPayload.dispatch(initCorrectness());
+      current.keydownHandler = e => keydownGlobalController({keydownEvent: e, codeSample, ...current.globalControllerPayload})
+      document.addEventListener("keydown", current.keydownHandler);
 
-      const keydownHandler = e => keydownGlobalController({keydownEvent: e, codeSample, ...current.globalControllerPayload})
-      document.addEventListener("keydown", keydownHandler);
-      current.keydownGlobalControllerInit = true;
+      // Setup inactivity timer (drops every keyboard action)
+      current.staleTimeoutCounter = setInterval(() => current.globalControllerPayload.dispatch(incrementStaleTimeout(1)), 1000);
+
+      // Make stale if page inactive
+      current.pageInactiveHandler = () => current.globalControllerPayload.dispatch(incrementStaleTimeout(999))
+      window.addEventListener('blur', current.pageInactiveHandler);
+
       return () => {
-        document.removeEventListener("keydown", keydownHandler);
-      }
+        document.removeEventListener("keydown", current.keydownHandler);
+        document.removeEventListener('blur', current.pageInactiveHandler);
+        clearInterval(current.staleTimeoutCounter);
+      };
     }
-  }, [codeSample, current]);
+
+    // Turn off keyboard handler when session completed
+    if (correctness.isComplete && current.keydownHandler) {
+      document.removeEventListener("keydown", current.keydownHandler);
+    }
+  }, [codeSample, current, correctness.isComplete]);
 
   if (window.location.pathname === '/') {
     return <LandingPage/>;
@@ -61,7 +78,7 @@ export default function CodeTrainerApp() {
   if (correctAs2dArray.length > 1) {
     return (
       <div className="CodeTrainerApp">
-        <CodingAreaHeader currentCodeSample={codeSample}>
+        <CodingAreaHeader codeSampleUrl={codeSample.html_url}>
           <CodingArea
             currentCodeSample={codeSample}
             cursorIndex={cursorIndex}
@@ -70,6 +87,7 @@ export default function CodeTrainerApp() {
         </CodingAreaHeader>
         <InfoPanel
           correctness={correctness}
+          totalChars={codeSample.totalChars}
         />
       </div>
     );
