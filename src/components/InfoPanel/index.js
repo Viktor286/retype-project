@@ -1,6 +1,7 @@
-// import { millisecondsToTime } from "../../utils/misc";
 import "./index.css";
 import TimelineTimer from "../TimelineTimer";
+import {useSelector} from "react-redux";
+import Timer from '../../modules/timer';
 
 function markBodyAsComplete() {
   window.document.body.classList.add('completed');
@@ -11,22 +12,28 @@ function unmarkBodyAsComplete() {
 }
 
 const InfoPanel = ({correctness, totalChars}) => {
-
   const {
     correctAmount,
     keysLeft,
+    keysCompletedPercent,
     isComplete,
     mistakes,
     corrections,
-  } = correctness
+  } = correctness;
+
+  const {elapsedSeconds} = useSelector(state => state.stats);
 
   isComplete ? markBodyAsComplete() : unmarkBodyAsComplete();
 
   return (
     <section className={"infoPanel" + (isComplete ? " complete" : "")}>
-      <TimelineTimer totalChars={totalChars} isComplete={correctness.isComplete} keysCompletedPercent={correctness.keysCompletedPercent} staleTimeout={correctness.staleTimeout}/>
+      <TimelineTimer
+        totalChars={totalChars}
+        isComplete={isComplete}
+        keysCompletedPercent={keysCompletedPercent}
+      />
       <div className="currentStats">
-        {/*{millisecondsToTime(timeCounted)}, CPM {cpm}*/}
+        {Timer.msToTimeString(elapsedSeconds * 1000)}, CPM {correctAmount > 0 && elapsedSeconds > 0 ? Number(60 / (elapsedSeconds / correctAmount)).toFixed(2) : 0}
       </div>
       <div className="currentStatus">
         <span className={"text"}>
@@ -38,7 +45,7 @@ const InfoPanel = ({correctness, totalChars}) => {
         <span className="keysLeft">left: {keysLeft} / mistakes: {mistakes} / corrections: {corrections}</span>
       </div>
       <div className="todayStats">
-        1:10 CPM 20, 313
+        {/*CPM */}
       </div>
     </section>
   );

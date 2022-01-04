@@ -1,11 +1,13 @@
 import { createStore } from "redux";
 import { combineReducers } from "redux";
 import { auth } from "./auth";
-import { correctness } from "./correctness";
+import { correctnessReducer as correctness } from "./correctness";
+import { statsReducer as stats } from "./stats";
 
 export const reducers = combineReducers({
   auth,
   correctness,
+  stats,
 });
 
 const initStore = () => {

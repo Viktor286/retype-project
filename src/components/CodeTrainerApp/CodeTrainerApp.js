@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {useSelector, useDispatch, useStore} from "react-redux";
-import {incrementStaleTimeout, initCorrectness} from "../../model/redux/correctness";
+import {initCorrectness} from "../../model/redux/correctness";
 import CreateCodeSample from "../../model/CodeSample";
 import keydownGlobalController from "./keydownGlobalController";
 import {fetchGithubResource} from "../../modules/fetchGithubResource";
@@ -19,8 +19,6 @@ export default function CodeTrainerApp() {
   const { correctAs2dArray, cursorIndex } = correctness;
   let {current} = useRef({
     keydownHandler: undefined,
-    pageInactiveHandler: undefined,
-    staleTimeoutCounter: undefined,
     globalControllerPayload: {dispatch, store}
   });
 
@@ -51,17 +49,8 @@ export default function CodeTrainerApp() {
       current.keydownHandler = e => keydownGlobalController({keydownEvent: e, codeSample, ...current.globalControllerPayload})
       document.addEventListener("keydown", current.keydownHandler);
 
-      // Setup inactivity timer (drops every keyboard action)
-      current.staleTimeoutCounter = setInterval(() => current.globalControllerPayload.dispatch(incrementStaleTimeout(1)), 1000);
-
-      // Make stale if page inactive
-      current.pageInactiveHandler = () => current.globalControllerPayload.dispatch(incrementStaleTimeout(999))
-      window.addEventListener('blur', current.pageInactiveHandler);
-
       return () => {
         document.removeEventListener("keydown", current.keydownHandler);
-        document.removeEventListener('blur', current.pageInactiveHandler);
-        clearInterval(current.staleTimeoutCounter);
       };
     }
 

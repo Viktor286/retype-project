@@ -25,22 +25,6 @@ const CodingArea = ({
   </section>
 };
 
-// function ActiveCodingLine({linesArr, lineNumber, correctnessLine, cursorInLine, lineSkipMask}) {
-//   return <div className={`line ${lineNumber} active`}>
-//     <div className='char lineNum'>&nbsp;{lineNumber}</div>
-//     <div className='code'>
-//       {linesArr.map((char, charNumInLine) => <CodingChar {...{
-//         charCorrectness: correctnessLine[charNumInLine],
-//         charNumInLine,
-//         char,
-//         isActive: cursorInLine === charNumInLine,
-//         key: `l${lineNumber}c${charNumInLine}`,
-//         lineSkipMask,
-//       }} />)}
-//     </div>
-//   </div>
-// }
-
 function ActiveCodingLine({linesArr, lineNumber, correctnessLine, cursorInLine, lineSkipMask, tokensAs2dArray}) {
   let lineTokens = tokensAs2dArray[lineNumber];
 

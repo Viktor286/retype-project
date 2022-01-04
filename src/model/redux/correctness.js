@@ -12,8 +12,7 @@ const initialState = {
   keysCompletedPercent: 0,
   isComplete: false,
   mistakes: 0,
-  corrections: 0,
-  staleTimeout: 999,
+  corrections: 0
 };
 
 // Actions
@@ -24,16 +23,10 @@ export const MATCH = "MATCH";
 export const MISTAKE = "MISTAKE";
 export const ONE_FORWARD = "ONE_FORWARD";
 export const ONE_BACKWARD = "ONE_BACKWARD";
-export const INCREMENT_STALE = "INCREMENT_STALE";
 // export const JUMP_TO = "JUMP_TO";
 
 export const initCorrectness = () => ({
   type: INIT,
-});
-
-export const incrementStaleTimeout = (amount = 1) => ({
-  type: INCREMENT_STALE,
-  amount
 });
 
 export const updateCorrectness = type => ({
@@ -110,12 +103,11 @@ function resolveStats(command, state, prevCharState, totalChars) {
     mistakes,
     corrections,
     isComplete: correctAmount === totalChars,
-    staleTimeout: 0,
   }
 }
 
 // Reducer
-const correctnessReducer = (state = initialState, action) => {
+export const correctnessReducer = (state = initialState, action) => {
   let stats = {};
   const codeSample = window.codeTrainerApp?.codeSample || {};
   const {cursorIndex: cursor} = state;
@@ -126,13 +118,6 @@ const correctnessReducer = (state = initialState, action) => {
         ...state,
         correctAs2dArray: initEmptyContent2dArray(codeSample.contentAs2dArray),
         cursorIndex: codeSample.skipMask2dArray[0][0] > 0 ? getNextCursor(cursor, codeSample) : cursor,
-      };
-    }
-
-    case INCREMENT_STALE: {
-      return {
-        ...state,
-        staleTimeout: state.staleTimeout + action.amount
       };
     }
 
@@ -208,13 +193,11 @@ const correctnessReducer = (state = initialState, action) => {
     case ONE_FORWARD:
       return {
         ...state,
-        ...resolveStats(),
         cursorIndex: getNextCursor(cursor, codeSample),
       };
     case ONE_BACKWARD:
       return {
         ...state,
-        ...resolveStats(),
         cursorIndex: getPrevCursor(cursor, codeSample),
       };
     // case JUMP_TO:
@@ -330,9 +313,3 @@ export function insertElementIntoArray2dCopy(array, position, element) {
     ...array.slice(position + 1),
   ];
 }
-
-export const correctness = (state = initialState, action) => {
-  const newState = correctnessReducer(state, action);
-  if (window.codeTrainerApp) window.codeTrainerApp.correctness = newState;
-  return newState;
-};

@@ -8,6 +8,8 @@ import {
   updateCorrectness
 } from "../../model/redux/correctness";
 
+import { resetStaleTimeout } from "../../model/redux/stats";
+
 export default function keydownGlobalController({keydownEvent: e, dispatch, store, codeSample}) {
   // Prevent keys
   if (
@@ -55,6 +57,9 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
     // F1-F12
     return true;
   }
+
+  // Before actionable key handled reset the staleTimeout
+  dispatch(resetStaleTimeout());
 
   // Arrows back/forward
   if (e.keyCode === 39) {

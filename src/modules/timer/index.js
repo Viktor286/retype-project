@@ -29,7 +29,7 @@ export default class Timer {
 
       // seconds callback
       if (this.seconds !== Timer.msToSecReminder(this.elapsed)) {
-        this.seconds = Timer.msToSec(this.elapsed);
+        this.seconds = Timer.msToSecReminder(this.elapsed);
         this.secondCallback && this.secondCallback(this.seconds);
       }
     }
@@ -52,17 +52,16 @@ export default class Timer {
     if (this.isPlaying) {
       this.isPlaying = false;
       this.wasStopped = true;
-      this.pausedTime = this.previousTime;
-      return this.elapsed;
+      window.requestAnimationFrame((timestamp) => {
+        this.elapsed = timestamp - this.startTime;
+        this.previousTime = timestamp;
+        this.pausedTime = timestamp;
+      });
     }
   }
 
   static pad(n, z = 2) {
     return ('00' + n).slice(-z);
-  }
-
-  static msToSec(ms) {
-    return Math.floor(ms / 1000);
   }
 
   static msToTimeString(ms) {

@@ -1,18 +1,25 @@
 import Timer from '../../modules/timer';
 import "./index.css";
 import {useEffect, useRef, useMemo, useState} from "react";
+import {useDispatch, useSelector} from 'react-redux';
+import {setStaleTimeout, updateSecondStat} from "../../model/redux/stats";
 
 const statRatios = {
   averageCps: 2.4,
   bestCps: 5.7
 };
 
-function TimelineTimer({totalChars, isComplete, keysCompletedPercent, staleTimeout}) {
+function TimelineTimer({totalChars, isComplete, keysCompletedPercent}) {
+  const dispatch = useDispatch();
   // Init timer (probably will go higher in tree)
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const {elapsedSeconds, staleTimeout} = useSelector(state => state.stats);
   const [elapsedMilliseconds, setElapsedMilliseconds] = useState(0);
   const [allowComparativeProgress, setAllowComparativeProgress] = useState(1);
   let timer = useRef(undefined);
+  let {current} = useRef({
+    pageInactiveHandler: undefined,
+    staleTimeoutCounter: undefined,
+  });
 
   const bestTimeLimitMs =  useMemo(() => Math.floor(totalChars / statRatios.bestCps) * 1000, [totalChars]);
   const averageTimeLimitMs = useMemo(() => Math.floor(totalChars / statRatios.averageCps) * 1000, [totalChars]);
@@ -44,12 +51,19 @@ function TimelineTimer({totalChars, isComplete, keysCompletedPercent, staleTimeo
         setElapsedMilliseconds(millisecondsHighRes)
       },
       (seconds) => {
-        setElapsedSeconds(seconds);
+        dispatch(updateSecondStat(seconds)); // inactivity timer (drops every keyboard action)
       }
     );
-  }, []);
 
-  // console.log('averageTimeProgress', allowComparativeProgress, averageTimeProgress);
+    // Make stale if page inactive
+    current.pageInactiveHandler = () => dispatch(setStaleTimeout(999))
+    window.addEventListener('blur', current.pageInactiveHandler);
+
+    return () => {
+      document.removeEventListener('blur', current.pageInactiveHandler);
+    }
+  }, [current, dispatch]);
+
   return <section className="timer">
     <div className="wrap">
       <div className="timer-counter">{Timer.msToTimeString(elapsedSeconds * 1000)}</div>
