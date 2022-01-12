@@ -37,6 +37,13 @@ async function entryPoint() {
     const userJourneyData = await initializeUserByAuthData(githubAuthData, auth);
     store.dispatch(setUser(userJourneyData));
   }
+  // preloadResources goes into localstorage?
+  // <CodingZone>
+  // github content
+  // fonts
+  // icons
+  // wasm + color theme
+  // code lang --> based on github content
 
   ReactDOM.render(Main, document.getElementById("root"));
 }

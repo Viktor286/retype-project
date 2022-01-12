@@ -1,6 +1,3 @@
-// TODO: switch to SWR
-// Input: str githubPathname
-// Return: {content, name}
 export const fetchGithubResource = async (githubPathname) => {
   if (githubPathname.length <= 3) {
     return {};
