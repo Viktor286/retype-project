@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 .idea
+.env
 
 # dependencies
 /node_modules
@@ -12,6 +12,14 @@
 
 # production
 /build
+/storage
+/public/fonts
+/public/img
+/public/lib
+.firebaserc
+firebase.json
+/src/modules/persistance/firebase/firebaseConfig.js
+/src/modules/resolver
 
 # misc
 .DS_Store

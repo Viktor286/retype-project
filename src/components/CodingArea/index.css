@@ -1,0 +1,127 @@
+section.codingArea {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 1.8rem;
+    position: relative;
+    margin: 0 50px 190px;
+    background-color: hsl(223deg 5% 12%);
+    padding: 20px 30px 20px;
+    border-radius: 20px;
+    text-align: left;
+    max-width: 80%;
+    overflow: hidden;
+}
+
+body.completed section.codingArea {
+    background-color: hsl(158deg 4% 14%);
+    /*background-color: hsl(223deg 8% 13%);*/
+    /*background-color: hsl(155deg 13% 18%);*/
+    /*background-color: hsl(160deg 10% 15%);*/
+}
+
+
+div.line {
+    display: flex;
+}
+
+div.line .code {
+    display: block;
+}
+
+div.line.active {
+    background-color: hsl(200deg 14% 15%);
+}
+
+div.line.active span.ok {
+    color: hsl(217deg 15% 34%);
+}
+
+/* Char Sections */
+span.char {
+    padding: 0 0 0 0;
+}
+
+span.char.skip {
+    color: hsl(199deg 10% 44%);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.4rem;
+}
+
+span.char.tab.skip {
+    color: hsl(217deg 11% 27%);
+    font-style: inherit;
+    font-size: 1.8rem;
+    font-weight: inherit;
+}
+
+div.char.lineNum {
+    color: hsl(214deg 20% 25%);
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 300;
+    width: 50px;
+    margin-right: 15px;
+}
+
+div.line.active div.char.lineNum {
+    color: hsl(214deg 20% 50%);
+}
+
+/*span.char.await {*/
+/*    color: #e3fcff;*/
+/*}*/
+
+span.char.tab, span.char.lineBreak {
+    color: hsl(208deg 20% 50%);
+}
+
+span.char.tab {
+    margin: 0 5px 0 0;
+}
+
+span.lineBreak {
+    margin: 0 5px;
+}
+
+/*span.lineBreak::after {*/
+/*    content: "\A";*/
+/*    white-space: pre;*/
+/*}*/
+
+span.char.ok {
+    color: hsl(217deg 11% 27%);
+}
+
+body.completed span.ok {
+    color: hsl(145deg 33% 84%);
+}
+
+
+span.mistake {
+    color: #f19c83;
+    background-color: #573430;
+}
+
+span.cursor {
+    text-decoration: underline;
+
+    color: #fff;
+    background-color: #8d8649;
+}
+
+span.cursor.mistake {
+    background-color: #dc3c54;
+}
+
+span.cursor.ok {
+    color: #fff;
+    background-color: #489940;
+}
+
+span.lineBreak.cursor,
+span.tab.cursor {
+    text-decoration: none;
+
+    color: #fff;
+}

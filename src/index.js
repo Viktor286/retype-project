@@ -1,14 +1,13 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import configureStore from "./configureStore";
-
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-import App from "./App";
-
-import "./css/Globals.css";
+import {Provider} from "react-redux";
+import initStore from "./model/redux";
+import CodeTrainerApp from "./components/CodeTrainerApp/CodeTrainerApp";
+import "./Globals.css";
 import * as serviceWorker from "./serviceWorker";
+import {prepareAuth} from "./modules/persistance/firebase";
+import {setUser} from "./model/redux/auth";
+import {initializeUserByAuthData} from "./modules/persistance";
+import LandingPage from "./components/LandingPage";
 
 window.debugLogConfig = {
   "redux-log": 0,
@@ -16,20 +15,33 @@ window.debugLogConfig = {
   codeSampleComplete: 1,
   saveCodeSamplesPlaylistToLS: 1
 };
-const store = configureStore();
+
+window.codeTrainerApp = {
+  codeSample: undefined,
+  correctness: undefined,
+};
+
+const store = initStore();
 
 const Main = (
   <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route path="/" exact={true} component={App} />
-        <Route path="/code/:codesample" component={App} />
-      </Switch>
-    </Router>
+    {window.location.pathname === '/' ? <LandingPage/> : <CodeTrainerApp/>}
   </Provider>
 );
 
-ReactDOM.render(Main, document.getElementById("root"));
+async function entryPoint() {
+  if (store.getState()?.auth?.config) {
+    // console.log('Auth already initialized');
+  } else {
+    const { authData: githubAuthData, auth } = await prepareAuth(store);
+    const userJourneyData = await initializeUserByAuthData(githubAuthData, auth);
+    store.dispatch(setUser(userJourneyData));
+  }
+
+  ReactDOM.render(Main, document.getElementById("root"));
+}
+
+entryPoint();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
