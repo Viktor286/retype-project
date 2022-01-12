@@ -46,6 +46,19 @@ section.codingAreaHeader {
     color: white;
 }
 
+section.codingAreaHeader button.loginBtn {
+    color: #acd6f5;
+    background-color: #18191c;
+    text-decoration: underline;
+    border: none;
+    font-size: 1.2rem;
+}
+
+section.codingAreaHeader button.loginBtn:hover {
+    cursor: pointer;
+    color: #ffffff;
+}
+
 section.codingAreaHeader h2 {
     font-size: 2.1rem;
     font-weight: normal;
@@ -60,6 +73,10 @@ section.codingAreaHeader h2 div.mainCategory {
     color: #6a7487;
 }
 
+section.codingAreaHeader h2 div.mainCategory a {
+    line-height: 160%;
+}
+
 section.codingAreaHeader h2 div.mainCategory a > img {
     width: 1.7rem;
     filter: invert(48%) sepia(79%) saturate(150%) hue-rotate(126deg) brightness(118%) contrast(119%);
@@ -70,4 +87,6 @@ section.codingAreaHeader h2 div.mainCategory a > img {
 section.codingAreaHeader h2 div.mainCategory a:hover > img {
     filter: invert(85%);
 }
+
+
 

@@ -12,11 +12,11 @@ function TempLogInButton({user}) {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
   if (user === 'unknown') {
-    return <button onClick={async () => {
+    return <button className={"loginBtn"} onClick={async () => {
       const authData = await signInGithubWithPopup(auth.auth);
       const userJourneyData = await initializeUserByAuthData(authData, auth.auth);
       dispatch(setUser(userJourneyData));
-    }}>Login via github
+    }}>Login here via github to keep your stats
     </button>;
   } else {
     return <h2>{user}</h2>;
