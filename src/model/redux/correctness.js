@@ -15,6 +15,9 @@ const initialState = {
   corrections: 0
 };
 
+// Exception constant for "correctness" entire lifetime cycle will be obtained after content initialization
+let GLOBAL_CONSTANT_CODE_SAMPLE = {}
+
 // Actions
 export const INIT = "INIT";
 export const DELETE = "DELETE";
@@ -109,15 +112,15 @@ function resolveStats(command, state, prevCharState, totalChars) {
 // Reducer
 export const correctnessReducer = (state = initialState, action) => {
   let stats = {};
-  const codeSample = window.codeTrainerApp?.codeSample || {};
+  GLOBAL_CONSTANT_CODE_SAMPLE = window.codeTrainerApp?.codeSample || {}; // todo: can we avoid this trick effectively?
   const {cursorIndex: cursor} = state;
 
   switch (action.type) {
     case INIT: {
       return {
         ...state,
-        correctAs2dArray: initEmptyContent2dArray(codeSample.contentAs2dArray),
-        cursorIndex: codeSample.skipMask2dArray[0][0] > 0 ? getNextCursor(cursor, codeSample) : cursor,
+        correctAs2dArray: initEmptyContent2dArray(GLOBAL_CONSTANT_CODE_SAMPLE.contentAs2dArray),
+        cursorIndex: GLOBAL_CONSTANT_CODE_SAMPLE.skipMask2dArray[0][0] > 0 ? getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE) : cursor,
       };
     }
 
@@ -128,13 +131,13 @@ export const correctnessReducer = (state = initialState, action) => {
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.RESET;
 
-      stats = resolveStats(DELETE, state, prevCharState, codeSample.totalChars);
+      stats = resolveStats(DELETE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
         ...stats,
         prevCharState,
-        cursorIndex: getNextCursor(cursor, codeSample),
+        cursorIndex: getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
         correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
     }
@@ -146,13 +149,13 @@ export const correctnessReducer = (state = initialState, action) => {
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.RESET;
 
-      stats = resolveStats(BACKSPACE, state, prevCharState, codeSample.totalChars);
+      stats = resolveStats(BACKSPACE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
         ...stats,
         prevCharState,
-        cursorIndex: getPrevCursor(cursor, codeSample),
+        cursorIndex: getPrevCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
         correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
     }
@@ -163,13 +166,13 @@ export const correctnessReducer = (state = initialState, action) => {
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.SUCCESS;
 
-      stats = resolveStats(MATCH, state, prevCharState, codeSample.totalChars);
+      stats = resolveStats(MATCH, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
         ...stats,
         prevCharState,
-        cursorIndex: getNextCursor(cursor, codeSample),
+        cursorIndex: getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
         correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
     }
@@ -180,25 +183,25 @@ export const correctnessReducer = (state = initialState, action) => {
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.MISTAKE;
 
-      stats = resolveStats(MISTAKE, state, prevCharState, codeSample.totalChars);
+      stats = resolveStats(MISTAKE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
         ...stats,
         prevCharState,
-        cursorIndex: getNextCursor(cursor, codeSample),
+        cursorIndex: getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
         correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
     }
     case ONE_FORWARD:
       return {
         ...state,
-        cursorIndex: getNextCursor(cursor, codeSample),
+        cursorIndex: getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
       };
     case ONE_BACKWARD:
       return {
         ...state,
-        cursorIndex: getPrevCursor(cursor, codeSample),
+        cursorIndex: getPrevCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
       };
     // case JUMP_TO:
     //   return {

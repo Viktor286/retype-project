@@ -26,10 +26,9 @@ export default class Timer {
 
       this.tickCallback && this.isTickCallbackActive && this.tickCallback(this.elapsed);
 
-
       // seconds callback
-      if (this.seconds !== Timer.msToSecReminder(this.elapsed)) {
-        this.seconds = Timer.msToSecReminder(this.elapsed);
+      if (this.seconds !== Timer.msToSec(this.elapsed)) {
+        this.seconds = Timer.msToSec(this.elapsed);
         this.secondCallback && this.secondCallback(this.seconds);
       }
     }
@@ -52,16 +51,17 @@ export default class Timer {
     if (this.isPlaying) {
       this.isPlaying = false;
       this.wasStopped = true;
-      window.requestAnimationFrame((timestamp) => {
-        this.elapsed = timestamp - this.startTime;
-        this.previousTime = timestamp;
-        this.pausedTime = timestamp;
-      });
+      this.pausedTime = this.previousTime;
+      return this.elapsed;
     }
   }
 
   static pad(n, z = 2) {
     return ('00' + n).slice(-z);
+  }
+
+  static msToSec(ms) {
+    return Number(ms / 1000).toFixed(0);
   }
 
   static msToTimeString(ms) {

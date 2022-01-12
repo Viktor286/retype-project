@@ -1,83 +1,73 @@
 import React, {useEffect, useState, useRef} from "react";
 import {useSelector, useDispatch, useStore} from "react-redux";
 import {initCorrectness} from "../../model/redux/correctness";
+import {setCodeSample} from "../../model/redux/sample";
 import CreateCodeSample from "../../model/CodeSample";
 import keydownGlobalController from "./keydownGlobalController";
 import {fetchGithubResource} from "../../modules/fetchGithubResource";
 import InfoPanel from "../InfoPanel";
 import CodingArea from "../CodingArea";
-import LandingPage from "../LandingPage";
 import CodingAreaHeader from "../CodingAreaHeader";
 
-import "../../Globals.css";
-
 export default function CodeTrainerApp() {
-  const [codeSample, setCodeSample] = useState({});
+  const [init, setInit] = useState(false);
   const dispatch = useDispatch();
   const store = useStore();
-  const correctness = useSelector(state => state.correctness);
-  const { correctAs2dArray, cursorIndex } = correctness;
-  let {current} = useRef({
+  const codeSample = useSelector(state => state.sample);
+  const keydownController = useRef({
     keydownHandler: undefined,
-    globalControllerPayload: {dispatch, store}
+    modelRef: {dispatch, store}
   });
 
   useEffect(() => {
-    fetchGithubResource(window.location.pathname).then(async githubResource => {
-      const {content, name, html_url} = githubResource;
+    if (window.location.pathname.length > 3) {
+      fetchGithubResource(window.location.pathname).then(async githubResource => {
+        const {content, name, html_url} = githubResource;
 
-      if (!content || !name) {
-        return;
-      }
+        if (!content || !name) {
+          return;
+        }
 
-      const codeSample = await CreateCodeSample({
-        fileName: name,
-        content,
-        html_url
+        const codeSample = await CreateCodeSample({
+          fileName: name,
+          content,
+          html_url
+        });
+
+        window.codeTrainerApp.codeSample = codeSample; // todo: can we avoid this trick effectively?
+        dispatch(setCodeSample(codeSample));
       });
-
-      window.codeTrainerApp.codeSample = codeSample;
-      setCodeSample(codeSample);
-    });
-  }, []);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    // Setup keyboard handlers
-    if (codeSample.id && !current.keydownHandler) {
+    if (codeSample.id && !keydownController.current.keydownHandler) {
+      // Setup keyboard handlers
       // Setup GlobalController
-      current.globalControllerPayload.dispatch(initCorrectness());
-      current.keydownHandler = e => keydownGlobalController({keydownEvent: e, codeSample, ...current.globalControllerPayload})
-      document.addEventListener("keydown", current.keydownHandler);
+      keydownController.current.keydownHandler = e => keydownGlobalController({
+        keydownEvent: e,
+        codeSample, ...keydownController.current.modelRef
+      })
+      document.addEventListener("keydown", keydownController.current.keydownHandler);
+
+      // init sample validation data
+      dispatch(initCorrectness(codeSample));
+      setInit(true);
 
       return () => {
-        document.removeEventListener("keydown", current.keydownHandler);
+        // eslint-disable-next-line
+        document.removeEventListener("keydown", keydownController.current.keydownHandler);
       };
     }
+  }, [codeSample, dispatch]);
 
-    // Turn off keyboard handler when session completed
-    if (correctness.isComplete && current.keydownHandler) {
-      document.removeEventListener("keydown", current.keydownHandler);
-    }
-  }, [codeSample, current, correctness.isComplete]);
-
-  if (window.location.pathname === '/') {
-    return <LandingPage/>;
-  }
-
-  if (correctAs2dArray.length > 1) {
+  if (init) {
     return (
       <div className="CodeTrainerApp">
         <CodingAreaHeader codeSampleUrl={codeSample.html_url}>
-          <CodingArea
-            currentCodeSample={codeSample}
-            cursorIndex={cursorIndex}
-            characterCorrectness={correctAs2dArray}
-          />
+          <CodingArea codeSample={codeSample}/>
         </CodingAreaHeader>
-        <InfoPanel
-          correctness={correctness}
-          totalChars={codeSample.totalChars}
-        />
+        <InfoPanel codeSample={codeSample} parentCurrent={keydownController.current}/>
       </div>
     );
   } else {

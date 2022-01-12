@@ -1,7 +1,10 @@
+import {useEffect} from 'react';
 import "./index.css";
 import TimelineTimer from "../TimelineTimer";
 import {useSelector} from "react-redux";
 import Timer from '../../modules/timer';
+import {createHistorySessionStat} from '../../model/HistorySession';
+import {sendHistoryInfo} from '../../modules/persistance/';
 
 function markBodyAsComplete() {
   window.document.body.classList.add('completed');
@@ -11,17 +14,32 @@ function unmarkBodyAsComplete() {
   window.document.body.classList.remove('completed');
 }
 
-const InfoPanel = ({correctness, totalChars}) => {
-  const {
-    correctAmount,
-    keysLeft,
-    keysCompletedPercent,
-    isComplete,
-    mistakes,
-    corrections,
-  } = correctness;
+const InfoPanel = ({codeSample, parentCurrent}) => {
+  const state = useSelector(state => state);
+  const {stats, correctness, auth} = state;
 
-  const {elapsedSeconds} = useSelector(state => state.stats);
+  const {elapsedSeconds, cpm, wpm} = stats;
+  const {correctAmount, keysLeft, isComplete, mistakes, corrections} = correctness;
+  const {uid} = auth;
+
+  const {totalChars, html_url} = codeSample;
+  const codeSamplePath = new URL(html_url).pathname;
+
+  useEffect(() => {
+    if (isComplete && uid && codeSamplePath) {
+      // Turn off keyboard handler when session completed
+      if (correctness.isComplete && parentCurrent.keydownHandler) {
+        document.removeEventListener("keydown", parentCurrent.keydownHandler);
+      }
+
+      // Save historySessionData
+      const historySessionData = createHistorySessionStat(stats, correctness, codeSamplePath);
+      sendHistoryInfo(uid, historySessionData).then(response => {
+        // console.log('@@@ historySessionData sent', historySessionData, response);
+      });
+    }
+    // eslint-disable-next-line
+  }, [isComplete, uid, codeSamplePath]);
 
   isComplete ? markBodyAsComplete() : unmarkBodyAsComplete();
 
@@ -29,16 +47,14 @@ const InfoPanel = ({correctness, totalChars}) => {
     <section className={"infoPanel" + (isComplete ? " complete" : "")}>
       <TimelineTimer
         totalChars={totalChars}
-        isComplete={isComplete}
-        keysCompletedPercent={keysCompletedPercent}
       />
       <div className="currentStats">
-        {Timer.msToTimeString(elapsedSeconds * 1000)}, CPM {correctAmount > 0 && elapsedSeconds > 0 ? Number(60 / (elapsedSeconds / correctAmount)).toFixed(2) : 0}
+        {Timer.msToTimeString(elapsedSeconds * 1000)}, CPM {cpm}, WPM {wpm}
       </div>
       <div className="currentStatus">
         <span className={"text"}>
           <span className={isComplete ? "complete" : "progress"}>
-            {isComplete ? "Complete!" : "In progress:"}
+            {isComplete ? "Completed!" : "In progress:"}
           </span>
         </span>
         correct: {correctAmount} /&nbsp;

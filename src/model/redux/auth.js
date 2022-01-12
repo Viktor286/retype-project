@@ -1,13 +1,19 @@
 const initialState = {
-  user: 'unknown',
+  uid: '',
+  githubId: '',
+  displayName: 'unknown',
+  screenName: 'unknown',
+  photoURL: '',
+  averageStats: {},
+  auth: {},
 };
 
 // Actions
 export const SET_USER = "SET_USER";
 
-export const setUser = user => ({
+export const setUser = userData => ({
   type: SET_USER,
-  payload: user
+  userData
 });
 
 // Reducer
@@ -16,7 +22,7 @@ export const auth = (state = initialState, action) => {
     case SET_USER:
       return {
         ...state,
-        user: action.payload
+        ...action.userData,
       };
     default:
       return state;

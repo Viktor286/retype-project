@@ -27,8 +27,7 @@ section.landingContent section {
 
 section.landingContent h2 {
     font-size: 2.1rem;
-    font-weight: normal;
-
+    font-weight: 100;
     margin: 5px 0 15px;
     text-align: center;
 }

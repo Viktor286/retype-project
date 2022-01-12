@@ -9,10 +9,12 @@ const statRatios = {
   bestCps: 5.7
 };
 
-function TimelineTimer({totalChars, isComplete, keysCompletedPercent}) {
+function TimelineTimer({totalChars}) {
   const dispatch = useDispatch();
   // Init timer (probably will go higher in tree)
-  const {elapsedSeconds, staleTimeout} = useSelector(state => state.stats);
+  const {staleTimeout} = useSelector(state => state.stats);
+  const {correctAmount, isComplete, keysCompletedPercent} = useSelector(state => state.correctness);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [elapsedMilliseconds, setElapsedMilliseconds] = useState(0);
   const [allowComparativeProgress, setAllowComparativeProgress] = useState(1);
   let timer = useRef(undefined);
@@ -21,7 +23,7 @@ function TimelineTimer({totalChars, isComplete, keysCompletedPercent}) {
     staleTimeoutCounter: undefined,
   });
 
-  const bestTimeLimitMs =  useMemo(() => Math.floor(totalChars / statRatios.bestCps) * 1000, [totalChars]);
+  const bestTimeLimitMs = useMemo(() => Math.floor(totalChars / statRatios.bestCps) * 1000, [totalChars]);
   const averageTimeLimitMs = useMemo(() => Math.floor(totalChars / statRatios.averageCps) * 1000, [totalChars]);
 
   if (timer.current) {
@@ -47,12 +49,8 @@ function TimelineTimer({totalChars, isComplete, keysCompletedPercent}) {
   useEffect(() => {
     // init and start timer
     timer.current = new Timer(
-      (millisecondsHighRes) => {
-        setElapsedMilliseconds(millisecondsHighRes)
-      },
-      (seconds) => {
-        dispatch(updateSecondStat(seconds)); // inactivity timer (drops every keyboard action)
-      }
+      millisecondsHighRes => setElapsedMilliseconds(millisecondsHighRes),
+      seconds => setElapsedSeconds(seconds)
     );
 
     // Make stale if page inactive
@@ -62,7 +60,13 @@ function TimelineTimer({totalChars, isComplete, keysCompletedPercent}) {
     return () => {
       document.removeEventListener('blur', current.pageInactiveHandler);
     }
-  }, [current, dispatch]);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    dispatch(updateSecondStat(elapsedSeconds, correctAmount)); // inactivity timer drops every keyboard action
+    // eslint-disable-next-line
+  }, [elapsedSeconds]);
 
   return <section className="timer">
     <div className="wrap">
@@ -70,8 +74,10 @@ function TimelineTimer({totalChars, isComplete, keysCompletedPercent}) {
     </div>
     <div className="timeline">
       <div className="player-time-bar" style={{width: keysCompletedPercent + "%"}}>&nbsp;</div>
-      <div className="best-time-bar" style={{width: `${bestTimeProgress >= 100 ? 100 : bestTimeProgress}%`}}>&nbsp;</div>
-      <div className="average-time-bar" style={{width: `${averageTimeProgress >= 100 ? 100 : averageTimeProgress}%`}}>&nbsp;</div>
+      <div className="best-time-bar"
+           style={{width: `${bestTimeProgress >= 100 ? 100 : bestTimeProgress}%`}}>&nbsp;</div>
+      <div className="average-time-bar"
+           style={{width: `${averageTimeProgress >= 100 ? 100 : averageTimeProgress}%`}}>&nbsp;</div>
     </div>
   </section>;
 }

@@ -18,7 +18,8 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": ["react-app"],
+    "ignorePatterns": ["**/src/modules/resolver"]
   },
   "browserslist": [
     ">0.2%",

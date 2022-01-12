@@ -1,6 +1,6 @@
 import {splitTextLines, spacesIntoTabs} from "../utils/text";
 import {initEmptyContent2dArray} from "./redux/correctness";
-import {getTokens} from "token-resolver";
+import resolver from "../modules/resolver";
 
 export default async function CreateCodeSample({fileName, content, html_url}) {
   let text = decodeURIComponent(escape(window.atob(content)));
@@ -8,14 +8,9 @@ export default async function CreateCodeSample({fileName, content, html_url}) {
 
   let contentAsLines = splitTextLines(text);
   contentAsLines = spacesIntoTabs(contentAsLines);
-
   const contentAs2dArray = contentAsLines.map(line => line.split(''));
-
-  const tokensAs2dArray = await getTokens(contentAsLines, fileName);
-
-  // Prepare skipping mask
-  const skipMask2dArray = parseSkipMask(contentAs2dArray, tokensAs2dArray);
-
+  const subDivisions = await resolver(contentAsLines, fileName);
+  const skipMask2dArray = parseSkipMask(contentAs2dArray, subDivisions);
   // Gather final amount of successful letters
   let totalChars = 0;
   for (let i = 0; i < skipMask2dArray.length; i++) {
@@ -30,7 +25,7 @@ export default async function CreateCodeSample({fileName, content, html_url}) {
     contentAsLines,
     contentAs2dArray,
     skipMask2dArray,
-    tokensAs2dArray,
+    subDivisions,
     totalChars,
     contentLinesLen: contentAs2dArray.length,
     createdAt: new Date().getTime(),
@@ -38,13 +33,12 @@ export default async function CreateCodeSample({fileName, content, html_url}) {
   };
 }
 
-export function parseSkipMask(contentAs2dArray, tokensAs2dArray) {
+export function parseSkipMask(contentAs2dArray, subDivisions) {
   let skipMask2dArr = initEmptyContent2dArray(contentAs2dArray);
 
-  for (let ln = 0; ln < tokensAs2dArray.length; ln++) {
-    // Parse skipable tokens
-    for (let tn = 0; tn < tokensAs2dArray[ln].length; tn++) {
-      const t = tokensAs2dArray[ln][tn];
+  for (let ln = 0; ln < subDivisions.length; ln++) {
+    for (let tn = 0; tn < subDivisions[ln].length; tn++) {
+      const t = subDivisions[ln][tn];
       if (t.tokenType === 1) {
         const [start, end] = t.ltRange;
         //  0 - no skip, 1 - start skip, 2 - inner skip, 3 - end skip

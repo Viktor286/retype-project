@@ -8,10 +8,61 @@
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000"/>
+    <link rel="preload" as="font" href="fonts/roboto-thin.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="fonts/inter-light.woff2" type="font/woff2" crossorigin="anonymous">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <style>
+        /*! Minified normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}
+        /* Plugin custom fonts from https://fonts.google.com/specimen/Roboto?query=roboto&preview.text=Retype_&preview.text_type=custom */
+        @font-face {
+            font-family: 'Roboto';
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap;
+            src: local('Roboto-Thin'), url('/fonts/roboto-thin.woff2') format('woff');
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+            src: local('Roboto-Light'), url('/fonts/roboto-light.woff2') format('woff');
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+            src: local('Roboto-Regular'), url('/fonts/roboto-regular.woff2') format('woff');
+        }
+
+        /*@font-face {*/
+        /*    font-family: 'Roboto';*/
+        /*    font-weight: 700;*/
+        /*    font-style: normal;*/
+        /*    font-display: swap;*/
+        /*    src: local('Roboto-Bold'), url('/fonts/roboto-bold.woff2') format('woff');*/
+        /*}*/
+
+        @font-face {
+            font-family: 'Inter';
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+            src: local('Inter-Light'), url('/fonts/inter-light.woff2') format('woff');
+        }
+
+        /*@font-face {*/
+        /*    font-family: 'Inter';*/
+        /*    font-weight: 400;*/
+        /*    font-style: normal;*/
+        /*    font-display: swap;*/
+        /*    src: local('Inter-Medium'), url('/fonts/inter-medium.woff2') format('woff');*/
+        /*}*/
+
+    </style>
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -26,7 +77,12 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Retype Project: typing trainer for opensource</title>
+    <meta name="description"
+          content="Exercise typing skills with open source code files">
+    <meta property="og:title" content="Retype Project typing trainer">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://retypeproject.com">
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>

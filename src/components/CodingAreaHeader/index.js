@@ -1,31 +1,36 @@
 import {useEffect, useState} from 'react';
 import {getTopSvgIcon, defaultTopSvgIcon} from "./topIconIndex";
-import gitHubIcon from './github-brands.svg'
+import gitHubIcon from './github-brands.svg';
 import "./index.css";
 
-// import {useSelector, useDispatch} from "react-redux";
-// import {signInGithubWithPopup} from "../../modules/firebase/githubAuth";
-// import {setUser} from "../../model/redux/auth";
+import {useSelector, useDispatch} from "react-redux";
+import {signInGithubWithPopup} from "../../modules/persistance/firebase/githubAuth";
+import {initializeUserByAuthData} from "../../modules/persistance";
+import {setUser} from "../../model/redux/auth";
 
-// function TempLogInButton({user}) {
-//   const dispatch = useDispatch();
-//   if (user === 'unknown') {
-//     return <button onClick={async () => {
-//       const authData = await signInGithubWithPopup();
-//       const {displayName} = authData;
-//       dispatch(setUser(displayName));
-//     }}>Login via github
-//     </button>;
-//   } else {
-//     return <h2>{user}</h2>;
-//   }
-// }
+function TempLogInButton({user}) {
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
+  if (user === 'unknown') {
+    return <button onClick={async () => {
+      const authData = await signInGithubWithPopup(auth.auth);
+      const userJourneyData = await initializeUserByAuthData(authData, auth.auth);
+      dispatch(setUser(userJourneyData));
+    }}>Login via github
+    </button>;
+  } else {
+    return <h2>{user}</h2>;
+  }
+}
 
-export default function CodingAreaHeader({currentCodeSample, children}) {
+export default function CodingAreaHeader({codeSampleUrl, children}) {
   const [icon, setIcon] = useState(defaultTopSvgIcon);
   const [isHiding, setIsHiding] = useState(true);
-  // const {user} = useSelector(state => state.auth);
+  const auth = useSelector(state => state.auth);
+  const u = new URL(codeSampleUrl);
+
   useEffect(() => {
+    // load icon async
     getTopSvgIcon().then(svg => {
       if (svg.startsWith('<svg')) {
         setIcon(svg);
@@ -34,10 +39,9 @@ export default function CodingAreaHeader({currentCodeSample, children}) {
     })
   }, []);
 
-  const u = new URL(currentCodeSample.html_url);
   return <section className={"codingAreaHeader"}>
-    {/*<TempLogInButton user={user} />*/}
-    <a href="/" dangerouslySetInnerHTML={{__html: icon}} className={`app-logo ${isHiding ? 'hiding' : ''}`} />
+    <TempLogInButton user={auth.screenName} />
+    <a href="/" dangerouslySetInnerHTML={{__html: icon}} className={`app-logo ${isHiding ? 'hiding' : ''}`}/>
     <h2>
       {u.pathname}
       <div className="mainCategory">

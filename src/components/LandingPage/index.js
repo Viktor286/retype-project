@@ -6,9 +6,9 @@ export default function LandingPage() {
     <section className={"landingContent"}>
       <section>
         <div dangerouslySetInnerHTML={{__html: svgLogo}} className="main-app-logo"/>
-        <h2>Github Retype
+        <h2>Retype Project
           <div className="mainCategory">
-            speed code typing trainer
+            typing trainer for opensource
           </div>
         </h2>
       </section>
@@ -16,9 +16,9 @@ export default function LandingPage() {
       {/*Keyboard cool image + code attributes*/}
 
       <section>
-        <h2>Improve programming skills by typing code!</h2>
+        <h2>Improve programming skills by typing code</h2>
         <p>Code writing requires special kind of typing skill, a bit different from regular text typing.<br />
-          In order to get comfortable and fast in coding it's important to practice the special characters flow of symbols like brackets, semicolon, math operators and others.<br />
+          In order to get comfortable and fast in coding it's important to practice the special characters flow of symbols like brackets, semicolons, math operators and others.<br />
           Typos and mistakes can significantly interrupt working process which decreases both dev speed and dev experience.</p>
         <p>The great way to achieve a good results is by retyping real-life code examples. Learn to write code faster mastering your keyboarding technique.<br />
           With a great code-typing skill you will get more freedom in creating your projects without paying attention cost to complex patterns of code syntax.<br />
@@ -26,18 +26,18 @@ export default function LandingPage() {
       </section>
 
       <section>
-        <h2>Use "Github Retype" to exercise any open source code file from the largest repository in the world! <br />Python, Javascript, PHP, Java, C, C++ — all top programming languages.</h2>
-        <p>Add "rt" or "retype" text after the "github" domain name before ".com" to get github file as code typing trainer session.</p>
+        <h2>Use "Retype Project" to exercise any open source code file from the largest repository in the world! <br />Python, Javascript, PHP, C, C++, Java — all top programming languages.</h2>
+        <p>Add "rt" text after the "github" domain name before ".com" to get github file as code typing training session.</p>
         {/* eslint-disable no-script-url */}
-        <p>Or use bookmarklet to easy switch between github and retype: </p><pre>{"javascript: window.location.href = window.location.href.replace(/github(retype)?.com/, function(match, s) {return s ? %27github.com%27 : %27githubretype.com%27})"}</pre>
+        <p>Or use bookmarklet to easy switch between github and retype: </p><pre>{"javascript:(() => {let l = window.location; let h = l.host; let c = l.href; let rt = 'retypeproject.com'; let g = 'github.com'; \n l.href = h == rt ? c.replace(rt, g) : h == g ? c.replace(g, rt) : 'https://' + rt})();"}</pre>
         {/* cool image example */}
       </section>
 
       <section>
-        <h2>Learn new programming languages, syntax and APIs quickly</h2>
+        <h2>Get in touch with new programming languages, syntax and APIs quickly</h2>
         <p>The world has plenty of different code syntax, interfaces, special frameworks and sometimes you need to quickly switch gears between something like python's NumPy and javascript's React.</p>
         <p>Just a couple of exercise per day/week will help you to quickly adapt to a new programing language, interface or framework pattern.</p>
-        <p>Example: i am rarely write SQL queries by hand but i don't want to forget complex JOINs constructions, so as part of typing training from time to time i write several SQL commands just to refresh my memory.<br />
+        <p>Example: i am rarely write SQL queries by hand but i don't want to forget how to write complex JOINs constructions, so as part of my typing training program from time to time i write several SQL commands just to refresh my memory.<br />
         </p>
       </section>
 
@@ -50,11 +50,14 @@ export default function LandingPage() {
         <h2>Try speed code typing training examples</h2>
         <ul>
           <li><a href="TheAlgorithms/C/blob/master/leetcode/src/1.c">TheAlgorithms/C/blob/master/leetcode/src/1.c</a></li>
+          <li><a href="TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java">TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java</a></li>
+          <li><a href="TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl">TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl</a></li>
           <li><a href="TheAlgorithms/Go/blob/master/dynamic/fibonacci.go">TheAlgorithms/Go/blob/master/dynamic/fibonacci.go</a></li>
           <li><a href="facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js">facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js</a></li>
           <li><a href="numpy/numpy/blob/main/numpy/typing/_array_like.py">numpy/numpy/blob/main/numpy/typing/_array_like.py</a></li>
-          <li><a href="/TheAlgorithms/PHP/blob/master/String/EditDistance.php">/TheAlgorithms/PHP/blob/master/String/EditDistance.php</a></li>
+          <li><a href="TheAlgorithms/PHP/blob/master/String/EditDistance.php">/TheAlgorithms/PHP/blob/master/String/EditDistance.php</a></li>
           <li><a href="AppFlowy-IO/appflowy/blob/main/backend/src/application.rs">AppFlowy-IO/appflowy/blob/main/backend/src/application.rs</a></li>
+          <li><a href="TheAlgorithms/Rust/blob/master/src/general/hanoi.rs">TheAlgorithms/Rust/blob/master/src/general/hanoi.rs</a></li>
           <li><a href="Viktor286/code-samples/blob/master/src/Engineering/Types.ts">Viktor286/code-samples/blob/master/src/Engineering/Types.ts</a></li>
           <li><a href="Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts">Long line Permutations_Lexicg_Order.ts</a></li>
           <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js">(both comments js) TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js</a></li>
@@ -62,13 +65,15 @@ export default function LandingPage() {
           <li><a href="Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts">Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts</a></li>
           <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js">Long lines example</a></li>
           <li><a href="TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py">Python comments aren't working</a></li>
+          <li><a href="googlefonts/nanoemoji/blob/main/precommit.sh">Bash comments aren't working</a></li>
+          <li><a href="trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js">trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js</a></li>
         </ul>
       </section>
 
       <section>
         <h2>Take advantage of typing routine</h2>
-        <p>Use retyping exercise to switch your focus and attention during the day while gaining benefits of good code writing ability.</p>
-        <p>Exercise repetition within day-or-two interval helps to increase the quality of sensory and procedural memory.</p>
+        <p>Use retyping exercise to switch your focus and attention during the day. Fine motor skills exercises can help to take your mind off.</p>
+        <p>Regular repetition within day-or-two interval helps to increase the quality of sensory and procedural memory.</p>
       </section>
 
       <section>
@@ -78,7 +83,7 @@ export default function LandingPage() {
 
       <section>
         <h2>Create your own typing playlist</h2>
-        <p>Make your own training program as files in your github repository and have your own custom coding exercises.</p>
+        <p>Make your own training program as collection of files in your github repository and have your own custom coding exercise set.</p>
       </section>
 
       <section>

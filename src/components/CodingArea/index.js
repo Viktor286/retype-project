@@ -1,10 +1,12 @@
 import "./index.css";
+import {useSelector} from "react-redux";
 
 const CodingArea = ({
-                      cursorIndex,
-                      characterCorrectness,
-                      currentCodeSample: {contentAs2dArray, skipMask2dArray, colorMask2dArray, tokensAs2dArray}
+                      codeSample: {contentAs2dArray, skipMask2dArray, colorMask2dArray, subDivisions}
                     }) => {
+  const correctness = useSelector(state => state.correctness);
+  const { correctAs2dArray, cursorIndex} = correctness;
+
   return <section className="codingArea">
     {contentAs2dArray.map((linesArr, lineNumber) => {
 
@@ -12,9 +14,9 @@ const CodingArea = ({
         linesArr,
         lineNumber,
         lineSkipMask: skipMask2dArray[lineNumber],
-        correctnessLine: characterCorrectness[lineNumber],
+        correctnessLine: correctAs2dArray[lineNumber],
         colorMask2dArray,
-        tokensAs2dArray,
+        subDivisions,
         key: `l${lineNumber}`,
       };
 
@@ -25,8 +27,8 @@ const CodingArea = ({
   </section>
 };
 
-function ActiveCodingLine({linesArr, lineNumber, correctnessLine, cursorInLine, lineSkipMask, tokensAs2dArray}) {
-  let lineTokens = tokensAs2dArray[lineNumber];
+function ActiveCodingLine({linesArr, lineNumber, correctnessLine, cursorInLine, lineSkipMask, subDivisions}) {
+  let lineTokens = subDivisions[lineNumber];
 
   return <div className={`line ${lineNumber} active`}>
     <div className='char lineNum'>&nbsp;{lineNumber}</div>
@@ -49,9 +51,8 @@ function ActiveCodingLine({linesArr, lineNumber, correctnessLine, cursorInLine, 
   </div>
 }
 
-
-function CodingLine({linesArr, lineNumber, correctnessLine, lineSkipMask, tokensAs2dArray}) {
-  let lineTokens = tokensAs2dArray[lineNumber];
+function CodingLine({linesArr, lineNumber, correctnessLine, lineSkipMask, subDivisions}) {
+  let lineTokens = subDivisions[lineNumber];
 
   return <div className={`line ${lineNumber}`}>
     <div className='char lineNum'>&nbsp;{lineNumber}</div>
