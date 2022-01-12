@@ -14,12 +14,13 @@ function unmarkBodyAsComplete() {
   window.document.body.classList.remove('completed');
 }
 
-const InfoPanel = ({codeSample, parentCurrent}) => {
+const InfoPanel = ({codeSample, keydownController}) => {
   const state = useSelector(state => state);
   const {stats, correctness, auth} = state;
 
   const {elapsedSeconds, cpm, wpm} = stats;
   const {correctAmount, keysLeft, isComplete, mistakes, corrections} = correctness;
+
   const {uid} = auth;
 
   const {totalChars, html_url} = codeSample;
@@ -28,8 +29,8 @@ const InfoPanel = ({codeSample, parentCurrent}) => {
   useEffect(() => {
     if (isComplete && uid && codeSamplePath) {
       // Turn off keyboard handler when session completed
-      if (correctness.isComplete && parentCurrent.keydownHandler) {
-        document.removeEventListener("keydown", parentCurrent.keydownHandler);
+      if (correctness.isComplete && keydownController.keydownHandler) {
+        document.removeEventListener("keydown", keydownController.keydownHandler);
       }
 
       // Save historySessionData

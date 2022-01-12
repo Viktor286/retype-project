@@ -17,7 +17,6 @@ getPerformance(app);
 
 const prepareAuth = () => {
   return new Promise((resolve, reject) => {
-    console.log('> prepareAuth', performance.now());
     try {
       const auth = getAuth();
       auth.onAuthStateChanged(authData => {

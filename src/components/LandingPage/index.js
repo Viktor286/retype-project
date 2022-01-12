@@ -65,7 +65,6 @@ export default function LandingPage() {
           <li><a href="Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts">Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts</a></li>
           <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js">Long lines example</a></li>
           <li><a href="TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py">Python comments aren't working</a></li>
-          <li><a href="googlefonts/nanoemoji/blob/main/precommit.sh">Bash comments aren't working</a></li>
           <li><a href="trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js">trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js</a></li>
         </ul>
       </section>

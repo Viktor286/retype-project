@@ -11,9 +11,10 @@ const statRatios = {
 
 function TimelineTimer({totalChars}) {
   const dispatch = useDispatch();
-  // Init timer (probably will go higher in tree)
-  const {staleTimeout} = useSelector(state => state.stats);
-  const {correctAmount, isComplete, keysCompletedPercent} = useSelector(state => state.correctness);
+  const {stats, correctness} = useSelector(state => state);
+  const {staleTimeout} = stats;
+  const {correctAmount, isComplete, keysCompletedPercent} = correctness;
+
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [elapsedMilliseconds, setElapsedMilliseconds] = useState(0);
   const [allowComparativeProgress, setAllowComparativeProgress] = useState(1);
