@@ -1,10 +1,10 @@
 import {
-  DELETE,
-  BACKSPACE,
-  MATCH,
-  MISTAKE,
-  ONE_FORWARD,
-  ONE_BACKWARD,
+  CR_DELETE,
+  CR_BACKSPACE,
+  CR_MATCH,
+  CR_MISTAKE,
+  CR_ONE_FORWARD,
+  CR_ONE_BACKWARD,
   updateCorrectness
 } from "../../model/redux/correctness";
 
@@ -64,25 +64,25 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
   // Arrows back/forward
   if (e.keyCode === 39) {
     // forward
-    dispatch(updateCorrectness(ONE_FORWARD));
+    dispatch(updateCorrectness(CR_ONE_FORWARD));
     return true;
   }
 
   if (e.keyCode === 37) {
     // backward
-    dispatch(updateCorrectness(ONE_BACKWARD));
+    dispatch(updateCorrectness(CR_ONE_BACKWARD));
     return true;
   }
 
   if (e.keyCode === 8) {
     // backspace
-    dispatch(updateCorrectness(BACKSPACE));
+    dispatch(updateCorrectness(CR_BACKSPACE));
     return true;
   }
 
   if (e.keyCode === 46) {
     // delete
-    dispatch(updateCorrectness(DELETE));
+    dispatch(updateCorrectness(CR_DELETE));
     return true;
   }
 
@@ -93,7 +93,7 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
 
   if (e.keyCode === 13 && currentChar.charCodeAt(0) === 10) {
     // enter
-    dispatch(updateCorrectness(MATCH));
+    dispatch(updateCorrectness(CR_MATCH));
     return true;
   }
 
@@ -101,11 +101,11 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
     // if tab char is expecting
     if (e.keyCode === 9 || e.keyCode === 32) {
       // tab or space will be ok
-      dispatch(updateCorrectness(MATCH));
+      dispatch(updateCorrectness(CR_MATCH));
       return true;
     }
   }
 
   // Detect match or mistake
-  dispatch(updateCorrectness(e.key === currentChar ? MATCH : MISTAKE));
+  dispatch(updateCorrectness(e.key === currentChar ? CR_MATCH : CR_MISTAKE));
 }

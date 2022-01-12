@@ -19,17 +19,17 @@ const initialState = {
 let GLOBAL_CONSTANT_CODE_SAMPLE = {}
 
 // Actions
-export const INIT = "INIT";
-export const DELETE = "DELETE";
-export const BACKSPACE = "BACKSPACE";
-export const MATCH = "MATCH";
-export const MISTAKE = "MISTAKE";
-export const ONE_FORWARD = "ONE_FORWARD";
-export const ONE_BACKWARD = "ONE_BACKWARD";
+export const CR_INIT = "CR_INIT";
+export const CR_DELETE = "CR_DELETE";
+export const CR_BACKSPACE = "CR_BACKSPACE";
+export const CR_MATCH = "CR_MATCH";
+export const CR_MISTAKE = "CR_MISTAKE";
+export const CR_ONE_FORWARD = "CR_ONE_FORWARD";
+export const CR_ONE_BACKWARD = "CR_ONE_BACKWARD";
 // export const JUMP_TO = "JUMP_TO";
 
 export const initCorrectness = () => ({
-  type: INIT,
+  type: CR_INIT,
 });
 
 export const updateCorrectness = type => ({
@@ -56,7 +56,7 @@ function resolveStats(command, state, prevCharState, totalChars) {
   let {correctAmount, mistakes, corrections } = state || {};
 
   switch (command) {
-    case DELETE:
+    case CR_DELETE:
       if (prevCharState === CHAR_STATE.MISTAKE) {
         corrections += 1;
       }
@@ -66,7 +66,7 @@ function resolveStats(command, state, prevCharState, totalChars) {
         corrections += 1;
       }
       break;
-    case BACKSPACE:
+    case CR_BACKSPACE:
       if (prevCharState === CHAR_STATE.MISTAKE) {
         corrections += 1;
       }
@@ -76,7 +76,7 @@ function resolveStats(command, state, prevCharState, totalChars) {
         corrections += 1;
       }
       break;
-    case MATCH:
+    case CR_MATCH:
       if (prevCharState !== CHAR_STATE.SUCCESS) {
         correctAmount += 1;
       }
@@ -85,7 +85,7 @@ function resolveStats(command, state, prevCharState, totalChars) {
         corrections += 1;
       }
       break;
-    case MISTAKE:
+    case CR_MISTAKE:
       mistakes += 1;
 
       if (prevCharState === CHAR_STATE.SUCCESS) {
@@ -116,7 +116,7 @@ export const correctnessReducer = (state = initialState, action) => {
   const {cursorIndex: cursor} = state;
 
   switch (action.type) {
-    case INIT: {
+    case CR_INIT: {
       return {
         ...state,
         correctAs2dArray: initEmptyContent2dArray(GLOBAL_CONSTANT_CODE_SAMPLE.contentAs2dArray),
@@ -124,14 +124,14 @@ export const correctnessReducer = (state = initialState, action) => {
       };
     }
 
-    case DELETE: {
+    case CR_DELETE: {
       const [line, char] = cursor;
       const lineAsArr = state.correctAs2dArray[line].slice(0);
 
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.RESET;
 
-      stats = resolveStats(DELETE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
+      stats = resolveStats(CR_DELETE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
@@ -142,14 +142,14 @@ export const correctnessReducer = (state = initialState, action) => {
       };
     }
 
-    case BACKSPACE: {
+    case CR_BACKSPACE: {
       const [line, char] = cursor;
       const lineAsArr = state.correctAs2dArray[line].slice(0);
 
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.RESET;
 
-      stats = resolveStats(BACKSPACE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
+      stats = resolveStats(CR_BACKSPACE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
@@ -159,14 +159,14 @@ export const correctnessReducer = (state = initialState, action) => {
         correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
     }
-    case MATCH: {
+    case CR_MATCH: {
       const [line, char] = cursor;
       const lineAsArr = state.correctAs2dArray[line].slice(0);
 
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.SUCCESS;
 
-      stats = resolveStats(MATCH, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
+      stats = resolveStats(CR_MATCH, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
@@ -176,14 +176,14 @@ export const correctnessReducer = (state = initialState, action) => {
         correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
     }
-    case MISTAKE: {
+    case CR_MISTAKE: {
       const [line, char] = cursor;
       const lineAsArr = state.correctAs2dArray[line].slice(0);
 
       const prevCharState = lineAsArr[char];
       lineAsArr[char] = CHAR_STATE.MISTAKE;
 
-      stats = resolveStats(MISTAKE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
+      stats = resolveStats(CR_MISTAKE, state, prevCharState, GLOBAL_CONSTANT_CODE_SAMPLE.totalChars);
 
       return {
         ...state,
@@ -193,12 +193,12 @@ export const correctnessReducer = (state = initialState, action) => {
         correctAs2dArray: insertElementIntoArray2dCopy(state.correctAs2dArray, line, lineAsArr),
       };
     }
-    case ONE_FORWARD:
+    case CR_ONE_FORWARD:
       return {
         ...state,
         cursorIndex: getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
       };
-    case ONE_BACKWARD:
+    case CR_ONE_BACKWARD:
       return {
         ...state,
         cursorIndex: getPrevCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE),
