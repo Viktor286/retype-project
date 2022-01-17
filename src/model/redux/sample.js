@@ -12,17 +12,17 @@ const initialState = {
 };
 
 // Actions
-export const SET_SAMPLE = "SET_SAMPLE";
+export const SM_SET_SAMPLE = "SM_SET_SAMPLE";
 
 export const setCodeSample = codeSample => ({
-  type: SET_SAMPLE,
+  type: SM_SET_SAMPLE,
   codeSample
 });
 
 // Reducer
 export const sampleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_SAMPLE:
+    case SM_SET_SAMPLE:
       const {codeSample} = action;
       return {
         ...codeSample,

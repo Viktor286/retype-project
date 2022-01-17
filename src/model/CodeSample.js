@@ -2,7 +2,7 @@ import {splitTextLines, spacesIntoTabs} from "../utils/text";
 import {initEmptyContent2dArray} from "./redux/correctness";
 import resolver from "../modules/resolver";
 
-export default async function CreateCodeSample({fileName, content, html_url}) {
+export default async function CreateCodeSample({fileName, content, html_url, credentials}) {
   let text = decodeURIComponent(escape(window.atob(content)));
   if (text.length > 10000) text = text.slice(0, 10000);
 
@@ -29,7 +29,8 @@ export default async function CreateCodeSample({fileName, content, html_url}) {
     totalChars,
     contentLinesLen: contentAs2dArray.length,
     createdAt: new Date().getTime(),
-    html_url
+    html_url,
+    credentials
   };
 }
 

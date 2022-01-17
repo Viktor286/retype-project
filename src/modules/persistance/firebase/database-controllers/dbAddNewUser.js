@@ -6,7 +6,7 @@ export async function dbAddNewUser({
                               githubId,
                               email,
                               displayName,
-                              screenName,
+                              userName,
                               photoURL,
                             }) {
   try {
@@ -15,7 +15,7 @@ export async function dbAddNewUser({
       githubId,
       email,
       displayName,
-      screenName,
+      userName,
       photoURL,
       // history: [],
       averageStats: {

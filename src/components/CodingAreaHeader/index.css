@@ -1,8 +1,12 @@
-.app-logo {
+a.app-logo {
     color: #9cc4e2;
-    margin: 40px 0 20px 0;
+    width: 110px;
+    height: 110px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
-    padding: 17px;
     border: 1px #284a64 dashed;
     opacity: 1;
     transition: opacity .5s linear;
@@ -12,14 +16,13 @@ a.app-logo.hiding {
     opacity: 0;
 }
 
-.app-logo svg {
+a.app-logo svg {
     overflow: hidden;
     height: 70px;
     width: 70px;
-    margin: 3px 0 0 0;
+    position: relative;
+    margin: 0;
     padding: 0;
-    line-height: 100;
-
     animation: app-logo-spin infinite 50s linear;
     pointer-events: none;
 }
@@ -46,7 +49,20 @@ section.codingAreaHeader {
     color: white;
 }
 
-section.codingAreaHeader h2 {
+section.codingAreaHeader button.loginBtn {
+    color: #acd6f5;
+    background-color: #18191c;
+    text-decoration: underline;
+    border: none;
+    font-size: 1.2rem;
+}
+
+section.codingAreaHeader button.loginBtn:hover {
+    cursor: pointer;
+    color: #ffffff;
+}
+
+section.codingAreaHeader {
     font-size: 2.1rem;
     font-weight: normal;
 
@@ -54,20 +70,35 @@ section.codingAreaHeader h2 {
     text-align: center;
 }
 
-section.codingAreaHeader h2 div.mainCategory {
+section.codingAreaHeader div.mainCategory {
     font-size: 1.1rem;
     margin: 10px;
     color: #6a7487;
 }
 
-section.codingAreaHeader h2 div.mainCategory a > img {
+section.codingAreaHeader div.mainCategory a {
+    font-size: 1.6rem;
+    line-height: 160%;
+}
+
+section.codingAreaHeader div.mainCategory a > img {
     width: 1.7rem;
     filter: invert(48%) sepia(79%) saturate(150%) hue-rotate(126deg) brightness(118%) contrast(119%);
     position: absolute;
-    margin-left: -1.95rem;
+    margin: .3rem 0 0 -1.95rem;
 }
 
-section.codingAreaHeader h2 div.mainCategory a:hover > img {
+section.codingAreaHeader div.mainCategory a:hover > img {
     filter: invert(85%);
 }
+
+section.codingAreaHeader div.mainCategory a.license {
+    color: var(--blue-link);
+    font-size: 1rem;
+}
+
+section.codingAreaHeader div.mainCategory a.license:hover {
+    color: white;
+}
+
 

@@ -43,7 +43,7 @@ export default function LandingPage() {
 
       <section>
         <h2>Why this works?</h2>
-        <p>Muscle memory, patterns pickup, peripheral vision training, concentration skill, semantic memory improving, discipline routine are among the many reasons.</p>
+        <p>Muscle memory, patterns pickup, peripheral vision training, concentration skill, semantic memory improving, discipline routine — among the many reasons.</p>
       </section>
 
       <section>

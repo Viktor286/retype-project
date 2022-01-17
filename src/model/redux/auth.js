@@ -2,24 +2,24 @@ const initialState = {
   uid: '',
   githubId: '',
   displayName: 'unknown',
-  screenName: 'unknown',
+  userName: 'unknown',
   photoURL: '',
   averageStats: {},
   auth: {},
 };
 
 // Actions
-export const SET_USER = "SET_USER";
+export const AU_SET_USER = "AU_SET_USER";
 
 export const setUser = userData => ({
-  type: SET_USER,
+  type: AU_SET_USER,
   userData
 });
 
 // Reducer
 export const auth = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USER:
+    case AU_SET_USER:
       return {
         ...state,
         ...action.userData,
