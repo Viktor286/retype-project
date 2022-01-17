@@ -2,7 +2,7 @@ const initialState = {
   uid: '',
   githubId: '',
   displayName: 'unknown',
-  screenName: 'unknown',
+  userName: 'unknown',
   photoURL: '',
   averageStats: {},
   auth: {},

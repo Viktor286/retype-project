@@ -7,13 +7,13 @@ export async function initializeUserByAuthData(githubAuthData, auth) {
 
   const {providerData, email, displayName, photoURL, reloadUserInfo, uid} = githubAuthData;
   const githubId = providerData[0].uid;
-  const {screenName} = reloadUserInfo;
+  const {screenName: userName} = reloadUserInfo;
 
   // Initialize user with database, check via averageStats
   let averageStats = await dbReadUserField(uid, 'averageStats');
 
   if (!averageStats) {
-    await dbAddNewUser({githubId, email, displayName, screenName, photoURL, uid});
+    await dbAddNewUser({githubId, email, displayName, userName, photoURL, uid});
     averageStats = {
       cpm: 0,
       wpm: 0,
@@ -24,7 +24,7 @@ export async function initializeUserByAuthData(githubAuthData, auth) {
     uid,
     githubId,
     displayName,
-    screenName,
+    userName,
     photoURL,
     averageStats,
     auth

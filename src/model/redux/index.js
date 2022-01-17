@@ -4,12 +4,14 @@ import { auth } from "./auth";
 import { correctnessReducer as correctness } from "./correctness";
 import { statsReducer as stats } from "./stats";
 import {sampleReducer as sample} from "./sample";
+import {uiReducer as ui} from "./ui";
 
 export const reducers = combineReducers({
   auth,
   correctness,
   stats,
   sample,
+  ui,
 });
 
 const initStore = () => {

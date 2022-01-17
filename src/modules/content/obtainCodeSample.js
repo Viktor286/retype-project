@@ -1,16 +1,17 @@
-import {fetchGithubResource} from "./fetchGithubResource";
+import { fetchGithubResource, obtainCredentials } from "./github";
 import CreateCodeSample from "../../model/CodeSample";
 
-export default async function obtainCodeSample(githubPath) {
+export default async function obtainCodeSample(githubPath, userName) {
   try {
-    // todo make proper githubPath validation
     const githubResource = await fetchGithubResource(githubPath);
-    const {content, name, html_url} = githubResource;
+    const {content, name, html_url, url} = githubResource;
+    const credentials = await obtainCredentials(url, userName);
 
     const codeSample = await CreateCodeSample({
       fileName: name,
       content,
-      html_url
+      html_url,
+      credentials
     });
 
     window.codeTrainerApp.codeSample = codeSample; // todo: can we avoid this trick effectively?

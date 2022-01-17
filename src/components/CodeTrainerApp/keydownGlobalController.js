@@ -39,6 +39,7 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
 
   // Skip some keys
   if (
+    e.keyCode === 27 || // escape key
     e.keyCode === 38 || // up
     e.keyCode === 33 || // page up
     e.keyCode === 34 || // page down

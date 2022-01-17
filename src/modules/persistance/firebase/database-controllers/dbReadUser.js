@@ -23,7 +23,7 @@ export async function dbReadUserField(userId, field) {
 
 // email
 // displayName
-// screenName
+// userName
 // photoURL
 // history
 // averageStats

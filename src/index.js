@@ -8,6 +8,7 @@ import {prepareAuth} from "./modules/persistance/firebase";
 import {setUser} from "./model/redux/auth";
 import {initializeUserByAuthData} from "./modules/persistance";
 import LandingPage from "./components/LandingPage";
+import ModalWindow from "./components/ModalWindow";
 
 window.debugLogConfig = {
   "redux-log": 0,
@@ -25,6 +26,7 @@ const store = initStore();
 
 const Main = (
   <Provider store={store}>
+    <ModalWindow />
     {window.location.pathname === '/' ? <LandingPage/> : <CodeTrainerApp/>}
   </Provider>
 );

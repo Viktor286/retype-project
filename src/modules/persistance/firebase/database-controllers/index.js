@@ -11,7 +11,7 @@ export {dbAddUserLogin, dbAddUserReturn, dbAddUserLastReturn} from "./dbUserVisi
   // dbAddUserReturn(githubId, new Date().getTime());
   //
   // dbUpdateUser(githubId, 'averageStats/wpm', 3);
-  // dbUpdateUser(githubId, 'screenName', 'tobasco');
+  // dbUpdateUser(githubId, 'userName', 'tobasco');
   //
   // const history = await dbReadUserField(githubId, 'history');
   //

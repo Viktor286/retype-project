@@ -11,6 +11,7 @@ html {
 :root {
     --base-color: hsl(223, 6%, 10%);
     --success-color: hsl(180, 10%, 12%);
+    --blue-link: #a7c3ee;
 }
 
 body {

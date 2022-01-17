@@ -53,7 +53,7 @@ export function initEmptyContent2dArray(contentAs2dArray) {
 
 // prev
 function resolveStats(command, state, prevCharState, totalChars) {
-  let {correctAmount, mistakes, corrections } = state || {};
+  let {correctAmount, mistakes, corrections} = state || {};
 
   switch (command) {
     case CR_DELETE:
