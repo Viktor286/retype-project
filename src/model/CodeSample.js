@@ -4,6 +4,7 @@ import resolver from "../modules/resolver";
 
 export default async function CreateCodeSample({fileName, content, html_url, credentials}) {
   let text = decodeURIComponent(escape(window.atob(content)));
+  text = text.replaceAll("\ufeff", "");
   if (text.length > 10000) text = text.slice(0, 10000);
 
   let contentAsLines = splitTextLines(text);

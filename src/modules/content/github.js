@@ -3,7 +3,8 @@ import {processLicenseData} from "./licenses";
 const githubApiDomain = "https://api.github.com";
 
 export function convertPathnameToFileEndpoint(githubPathname) {
-  return `${githubApiDomain}/repos${githubPathname.replaceAll('blob/master', 'contents').replaceAll('blob/main', 'contents')}`;
+  // eslint-disable-next-line
+  return `${githubApiDomain}/repos${githubPathname.replaceAll(/\/blob\/[^\/]*\//gm, '/contents/')}`;
 }
 
 export function validateGithubPath(githubPathname) {

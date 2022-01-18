@@ -16,7 +16,7 @@ export default function LandingPage() {
       {/*Keyboard cool image + code attributes*/}
 
       <section>
-        <h2>Improve programming skills by typing code</h2>
+        <h2>Improve programming skills by retyping code</h2>
         <p>Code writing requires special kind of typing skill, a bit different from regular text typing.<br />
           In order to get comfortable and fast in coding it's important to practice the special characters flow of symbols like brackets, semicolons, math operators and others.<br />
           Typos and mistakes can significantly interrupt working process which decreases both dev speed and dev experience.</p>
@@ -37,7 +37,7 @@ export default function LandingPage() {
         <h2>Get in touch with new programming languages, syntax and APIs quickly</h2>
         <p>The world has plenty of different code syntax, interfaces, special frameworks and sometimes you need to quickly switch gears between something like python's NumPy and javascript's React.</p>
         <p>Just a couple of exercise per day/week will help you to quickly adapt to a new programing language, interface or framework pattern.</p>
-        <p>Example: i am rarely write SQL queries by hand but i don't want to forget how to write complex JOINs constructions, so as part of my typing training program from time to time i write several SQL commands just to refresh my memory.<br />
+        <p>Example: i am rarely write SQL queries by hand but i don't want to forget how to write complex JOINs constructions, so as part of my typing training routine from time to time i write several SQL commands just to refresh my memory.<br />
         </p>
       </section>
 
@@ -60,12 +60,13 @@ export default function LandingPage() {
           <li><a href="TheAlgorithms/Rust/blob/master/src/general/hanoi.rs">TheAlgorithms/Rust/blob/master/src/general/hanoi.rs</a></li>
           <li><a href="Viktor286/code-samples/blob/master/src/Engineering/Types.ts">Viktor286/code-samples/blob/master/src/Engineering/Types.ts</a></li>
           <li><a href="Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts">Long line Permutations_Lexicg_Order.ts</a></li>
-          <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js">(both comments js) TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js</a></li>
-          <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js">(all comments js)TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js</a></li>
+          <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js">TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js</a></li>
+          <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js">TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js</a></li>
           <li><a href="Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts">Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts</a></li>
-          <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js">Long lines example</a></li>
-          <li><a href="TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py">Python comments aren't working</a></li>
+          <li><a href="TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js">TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js</a></li>
+          <li><a href="TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py">TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py</a></li>
           <li><a href="trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js">trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js</a></li>
+          <li><a href="megadose/holehe/blob/master/holehe/instruments.py">megadose/holehe/blob/master/holehe/instruments.py</a></li>
         </ul>
       </section>
 
@@ -83,12 +84,13 @@ export default function LandingPage() {
       <section>
         <h2>Create your own typing playlist</h2>
         <p>Make your own training program as collection of files in your github repository and have your own custom coding exercise set.</p>
+        <p>If you're logged in then you can have access to unlicensed files from your repository.</p>
       </section>
 
       <section>
         <h2>Typing skill required!</h2>
-        <p>If you are new in typing and if you want to learn how increase your level of touch typing, there is several great resources to start with: <a href="https://www.typing.com/" target="_blank" rel="noreferrer">one</a>, <a href="https://www.ratatype.com/learn/" target="_blank" rel="noreferrer">two</a>, <a href="https://www.keybr.com/" target="_blank" rel="noreferrer">three</a></p>
-        <p>You also can use touch typing exercises from github repository.</p>
+        <p>If you are new in typing and if you want to learn how to increase your level of touch typing, there is several great resources to start with: <a href="https://www.typing.com/" target="_blank" rel="noreferrer">one</a>, <a href="https://www.ratatype.com/learn/" target="_blank" rel="noreferrer">two</a>, <a href="https://www.keybr.com/" target="_blank" rel="noreferrer">three</a></p>
+        {/*<p>You also can use touch typing exercises from github repository.</p>*/}
       </section>
 
     </section>

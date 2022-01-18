@@ -44,7 +44,7 @@ export default function CodingAreaHeader({codeSampleUrl, children}) {
     <TempLogInButton user={auth.userName} />
     <a href="/" className={`app-logo ${isHiding ? 'hiding' : ''}`} dangerouslySetInnerHTML={{__html: icon}} />
     <div className="mainCategory">
-      <a href={u.href}><img src={gitHubIcon} alt="code resource on the github.com" title="the origin of this code resource at github.com"/>{u.pathname}</a><sup className="copyright" title={`the license type and the origin of this resource could be found at ${u.href}`}>©</sup>
+      <a href={u.href}><img src={gitHubIcon} alt="code resource on the github.com" title="the origin of this code resource at github.com"/>{decodeURI(u.pathname)}</a><sup className="copyright" title={`the license type and the origin of this resource could be found at ${u.href}`}>©</sup>
       <LicenseDetailsButton codeSample={codeSample} />
     </div>
     {children}

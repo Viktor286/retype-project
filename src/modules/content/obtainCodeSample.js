@@ -8,9 +8,9 @@ export default async function obtainCodeSample(githubPath, userName) {
     const credentials = await obtainCredentials(url, userName);
 
     const codeSample = await CreateCodeSample({
-      fileName: name,
+      fileName: decodeURI(name),
       content,
-      html_url,
+      html_url: decodeURI(html_url),
       credentials
     });
 

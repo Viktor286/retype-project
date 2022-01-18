@@ -6,6 +6,7 @@ const licenseAllowList = [
   "artistic-2.0",
   "bsl-1.0",
   "bsd-2-clause",
+  "bsd-3-clause",
   "cc",
   "cc0-1.0",
   "cc-by-4.0",
@@ -36,7 +37,7 @@ const licenseAllowList = [
 ];
 
 export function addLicenseCommentToHtmlTop(codeSample) {
-  if (codeSample?.credentials?.license?.body.length > 10) {
+  if (codeSample?.credentials?.license?.body?.length > 10) {
     const CommentNode = document.createComment(`\n\n${codeSample.credentials.license.body}\n\n`);
     document.prepend(CommentNode);
   }
@@ -55,7 +56,7 @@ async function processLicenseData(owner, repo, url) {
       licenseInfo = await fetchGithubLicenseDetails(license.key);
     }
   } catch (e) {
-    // licenseDetails =  'not-found';
+    // licenseInfo = 'not-found';
     // pass
   }
 
