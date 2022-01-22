@@ -55,6 +55,7 @@ section.codingAreaHeader button.loginBtn {
     text-decoration: underline;
     border: none;
     font-size: 1.2rem;
+    margin: 0 0 2rem 0;
 }
 
 section.codingAreaHeader button.loginBtn:hover {

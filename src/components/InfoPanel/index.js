@@ -27,17 +27,19 @@ const InfoPanel = ({codeSample, keydownController}) => {
   const codeSamplePath = new URL(html_url).pathname;
 
   useEffect(() => {
-    if (isComplete && uid && codeSamplePath) {
+    if (isComplete && codeSamplePath) {
       // Turn off keyboard handler when session completed
       if (correctness.isComplete && keydownController.keydownHandler) {
         document.removeEventListener("keydown", keydownController.keydownHandler);
       }
 
-      // Save historySessionData
-      const historySessionData = createHistorySessionStat(stats, correctness, codeSamplePath);
-      sendHistoryInfo(uid, historySessionData).then(response => {
-        // console.log('@@@ historySessionData sent', historySessionData, response);
-      });
+      if (uid) {
+        // Save historySessionData
+        const historySessionData = createHistorySessionStat(stats, correctness, codeSamplePath);
+        sendHistoryInfo(uid, historySessionData).then(response => {
+          // console.log('@@@ historySessionData sent', historySessionData, response);
+        });
+      }
     }
     // eslint-disable-next-line
   }, [isComplete, uid, codeSamplePath]);

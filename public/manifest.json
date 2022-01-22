@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Retype Project",
+  "name": "typing trainer for opensource",
   "icons": [
     {
       "src": "favicon.ico",
