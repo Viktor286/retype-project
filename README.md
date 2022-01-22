@@ -1,4 +1,5 @@
-#Retype Project
+# Retype Project
+
 _typing trainer for opensource_
 
 [retypeproject.com](https://retypeproject.com/)
