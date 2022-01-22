@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import initStore from "./model/redux";
 import CodeTrainerApp from "./components/CodeTrainerApp/CodeTrainerApp";
-import "./Globals.css";
+import "./globals.css";
 import * as serviceWorker from "./serviceWorker";
 import {prepareAuth} from "./modules/persistance/firebase";
 import {setUser} from "./model/redux/auth";
