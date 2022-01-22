@@ -1,8 +1,6 @@
 # Retype Project
 
-_typing trainer for opensource_
-
-[retypeproject.com](https://retypeproject.com/)
+[retypeproject.com](https://retypeproject.com/) _typing trainer for opensource_
 
 ### Improve programming skills by retyping code
 
@@ -13,10 +11,18 @@ Typos and mistakes can significantly interrupt working process which decreases b
 The great way to achieve a good results in training code patterns is retyping real-life code examples. With typing trainer like that you can learn to write code faster mastering your keyboarding technique.
 Great code-typing skills offers more freedom in creating your projects without paying attention cost to complex patterns of code syntax.
 
+
+![image](https://user-images.githubusercontent.com/13506547/150652323-225dc326-1ce4-466a-b4e3-e28d304b4bd5.png)
+
+
 ### Retype Project is for opensource
 Use "Retype Project" to exercise any open source code file from the largest repository in the world!
 Python, Javascript, PHP, C, C++, Java — all top programming languages.
 Add "rt" text after the "github" domain name before ".com" to get github file as code typing training session.
+
+![image](https://user-images.githubusercontent.com/13506547/150652550-bff87433-f272-479a-a0e2-e97cad0280e2.png)
+
+
 
 Or use bookmarklet to easy switch between github and retype:
 ```
