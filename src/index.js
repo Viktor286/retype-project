@@ -32,9 +32,7 @@ const Main = (
 );
 
 async function entryPoint() {
-  if (store.getState()?.auth?.config) {
-    // console.log('Auth already initialized');
-  } else {
+  if (!store.getState()?.auth?.config) {
     const { authData: githubAuthData, auth } = await prepareAuth(store);
     const userJourneyData = await initializeUserByAuthData(githubAuthData, auth);
     store.dispatch(setUser(userJourneyData));
