@@ -51,7 +51,7 @@ Muscle memory, patterns pickup, peripheral vision training, concentration skill,
 - [Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts](https://retypeproject.com/Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts)
 - [TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js](https://retypeproject.com/TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js)
 - [TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js](https://retypeproject.com/TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js)
-- [Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts](https://retypeproject.com/Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/01_preOrder.ts)
+- [Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/02_PreOrder_Iterative.ts](https://retypeproject.com/Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/02_PreOrder_Iterative.ts)
 - [TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js](https://retypeproject.com/TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js)
 - [TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py](https://retypeproject.com/TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py)
 - [trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js](https://retypeproject.com/trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js)
