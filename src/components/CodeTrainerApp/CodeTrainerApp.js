@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useSelector, useDispatch, useStore} from "react-redux";
 import {initCorrectness} from "../../model/redux/correctness";
 import {setCodeSample} from "../../model/redux/sample";
@@ -15,6 +15,7 @@ import {enableModalWindow} from "../ModalWindow";
 export default function CodeTrainerApp() {
   const dispatch = useDispatch();
   const store = useStore();
+  const [status, setStatus] = useState('Loading...');
   const {sample: codeSample, auth} = useSelector(state => state);
   const { userName } = auth;
   const keydownController = useRef({
@@ -28,6 +29,12 @@ export default function CodeTrainerApp() {
         if (!remoteCodeSample) {
           return;
         }
+
+        if (typeof remoteCodeSample === "string") {
+          setStatus(remoteCodeSample);
+          return;
+        }
+
         // Setup keyboard handlers
         // Setup GlobalController
         const keydownHandler = e => keydownGlobalController({
@@ -77,7 +84,7 @@ export default function CodeTrainerApp() {
   } else {
     return <div className="CodeTrainerApp">
       <section className={"codingAreaHeader"}>
-        <h2>Loading...</h2>
+        <h2>{status}</h2>
       </section>
     </div>;
   }

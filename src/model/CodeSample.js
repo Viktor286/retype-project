@@ -57,15 +57,13 @@ export function parseSkipMask(contentAs2dArray, subDivisions) {
     }
 
     // Special cases:
-    // Remove tabs completely
-    let c = 0;
-    let skipMask = 0;
-    while (c < skipMask2dArr[ln].length) {
-      if (contentAs2dArray[ln][c] === '\t') {
-        skipMask2dArr[ln][c] = ++skipMask;
-        c++;
-      } else {
-        break;
+    for (let c=0; c < skipMask2dArr[ln].length; c++) {
+      // Skip characters
+      if (
+        contentAs2dArray[ln][c] === '\t' || // tabs
+        contentAs2dArray[ln][c].charCodeAt(0) > 126 // non ASCII chars
+      ) {
+        skipMask2dArr[ln][c] = resolveSkipCode(skipMask2dArr[ln], c);
       }
     }
 
@@ -80,4 +78,23 @@ export function parseSkipMask(contentAs2dArray, subDivisions) {
   }
 
   return skipMask2dArr;
+}
+
+function resolveSkipCode(skipMaskLine, skipCursor) {
+  if (skipCursor === 0 || skipMaskLine[skipCursor-1] === 0) {
+    return 1;
+  }
+
+  if (skipMaskLine[skipCursor+1] === 0 || skipCursor === skipMaskLine.length-1) {
+    // back step adjusting
+    if (skipMaskLine[skipCursor-1] === 3) {
+      skipMaskLine[skipCursor-1] = 2;
+    }
+
+    return 3;
+  }
+
+  if (skipMaskLine[skipCursor-1] === 1 || skipMaskLine[skipCursor-1] === 2) {
+    return 2;
+  }
 }

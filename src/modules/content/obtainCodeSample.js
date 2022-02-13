@@ -4,7 +4,12 @@ import CreateCodeSample from "../../model/CodeSample";
 export default async function obtainCodeSample(githubPath, userName) {
   try {
     const githubResource = await fetchGithubResource(githubPath);
-    const {content, name, html_url, url} = githubResource;
+    const {content, name, html_url, url, message} = githubResource;
+
+    if (message === "Not Found") {
+      return "Resource was not found";
+    }
+
     const credentials = await obtainCredentials(url, userName);
 
     const codeSample = await CreateCodeSample({
