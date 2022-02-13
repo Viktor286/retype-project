@@ -38,6 +38,7 @@ Example: i am rarely writing SQL queries by hand but i don't want to forget how 
 Muscle memory, patterns pickup, peripheral vision training, concentration skill, semantic memory improving, discipline routine — among the many reasons.
 
 ## :eyes: Try speed code typing training examples
+- [HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js](https://retypeproject.com/HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js)
 - [TheAlgorithms/C/blob/master/leetcode/src/1.c](https://retypeproject.com/TheAlgorithms/C/blob/master/leetcode/src/1.c)
 - [TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java](https://retypeproject.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java)
 - [TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl](https://retypeproject.com/TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl)

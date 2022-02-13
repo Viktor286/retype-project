@@ -49,6 +49,7 @@ export default function LandingPage() {
       <section>
         <h2>Try speed code typing training examples</h2>
         <ul>
+          <li><a href="HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js">HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js</a></li>
           <li><a href="TheAlgorithms/C/blob/master/leetcode/src/1.c">TheAlgorithms/C/blob/master/leetcode/src/1.c</a></li>
           <li><a href="TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java">TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java</a></li>
           <li><a href="TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl">TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl</a></li>
