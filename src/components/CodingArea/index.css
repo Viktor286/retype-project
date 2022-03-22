@@ -22,6 +22,8 @@ body.completed section.codingArea {
 
 div.line {
     display: flex;
+    margin: 3px 0;
+    padding: 0;
 }
 
 div.line .code {
@@ -60,7 +62,7 @@ div.char.lineNum {
     font-size: 1.4rem;
     font-style: italic;
     font-weight: 300;
-    width: 50px;
+    width: 30px;
     margin-right: 15px;
 }
 
@@ -73,7 +75,9 @@ div.line.active div.char.lineNum {
 /*}*/
 
 span.char.tab, span.char.lineBreak {
-    color: hsl(208deg 20% 50%);
+    /*color: hsl(208deg 20% 50%);*/
+    color: hsl(208deg 18% 42%);
+
 }
 
 span.char.tab {
