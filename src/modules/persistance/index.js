@@ -1,8 +1,8 @@
 import {dbReadUserField, dbAddNewUser, dbAddUserHistory} from "./firebase/database-controllers";
 
-export async function initializeUserByAuthData(githubAuthData, auth) {
+export async function initializeUserByAuthData(githubAuthData) {
   if (!githubAuthData) {
-    return {auth};
+    return {};
   }
 
   const {providerData, email, displayName, photoURL, reloadUserInfo, uid} = githubAuthData;
@@ -27,7 +27,6 @@ export async function initializeUserByAuthData(githubAuthData, auth) {
     userName,
     photoURL,
     averageStats,
-    auth
   };
 }
 

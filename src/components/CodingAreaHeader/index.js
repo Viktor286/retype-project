@@ -11,11 +11,11 @@ import LicenseDetailsButton from "./LicenseDetailsButton";
 
 export function TempLogInButton({user}) {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
+
   if (user === 'unknown') {
     return <button className={"loginBtn"} onClick={async () => {
-      const authData = await signInGithubWithPopup(auth.auth);
-      const userJourneyData = await initializeUserByAuthData(authData, auth.auth);
+      const authData = await signInGithubWithPopup(window.codeTrainerApp.auth);
+      const userJourneyData = await initializeUserByAuthData(authData, window.codeTrainerApp.auth);
       dispatch(setUser(userJourneyData));
     }}>Login here via github to keep your stats
     </button>;

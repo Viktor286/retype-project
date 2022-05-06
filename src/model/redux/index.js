@@ -1,12 +1,12 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
-import { auth } from "./auth";
-import { correctnessReducer as correctness } from "./correctness";
-import { statsReducer as stats } from "./stats";
+import {configureStore} from "@reduxjs/toolkit";
+import {combineReducers} from "@reduxjs/toolkit";
+import {auth} from "./auth";
+import {correctnessReducer as correctness} from "./correctness";
+import {statsReducer as stats} from "./stats";
 import {sampleReducer as sample} from "./sample";
 import {uiReducer as ui} from "./ui";
 
-export const reducers = combineReducers({
+export const reducer = combineReducers({
   auth,
   correctness,
   stats,
@@ -15,9 +15,9 @@ export const reducers = combineReducers({
 });
 
 const initStore = () => {
-  return createStore(
-    reducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  return configureStore(
+    { reducer }
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 };
 
