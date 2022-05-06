@@ -25,6 +25,11 @@ body {
     transition-duration: 0s;
     transition-property: background-color;
     transition-timing-function: linear;
+
+    /* hide scrollbar but allow scrolling */
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    display: none; /* for Chrome, Safari, and Opera */
 }
 
 body.completed {
