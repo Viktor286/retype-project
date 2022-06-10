@@ -18,7 +18,7 @@
 /public/lib
 .firebaserc
 firebase.json
-/src/modules/persistance/firebase/firebaseConfig.js
+/src/modules/persistence/firebase/firebaseConfig.js
 /src/modules/resolver
 
 # misc

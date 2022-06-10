@@ -2,10 +2,12 @@ import {splitTextLines, spacesIntoTabs} from "../utils/text";
 import {initEmptyContent2dArray} from "./redux/correctness";
 import resolver from "../modules/resolver";
 
+const textCharsLimit = 20000;
+
 export default async function CreateCodeSample({fileName, content, html_url, credentials}) {
   let text = decodeURIComponent(escape(window.atob(content)));
   text = text.replaceAll("\ufeff", "");
-  if (text.length > 10000) text = text.slice(0, 10000);
+  if (text.length > textCharsLimit) text = text.slice(0, textCharsLimit);
 
   let contentAsLines = splitTextLines(text);
   contentAsLines = spacesIntoTabs(contentAsLines);
