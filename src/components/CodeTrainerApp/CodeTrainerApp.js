@@ -75,9 +75,10 @@ export default function CodeTrainerApp() {
   if (codeSample.id) {
     return (
       <div className="CodeTrainerApp">
-        <CodingAreaHeader codeSampleUrl={codeSample.html_url}>
+        <section className={"codingAreaHeader"}>
+          <CodingAreaHeader codeSample={codeSample} />
           <CodingArea codeSample={codeSample}/>
-        </CodingAreaHeader>
+        </section>
         <InfoPanel codeSample={codeSample} keydownController={keydownController.current}/>
       </div>
     );

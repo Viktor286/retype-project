@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getTopSvgIcon, defaultTopSvgIcon} from "./topIconIndex";
 import gitHubIcon from './github-brands.svg';
 import "./index.css";
@@ -6,12 +6,10 @@ import "./index.css";
 import {useSelector} from "react-redux";
 import LicenseDetailsButton from "./LicenseDetailsButton";
 
-
-export default function CodingAreaHeader({codeSampleUrl, children}) {
+function CodingAreaHeader({codeSample}) {
+  const {html_url: codeSampleUrl} = codeSample;
   // const [icon, setIcon] = useState(defaultTopSvgIcon);
   // const [isHiding, setIsHiding] = useState(true);
-  // const {auth, sample: codeSample} = useSelector(state => state);
-  const {sample: codeSample} = useSelector(state => state);
   const u = new URL(codeSampleUrl);
 
   // useEffect(() => {
@@ -24,15 +22,15 @@ export default function CodingAreaHeader({codeSampleUrl, children}) {
   //   })
   // }, []);
 
-  return <section className={"codingAreaHeader"}>
+  return <>
     <a href="/" className="home-logo">
-    <div className="retype-logo">
-      <div className="logo-icon">Rt</div>
-      <div className="left-side">
-        <div className="text-title">Retype_</div>
-        <div className="sub-title">project</div>
+      <div className="retype-logo">
+        <div className="logo-icon">Rt</div>
+        <div className="left-side">
+          <div className="text-title">Retype_</div>
+          <div className="sub-title">project</div>
+        </div>
       </div>
-    </div>
     </a>
     {/*<a href="/" className={`app-logo ${isHiding ? 'hiding' : ''}`} dangerouslySetInnerHTML={{__html: icon}}/>*/}
     <div className="mainCategory">
@@ -42,6 +40,7 @@ export default function CodingAreaHeader({codeSampleUrl, children}) {
       title={`the license type and the origin of this resource could be found at ${u.href}`}>©</sup>
       <LicenseDetailsButton codeSample={codeSample}/>
     </div>
-    {children}
-  </section>
+  </>
 }
+
+export default React.memo(CodingAreaHeader);

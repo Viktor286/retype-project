@@ -1,4 +1,5 @@
 import "./index.css";
+import React from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {toggleTypingMode} from "../../model/redux/stats";
 
@@ -38,7 +39,7 @@ const CodingArea = ({
 
           return lineNumber === cursorIndex[0] ?
             <ActiveCodingLine {...{cursorInLine: cursorIndex[1], ...linePayload}} /> :
-            <CodingLine {...linePayload} />
+            <CodingLineMemo {...linePayload} />
         })}
       </section>
     </>
@@ -55,7 +56,7 @@ function ActiveCodingLine({linesArr, lineNumber, correctnessLine, cursorInLine, 
         const [start, end] = token.ltRange;
         return <span key={id} style={{color: token.foregroundColor}}>{linesArr.slice(start, end + 1).map((char, charNumInLine) => {
           charNumInLine += start;
-          return <CodingChar {...{
+          return <CodingCharMemo {...{
             charCorrectness: correctnessLine[charNumInLine],
             charNumInLine,
             char,
@@ -79,7 +80,7 @@ function CodingLine({linesArr, lineNumber, correctnessLine, lineSkipMask, subDiv
         const [start, end] = token.ltRange;
         return <span key={id} style={{color: token.foregroundColor}}>{linesArr.slice(start, end + 1).map((char, charNumInLine) => {
           charNumInLine += start;
-          return <CodingChar {...{
+          return <CodingCharMemo {...{
             charCorrectness: correctnessLine[charNumInLine],
             charNumInLine,
             char,
@@ -91,6 +92,8 @@ function CodingLine({linesArr, lineNumber, correctnessLine, lineSkipMask, subDiv
     </div>
   </div>
 }
+
+const CodingLineMemo = React.memo(CodingLine);
 
 function CodingChar({char, charNumInLine, charCorrectness, lineSkipMask, isActive = false}) {
   let displayChar = char;
@@ -136,6 +139,8 @@ function CodingChar({char, charNumInLine, charCorrectness, lineSkipMask, isActiv
 
   return <span key={`c${charNumInLine}`} className={cssClasses.join(" ")}>{displayChar}</span>;
 }
+
+const CodingCharMemo = React.memo(CodingChar);
 
 
 export default CodingArea;
