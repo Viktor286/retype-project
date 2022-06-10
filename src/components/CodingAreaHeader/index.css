@@ -102,4 +102,63 @@ section.codingAreaHeader div.mainCategory a.license:hover {
     color: white;
 }
 
+/* retype-logo */
+a.home-logo {
+    text-decoration: none;
+    margin: 40px 0 40px 0;
+}
 
+div.retype-logo {
+    display: flex;
+    font-family: Roboto, sans-serif;
+    user-select: none;
+    /*transform: scale(1.1);*/
+    transform: translateX(10px);
+}
+
+div.retype-logo .logo-icon {
+    color: white;
+    border: 1px #a5d7ef solid;
+    border-radius: 10px;
+    width: 70px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+div.retype-logo:hover .logo-icon {
+    border-color: #91deb1;
+    background-color: #222328;
+}
+
+div.retype-logo .left-side {
+    margin-left: 10px;
+}
+
+div.retype-logo .left-side .text-title {
+    color: #a5d7ef;
+    font-size: 42px;
+    text-align: left;
+    font-weight: 100;
+    margin: -4px 0 0 0;
+}
+
+div.retype-logo:hover .left-side .text-title {
+ color: #91deb1;
+}
+
+div.retype-logo .left-side .sub-title {
+    color: #a6a6a7;
+    font-size: 16px;
+    text-align: left;
+    font-weight: 300;
+    margin: -2px 0 0 2px;
+    letter-spacing: 2px;
+}
+
+div.retype-logo:hover .left-side .sub-title {
+    color: #b7b7b7;
+}

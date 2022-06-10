@@ -1,8 +1,8 @@
 section.timer {
-    margin: 0 50px;
-    padding: 0 30px;
-    width: 80%;
-    height: 100px;
+    margin: 0 5px;
+    /*padding: 0 30px;*/
+    width: 100%;
+    position: relative;
 }
 
 section.timer div.wrap {
@@ -11,37 +11,49 @@ section.timer div.wrap {
     justify-content: center;
 }
 
-section.timer div.wrap div.timer-counter {
-    font-size: 2.1rem;
-    text-align: left;
-    width: 100px;
-    font-family: Ubuntu, sans-serif;
-    color: #a9d7ff;
-}
-
 section.timer div.timeline {
     width: 100%;
     /*margin: 0 auto;*/
-    height: 35px;
-    border: 1px solid #3e4a52;
+    height: 30px;
+    /*border: 1px solid #3e4a52;*/
     background-color: #1a1f23;
+    border-radius: 5px;
 }
 
 section.timer div.timeline > div.best-time-bar,
 section.timer div.timeline > div.average-time-bar,
 section.timer div.timeline > div.player-time-bar {
     width: 0;
-    height: 33%;
-    border-radius: 0;
+    border-radius: 2px;
+}
+
+section.timer div.timeline > div.player-time-bar {
+    height: 65%;
     background-color: #67b7e6;
+    border-radius: 4px;
 }
 
 section.timer div.timeline > div.best-time-bar {
+    height: 35%;
     background-color: #9ce2ba;
-    height: 33%;
 }
 
 section.timer div.timeline > div.average-time-bar {
     background-color: #5691ad;
-    height: 33%;
+}
+
+div.timeline div.username {
+    position: absolute;
+    color: white;
+    font-style: italic;
+    padding: 2px 0 0 4px;
+}
+
+div.timeline div.comparison-label {
+    position: absolute;
+    top: 17px;
+    font-style: italic;
+    padding: 0 0 0 4px;
+    color: #0e9674;
+    font-size: 12px;
 }
