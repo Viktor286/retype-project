@@ -66,9 +66,10 @@ export default function CodeTrainerApp() {
     codeSample?.credentials?.owner !== userName
   ) {
     return <div className="CodeTrainerApp">
-      <CodingAreaHeader codeSampleUrl={codeSample.html_url}>
+      <section className={"codingAreaHeader"}>
+        <CodingAreaHeader codeSample={codeSample} />
         <NoLicenseNotification />
-      </CodingAreaHeader>
+      </section>
     </div>;
   }
 

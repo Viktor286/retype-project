@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {getTopSvgIcon, defaultTopSvgIcon} from "./topIconIndex";
+import React from 'react';
+// import {getTopSvgIcon, defaultTopSvgIcon} from "./topIconIndex";
 import gitHubIcon from './github-brands.svg';
 import "./index.css";
 
-import {useSelector} from "react-redux";
 import LicenseDetailsButton from "./LicenseDetailsButton";
 
 function CodingAreaHeader({codeSample}) {

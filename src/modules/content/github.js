@@ -31,6 +31,15 @@ export function getOwnerAndRepoFromGithubUrl(url) {
 // https://docs.github.com/en/rest/reference/licenses
 export async function fetchGithubLicense(owner, repo) {
   const res = await fetch(`${githubApiDomain}/repos/${owner}/${repo}/license`);
+
+  // TODO:  error response with 403 would usually be because of API rate limit
+  // "message":"API rate limit exceeded for
+  // next in line would be to make a readable notification for that
+
+  if (res.status === 404) {
+    throw new Error('license file not found');
+  }
+
   return await res.json();
 }
 
