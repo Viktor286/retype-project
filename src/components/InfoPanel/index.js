@@ -3,8 +3,8 @@ import "./index.css";
 import TimelineTimer from "../TimelineTimer";
 import {useDispatch, useSelector} from "react-redux";
 import {createHistorySessionStat} from '../../model/HistorySession';
-import {initializeUserByAuthData, sendHistoryInfo} from '../../modules/persistance/';
-import {signInGithubWithPopup} from "../../modules/persistance/firebase/githubAuth";
+import {initializeUserByAuthData, sendHistoryInfo} from '../../modules/persistence/';
+import {signInGithubWithPopup} from "../../modules/persistence/firebase/githubAuth";
 import {setUser} from "../../model/redux/auth";
 
 function markBodyAsComplete() {
