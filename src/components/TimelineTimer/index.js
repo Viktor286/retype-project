@@ -9,7 +9,7 @@ const statRatios = {
   bestCps: 5.7
 };
 
-function TimelineTimer({totalChars}) {
+function TimelineTimer({totalChars, userName}) {
   const dispatch = useDispatch();
   const {stats, correctness} = useSelector(state => state);
   const {staleTimeout} = stats;
@@ -70,15 +70,14 @@ function TimelineTimer({totalChars}) {
   }, [elapsedSeconds]);
 
   return <section className="timer">
-    <div className="wrap">
-      <div className="timer-counter">{Timer.msToTimeString(elapsedSeconds * 1000)}</div>
-    </div>
     <div className="timeline">
+      <div className="username">{userName ? userName : "Anonymous"}</div>
+      <div className="comparison-label">top result</div>
       <div className="player-time-bar" style={{width: keysCompletedPercent + "%"}}>&nbsp;</div>
       <div className="best-time-bar"
            style={{width: `${bestTimeProgress >= 100 ? 100 : bestTimeProgress}%`}}>&nbsp;</div>
-      <div className="average-time-bar"
-           style={{width: `${averageTimeProgress >= 100 ? 100 : averageTimeProgress}%`}}>&nbsp;</div>
+      {/*<div className="average-time-bar"*/}
+      {/*     style={{width: `${averageTimeProgress >= 100 ? 100 : averageTimeProgress}%`}}>&nbsp;</div>*/}
     </div>
   </section>;
 }

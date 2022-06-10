@@ -5,7 +5,7 @@ section.codingArea {
     position: relative;
     margin: 0 50px 190px;
     background-color: hsl(223deg 5% 12%);
-    padding: 20px 30px 20px;
+    padding: 5px 30px 20px;
     border-radius: 20px;
     text-align: left;
     max-width: 80%;
@@ -18,7 +18,6 @@ body.completed section.codingArea {
     /*background-color: hsl(155deg 13% 18%);*/
     /*background-color: hsl(160deg 10% 15%);*/
 }
-
 
 div.line {
     display: flex;
@@ -34,7 +33,7 @@ div.line.active {
     background-color: hsl(200deg 14% 15%);
 }
 
-div.line.active span.ok {
+.fade-out-typing-mode div.line.active span.ok {
     color: hsl(217deg 15% 34%);
 }
 
@@ -70,9 +69,9 @@ div.line.active div.char.lineNum {
     color: hsl(214deg 20% 50%);
 }
 
-/*span.char.await {*/
-/*    color: #e3fcff;*/
-/*}*/
+.fade-in-typing-mode span.char.await {
+    color: hsl(217deg 11% 27%);
+}
 
 span.char.tab, span.char.lineBreak {
     /*color: hsl(208deg 20% 50%);*/
@@ -93,29 +92,34 @@ span.lineBreak {
 /*    white-space: pre;*/
 /*}*/
 
-span.char.ok {
+.fade-out-typing-mode span.char.ok {
     color: hsl(217deg 11% 27%);
 }
 
-body.completed span.ok {
+body.completed section.codingArea span.char.ok {
     color: hsl(145deg 33% 84%);
 }
 
-
 span.mistake {
-    color: #f19c83;
-    background-color: #573430;
+    background-color: #d91600;
+    color: #ffffff;
+    border-bottom: 2px solid white;
+    border-top: 2px solid white;
 }
 
-span.cursor {
+.fade-out-typing-mode span.cursor {
     text-decoration: underline;
-
     color: #fff;
     background-color: #8d8649;
 }
 
+.fade-in-typing-mode span.cursor {
+    background-color: #59ceff;
+}
+
 span.cursor.mistake {
-    background-color: #dc3c54;
+    background-color: #ff9f30;
+    color: #000;
 }
 
 span.cursor.ok {
@@ -126,6 +130,37 @@ span.cursor.ok {
 span.lineBreak.cursor,
 span.tab.cursor {
     text-decoration: none;
-
     color: #fff;
+}
+
+.codingArea .top-bar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.toggle-typing-mode {
+    padding: 0;
+    margin: .3rem;
+    background: none;
+    border: 0;
+    outline: 0;
+    display: flex;
+}
+
+div.toggle-typing-mode:hover {
+    cursor: pointer;
+}
+
+div.toggle-typing-mode svg {
+    width: 1.8rem;
+    fill: #6f8db3;
+    transition: transform .1s;
+}
+
+div.toggle-typing-mode svg:hover {
+    fill: #90b4e1;
+}
+
+.fade-out-typing-mode svg {
+    transform: rotate(180deg);
 }

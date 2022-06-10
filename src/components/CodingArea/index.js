@@ -1,30 +1,48 @@
 import "./index.css";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {toggleTypingMode} from "../../model/redux/stats";
 
 const CodingArea = ({
                       codeSample: {contentAs2dArray, skipMask2dArray, colorMask2dArray, subDivisions}
                     }) => {
+  const dispatch = useDispatch();
   const correctness = useSelector(state => state.correctness);
-  const { correctAs2dArray, cursorIndex} = correctness;
+  const {correctAs2dArray, cursorIndex} = correctness;
+  const stats = useSelector(state => state.stats);
+  const {typingMode} = stats;
 
-  return <section className="codingArea">
-    {contentAs2dArray.map((linesArr, lineNumber) => {
+  return (
+    <>
+      <section className={`codingArea ${typingMode === 0 ? 'fade-out-typing-mode' : 'fade-in-typing-mode'}`}>
+        <div className="top-bar">
+          {/* temporary make as a button to keep away from keyboard enter functionality */}
+          <div className="toggle-typing-mode" onClick={(e) => {
+            dispatch(toggleTypingMode(typingMode))
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path
+                d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 64V448C362 448 448 362 448 256C448 149.1 362 64 256 64z"/>
+            </svg>
+          </div>
+        </div>
+        {contentAs2dArray.map((linesArr, lineNumber) => {
+          const linePayload = {
+            linesArr,
+            lineNumber,
+            lineSkipMask: skipMask2dArray[lineNumber],
+            correctnessLine: correctAs2dArray[lineNumber],
+            colorMask2dArray,
+            subDivisions,
+            key: `l${lineNumber}`,
+          };
 
-      const linePayload = {
-        linesArr,
-        lineNumber,
-        lineSkipMask: skipMask2dArray[lineNumber],
-        correctnessLine: correctAs2dArray[lineNumber],
-        colorMask2dArray,
-        subDivisions,
-        key: `l${lineNumber}`,
-      };
-
-      return lineNumber === cursorIndex[0] ?
-        <ActiveCodingLine {...{cursorInLine: cursorIndex[1], ...linePayload}} /> :
-        <CodingLine {...linePayload} />
-    })}
-  </section>
+          return lineNumber === cursorIndex[0] ?
+            <ActiveCodingLine {...{cursorInLine: cursorIndex[1], ...linePayload}} /> :
+            <CodingLine {...linePayload} />
+        })}
+      </section>
+    </>
+  )
 };
 
 function ActiveCodingLine({linesArr, lineNumber, correctnessLine, cursorInLine, lineSkipMask, subDivisions}) {
