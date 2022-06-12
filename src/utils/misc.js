@@ -1,5 +1,4 @@
-export const millisecondsToTime = ms => {
-  let seconds = ms / 1000;
+export const secondsToTime = seconds => {
   let minutes = parseInt(seconds / 60, 10);
   seconds = seconds % 60;
   let hours = parseInt(minutes / 60, 10);
@@ -16,7 +15,7 @@ export const millisecondsToTime = ms => {
 
   const strHours = hours === "00" ? "" : hours + ":";
 
-  const strMinutes = minutes === "00" && hours === "00" ? "" : minutes + ":";
+  const strMinutes = minutes === "00" && hours === "00" ? "0:" : minutes + ":";
 
   const strSeconds =
     seconds === "00" && minutes === "00" && hours === "00" ? "0" : seconds;
