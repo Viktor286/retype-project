@@ -1,6 +1,6 @@
 {
   "short_name": "Retype Project",
-  "name": "Retype Project: typing trainer for opensource",
+  "name": "typing trainer for opensource",
   "description": "Retype Project is a typing trainer for opensource. Improve programming skills by retyping code. Learn to write code faster mastering your keyboarding technique.",
   "icons": [
     {
@@ -20,7 +20,7 @@
     }
   ],
   "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#a5d7ef",
+  "display": "fullscreen",
+  "theme_color": "#262b2f",
   "background_color": "#18191b"
 }
