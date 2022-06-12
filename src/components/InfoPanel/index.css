@@ -62,8 +62,8 @@ section.infoPanel .ui {
 .right-area .right-user-info,
 .center-area .center-info {
     display: flex;
-    margin-top: 10px;
-    max-width: 210px;
+    margin-top: 8px;
+    max-width: 220px;
 }
 
 /*  center-area  */
@@ -115,8 +115,7 @@ section.infoPanel .ui {
     width: 60px;
     min-width: 60px;
     height: 100%;
-    margin: -6px 4px 0 0;
-
+    margin: -6px 10px 0 0;
 }
 
 .left-area .left-user-info .user-profile .user-pic img {
@@ -158,18 +157,22 @@ section.infoPanel .ui {
     font-weight: 100;
 }
 
-.complete .left-area .left-user-info .user-stat .wpm-indicator {
+.complete .left-area .left-user-info .user-stat .wpm-indicator,
+.complete .left-area .left-user-info .user-stat .cpm-indicator,
+.complete .left-area .left-user-info .user-stat .time-indicator
+{
     color: #bde7ff;
 }
 
-.left-area .left-user-info .user-stat .cpm-indicator {
+.left-area .left-user-info .user-stat .cpm-indicator, .time-indicator {
     color: #718896;
     font-size: 1.2rem;
     text-align: left;
 }
 
-.complete .left-area .left-user-info .user-stat .cpm-indicator {
-    color: #bde7ff;
+.cpm-indicator, .time-indicator {
+    margin-top: 2px;
+    font-size: 1.1rem;
 }
 
 /*  right-area  */
@@ -183,6 +186,8 @@ section.infoPanel .ui {
     color: #bde7ff;
     font-size: 1.5rem;
     font-weight: 300;
+    width: 100%;
+    text-align: left;
 }
 
 .correct-stat span.remain {

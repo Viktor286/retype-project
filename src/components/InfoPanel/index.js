@@ -6,6 +6,7 @@ import {createHistorySessionStat} from '../../model/HistorySession';
 import {initializeUserByAuthData, sendHistoryInfo} from '../../modules/persistence/';
 import {signInGithubWithPopup} from "../../modules/persistence/firebase/githubAuth";
 import {setUser} from "../../model/redux/auth";
+import {secondsToTime} from "../../utils/misc.js";
 
 function markBodyAsComplete() {
   window.document.body.classList.add('completed');
@@ -26,8 +27,8 @@ const InfoPanel = ({codeSample, keydownController}) => {
   }
 
   const {stats, correctness, auth} = state;
-  const {cpm, wpm} = stats;
-  const {correctAmount, keysLeft, isComplete, mistakes, corrections} = correctness;
+  const {cpm, wpm, elapsedSeconds} = stats;
+  const {correctAmount, keysLeft, isComplete, mistakes} = correctness;
   let {uid, userName, photoURL} = auth;
   if (userName === "unknown") userName = '';
   const {totalChars, html_url} = codeSample;
@@ -62,7 +63,7 @@ const InfoPanel = ({codeSample, keydownController}) => {
             {userName && photoURL ? (
               <div className="user-profile logged-in">
                 <div className="user-pic">
-                  <img src={photoURL} width="48" height="48" alt="user picture"/>
+                  <img src={photoURL} width="48" height="48" alt="user"/>
                 </div>
                 <div className="login">{userName}</div>
               </div>
@@ -84,6 +85,7 @@ const InfoPanel = ({codeSample, keydownController}) => {
             <div className="user-stat">
               <div className="wpm-indicator" title="Words Per Minute">WPM {wpm}</div>
               <div className="cpm-indicator" title="Chars Per Minute" >CPM {Math.floor(cpm)} / <span title="Chars Per Second">CPS {Math.floor(cpm / 60)}</span></div>
+              <div className="time-indicator" title="Elapsed time">{secondsToTime(elapsedSeconds)}</div>
             </div>
           </div>
         </section>
@@ -112,7 +114,7 @@ const InfoPanel = ({codeSample, keydownController}) => {
         <section className="right-area">
           <div className="right-user-info">
             <div className="correct-stat">correct: {correctAmount}<span className="remain">/{keysLeft}</span></div>
-            <div className="mistakes-stat">mistakes/fixes: {mistakes}/{corrections}</div>
+            <div className="mistakes-stat">mistakes: {mistakes}</div>
           </div>
         </section>
       </div>

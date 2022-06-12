@@ -74,6 +74,8 @@ export default function CodeTrainerApp() {
   }
 
   if (codeSample.id) {
+    document.title = `Retype Project: typing trainer for ${codeSample.title}`;
+
     return (
       <div className="CodeTrainerApp">
         <section className={"codingAreaHeader"}>
