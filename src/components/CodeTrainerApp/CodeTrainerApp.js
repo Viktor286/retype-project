@@ -74,7 +74,7 @@ export default function CodeTrainerApp() {
   }
 
   if (codeSample.id) {
-    document.title = `Retype Project: typing trainer for ${codeSample.title}`;
+    document.title = `Retype ${codeSample.title} file — code typing practice.`;
 
     return (
       <div className="CodeTrainerApp">
