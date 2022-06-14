@@ -1,3 +1,17 @@
+export function getTodayDateString() {
+  const today = new Date();
+  return `${today.getMonth()}/${today.getDate()}/${today.getFullYear()}`;
+}
+
+export function getCpm(correctAmount, seconds) {
+  return correctAmount > 0 && seconds > 0 ? Number((correctAmount / seconds) * 60).toFixed(2) : 0;
+}
+
+export function getWpm(correctAmount, seconds) {
+  // The average word in the English language is 4.7 characters + one quoter of spaces = 5.875
+  return Number(getCpm(correctAmount, seconds) / 5.875).toFixed(2);
+}
+
 export const secondsToTime = seconds => {
   let minutes = parseInt(seconds / 60, 10);
   seconds = seconds % 60;

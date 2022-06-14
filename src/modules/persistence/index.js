@@ -30,6 +30,7 @@ export async function initializeUserByAuthData(githubAuthData) {
   };
 }
 
+// todo: sendHistoryInfo deprecated, delete me and refactor
 export async function sendHistoryInfo(githubId, historySessionStat) {
   return dbAddUserHistory(githubId, historySessionStat);
 }

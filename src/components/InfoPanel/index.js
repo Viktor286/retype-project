@@ -3,9 +3,10 @@ import "./index.css";
 import TimelineTimer from "../TimelineTimer";
 import {useDispatch, useSelector} from "react-redux";
 import {createHistorySessionStat} from '../../model/HistorySession';
-import {initializeUserByAuthData, sendHistoryInfo} from '../../modules/persistence/';
+import {initializeUserByAuthData} from '../../modules/persistence/';
 import {signInGithubWithPopup} from "../../modules/persistence/firebase/githubAuth";
 import {setUser} from "../../model/redux/auth";
+import {setLocalDailyStats} from "../../model/DailyStats";
 import {secondsToTime} from "../../utils/misc.js";
 
 function markBodyAsComplete() {
@@ -41,13 +42,9 @@ const InfoPanel = ({codeSample, keydownController}) => {
         document.removeEventListener("keydown", keydownController.keydownHandler);
       }
 
-      if (uid) {
-        // Save historySessionData
-        const historySessionData = createHistorySessionStat(stats, correctness, codeSamplePath);
-        sendHistoryInfo(uid, historySessionData).then(response => {
-          // console.log('@@@ historySessionData sent', historySessionData, response);
-        });
-      }
+      // Save historySessionData
+      const historySessionData = createHistorySessionStat(stats, correctness, codeSamplePath);
+      setLocalDailyStats(historySessionData);
     }
     // eslint-disable-next-line
   }, [isComplete, uid, codeSamplePath]);

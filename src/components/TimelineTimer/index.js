@@ -3,6 +3,7 @@ import "./index.css";
 import {useEffect, useRef, useMemo, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {setStaleTimeout, updateSecondStat} from "../../model/redux/stats";
+import {getCpm, getWpm} from "../../utils/misc";
 
 const statRatios = {
   averageCps: 2.4,
@@ -65,7 +66,13 @@ function TimelineTimer({totalChars, userName}) {
   }, []);
 
   useEffect(() => {
-    dispatch(updateSecondStat(elapsedSeconds, correctAmount)); // inactivity timer drops every keyboard action
+    dispatch(updateSecondStat(
+      {
+        seconds: elapsedSeconds,
+        cpm: getCpm(correctAmount, elapsedSeconds),
+        wpm: getWpm(correctAmount, elapsedSeconds)
+      }
+    )); // inactivity timer drops every keyboard action
     // eslint-disable-next-line
   }, [elapsedSeconds]);
 
