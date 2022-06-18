@@ -1,5 +1,4 @@
 import {enableModalWindow} from "../ModalWindow";
-import LicenseInfoModalWindowContent from "../LicenseInfoModalWindowContent";
 
 export default function LicenseDetailsButton({codeSample}) {
   if (!codeSample?.credentials?.license || codeSample?.credentials?.license?.message === "Not Found") {
@@ -8,10 +7,7 @@ export default function LicenseDetailsButton({codeSample}) {
 
   return (<><br/>(
     <a href="#license" className="license"
-       onClick={() => enableModalWindow(LicenseInfoModalWindowContent(codeSample?.credentials?.license?.body))}>file's
+       // onClick={() => enableModalWindow(LicenseInfo(codeSample?.credentials?.license?.body))}>file's
+       onClick={() => enableModalWindow('LicenseInfo', {licenseDetails: codeSample?.credentials?.license?.body})}>file's
       license details</a>)</>)
 }
-
-
-
-

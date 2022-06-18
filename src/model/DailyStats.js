@@ -12,13 +12,13 @@ export function setLocalDailyStats(historySessionData) {
 }
 
 export function addSessionToDailyStats(dailyStats, historySessionData) {
-  const {today, finished, total} = dailyStats;
-  const {a: correctChars, m: mistakes, s: spendTimeSec} = historySessionData;
-
   // Reset DailyStats, keep previousDay
-  if (today !== getTodayDateString()) {
-    dailyStats = createDailyStatsInitialState({previousDay: today});
+  if (dailyStats.today !== getTodayDateString()) {
+    dailyStats = createDailyStatsInitialState({previousDay: dailyStats.today});
   }
+
+  const {finished, total} = dailyStats;
+  const {a: correctChars, m: mistakes, s: spendTimeSec} = historySessionData;
 
   const newTotal = {
     timeSpent: total.timeSpent + spendTimeSec,

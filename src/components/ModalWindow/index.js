@@ -1,6 +1,8 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {setModal, unsetModal} from "../../model/redux/ui";
 import "./index.css";
+import LicenseInfo from "./ContentTemplates/LicenseInfo";
+import CompletionScreen from "./ContentTemplates/CompletionScreen";
 
 let dispatch;
 
@@ -48,8 +50,8 @@ function installModalWindow() {
   window.document.addEventListener('keydown', onDocumentHandler, {capture: true});
 }
 
-export function enableModalWindow(Component) {
-  dispatch(setModal(Component));
+export function enableModalWindow(modalWindowComponentName, staticModalContent = null) {
+  dispatch(setModal({modalWindowComponentName, staticModalContent}));
 }
 
 export function disableModalWindow() {
@@ -59,7 +61,7 @@ export function disableModalWindow() {
 let isInitialRender = true;
 
 export default function ModalWindow() {
-  const {modalContent} = useSelector(s => s.ui);
+  const {modalLayout, modalContent} = useSelector(s => s.ui);
   dispatch = useDispatch();
 
   if (isInitialRender) {
@@ -69,9 +71,21 @@ export default function ModalWindow() {
     return null;
   }
 
-  if (!modalContent) {
+  if (!modalLayout) {
     uninstallModalWindow();
     return null;
+  }
+
+  let ModalTemplate = null;
+  switch (modalLayout) {
+    case 'LicenseInfo':
+      ModalTemplate = LicenseInfo;
+      break;
+    case 'CompletionScreen':
+      ModalTemplate = CompletionScreen;
+      break;
+    default:
+      ModalTemplate = null;
   }
 
   installModalWindow();
@@ -79,7 +93,7 @@ export default function ModalWindow() {
   return <section className="modal" onClick={onModalOutsideClick}>
     <div className="modal-frame">
       <div className="modal-body">
-        <div className="modal-content">{modalContent}</div>
+        <ModalTemplate {...modalContent} />
       </div>
     </div>
   </section>

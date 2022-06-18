@@ -1,0 +1,9 @@
+section.license-info {
+    background-color: var(--base-color);
+    color: white;
+    font-size: 1.2rem;
+    white-space: pre;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+}
