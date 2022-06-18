@@ -1,4 +1,5 @@
 const initialState = {
+  modalLayout: '',
   modalContent: '',
 };
 
@@ -6,9 +7,10 @@ const initialState = {
 export const UI_SET_MODAL = "UI_SET_MODAL";
 export const UI_UNSET_MODAL = "UI_UNSET_MODAL";
 
-export const setModal = modalContent => ({
+export const setModal = details => ({
   type: UI_SET_MODAL,
-  modalContent
+  modalLayout: details.modalWindowComponentName,
+  modalContent: details.staticModalContent
 });
 
 export const unsetModal = () => ({
@@ -21,11 +23,13 @@ export const uiReducer = (state = initialState, action) => {
     case UI_SET_MODAL:
       return {
         ...state,
+        modalLayout: action.modalLayout,
         modalContent: action.modalContent,
       };
     case UI_UNSET_MODAL:
       return {
         ...state,
+        modalLayout: initialState.modalLayout,
         modalContent: initialState.modalContent,
       };
     default:

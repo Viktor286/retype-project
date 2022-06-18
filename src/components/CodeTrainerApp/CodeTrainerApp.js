@@ -9,7 +9,6 @@ import InfoPanel from "../InfoPanel";
 import CodingArea from "../CodingArea";
 import CodingAreaHeader from "../CodingAreaHeader";
 import NoLicenseNotification from "../NoLicenseNotification";
-import LicenseInfoModalWindowContent from "../LicenseInfoModalWindowContent";
 import {enableModalWindow} from "../ModalWindow";
 
 export default function CodeTrainerApp() {
@@ -17,7 +16,7 @@ export default function CodeTrainerApp() {
   const store = useStore();
   const [status, setStatus] = useState('Loading...');
   const {sample: codeSample, auth} = useSelector(state => state);
-  const { userName } = auth;
+  const {userName} = auth;
   const keydownController = useRef({
     keydownHandler: false,
     modelRef: {dispatch, store}
@@ -52,7 +51,7 @@ export default function CodeTrainerApp() {
         if (remoteCodeSample?.credentials?.license) {
           addLicenseCommentToHtmlTop(remoteCodeSample);
           if (window.location.hash === '#license') {
-            enableModalWindow(LicenseInfoModalWindowContent(remoteCodeSample?.credentials?.license?.body));
+            enableModalWindow('LicenseInfo', {licenseDetails: remoteCodeSample?.credentials?.license?.body});
           }
         }
       });
@@ -67,8 +66,8 @@ export default function CodeTrainerApp() {
   ) {
     return <div className="CodeTrainerApp">
       <section className={"codingAreaHeader"}>
-        <CodingAreaHeader codeSample={codeSample} />
-        <NoLicenseNotification />
+        <CodingAreaHeader codeSample={codeSample}/>
+        <NoLicenseNotification/>
       </section>
     </div>;
   }
@@ -79,7 +78,7 @@ export default function CodeTrainerApp() {
     return (
       <div className="CodeTrainerApp">
         <section className={"codingAreaHeader"}>
-          <CodingAreaHeader codeSample={codeSample} />
+          <CodingAreaHeader codeSample={codeSample}/>
           <CodingArea codeSample={codeSample}/>
         </section>
         <InfoPanel codeSample={codeSample} keydownController={keydownController.current}/>
