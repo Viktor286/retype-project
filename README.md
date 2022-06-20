@@ -34,9 +34,6 @@ Just a couple of exercises per day/week will help you to quickly adapt to a new 
 
 Example: i am rarely writing SQL queries by hand but i don't want to forget how to write complex JOINs constructions, so as part of my typing training routine from time to time i write several SQL commands just to refresh my memory.
 
-## :mechanical_arm: Why this works?
-Muscle memory, patterns pickup, peripheral vision training, concentration skill, semantic memory improving, discipline routine — among the many reasons.
-
 ## :eyes: Try speed code typing training examples
 - [HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js](https://retypeproject.com/HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js)
 - [TheAlgorithms/C/blob/master/leetcode/src/1.c](https://retypeproject.com/TheAlgorithms/C/blob/master/leetcode/src/1.c)
@@ -57,9 +54,6 @@ Muscle memory, patterns pickup, peripheral vision training, concentration skill,
 - [TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py](https://retypeproject.com/TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py)
 - [trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js](https://retypeproject.com/trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js)
 - [megadose/holehe/blob/master/holehe/instruments.py](https://retypeproject.com/megadose/holehe/blob/master/holehe/instruments.py)
-
-## Take advantage of typing routine
-Use retyping exercises to switch your focus and attention during the day. Fine motor skills exercises can help to take your mind off.  Regular repetition within day-or-two intervals helps to increase the quality of sensory and procedural memory.
 
 ## Discover Github
 Github is awesome community to discover new ideas, people, approaches, trends.
