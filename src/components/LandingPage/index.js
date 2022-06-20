@@ -42,11 +42,6 @@ export default function LandingPage() {
       </section>
 
       <section>
-        <h2>Why this works?</h2>
-        <p>Muscle memory, patterns pickup, peripheral vision training, concentration skill, semantic memory improving, discipline routine — among the many reasons.</p>
-      </section>
-
-      <section>
         <h2>Try speed code typing training examples</h2>
         <ul>
           <li><a href="HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js">HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js</a></li>
@@ -69,12 +64,6 @@ export default function LandingPage() {
           <li><a href="trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js">trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js</a></li>
           <li><a href="megadose/holehe/blob/master/holehe/instruments.py">megadose/holehe/blob/master/holehe/instruments.py</a></li>
         </ul>
-      </section>
-
-      <section>
-        <h2>Take advantage of typing routine</h2>
-        <p>Use retyping exercise to switch your focus and attention during the day. Fine motor skills exercises can help to take your mind off.</p>
-        <p>Regular repetition within day-or-two interval helps to increase the quality of sensory and procedural memory.</p>
       </section>
 
       <section>
