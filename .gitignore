@@ -14,8 +14,6 @@
 /build
 /storage
 /public/img
-/public/lib
-.firebaserc
 /src/modules/persistence/firebase/firebaseConfig.js
 /src/modules/resolver
 

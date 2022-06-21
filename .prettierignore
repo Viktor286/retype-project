@@ -1,0 +1,5 @@
+.firebase
+cypress-examples
+/src/modules/resolver
+storage
+build

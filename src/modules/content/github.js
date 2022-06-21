@@ -1,6 +1,6 @@
-import {processLicenseData} from "./licenses";
+import { processLicenseData } from './licenses';
 
-const githubApiDomain = "https://api.github.com";
+const githubApiDomain = 'https://api.github.com';
 
 export function convertPathnameToFileEndpoint(githubPathname) {
   // eslint-disable-next-line
@@ -25,7 +25,7 @@ export function getOwnerAndRepoFromGithubUrl(url) {
   const apiRepoPrefixLen = `${githubApiDomain}/repos/`.length;
   const chunk = url.slice(apiRepoPrefixLen);
   const a = chunk.split('/');
-  return {owner: a[0], repo: a[1]};
+  return { owner: a[0], repo: a[1] };
 }
 
 // https://docs.github.com/en/rest/reference/licenses
@@ -49,7 +49,6 @@ export async function fetchGithubLicenseDetails(licenseKey) {
 }
 
 export async function obtainCredentials(url) {
-  const {owner, repo} = getOwnerAndRepoFromGithubUrl(url);
+  const { owner, repo } = getOwnerAndRepoFromGithubUrl(url);
   return await processLicenseData(owner, repo, url);
 }
-

@@ -5,12 +5,12 @@ import {
   CR_MISTAKE,
   CR_ONE_FORWARD,
   CR_ONE_BACKWARD,
-  updateCorrectness
-} from "../../model/redux/correctness";
+  updateCorrectness,
+} from '../../model/redux/correctness';
 
-import { resetStaleTimeout } from "../../model/redux/stats";
+import { resetStaleTimeout } from '../../model/redux/stats';
 
-export default function keydownGlobalController({keydownEvent: e, dispatch, store, codeSample}) {
+export default function keydownGlobalController({ keydownEvent: e, dispatch, store, codeSample }) {
   // Prevent keys
   if (
     e.keyCode === 9 || // prevent tab behavior
@@ -89,7 +89,9 @@ export default function keydownGlobalController({keydownEvent: e, dispatch, stor
 
   // Special cases with enter, tab and space
   const state = store.getState();
-  const {correctness: {cursorIndex: cursor}} = state;
+  const {
+    correctness: { cursorIndex: cursor },
+  } = state;
   const currentChar = codeSample.contentAs2dArray[cursor[0]][cursor[1]];
 
   if (e.keyCode === 13 && currentChar.charCodeAt(0) === 10) {

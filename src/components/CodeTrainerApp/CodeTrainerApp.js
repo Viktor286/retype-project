@@ -1,48 +1,49 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useSelector, useDispatch, useStore} from "react-redux";
-import {initCorrectness} from "../../model/redux/correctness";
-import {setCodeSample} from "../../model/redux/sample";
-import keydownGlobalController from "./keydownGlobalController";
-import obtainCodeSample from "../../modules/content/obtainCodeSample";
-import {addLicenseCommentToHtmlTop} from "../../modules/content/licenses";
-import InfoPanel from "../InfoPanel";
-import CodingArea from "../CodingArea";
-import CodingAreaHeader from "../CodingAreaHeader";
-import NoLicenseNotification from "../NoLicenseNotification";
-import {enableModalWindow} from "../ModalWindow";
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector, useDispatch, useStore } from 'react-redux';
+import { initCorrectness } from '../../model/redux/correctness';
+import { setCodeSample } from '../../model/redux/sample';
+import keydownGlobalController from './keydownGlobalController';
+import obtainCodeSample from '../../modules/content/obtainCodeSample';
+import { addLicenseCommentToHtmlTop } from '../../modules/content/licenses';
+import InfoPanel from '../InfoPanel';
+import CodingArea from '../CodingArea';
+import CodingAreaHeader from '../CodingAreaHeader';
+import NoLicenseNotification from '../NoLicenseNotification';
+import { enableModalWindow } from '../ModalWindow';
 
 export default function CodeTrainerApp() {
   const dispatch = useDispatch();
   const store = useStore();
   const [status, setStatus] = useState('Loading...');
-  const {sample: codeSample, auth} = useSelector(state => state);
-  const {userName} = auth;
+  const { sample: codeSample, auth } = useSelector((state) => state);
+  const { userName } = auth;
   const keydownController = useRef({
     keydownHandler: false,
-    modelRef: {dispatch, store}
+    modelRef: { dispatch, store },
   });
 
   useEffect(() => {
     if (window.location.pathname.length > 3 && !codeSample.id) {
-      obtainCodeSample(window.location.pathname).then(async remoteCodeSample => {
+      obtainCodeSample(window.location.pathname).then(async (remoteCodeSample) => {
         if (!remoteCodeSample) {
           return;
         }
 
-        if (typeof remoteCodeSample === "string") {
+        if (typeof remoteCodeSample === 'string') {
           setStatus(remoteCodeSample);
           return;
         }
 
         // Setup keyboard handlers
         // Setup GlobalController
-        const keydownHandler = e => keydownGlobalController({
-          keydownEvent: e,
-          codeSample: remoteCodeSample,
-          ...keydownController.current.modelRef
-        });
+        const keydownHandler = (e) =>
+          keydownGlobalController({
+            keydownEvent: e,
+            codeSample: remoteCodeSample,
+            ...keydownController.current.modelRef,
+          });
 
-        document.addEventListener("keydown", keydownHandler);
+        document.addEventListener('keydown', keydownHandler);
         keydownController.current.keydownHandler = keydownHandler;
 
         dispatch(initCorrectness(remoteCodeSample)); // not used int current component/tree, no component update
@@ -51,7 +52,9 @@ export default function CodeTrainerApp() {
         if (remoteCodeSample?.credentials?.license) {
           addLicenseCommentToHtmlTop(remoteCodeSample);
           if (window.location.hash === '#license') {
-            enableModalWindow('LicenseInfo', {licenseDetails: remoteCodeSample?.credentials?.license?.body});
+            enableModalWindow('LicenseInfo', {
+              licenseDetails: remoteCodeSample?.credentials?.license?.body,
+            });
           }
         }
       });
@@ -64,12 +67,14 @@ export default function CodeTrainerApp() {
     (codeSample?.credentials?.license === 'not-found' || !codeSample?.credentials?.licenseAllowed) &&
     codeSample?.credentials?.owner !== userName
   ) {
-    return <div className="CodeTrainerApp">
-      <section className={"codingAreaHeader"}>
-        <CodingAreaHeader codeSample={codeSample}/>
-        <NoLicenseNotification/>
-      </section>
-    </div>;
+    return (
+      <div className="CodeTrainerApp">
+        <section className={'codingAreaHeader'}>
+          <CodingAreaHeader codeSample={codeSample} />
+          <NoLicenseNotification />
+        </section>
+      </div>
+    );
   }
 
   if (codeSample.id) {
@@ -77,18 +82,20 @@ export default function CodeTrainerApp() {
 
     return (
       <div className="CodeTrainerApp">
-        <section className={"codingAreaHeader"}>
-          <CodingAreaHeader codeSample={codeSample}/>
-          <CodingArea codeSample={codeSample}/>
+        <section className={'codingAreaHeader'}>
+          <CodingAreaHeader codeSample={codeSample} />
+          <CodingArea codeSample={codeSample} />
         </section>
-        <InfoPanel codeSample={codeSample} keydownController={keydownController.current}/>
+        <InfoPanel codeSample={codeSample} keydownController={keydownController.current} />
       </div>
     );
   } else {
-    return <div className="CodeTrainerApp">
-      <section className={"codingAreaHeader"}>
-        <h2>{status}</h2>
-      </section>
-    </div>;
+    return (
+      <div className="CodeTrainerApp">
+        <section className={'codingAreaHeader'}>
+          <h2>{status}</h2>
+        </section>
+      </div>
+    );
   }
 }

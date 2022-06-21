@@ -1,5 +1,5 @@
-import './LicenseInfo.css'
+import './LicenseInfo.css';
 
-export default function LicenseInfoModalWindowContent({licenseDetails = ''}) {
-  return <section className="license-info">{licenseDetails}</section>
+export default function LicenseInfoModalWindowContent({ licenseDetails = '' }) {
+  return <section className="license-info">{licenseDetails}</section>;
 }

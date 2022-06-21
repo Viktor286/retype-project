@@ -1,8 +1,8 @@
-import {useSelector, useDispatch} from 'react-redux';
-import {setModal, unsetModal} from "../../model/redux/ui";
-import "./index.css";
-import LicenseInfo from "./ContentTemplates/LicenseInfo";
-import CompletionScreen from "./ContentTemplates/CompletionScreen";
+import { useSelector, useDispatch } from 'react-redux';
+import { setModal, unsetModal } from '../../model/redux/ui';
+import './index.css';
+import LicenseInfo from './ContentTemplates/LicenseInfo';
+import CompletionScreen from './ContentTemplates/CompletionScreen';
 
 let dispatch;
 
@@ -16,14 +16,14 @@ function unmarkBodyAsModalActive() {
 
 function removeHashFromUrl() {
   const uri = window.location.toString();
-  if (uri.indexOf("#") > 0) {
-    const cleanUri = uri.substring(0, uri.indexOf("#"));
+  if (uri.indexOf('#') > 0) {
+    const cleanUri = uri.substring(0, uri.indexOf('#'));
     window.history.replaceState({}, document.title, cleanUri);
   }
 }
 
 const onDocumentHandler = (e) => {
-  if (e.key === "Escape") {
+  if (e.key === 'Escape') {
     disableModalWindow();
     return;
   }
@@ -31,27 +31,24 @@ const onDocumentHandler = (e) => {
 };
 
 function onModalOutsideClick(e) {
-  if (
-    e.target.classList.contains('modal') ||
-    e.target.classList.contains('modal-body')
-  ) {
+  if (e.target.classList.contains('modal') || e.target.classList.contains('modal-body')) {
     disableModalWindow();
   }
 }
 
 function uninstallModalWindow() {
-  window.document.removeEventListener('keydown', onDocumentHandler, {capture: true});
+  window.document.removeEventListener('keydown', onDocumentHandler, { capture: true });
   unmarkBodyAsModalActive();
   removeHashFromUrl();
 }
 
 function installModalWindow() {
   markBodyAsModalActive();
-  window.document.addEventListener('keydown', onDocumentHandler, {capture: true});
+  window.document.addEventListener('keydown', onDocumentHandler, { capture: true });
 }
 
 export function enableModalWindow(modalWindowComponentName, staticModalContent = null) {
-  dispatch(setModal({modalWindowComponentName, staticModalContent}));
+  dispatch(setModal({ modalWindowComponentName, staticModalContent }));
 }
 
 export function disableModalWindow() {
@@ -61,7 +58,7 @@ export function disableModalWindow() {
 let isInitialRender = true;
 
 export default function ModalWindow() {
-  const {modalLayout, modalContent} = useSelector(s => s.ui);
+  const { modalLayout, modalContent } = useSelector((s) => s.ui);
   dispatch = useDispatch();
 
   if (isInitialRender) {
@@ -90,11 +87,13 @@ export default function ModalWindow() {
 
   installModalWindow();
 
-  return <section className="modal" onClick={onModalOutsideClick}>
-    <div className="modal-frame">
-      <div className="modal-body">
-        <ModalTemplate {...modalContent} />
+  return (
+    <section className="modal" onClick={onModalOutsideClick}>
+      <div className="modal-frame">
+        <div className="modal-body">
+          <ModalTemplate {...modalContent} />
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  );
 }
