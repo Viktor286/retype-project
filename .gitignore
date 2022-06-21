@@ -13,11 +13,9 @@
 # production
 /build
 /storage
-/public/fonts
 /public/img
 /public/lib
 .firebaserc
-firebase.json
 /src/modules/persistence/firebase/firebaseConfig.js
 /src/modules/resolver
 
