@@ -13,6 +13,7 @@ const database = getDatabase(app);
 
 // Other services
 getAnalytics(app);
+
 getPerformance(app);
 
 const prepareAuth = () => {
