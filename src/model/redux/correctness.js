@@ -12,27 +12,27 @@ const initialState = {
   keysCompletedPercent: 0,
   isComplete: false,
   mistakes: 0,
-  corrections: 0
+  corrections: 0,
 };
 
 // Exception constant for "correctness" entire lifetime cycle will be obtained after content initialization
-let GLOBAL_CONSTANT_CODE_SAMPLE = {}
+let GLOBAL_CONSTANT_CODE_SAMPLE = {};
 
 // Actions
-export const CR_INIT = "CR_INIT";
-export const CR_DELETE = "CR_DELETE";
-export const CR_BACKSPACE = "CR_BACKSPACE";
-export const CR_MATCH = "CR_MATCH";
-export const CR_MISTAKE = "CR_MISTAKE";
-export const CR_ONE_FORWARD = "CR_ONE_FORWARD";
-export const CR_ONE_BACKWARD = "CR_ONE_BACKWARD";
+export const CR_INIT = 'CR_INIT';
+export const CR_DELETE = 'CR_DELETE';
+export const CR_BACKSPACE = 'CR_BACKSPACE';
+export const CR_MATCH = 'CR_MATCH';
+export const CR_MISTAKE = 'CR_MISTAKE';
+export const CR_ONE_FORWARD = 'CR_ONE_FORWARD';
+export const CR_ONE_BACKWARD = 'CR_ONE_BACKWARD';
 // export const JUMP_TO = "JUMP_TO";
 
 export const initCorrectness = () => ({
   type: CR_INIT,
 });
 
-export const updateCorrectness = type => ({
+export const updateCorrectness = (type) => ({
   type,
 });
 
@@ -53,7 +53,7 @@ export function initEmptyContent2dArray(contentAs2dArray) {
 
 // prev
 function resolveStats(command, state, prevCharState, totalChars) {
-  let {correctAmount, mistakes, corrections} = state || {};
+  let { correctAmount, mistakes, corrections } = state || {};
 
   switch (command) {
     case CR_DELETE:
@@ -96,7 +96,7 @@ function resolveStats(command, state, prevCharState, totalChars) {
     default:
       return {
         staleTimeout: 0,
-      }
+      };
   }
 
   return {
@@ -106,21 +106,24 @@ function resolveStats(command, state, prevCharState, totalChars) {
     mistakes,
     corrections,
     isComplete: correctAmount === totalChars,
-  }
+  };
 }
 
 // Reducer
 export const correctnessReducer = (state = initialState, action) => {
   let stats = {};
   GLOBAL_CONSTANT_CODE_SAMPLE = window.codeTrainerApp?.codeSample || {}; // todo: can we avoid this trick effectively?
-  const {cursorIndex: cursor} = state;
+  const { cursorIndex: cursor } = state;
 
   switch (action.type) {
     case CR_INIT: {
       return {
         ...state,
         correctAs2dArray: initEmptyContent2dArray(GLOBAL_CONSTANT_CODE_SAMPLE.contentAs2dArray),
-        cursorIndex: GLOBAL_CONSTANT_CODE_SAMPLE.skipMask2dArray[0][0] > 0 ? getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE) : cursor,
+        cursorIndex:
+          GLOBAL_CONSTANT_CODE_SAMPLE.skipMask2dArray[0][0] > 0
+            ? getNextCursor(cursor, GLOBAL_CONSTANT_CODE_SAMPLE)
+            : cursor,
       };
     }
 
@@ -231,7 +234,7 @@ function isLineBoundaryLeft(char) {
 }
 
 function getNextCursor(prevCursorIndex, codeSample) {
-  const {skipMask2dArray, contentLinesLen} = codeSample;
+  const { skipMask2dArray, contentLinesLen } = codeSample;
   const [line, char] = prevCursorIndex;
   let currentLineLen = codeSample.contentAs2dArray[line].length;
 
@@ -271,7 +274,7 @@ function getNextCursor(prevCursorIndex, codeSample) {
 }
 
 function getPrevCursor(prevCursorIndex, codeSample) {
-  const {skipMask2dArray} = codeSample;
+  const { skipMask2dArray } = codeSample;
   const [line, char] = prevCursorIndex;
 
   // Start boundary
@@ -279,7 +282,9 @@ function getPrevCursor(prevCursorIndex, codeSample) {
     return [0, 0];
   }
 
-  let nextCursor = isLineBoundaryLeft(char) ? [line - 1, codeSample.contentAs2dArray[line - 1].length - 1] : [line, char - 1];
+  let nextCursor = isLineBoundaryLeft(char)
+    ? [line - 1, codeSample.contentAs2dArray[line - 1].length - 1]
+    : [line, char - 1];
 
   // Skip comments
   let nextSkipMask = skipMask2dArray[nextCursor[0]][nextCursor[1]];
@@ -310,9 +315,5 @@ function getPrevCursor(prevCursorIndex, codeSample) {
 }
 
 export function insertElementIntoArray2dCopy(array, position, element) {
-  return [
-    ...array.slice(0, position),
-    element,
-    ...array.slice(position + 1),
-  ];
+  return [...array.slice(0, position), element, ...array.slice(position + 1)];
 }

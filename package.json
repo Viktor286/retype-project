@@ -10,6 +10,7 @@
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
+    "format": "prettier 'src/**/*/*.[tj]s' 'cypress/**/*/*.[tj]s' --ignore-path ./.prettierignore --write",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "eject": "react-scripts eject"
@@ -48,6 +49,8 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "cypress": "^10.1.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
     "react-scripts": "^5.0.1"
   }
 }

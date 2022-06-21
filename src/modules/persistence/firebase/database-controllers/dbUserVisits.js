@@ -1,6 +1,6 @@
-import {database} from "../index";
-import {push, ref, set} from "firebase/database";
-import {dbUpdateUser} from './dbUpdateUser'
+import { database } from '../index';
+import { push, ref, set } from 'firebase/database';
+import { dbUpdateUser } from './dbUpdateUser';
 
 export async function dbAddUserLogin(githubId, timestamp) {
   const loginsListRef = ref(database, `users/${githubId}/visits/logins`);

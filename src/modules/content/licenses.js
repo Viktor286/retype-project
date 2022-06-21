@@ -1,39 +1,39 @@
-import {fetchGithubLicense, fetchGithubLicenseDetails} from "./github";
+import { fetchGithubLicense, fetchGithubLicenseDetails } from './github';
 
 const licenseAllowList = [
-  "afl-3.0",
-  "apache-2.0",
-  "artistic-2.0",
-  "bsl-1.0",
-  "bsd-2-clause",
-  "bsd-3-clause",
-  "cc",
-  "cc0-1.0",
-  "cc-by-4.0",
-  "cc-by-sa-4.0",
-  "wtfpl",
-  "ecl-2.0",
-  "epl-1.0",
-  "epl-2.0",
-  "eupl-1.1",
-  "agpl-3.0",
-  "gpl",
-  "gpl-2.0",
-  "gpl-3.0",
-  "lgpl",
-  "lgpl-2.1",
-  "lgpl-3.0",
-  "isc",
-  "lppl-1.3c",
-  "ms-pl",
-  "mit",
-  "mpl-2.0",
-  "osl-3.0",
-  "postgresql",
-  "ofl-1.1",
-  "ncsa",
-  "unlicense",
-  "zlib",
+  'afl-3.0',
+  'apache-2.0',
+  'artistic-2.0',
+  'bsl-1.0',
+  'bsd-2-clause',
+  'bsd-3-clause',
+  'cc',
+  'cc0-1.0',
+  'cc-by-4.0',
+  'cc-by-sa-4.0',
+  'wtfpl',
+  'ecl-2.0',
+  'epl-1.0',
+  'epl-2.0',
+  'eupl-1.1',
+  'agpl-3.0',
+  'gpl',
+  'gpl-2.0',
+  'gpl-3.0',
+  'lgpl',
+  'lgpl-2.1',
+  'lgpl-3.0',
+  'isc',
+  'lppl-1.3c',
+  'ms-pl',
+  'mit',
+  'mpl-2.0',
+  'osl-3.0',
+  'postgresql',
+  'ofl-1.1',
+  'ncsa',
+  'unlicense',
+  'zlib',
 ];
 
 export function addLicenseCommentToHtmlTop(codeSample) {
@@ -69,7 +69,10 @@ async function processLicenseData(owner, repo, url) {
     // populate bsd, mit licenses
     if (license.key.startsWith('bsd') || license.key.startsWith('mit')) {
       licenseInfo.body = licenseInfo.body.replace('[year]', new Date().getFullYear().toString());
-      licenseInfo.body = licenseInfo.body.replace('[fullname]', `the "${owner}" within the code repository named "${repo}" at the https://github.com\nBy URL: ${url}`);
+      licenseInfo.body = licenseInfo.body.replace(
+        '[fullname]',
+        `the "${owner}" within the code repository named "${repo}" at the https://github.com\nBy URL: ${url}`,
+      );
     }
   } else {
     // TODO: finish smart resolver
@@ -79,7 +82,7 @@ async function processLicenseData(owner, repo, url) {
     // conditions: (4) ['include-copyright', 'document-changes', 'disclose-source', 'same-license']
   }
 
-  return {license: licenseInfo, owner, repo, licenseAllowed};
+  return { license: licenseInfo, owner, repo, licenseAllowed };
 }
 
-export {licenseAllowList, processLicenseData};
+export { licenseAllowList, processLicenseData };

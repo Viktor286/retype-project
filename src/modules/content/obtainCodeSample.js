@@ -1,13 +1,13 @@
-import { fetchGithubResource, obtainCredentials } from "./github";
-import CreateCodeSample from "../../model/CodeSample";
+import { fetchGithubResource, obtainCredentials } from './github';
+import CreateCodeSample from '../../model/CodeSample';
 
 export default async function obtainCodeSample(githubPath, userName) {
   try {
     const githubResource = await fetchGithubResource(githubPath);
-    const {content, name, html_url, url, message} = githubResource;
+    const { content, name, html_url, url, message } = githubResource;
 
-    if (message === "Not Found") {
-      return "Resource was not found";
+    if (message === 'Not Found') {
+      return 'Resource was not found';
     }
 
     const credentials = await obtainCredentials(url, userName);
@@ -16,7 +16,7 @@ export default async function obtainCodeSample(githubPath, userName) {
       fileName: decodeURI(name),
       content,
       html_url: decodeURI(html_url),
-      credentials
+      credentials,
     });
 
     window.codeTrainerApp.codeSample = codeSample; // todo: can we avoid this trick effectively?

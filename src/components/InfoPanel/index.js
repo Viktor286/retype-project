@@ -1,13 +1,13 @@
-import {useEffect} from 'react';
-import "./index.css";
-import TimelineTimer from "../TimelineTimer";
-import {useDispatch, useSelector} from "react-redux";
-import {createHistorySessionStat} from '../../model/HistorySession';
-import {initializeUserByAuthData} from '../../modules/persistence/';
-import {signInGithubWithPopup} from "../../modules/persistence/firebase/githubAuth";
-import {setUser} from "../../model/redux/auth";
-import {setLocalDailyStats} from "../../model/DailyStats";
-import {secondsToTime} from "../../utils/misc.js";
+import { useEffect } from 'react';
+import './index.css';
+import TimelineTimer from '../TimelineTimer';
+import { useDispatch, useSelector } from 'react-redux';
+import { createHistorySessionStat } from '../../model/HistorySession';
+import { initializeUserByAuthData } from '../../modules/persistence/';
+import { signInGithubWithPopup } from '../../modules/persistence/firebase/githubAuth';
+import { setUser } from '../../model/redux/auth';
+import { setLocalDailyStats } from '../../model/DailyStats';
+import { secondsToTime } from '../../utils/misc.js';
 
 function markBodyAsComplete() {
   window.document.body.classList.add('completed');
@@ -17,29 +17,29 @@ function unmarkBodyAsComplete() {
   window.document.body.classList.remove('completed');
 }
 
-const InfoPanel = ({codeSample, keydownController}) => {
-  const state = useSelector(state => state);
+const InfoPanel = ({ codeSample, keydownController }) => {
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const loginProcedure = async () => {
     const authData = await signInGithubWithPopup(window.codeTrainerApp.auth);
     const userJourneyData = await initializeUserByAuthData(authData, window.codeTrainerApp.auth);
     dispatch(setUser(userJourneyData));
-  }
+  };
 
-  const {stats, correctness, auth} = state;
-  const {cpm, wpm, elapsedSeconds} = stats;
-  const {correctAmount, keysLeft, isComplete, mistakes} = correctness;
-  let {uid, userName, photoURL} = auth;
-  if (userName === "unknown") userName = '';
-  const {totalChars, html_url} = codeSample;
+  const { stats, correctness, auth } = state;
+  const { cpm, wpm, elapsedSeconds } = stats;
+  const { correctAmount, keysLeft, isComplete, mistakes } = correctness;
+  let { uid, userName, photoURL } = auth;
+  if (userName === 'unknown') userName = '';
+  const { totalChars, html_url } = codeSample;
   const codeSamplePath = new URL(html_url).pathname;
 
   useEffect(() => {
     if (isComplete && codeSamplePath) {
       // Turn off keyboard handler when session completed
       if (correctness.isComplete && keydownController.keydownHandler) {
-        document.removeEventListener("keydown", keydownController.keydownHandler);
+        document.removeEventListener('keydown', keydownController.keydownHandler);
       }
 
       // Save historySessionData
@@ -52,7 +52,7 @@ const InfoPanel = ({codeSample, keydownController}) => {
   isComplete ? markBodyAsComplete() : unmarkBodyAsComplete();
 
   return (
-    <section className={"infoPanel" + (isComplete ? " complete" : "")}>
+    <section className={'infoPanel' + (isComplete ? ' complete' : '')}>
       <div className="separator">&nbsp;</div>
       <div className="ui">
         <section className="left-area">
@@ -60,7 +60,7 @@ const InfoPanel = ({codeSample, keydownController}) => {
             {userName && photoURL ? (
               <div className="user-profile logged-in">
                 <div className="user-pic">
-                  <img src={photoURL} width="48" height="48" alt="user"/>
+                  <img src={photoURL} width="48" height="48" alt="user" />
                 </div>
                 <div className="login">{userName}</div>
               </div>
@@ -68,27 +68,34 @@ const InfoPanel = ({codeSample, keydownController}) => {
               <div className="user-profile" onClick={loginProcedure}>
                 <div className="user-pic">
                   <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                    <rect fill="none" height="256" width="256"/>
-                    <circle cx="128" cy="120" r="44"/>
-                    <path
-                      d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm65.8,162.4a81.3,81.3,0,0,0-24.5-23,59.7,59.7,0,0,1-82.6,0,81.3,81.3,0,0,0-24.5,23,88,88,0,1,1,131.6,0Z"/>
+                    <rect fill="none" height="256" width="256" />
+                    <circle cx="128" cy="120" r="44" />
+                    <path d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm65.8,162.4a81.3,81.3,0,0,0-24.5-23,59.7,59.7,0,0,1-82.6,0,81.3,81.3,0,0,0-24.5,23,88,88,0,1,1,131.6,0Z" />
                   </svg>
                   {/*<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><rect fill="none" height="256" width="256"/><circle cx="128" cy="128" fill="none" r="96" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/><circle cx="128" cy="120" fill="none" r="40" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/><path d="M63.8,199.4a72,72,0,0,1,128.4,0" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/></svg>*/}
                 </div>
-                <div className="login"><span>Log in</span></div>
+                <div className="login">
+                  <span>Log in</span>
+                </div>
               </div>
             )}
 
             <div className="user-stat">
-              <div className="wpm-indicator" title="Words Per Minute">WPM {wpm}</div>
-              <div className="cpm-indicator" title="Chars Per Minute" >CPM {Math.floor(cpm)} / <span title="Chars Per Second">CPS {Math.floor(cpm / 60)}</span></div>
-              <div className="time-indicator" title="Elapsed time">{secondsToTime(elapsedSeconds)}</div>
+              <div className="wpm-indicator" title="Words Per Minute">
+                WPM {wpm}
+              </div>
+              <div className="cpm-indicator" title="Chars Per Minute">
+                CPM {Math.floor(cpm)} / <span title="Chars Per Second">CPS {Math.floor(cpm / 60)}</span>
+              </div>
+              <div className="time-indicator" title="Elapsed time">
+                {secondsToTime(elapsedSeconds)}
+              </div>
             </div>
           </div>
         </section>
         <section className="center-area">
           <div className="center-info">
-            <TimelineTimer totalChars={totalChars} userName={userName}/>
+            <TimelineTimer totalChars={totalChars} userName={userName} />
             <div className="footer">
               {/*<div className="up-next">*/}
               {/*  <span className="title">Up next: </span>*/}
@@ -110,7 +117,10 @@ const InfoPanel = ({codeSample, keydownController}) => {
         </section>
         <section className="right-area">
           <div className="right-user-info">
-            <div className="correct-stat">correct: {correctAmount}<span className="remain">/{keysLeft}</span></div>
+            <div className="correct-stat">
+              correct: {correctAmount}
+              <span className="remain">/{keysLeft}</span>
+            </div>
             <div className="mistakes-stat">mistakes: {mistakes}</div>
           </div>
         </section>

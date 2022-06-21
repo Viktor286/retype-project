@@ -1,5 +1,5 @@
-import {child, get, ref} from "firebase/database";
-import {database} from "../index";
+import { child, get, ref } from 'firebase/database';
+import { database } from '../index';
 
 const dbRef = ref(database);
 

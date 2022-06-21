@@ -9,11 +9,11 @@ const initialState = {
 };
 
 // Actions
-export const AU_SET_USER = "AU_SET_USER";
+export const AU_SET_USER = 'AU_SET_USER';
 
-export const setUser = userData => ({
+export const setUser = (userData) => ({
   type: AU_SET_USER,
-  userData
+  userData,
 });
 
 // Reducer

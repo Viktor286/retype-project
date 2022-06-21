@@ -11,10 +11,13 @@ export function splitTextLines(text) {
 }
 
 export function spacesIntoTabs(contentAsLines) {
-   return contentAsLines.map(line => {
+
+
+
+  return contentAsLines.map((line) => {
     let firstChar = 0;
     while (firstChar < line.length) {
-      if (line[firstChar] === " ") {
+      if (line[firstChar] === ' ') {
         firstChar++;
       } else {
         break;
@@ -24,6 +27,6 @@ export function spacesIntoTabs(contentAsLines) {
     const spacesLine = line.slice(0, firstChar);
     const tabsLine = spacesLine.replaceAll('  ', '\t');
 
-    return tabsLine.concat(line.slice(firstChar, line.length))
-  })
+    return tabsLine.concat(line.slice(firstChar, line.length));
+  });
 }

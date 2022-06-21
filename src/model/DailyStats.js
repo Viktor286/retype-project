@@ -1,4 +1,4 @@
-import {getTodayDateString, getCpm, getWpm} from '../utils/misc';
+import { getTodayDateString, getCpm, getWpm } from '../utils/misc';
 
 export function getLocalDailyStats() {
   const dailyStatsStr = window.localStorage.getItem('retypeDailyStats');
@@ -7,24 +7,27 @@ export function getLocalDailyStats() {
 
 export function setLocalDailyStats(historySessionData) {
   const dailyStats = getLocalDailyStats();
-  window.localStorage.setItem('retypeDailyStats', JSON.stringify(addSessionToDailyStats(dailyStats, historySessionData)));
+  window.localStorage.setItem(
+    'retypeDailyStats',
+    JSON.stringify(addSessionToDailyStats(dailyStats, historySessionData)),
+  );
   console.log('setLocalDailyStats', getLocalDailyStats());
 }
 
 export function addSessionToDailyStats(dailyStats, historySessionData) {
   // Reset DailyStats, keep previousDay
   if (dailyStats.today !== getTodayDateString()) {
-    dailyStats = createDailyStatsInitialState({previousDay: dailyStats.today});
+    dailyStats = createDailyStatsInitialState({ previousDay: dailyStats.today });
   }
 
-  const {finished, total} = dailyStats;
-  const {a: correctChars, m: mistakes, s: spendTimeSec} = historySessionData;
+  const { finished, total } = dailyStats;
+  const { a: correctChars, m: mistakes, s: spendTimeSec } = historySessionData;
 
   const newTotal = {
     timeSpent: total.timeSpent + spendTimeSec,
     chars: total.chars + correctChars,
     errs: total.errs + mistakes,
-  }
+  };
 
   return {
     ...dailyStats,
@@ -52,10 +55,10 @@ export function createDailyStatsInitialState(props = {}) {
       cpm: 0,
     },
     finished: [],
-  }
+  };
 
   return {
     ...newDailyStats,
-    ...props
-  }
+    ...props,
+  };
 }

@@ -1,4 +1,4 @@
-import { setPersistence, browserLocalPersistence, signInWithPopup, GithubAuthProvider } from "firebase/auth";
+import { setPersistence, browserLocalPersistence, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 
 export const signInGithubWithPopup = async (auth) => {
   try {
@@ -26,7 +26,7 @@ export const signInGithubWithPopup = async (auth) => {
       errorCode,
       errorMessage,
       email,
-      credential
+      credential,
     });
   }
-}
+};
