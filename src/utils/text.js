@@ -11,9 +11,6 @@ export function splitTextLines(text) {
 }
 
 export function spacesIntoTabs(contentAsLines) {
-
-
-
   return contentAsLines.map((line) => {
     let firstChar = 0;
     while (firstChar < line.length) {
