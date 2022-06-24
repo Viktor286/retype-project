@@ -17,9 +17,7 @@ export default function LicenseDetailsButton({ codeSample }) {
         href="#license"
         className="license"
         // onClick={() => enableModalWindow(LicenseInfo(codeSample?.credentials?.license?.body))}>file's
-        onClick={() =>
-          enableModalWindow('LicenseInfo', { licenseDetails: codeSample?.credentials?.license?.body })
-        }
+        onClick={() => enableModalWindow('LicenseInfo', { credentials: codeSample?.credentials })}
       >
         file's license details
       </a>

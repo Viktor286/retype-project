@@ -52,9 +52,7 @@ export default function CodeTrainerApp() {
         if (remoteCodeSample?.credentials?.license) {
           addLicenseCommentToHtmlTop(remoteCodeSample);
           if (window.location.hash === '#license') {
-            enableModalWindow('LicenseInfo', {
-              licenseDetails: remoteCodeSample?.credentials?.license?.body,
-            });
+            enableModalWindow('LicenseInfo', { credentials: remoteCodeSample?.credentials });
           }
         }
       });
