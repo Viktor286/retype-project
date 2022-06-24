@@ -1,0 +1,14 @@
+section.completion-screen {
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1.2rem;
+    white-space: pre;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    width: 75vw;
+    max-width: 1000px;
+    min-height: 500px;
+    border: 1px solid #6b9f80;
+    opacity: .93;
+}
