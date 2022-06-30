@@ -1,34 +1,50 @@
-import './CompletionScreen.css';
+import { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { secondsToTime } from '../../../utils/misc';
 import { getLocalDailyStats } from '../../../model/DailyStats';
+import './CompletionScreen.css';
 
 export default function CompletionScreenModalWindowContent() {
+  const goToNextButtonRef = useRef();
   const state = useSelector((state) => state);
   const { stats, sample, correctness } = state;
 
   const { cpm, wpm, elapsedSeconds } = stats;
-  const { title: filename, totalChars, html_url } = sample;
-  const origin = html_url.slice(19).split('/')[0];
+  const { title: filename, totalChars } = sample;
+  // const origin = html_url.slice(19).split('/')[0]; // destruct 'html_url' from 'sample'
 
   const { mistakes } = correctness;
 
   const dailyStats = getLocalDailyStats();
   const { total } = dailyStats;
 
+  useEffect(() => {
+    // bugfix: for some reason .focus() causes
+    // immediate "click" on the button without setTimeout trick
+    // (sending it to the end of exec queue)
+    setTimeout(() => goToNextButtonRef?.current?.focus(), 0);
+  }, []);
+
   return (
     <section className="completion-screen">
       <section className="code-sample-details">
         <div className="filename">
-          /{origin}/../{filename}
+          {/*/{origin}/../*/}
+          {filename}
         </div>
-        <div className="chars">Chars: {totalChars}</div>
-        <div className="Time">Time: {secondsToTime(elapsedSeconds)}</div>
+        <div className="chars">
+          Chars: <span>{totalChars}</span>
+        </div>
+        <div className="time">
+          Time: <span>{secondsToTime(elapsedSeconds)}</span>
+        </div>
       </section>
 
-      <h1>Completed!</h1>
+      <div className="success-header">
+        <h1>Completed!</h1>
+      </div>
 
-      <div className="evaluation-msg">Congrats! You did above avarage.</div>
+      <div className="evaluation-msg">Congrats! You did above average.</div>
 
       <div className="stats-row">
         <div className="wpm">
@@ -46,13 +62,17 @@ export default function CompletionScreenModalWindowContent() {
       </div>
 
       <div className="total-stats-msg">
-        Today results: {total.chars} chars for {secondsToTime(total.timeSpent)} of practice
+        Today results: <span className="chars">{total.chars}</span> chars for{' '}
+        <span className="time">{secondsToTime(total.timeSpent)}</span> of practice
       </div>
 
       <footer>
-        <button className="go-to-next">Go to next retype!</button>
+        {/*<button className="go-to-next">Go to next retype!</button>*/}
+        <button className="go-to-next" onClick={() => window.location.reload()} ref={goToNextButtonRef}>
+          Restart ⟳
+        </button>
         <br />
-        <button className="go-to-restart">Restart ⟳</button>
+        {/*<button className="go-to-restart">Restart ⟳</button>*/}
       </footer>
     </section>
   );
