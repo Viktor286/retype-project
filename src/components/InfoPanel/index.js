@@ -8,6 +8,7 @@ import { signInGithubWithPopup } from '../../modules/persistence/firebase/github
 import { setUser } from '../../model/redux/auth';
 import { setLocalDailyStats } from '../../model/DailyStats';
 import { secondsToTime } from '../../utils/misc.js';
+import { enableModalWindow } from '../ModalWindow';
 
 function markBodyAsComplete() {
   window.document.body.classList.add('completed');
@@ -45,6 +46,7 @@ const InfoPanel = ({ codeSample, keydownController }) => {
       // Save historySessionData
       const historySessionData = createHistorySessionStat(stats, correctness, codeSamplePath);
       setLocalDailyStats(historySessionData);
+      enableModalWindow('CompletionScreen');
     }
     // eslint-disable-next-line
   }, [isComplete, uid, codeSamplePath]);
