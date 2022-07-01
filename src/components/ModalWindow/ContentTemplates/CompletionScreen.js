@@ -28,10 +28,6 @@ export default function CompletionScreenModalWindowContent() {
   return (
     <section className="completion-screen">
       <section className="code-sample-details">
-        <div className="filename">
-          {/*/{origin}/../*/}
-          {filename}
-        </div>
         <div className="chars">
           Chars: <span>{totalChars}</span>
         </div>
@@ -41,10 +37,12 @@ export default function CompletionScreenModalWindowContent() {
       </section>
 
       <div className="success-header">
-        <h1>Completed!</h1>
+        <h1>{filename}</h1>
       </div>
 
-      <div className="evaluation-msg">Congrats! You did above average.</div>
+      <div className="evaluation-msg">
+        {wpm <= 38 ? 'Your result is below average.' : 'Congrats! You did above average.'}
+      </div>
 
       <div className="stats-row">
         <div className="wpm">
