@@ -24,7 +24,7 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         modalLayout: action.modalLayout,
-        modalContent: action.modalContent,
+        modalContent: action.modalContent || {},
       };
     case UI_UNSET_MODAL:
       return {

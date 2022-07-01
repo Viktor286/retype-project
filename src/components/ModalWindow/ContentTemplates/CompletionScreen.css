@@ -1,0 +1,117 @@
+section.completion-screen {
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1.2rem;
+    white-space: pre;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    width: 75vw;
+    max-width: 800px;
+    min-width: 500px;
+    min-height: 450px;
+    /*border: 1px solid #6b9f80;*/
+    border: 1px solid #7daeb4;
+    opacity: .93;
+    position: relative;
+    font-family: Roboto, sans-serif;
+}
+
+/* -------- code-sample-details */
+section.code-sample-details {
+    overflow: hidden;
+    position: absolute;
+}
+
+section.code-sample-details div {
+    text-align: left;
+    line-height: 170%;
+}
+
+div.chars, div.time {
+    color: #78908c;
+}
+
+div.chars span, div.time span {
+    color: #d0edff;
+}
+
+/* -------- success-header */
+
+div.success-header {
+    margin-top: 5%;
+    overflow: hidden; /* set block formatting context */
+}
+
+.evaluation-msg {
+    font-style: italic;
+    font-weight: 100;
+}
+
+/* -------- stats-row */
+
+div.stats-row {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 600px;
+    margin: 2.5rem auto;
+}
+
+div.stats-row > div {
+    min-width: 7rem;
+    /*background-color: #2d2d2d;*/
+}
+
+div.stats-row > div .title {
+    color: #9bb0bd;
+    font-size: 1.9rem;
+    font-weight: 100;
+}
+
+div.stats-row > div .value {
+    font-weight: 200;
+    background-color: #2e3b36;
+    border-radius: 5px;
+    font-size: 2.5rem;
+    padding: .4rem .6rem;
+    min-width: 10rem;
+}
+
+
+/* df */
+
+.total-stats-msg {
+    color: #a0bdce;
+    font-size: 2rem;
+    margin: 10px 0 40px;
+}
+
+.total-stats-msg span.chars, .total-stats-msg span.time {
+    color: #ffffff;
+}
+
+button.go-to-next {
+    cursor: pointer;
+    background-color: #3e524a;
+    color: white;
+    border-radius: 6px;
+    /*border: 1px #51916c solid;*/
+    border: 1px solid #91deb1;
+    font-size: 1.5rem;
+    font-weight: 300;
+    /*font-style: italic;*/
+    padding: .7rem 4rem;
+}
+
+button.go-to-next:hover {
+    background-color: #4e665b;
+    border: 1px #90d8ff solid;
+}
+
+button.go-to-next:focus {
+    background-color: #4e665b;
+    outline: 1px solid #90d8ff;
+    text-decoration: underline;
+    border: 1px #3e524a solid;
+}

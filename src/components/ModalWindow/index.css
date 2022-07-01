@@ -2,6 +2,11 @@ body.modal-active {
     overflow: hidden;
 }
 
+body.modal-active div.CodeTrainerApp .codingAreaHeader,
+body.modal-active section.infoPanel {
+    filter: blur(2px);
+}
+
 section.modal {
     position: fixed;
     z-index: 1000;
@@ -13,7 +18,7 @@ section.modal {
     min-height: 100%;
     overflow: auto;
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,6 +43,10 @@ section.modal::-webkit-scrollbar {
     display: flex;
     align-content: center;
     justify-content: center;
+}
+
+.modal-body > section {
+    box-shadow: 5px 5px 25px #080808;
 }
 
 .modal-content {

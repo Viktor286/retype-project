@@ -1,4 +1,4 @@
-import { fetchGithubLicense, fetchGithubLicenseDetails } from './github';
+import { githubApiDomain } from './github';
 
 const licenseAllowList = [
   'afl-3.0',
@@ -43,14 +43,40 @@ export function addLicenseCommentToHtmlTop(codeSample) {
   }
 }
 
+export function makeLicenseUrl(owner, repo) {
+  return `${githubApiDomain}/repos/${owner}/${repo}/license`;
+}
+
+// https://docs.github.com/en/rest/reference/licenses
+export async function fetchGithubLicense(owner, repo) {
+  const res = await fetch(makeLicenseUrl(owner, repo));
+
+  // TODO:  error response with 403 would usually be because of API rate limit
+  // "message":"API rate limit exceeded for
+  // next in line would be to make a readable notification for that
+
+  if (res.status === 404) {
+    throw new Error('license file not found');
+  }
+
+  return await res.json();
+}
+
+export async function fetchGithubLicenseDetails(licenseKey) {
+  const res = await fetch(`${githubApiDomain}/licenses/${licenseKey}`);
+  return await res.json();
+}
+
 async function processLicenseData(owner, repo, url) {
   let license;
+  let licenseOriginUrl;
   let licenseInfo;
   let licenseAllowed = false;
 
   try {
     const githubLicenseData = await fetchGithubLicense(owner, repo);
     license = githubLicenseData.license;
+    licenseOriginUrl = githubLicenseData.html_url;
 
     if (license) {
       licenseInfo = await fetchGithubLicenseDetails(license.key);
@@ -82,7 +108,7 @@ async function processLicenseData(owner, repo, url) {
     // conditions: (4) ['include-copyright', 'document-changes', 'disclose-source', 'same-license']
   }
 
-  return { license: licenseInfo, owner, repo, licenseAllowed };
+  return { license: licenseInfo, owner, repo, licenseAllowed, licenseOriginUrl };
 }
 
 export { licenseAllowList, processLicenseData };

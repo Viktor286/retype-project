@@ -58,7 +58,7 @@ export function disableModalWindow() {
 let isInitialRender = true;
 
 export default function ModalWindow() {
-  const { modalLayout, modalContent } = useSelector((s) => s.ui);
+  const { modalLayout, modalContent = {} } = useSelector((s) => s.ui);
   dispatch = useDispatch();
 
   if (isInitialRender) {
