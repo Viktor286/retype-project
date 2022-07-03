@@ -19,17 +19,12 @@ export default function keydownGlobalController({ keydownEvent: e, dispatch, sto
     e.preventDefault(); //
   }
 
-  // Ctrl + space: page down
-  if (e.keyCode === 32 && e.ctrlKey) {
-    const pageSize = parseInt(window.innerHeight, 10) - 100;
-    window.scroll(0, window.scrollY + pageSize);
-    return true;
-  }
-
-  if (e.keyCode === 32 && e.shiftKey) {
-    const pageSize = parseInt(window.innerHeight, 10) - 100;
-    window.scroll(0, window.scrollY - pageSize);
-    return true;
+  // Ctrl/Shift + space: page down
+  if (e.keyCode === 32 && (e.ctrlKey || e.shiftKey)) {
+    e.preventDefault();
+    // const pageSize = parseInt(window.innerHeight, 10) - 100;
+    // window.scroll(0, window.scrollY + pageSize);
+    // return true;
   }
 
   // Bypass other Ctrl shortcut group
