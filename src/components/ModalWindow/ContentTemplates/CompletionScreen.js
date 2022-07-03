@@ -67,7 +67,7 @@ export default function CompletionScreenModalWindowContent() {
       <footer>
         {/*<button className="go-to-next">Go to next retype!</button>*/}
         <button className="go-to-next" onClick={() => window.location.reload()} ref={goToNextButtonRef}>
-          Restart ⟳
+          Restart
         </button>
         <br />
         {/*<button className="go-to-restart">Restart ⟳</button>*/}
