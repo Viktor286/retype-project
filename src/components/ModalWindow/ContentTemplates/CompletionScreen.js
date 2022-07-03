@@ -60,7 +60,7 @@ export default function CompletionScreenModalWindowContent() {
       </div>
 
       <div className="total-stats-msg">
-        Today results: <span className="chars">{total.chars}</span> chars for{' '}
+        Today: <span className="chars">{total.chars}</span> chars for{' '}
         <span className="time">{secondsToTime(total.timeSpent)}</span> of practice
       </div>
 
