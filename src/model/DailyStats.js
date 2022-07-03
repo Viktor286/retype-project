@@ -11,7 +11,6 @@ export function setLocalDailyStats(historySessionData) {
     'retypeDailyStats',
     JSON.stringify(addSessionToDailyStats(dailyStats, historySessionData)),
   );
-  console.log('setLocalDailyStats', getLocalDailyStats());
 }
 
 export function addSessionToDailyStats(dailyStats, historySessionData) {
