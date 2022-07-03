@@ -42,6 +42,9 @@ div.chars span, div.time span {
 div.success-header {
     margin-top: 5%;
     overflow: hidden; /* set block formatting context */
+}
+
+div.success-header h1 {
     font-weight: 100;
 }
 
