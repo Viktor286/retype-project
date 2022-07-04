@@ -65,3 +65,17 @@ If you're logged in then you can have access to unlicensed files from your repos
 
 ## Typing skill required!
 If you are new to typing and if you want to learn how to increase your level of touch typing, there are several great resources to start with: [one](https://www.typing.com/), [two](https://www.ratatype.com/learn/), [three](https://www.keybr.com/).
+
+## Running locally
+
+Install dependencies:
+
+```sh
+npm install
+```
+
+Run the project:
+
+```sh
+npm start
+```
