@@ -69,3 +69,8 @@ ul li {
 .copyright {
     color: white;
 }
+
+.CodeTrainerApp {
+    display: flex;
+    text-align: center;
+}

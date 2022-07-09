@@ -13,7 +13,6 @@
 # production
 /build
 /storage
-/public/img
 /src/modules/resolver
 
 # misc

@@ -1,20 +1,16 @@
 import './index.css';
-import { svgLogo } from '../CodingAreaHeader/topIconIndex';
 
 export default function LandingPage() {
   return (
     <div className="CodeTrainerApp">
       <section className={'landingContent'}>
         <section>
-          <div dangerouslySetInnerHTML={{ __html: svgLogo }} className="main-app-logo" />
-          <h2>
-            Retype Project
-            <div className="mainCategory">typing trainer for opensource</div>
-          </h2>
+          {/*<div dangerouslySetInnerHTML={{ __html: svgLogo }} className="main-app-logo" />*/}
+          {/*<h2>*/}
+          {/*  Retype Project*/}
+          {/*  <div className="mainCategory">typing trainer for opensource</div>*/}
+          {/*</h2>*/}
         </section>
-
-        {/*Keyboard cool image + code attributes*/}
-
         <section>
           <h2>Improve programming skills by retyping code</h2>
           <p>
@@ -35,6 +31,10 @@ export default function LandingPage() {
             <br />
           </p>
         </section>
+
+        <a href="HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js">
+          <img src="img/rt-demo.gif" alt="retype app demonstration" width="1000px" />
+        </a>
 
         <section>
           <h2>
