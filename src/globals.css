@@ -44,11 +44,6 @@ code {
     monospace;
 }
 
-.CodeTrainerApp {
-    display: flex;
-    text-align: center;
-}
-
 a {
     color: #9ce0e2;
 }
