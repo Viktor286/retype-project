@@ -1,3 +1,5 @@
+import { initEmptyContent2dArray } from '../../utils/array';
+
 /**
  * Correctness map is basic state of the app.
  * It closely combined with basic stats like correctAmount, keysLeft, mistakes, isComplete for the sake of performance.
@@ -42,14 +44,6 @@ const CHAR_STATE = {
   SUCCESS: 1,
   MISTAKE: 2,
 };
-
-export function initEmptyContent2dArray(contentAs2dArray) {
-  const emptyContentAs2dArray = new Array(contentAs2dArray.length);
-  for (let i = 0; i < contentAs2dArray.length; i++) {
-    emptyContentAs2dArray[i] = new Array(contentAs2dArray[i].length).fill(0);
-  }
-  return emptyContentAs2dArray;
-}
 
 // prev
 function resolveStats(command, state, prevCharState, totalChars) {
