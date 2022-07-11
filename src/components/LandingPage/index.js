@@ -23,17 +23,21 @@ export default function LandingPage() {
             dev experience.
           </p>
           <p>
-            The great way to achieve a good results is by retyping real-life code examples. Learn to write
-            code faster mastering your keyboarding technique.
+            The great way to achieve good results is retyping real-life code examples. Learn to write code
+            faster mastering your keyboarding technique.
             <br />
             With a great code-typing skill you will get more freedom in creating your projects without paying
-            attention cost to complex patterns of code syntax.
+            attention the cost of complex code syntax patterns.
             <br />
           </p>
         </section>
 
         <a href="HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js">
-          <img src="img/rt-demo.gif" alt="retype app demonstration" width="1000px" />
+          <img
+            src="https://d3ly1egw9wtkcf.cloudfront.net/img/rt-demo.gif"
+            alt="retype app demonstration"
+            width="1000px"
+          />
         </a>
 
         <section>
