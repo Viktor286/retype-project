@@ -100,10 +100,7 @@ function CodingLine({ linesArr, lineNumber, correctnessLine, lineSkipMask, subDi
       <div className="code">
         {lineTokens.map((token, id) => {
           const [start, end] = token.ltRange;
-
           const tokenSequence = linesArr.slice(start, end + 1);
-          const isSingleSpaceToken = tokenSequence.length === 1 && tokenSequence[0] === ' ';
-
           return (
             <span key={id} style={{ color: token.foregroundColor }}>
               {tokenSequence.map((char, charNumInLine) => {
@@ -116,7 +113,6 @@ function CodingLine({ linesArr, lineNumber, correctnessLine, lineSkipMask, subDi
                       char,
                       key: `l${lineNumber}c${charNumInLine}`,
                       lineSkipMask,
-                      isSingleSpaceToken,
                     }}
                   />
                 );
@@ -131,14 +127,7 @@ function CodingLine({ linesArr, lineNumber, correctnessLine, lineSkipMask, subDi
 
 const CodingLineMemo = React.memo(CodingLine);
 
-function CodingChar({
-  char,
-  charNumInLine,
-  charCorrectness,
-  lineSkipMask,
-  isActive = false,
-  isSingleSpaceToken,
-}) {
+function CodingChar({ char, charNumInLine, charCorrectness, lineSkipMask, isActive = false }) {
   let displayChar = char;
 
   // Markup
@@ -184,8 +173,7 @@ function CodingChar({
 
   return (
     <span key={`c${charNumInLine}`} className={cssClasses.join(' ')}>
-      {/* isSingleSpaceToken handles very annoying bug when span collapses into zero */}
-      {isSingleSpaceToken ? <>&nbsp;</> : displayChar}
+      {displayChar}
     </span>
   );
 }
