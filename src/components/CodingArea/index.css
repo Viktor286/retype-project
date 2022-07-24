@@ -1,7 +1,6 @@
 section.codingArea {
     font-family: "Inter", sans-serif;
     font-weight: 300;
-    font-size: 1.8rem;
     position: relative;
     margin: 0 50px 190px;
     background-color: hsl(223deg 5% 12%);
@@ -53,17 +52,17 @@ span.char.skip {
 span.char.tab.skip {
     color: hsl(217deg 11% 27%);
     font-style: inherit;
-    font-size: 1.8rem;
     font-weight: inherit;
+    font-size: inherit;
 }
 
 div.char.lineNum {
     color: hsl(214deg 20% 25%);
-    font-size: 1.4rem;
+    font-size: .8em;
     font-style: italic;
     font-weight: 300;
-    width: 30px;
-    margin-right: 15px;
+    width: 1.8em;
+    margin-right: 0.2em;
 }
 
 div.line.active div.char.lineNum {
@@ -154,6 +153,7 @@ span.tab.cursor {
     justify-content: flex-end;
 }
 
+/* ------------------- toggle-typing-mode */
 div.toggle-typing-mode {
     padding: 0;
     margin: .3rem;
@@ -179,4 +179,74 @@ div.toggle-typing-mode svg:hover {
 
 .fade-out-typing-mode svg {
     transform: rotate(180deg);
+}
+
+/* ------------------- font-controls */
+
+div.font-controls {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    background: #262e35;
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+}
+
+div.font-controls button {
+    font-family: Garamond, serif;
+    font-size: 1.2rem;
+    color: #83a9d8;
+    margin: 0.3rem 0 0.3rem 0.2rem;
+    background: #303236;
+    border: 1px solid #52667e;
+    border-radius: 3px;
+    display: block;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+}
+
+div.font-controls button:hover {
+    background: #3b4150;
+}
+
+.fs-m {
+    font-size: 1.8rem;
+}
+
+.fs-l {
+    font-size: 2rem;
+}
+
+.fs-xl {
+    font-size: 2.3rem;
+}
+
+.fs-xxl {
+    font-size: 2.6rem;
+}
+
+.fs-xxxl {
+    font-size: 3rem;
+}
+
+.fs-4xl {
+    font-size: 3.4rem;
+}
+
+.fs-s {
+    font-size: 1.6rem;
+}
+
+.fs-xs {
+    font-size: 1.4rem;
+}
+
+.fs-xxs {
+    font-size: 1.2rem;
+}
+
+.fs-xxxs {
+    font-size: 1rem;
 }
