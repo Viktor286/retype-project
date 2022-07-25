@@ -14,7 +14,9 @@ export default function keydownGlobalController({ keydownEvent: e, dispatch, sto
   // Prevent keys
   if (
     e.keyCode === 9 || // prevent tab behavior
-    e.keyCode === 32 // prevent space behavior
+    e.keyCode === 32 || // prevent space behavior
+    e.keyCode === 222 || // prevent default ' behavior (firefox quick search)
+    e.keyCode === 191 // prevent default / behavior (firefox quick search)
   ) {
     e.preventDefault(); //
   }
