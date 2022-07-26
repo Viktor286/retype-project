@@ -1,13 +1,11 @@
 const initialState = {
   staleTimeout: 999,
   elapsedSeconds: 0,
-  typingMode: 0,
 };
 
 export const ST_PER_SEC_UPDATE = 'ST_PER_SEC_UPDATE';
 export const ST_RESET_STALE = 'ST_RESET_STALE';
 export const ST_SET_STALE = 'ST_SET_STALE';
-export const ST_TOGGLE_TYPE_MODE = 'ST_TOGGLE_TYPE_MODE';
 
 export const perSecondUpdate = () => ({
   type: ST_PER_SEC_UPDATE,
@@ -27,11 +25,6 @@ export const updateSecondStat = ({ seconds, cpm, wpm }) => ({
   seconds,
   cpm,
   wpm,
-});
-
-export const toggleTypingMode = (currentTypingMode) => ({
-  type: ST_TOGGLE_TYPE_MODE,
-  currentTypingMode,
 });
 
 // Reducer
@@ -59,13 +52,6 @@ export const statsReducer = (state = initialState, action) => {
       return {
         ...state,
         staleTimeout: 0,
-      };
-    }
-
-    case ST_TOGGLE_TYPE_MODE: {
-      return {
-        ...state,
-        typingMode: action.currentTypingMode === 0 ? 1 : 0,
       };
     }
 
