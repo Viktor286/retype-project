@@ -5,6 +5,7 @@ import { correctnessReducer as correctness } from './correctness';
 import { statsReducer as stats } from './stats';
 import { sampleReducer as sample } from './sample';
 import { uiReducer as ui } from './ui';
+import { userSettingsReducer as userSettings } from './userSettings';
 
 export const reducer = combineReducers({
   auth,
@@ -12,6 +13,7 @@ export const reducer = combineReducers({
   stats,
   sample,
   ui,
+  userSettings,
 });
 
 const initStore = () => {
