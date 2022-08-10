@@ -46,7 +46,7 @@ span.char.skip {
     color: hsl(199deg 10% 44%);
     font-style: italic;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: .78em;
 }
 
 span.char.tab.skip {
