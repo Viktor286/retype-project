@@ -21,7 +21,7 @@ body.completed section.codingArea {
 div.line {
     display: flex;
     margin: 3px 0;
-    padding: 0;
+    padding: 0px;
 }
 
 div.line .code {
