@@ -4,7 +4,10 @@ import CreateCodeSample from '../../model/CodeSample';
 export default async function obtainCodeSample(githubPath, userName) {
   try {
     const githubResource = await fetchGithubResource(githubPath);
+    // console.log('@@ githubResource', githubResource);
     const { content, name, html_url, url, message } = githubResource;
+
+    // console.log('FROM GH', { content, name, html_url, url, message });
 
     if (message === 'Not Found') {
       return 'Resource was not found';
