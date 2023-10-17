@@ -1,39 +1,39 @@
-.main-app-logo {
-    color: #9cc4e2;
-    margin: 40px 0 0 0;
+[class~='ant-col'] {
+    background: transparent;
+    border: 0;
 }
 
-.main-app-logo svg {
-    height: 150px;
-    width: 200px;
+[class~='ant-col'] > div {
+    height: 120px;
+    font-size: 14px;
+    line-height: 120px;
+    background: #0092ff;
+    border-radius: 4px;
 }
 
-section.landingContent {
-    display: flex;
-    overflow: hidden;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-
-    width: 100%;
-    min-height: 100vh;
-
-    color: white;
+pre {
+    padding: 8px 16px;
+    font-size: 13px;
+    background: #f9f9f9;
+    border-radius: 6px;
 }
 
-section.landingContent section {
-    margin: 10px 0 30px 0;
+pre.demo-code {
+    direction: ltr;
 }
 
-section.landingContent h2 {
-    font-size: 2.1rem;
-    font-weight: 100;
-    margin: 5px 0 15px;
-    text-align: center;
+.ant-col {
+    padding: 0;
 }
 
-section.landingContent h2 div.mainCategory {
-    font-size: 1.1rem;
-    margin: 0 10px 30px 10px;
-    color: #6a7487;
+.withDefaultAnimation {
+    transition: all 0.2s, background 0s;
+    transition-behavior: normal, normal;
+    transition-duration: 0.2s, 0s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
+}
+
+.demo-logo-vertical {
+    height: 100px;
 }
