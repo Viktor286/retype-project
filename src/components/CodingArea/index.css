@@ -3,7 +3,7 @@ section.codingArea {
     font-weight: 300;
     position: relative;
     margin: 0 50px 190px;
-    background-color: hsl(223deg 5% 12%);
+    background-color: var(--main-bg);
     padding: 5px 30px 20px;
     border-radius: 20px;
     text-align: left;

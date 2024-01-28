@@ -8,7 +8,7 @@ const textCharsLimit = 20000;
 // TODO: for the CodeSample model we will have to set the limit of content length as a rule for database
 //  there is no reason to parse the endpoint if it's too long
 
-export default async function CreateCodeSample({ fileName, content, html_url, credentials }) {
+export default async function CreateCodeSample({ fileName, content, html_url, credentials = {} }) {
   let text = decodeURIComponent(escape(window.atob(content)));
   text = text.replaceAll('\ufeff', '');
   if (text.length > textCharsLimit) text = text.slice(0, textCharsLimit);

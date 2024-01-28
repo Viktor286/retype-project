@@ -15,6 +15,9 @@ html {
     --base-color: hsl(223, 6%, 10%);
     --success-color: hsl(180, 10%, 12%);
     --blue-link: #a7c3ee;
+    --main-bg: hsl(223deg 5% 12%);
+    --lighter-bg: #262b2f;
+    --blue-bg: hsl(209 40% 13% / 1);
 }
 
 body {
@@ -31,6 +34,7 @@ body {
     /* hide scrollbar but allow scrolling */
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
+    background: var(--main-bg);
 }
 
 body::-webkit-scrollbar {

@@ -7,6 +7,7 @@ const breakpoints = {
   lg: 992,
   xl: 1200,
   xxl: 1600,
+  xxxl: 2000,
 };
 
 const findCurrentBreakpoint = (width) => {
@@ -15,7 +16,8 @@ const findCurrentBreakpoint = (width) => {
   if (width < breakpoints.lg) return 'md';
   if (width < breakpoints.xl) return 'lg';
   if (width < breakpoints.xxl) return 'xl';
-  return 'xxl';
+  if (width < breakpoints.xxxl) return 'xxl';
+  return 'xxxl';
 };
 
 export default function useBreakpoint(callback) {

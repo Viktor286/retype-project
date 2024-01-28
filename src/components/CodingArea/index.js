@@ -84,7 +84,7 @@ function ActiveCodingLine({
   );
 }
 
-function CodingLine({ linesArr, lineNumber, correctnessLine, lineSkipMask, subDivisions }) {
+export function CodingLine({ linesArr, lineNumber, correctnessLine = [], lineSkipMask, subDivisions }) {
   let lineTokens = subDivisions[lineNumber];
 
   return (
@@ -118,7 +118,7 @@ function CodingLine({ linesArr, lineNumber, correctnessLine, lineSkipMask, subDi
   );
 }
 
-const CodingLineMemo = React.memo(CodingLine);
+export const CodingLineMemo = React.memo(CodingLine);
 
 function CodingChar({ char, charNumInLine, charCorrectness, lineSkipMask, isActive = false }) {
   let displayChar = char;
