@@ -4,6 +4,7 @@ import { useEffect, useRef, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStaleTimeout, updateSecondStat } from '../../model/redux/stats';
 import { getCpm, getWpm } from '../../utils/misc';
+import { charBubbleEventHandler } from '../CharBubble/charBubbleEventHandler';
 
 const statRatios = {
   averageCps: 2.4,
@@ -12,14 +13,18 @@ const statRatios = {
 
 function TimelineTimer({ totalChars, userName }) {
   const dispatch = useDispatch();
-  const { stats, correctness } = useSelector((state) => state);
+  const { stats, correctness, events } = useSelector((state) => state);
   const { staleTimeout } = stats;
-  const { correctAmount, isComplete, keysCompletedPercent } = correctness;
+  const { mistakes, correctAmount, isComplete, keysCompletedPercent } = correctness;
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [elapsedMilliseconds, setElapsedMilliseconds] = useState(0);
   const [allowComparativeProgress, setAllowComparativeProgress] = useState(1);
   let timer = useRef(undefined);
+
+  let lastCorrectAmount = useRef(0);
+  let lastMistakesAmount = useRef(0);
+
   let { current } = useRef({
     pageInactiveHandler: undefined,
     staleTimeoutCounter: undefined,
@@ -69,6 +74,17 @@ function TimelineTimer({ totalChars, userName }) {
   }, []);
 
   useEffect(() => {
+    charBubbleEventHandler(
+      correctAmount,
+      mistakes,
+      lastCorrectAmount.current,
+      lastMistakesAmount.current,
+      events.charBubble,
+      dispatch,
+    );
+    lastCorrectAmount.current = correctAmount;
+    lastMistakesAmount.current = mistakes;
+
     dispatch(
       updateSecondStat({
         seconds: elapsedSeconds,

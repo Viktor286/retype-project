@@ -8,7 +8,7 @@ section.codingArea {
     border-radius: 20px;
     text-align: left;
     max-width: 80%;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 body.completed section.codingArea {
@@ -20,13 +20,15 @@ body.completed section.codingArea {
 
 div.line {
     display: flex;
+    position: relative;
     margin: 3px 0;
     padding: 0px;
 }
 
 div.line .code {
-    display: block;
+    display: inline;
     white-space: pre-wrap;
+    width: calc(100% + 1px); /* fixing bug with wrap sometime things it needs to do break while we still have a room */
 }
 
 div.line.active {
@@ -37,9 +39,46 @@ div.line.active {
     color: hsl(217deg 15% 34%);
 }
 
+span.token {
+    position: relative;
+    white-space: nowrap;
+}
+
 /* Char Sections */
 span.char {
     padding: 0 0 0 0;
+    position: relative;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translateY(-30px); opacity: 0; }
+}
+
+span.char div.char-bubble {
+    z-index: 99999;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 7px 15px;
+    border-radius: 6px;
+    text-align: left;
+    animation: floatUp 2s ease forwards;
+    white-space: nowrap;
+    color: #fff0cb;
+    /*color: #bfe098;*/
+    background: #333949;
+    border: 1px solid #62815f;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+span.char div.char-bubble span {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #768e98;
 }
 
 span.char.skip {

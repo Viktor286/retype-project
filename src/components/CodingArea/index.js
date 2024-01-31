@@ -1,8 +1,9 @@
 import './index.css';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import CodeAreaControls from '../CodeAreaControls';
 import { fontSizes } from '../../model/redux/userSettings';
+import AnimatedBubble from '../CharBubble/AnimatedBubble';
 
 const CodingArea = ({
   codeSample: { contentAs2dArray, skipMask2dArray, colorMask2dArray, subDivisions },
@@ -12,6 +13,9 @@ const CodingArea = ({
 
   const userSettings = useSelector((state) => state.userSettings);
   const { fontSize, typingMode } = userSettings;
+
+  const events = useSelector((state) => state.events);
+  const { charBubble, charBubbleReported } = events;
 
   return (
     <>
@@ -33,7 +37,9 @@ const CodingArea = ({
           };
 
           return lineNumber === cursorIndex[0] ? (
-            <ActiveCodingLine {...{ cursorInLine: cursorIndex[1], ...linePayload }} />
+            <ActiveCodingLine
+              {...{ cursorInLine: cursorIndex[1], charBubble, charBubbleReported, ...linePayload }}
+            />
           ) : (
             <CodingLineMemo {...linePayload} />
           );
@@ -50,6 +56,8 @@ function ActiveCodingLine({
   cursorInLine,
   lineSkipMask,
   subDivisions,
+  charBubble,
+  charBubbleReported,
 }) {
   let lineTokens = subDivisions[lineNumber];
 
@@ -72,6 +80,8 @@ function ActiveCodingLine({
                       isActive: cursorInLine === charNumInLine,
                       key: `l${lineNumber}c${charNumInLine}`,
                       lineSkipMask,
+                      charBubble,
+                      charBubbleReported,
                     }}
                   />
                 );
@@ -95,7 +105,7 @@ export function CodingLine({ linesArr, lineNumber, correctnessLine = [], lineSki
           const [start, end] = token.ltRange;
           const tokenSequence = linesArr.slice(start, end + 1);
           return (
-            <span key={id} style={{ color: token.foregroundColor }}>
+            <span className="token" key={id} style={{ color: token.foregroundColor }}>
               {tokenSequence.map((char, charNumInLine) => {
                 charNumInLine += start;
                 return (
@@ -120,7 +130,16 @@ export function CodingLine({ linesArr, lineNumber, correctnessLine = [], lineSki
 
 export const CodingLineMemo = React.memo(CodingLine);
 
-function CodingChar({ char, charNumInLine, charCorrectness, lineSkipMask, isActive = false }) {
+function CodingChar({
+  char,
+  charNumInLine,
+  charCorrectness,
+  lineSkipMask,
+  isActive = false,
+  charBubble,
+  charBubbleReported,
+}) {
+  let bubbleMessage = useRef(undefined);
   let displayChar = char;
 
   // Markup
@@ -162,10 +181,16 @@ function CodingChar({ char, charNumInLine, charCorrectness, lineSkipMask, isActi
 
   if (charCorrectness === 2) {
     cssClasses.push('mistake');
+    bubbleMessage.current = undefined;
+  }
+
+  if (isActive && charBubble?.length > 0 && !charBubbleReported.includes(charBubble)) {
+    bubbleMessage.current = charBubble;
   }
 
   return (
     <span key={`c${charNumInLine}`} className={cssClasses.join(' ')}>
+      {bubbleMessage.current && <AnimatedBubble message={bubbleMessage.current} />}
       {displayChar}
     </span>
   );

@@ -157,6 +157,7 @@ section.codeZone div.line {
 section.codeZone div.line .code {
     display: block;
     white-space: pre-wrap;
+    width: calc(100% + 1px); /* fixing bug with wrap sometime things it needs to do break while we still have a room */
 }
 
 /* Char Sections */
