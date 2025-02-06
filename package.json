@@ -38,11 +38,17 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@reduxjs/toolkit": "^1.8.1",
+    "antd": "^5.10.1",
     "firebase": "^9.7.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "jszip": "^3.10.1",
+    "plist": "^3.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-redux": "^8.0.1",
+    "vscode-oniguruma": "^1.7.0",
+    "vscode-textmate": "^6.0.0",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {

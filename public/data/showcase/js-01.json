@@ -1,0 +1,310 @@
+{
+  "resourcesList": [
+    {
+      "name": "226-invert-binary-tree-iter.ts",
+      "path": "src/Engineering/Arrays/226-invert-binary-tree-iter.ts",
+      "sha": "65664681ed2876bf7b6348af99159e8999194c4e",
+      "size": 602,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/226-invert-binary-tree-iter.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/226-invert-binary-tree-iter.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/65664681ed2876bf7b6348af99159e8999194c4e",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Arrays/226-invert-binary-tree-iter.ts",
+      "type": "file",
+      "content": "Ly8gMjI2LiBJbnZlcnQgQmluYXJ5IFRyZWUKLy8gaHR0cHM6Ly9sZWV0Y29k\nZS5jb20vcHJvYmxlbXMvaW52ZXJ0LWJpbmFyeS10cmVlLwovLyBHaXZlbiB0\naGUgcm9vdCBvZiBhIGJpbmFyeSB0cmVlLCBpbnZlcnQgdGhlIHRyZWUsCi8v\nIGFuZCByZXR1cm4gaXRzIHJvb3QuCgppbnRlcmZhY2UgQmlOb2RlIHsKICBs\nZWZ0OiBCaU5vZGU7CiAgcmlnaHQ6IEJpTm9kZTsKICB2YWw6IG51bWJlcjsK\nfQoKZnVuY3Rpb24gaW52ZXJ0VHJlZShyb290OiBCaU5vZGUpIHsKICBpZiAo\nIXJvb3QpIHsKICAgIHJldHVybiBudWxsOwogIH0KCiAgY29uc3QgcXVldWUg\nPSBbcm9vdF07CiAgd2hpbGUgKHF1ZXVlLmxlbmd0aCA+IDApIHsKICAgIGNv\nbnN0IGN1cnJlbnQgPSBxdWV1ZS5zaGlmdCgpOwoKICAgIGNvbnN0IGxlZnQg\nPSBjdXJyZW50LmxlZnQ7CiAgICBjdXJyZW50LmxlZnQgPSBjdXJyZW50LnJp\nZ2h0OwogICAgY3VycmVudC5yaWdodCA9IGxlZnQ7CgogICAgaWYgKGN1cnJl\nbnQubGVmdCkgcXVldWUucHVzaChjdXJyZW50LmxlZnQpOwogICAgaWYgKGN1\ncnJlbnQucmlnaHQpIHF1ZXVlLnB1c2goY3VycmVudC5yaWdodCk7CiAgfQoK\nICByZXR1cm4gcm9vdDsKfQo=\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/226-invert-binary-tree-iter.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/65664681ed2876bf7b6348af99159e8999194c4e",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/226-invert-binary-tree-iter.ts"
+      }
+    },
+    {
+      "name": "206-reverse-linked-list.ts",
+      "path": "src/Engineering/LinkedLists/206-reverse-linked-list.ts",
+      "sha": "8a5f7f4a9e610c1190481f8a5e9fcfb7c14b79e1",
+      "size": 624,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/LinkedLists/206-reverse-linked-list.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/LinkedLists/206-reverse-linked-list.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/8a5f7f4a9e610c1190481f8a5e9fcfb7c14b79e1",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/LinkedLists/206-reverse-linked-list.ts",
+      "type": "file",
+      "content": "Ly8gMjA2LiBSZXZlcnNlIExpbmtlZCBMaXN0Ci8vIGh0dHBzOi8vbGVldGNv\nZGUuY29tL3Byb2JsZW1zL3JldmVyc2UtbGlua2VkLWxpc3QvCi8vIEdpdmVu\nIHRoZSBoZWFkIG9mIGEgc2luZ2x5IGxpbmtlZCBsaXN0LAovLyByZXZlcnNl\nIHRoZSBsaXN0LCBhbmQgcmV0dXJuIHRoZSByZXZlcnNlZCBsaXN0LgoKaW50\nZXJmYWNlIExpc3ROb2RlIHsKICB2YWw6IG51bWJlcjsKICBuZXh0OiBMaXN0\nTm9kZSB8IG51bGw7Cn0KCmZ1bmN0aW9uIHJldmVyc2VMaXN0KGhlYWQ6IExp\nc3ROb2RlKSB7CiAgbGV0IHByZXZpb3VzID0gbnVsbDsKICBsZXQgY3VycmVu\ndCA9IGhlYWQ7CgogIHdoaWxlIChjdXJyZW50KSB7CiAgICBjb25zdCBuZXh0\nID0gY3VycmVudC5uZXh0OyAvLyBjYWNoZSB0aGUgbmV4dCBwb2ludGVyIChu\ndWxsIGZvciBsYXN0KQogICAgY3VycmVudC5uZXh0ID0gcHJldmlvdXM7IC8v\nIHNldCBuZXh0IHRvIHByZXYgbm9kZSAobnVsbCBmb3IgZmlyc3Qgc3RlcCkK\nCiAgICBwcmV2aW91cyA9IGN1cnJlbnQ7IC8vIGFkdmFuY2UgZnV0dXJlIHBy\nZXYgdG8gdGhlIGN1cnIKICAgIGN1cnJlbnQgPSBuZXh0OyAvLyBhZHZhbmNl\nIGZ1dHVyZSBjdXJyCiAgfQoKICByZXR1cm4gcHJldmlvdXM7Cn0K\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/LinkedLists/206-reverse-linked-list.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/8a5f7f4a9e610c1190481f8a5e9fcfb7c14b79e1",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/LinkedLists/206-reverse-linked-list.ts"
+      }
+    },
+    {
+      "name": "94-binary-tree-inorder-traversal-iterative.ts",
+      "path": "src/Engineering/BinaryTrees/94-binary-tree-inorder-traversal-iterative.ts",
+      "sha": "1c0b97a6bb8dccdeace4ad21d11671e9b51de335",
+      "size": 763,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/BinaryTrees/94-binary-tree-inorder-traversal-iterative.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/94-binary-tree-inorder-traversal-iterative.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/1c0b97a6bb8dccdeace4ad21d11671e9b51de335",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/BinaryTrees/94-binary-tree-inorder-traversal-iterative.ts",
+      "type": "file",
+      "content": "Ly8gOTQuIEJpbmFyeSBUcmVlIElub3JkZXIgVHJhdmVyc2FsCi8vIGh0dHBz\nOi8vbGVldGNvZGUuY29tL3Byb2JsZW1zL2JpbmFyeS10cmVlLWlub3JkZXIt\ndHJhdmVyc2FsLwovLyBHaXZlbiB0aGUgcm9vdCBvZiBhIGJpbmFyeSB0cmVl\nLAovLyByZXR1cm4gdGhlIGlub3JkZXIgdHJhdmVyc2FsIG9mIGl0cyBub2Rl\ncycgdmFsdWVzLgovLyBCaW5hcnkgdHJlZSBub2RlOiB7bGVmdCwgdmFsLCBy\naWdodH0KCmludGVyZmFjZSBJQmluYXJ5Tm9kZSB7CiAgbGVmdDogSUJpbmFy\neU5vZGUgfCBudWxsOwogIHJpZ2h0OiBJQmluYXJ5Tm9kZSB8IG51bGw7CiAg\ndmFsOiBudW1iZXI7Cn0KCi8vIEl0ZXJhdGl2ZQpmdW5jdGlvbiBpbm9yZGVy\nVHJhdmVyc2FsSXRlcmF0aXZlKHJvb3Q6IElCaW5hcnlOb2RlKSB7CiAgaWYg\nKCFyb290KSB7CiAgICByZXR1cm4gW107CiAgfQoKICBjb25zdCBjb2xsZWN0\naW9uID0gW107CiAgY29uc3Qgc3RhY2sgPSBbXTsKICBsZXQgY3VycmVudCA9\nIHJvb3Q7CgogIHdoaWxlIChjdXJyZW50ICE9IG51bGwgfHwgc3RhY2subGVu\nZ3RoID4gMCkgewogICAgd2hpbGUgKGN1cnJlbnQgIT0gbnVsbCkgewogICAg\nICBzdGFjay5wdXNoKGN1cnJlbnQpOwogICAgICBjdXJyZW50ID0gY3VycmVu\ndC5sZWZ0OwogICAgfQoKICAgIGN1cnJlbnQgPSBzdGFjay5wb3AoKTsKICAg\nIGNvbGxlY3Rpb24ucHVzaChjdXJyZW50LnZhbCk7CiAgICBjdXJyZW50ID0g\nY3VycmVudC5yaWdodDsKICB9CgogIHJldHVybiBjb2xsZWN0aW9uOwp9Cg==\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/BinaryTrees/94-binary-tree-inorder-traversal-iterative.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/1c0b97a6bb8dccdeace4ad21d11671e9b51de335",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/94-binary-tree-inorder-traversal-iterative.ts"
+      }
+    },
+    {
+      "name": "15-3sum.ts",
+      "path": "src/Engineering/Combinatorics/15-3sum.ts",
+      "sha": "ac3d6a06b6d43f25eb72085a30270448db5e95e1",
+      "size": 851,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Combinatorics/15-3sum.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/15-3sum.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/ac3d6a06b6d43f25eb72085a30270448db5e95e1",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Combinatorics/15-3sum.ts",
+      "type": "file",
+      "content": "Ly8gMTUuIDNTdW0KLy8gaHR0cHM6Ly9sZWV0Y29kZS5jb20vcHJvYmxlbXMv\nM3N1bS8KLy8gR2l2ZW4gYW4gaW50ZWdlciBhcnJheSBudW1zLAovLyByZXR1\ncm4gYWxsIHVuaXF1ZSB0cmlwbGV0cyB3aGljaCBzdW1zIHRvIDAKCmZ1bmN0\naW9uIHRocmVlU3VtKG51bXM6IG51bWJlcltdKSB7CiAgY29uc3QgdGFyZ2V0\nID0gMDsKICBjb25zdCBuID0gbnVtcy5sZW5ndGg7CiAgY29uc3QgcmVzdWx0\nID0gW107CiAgbnVtcy5zb3J0KChhLCBiKSA9PiBhIC0gYik7CgogIGZvciAo\nbGV0IGkgPSAwOyBpIDwgbiAtIDI7IGkrKykgewogICAgaWYgKGkgPiAwICYm\nIG51bXNbaV0gPT09IG51bXNbaSAtIDFdKSBjb250aW51ZTsKCiAgICBjb25z\ndCBhID0gbnVtc1tpXTsKICAgIGxldCBzdGFydCA9IGkgKyAxOwogICAgbGV0\nIGVuZCA9IG4gLSAxOwoKICAgIHdoaWxlIChzdGFydCA8IGVuZCkgewogICAg\nICBjb25zdCBiID0gbnVtc1tzdGFydF07CiAgICAgIGNvbnN0IGMgPSBudW1z\nW2VuZF07CiAgICAgIGNvbnN0IHN1bSA9IGEgKyBiICsgYzsKCiAgICAgIGlm\nIChzdW0gPT09IHRhcmdldCkgewogICAgICAgIHJlc3VsdC5wdXNoKFthLCBi\nLCBjXSk7CgogICAgICAgIHdoaWxlIChudW1zW3N0YXJ0XSA9PT0gbnVtc1tz\ndGFydCArIDFdKSBzdGFydCsrOwogICAgICAgIHdoaWxlIChudW1zW2VuZF0g\nPT09IG51bXNbZW5kIC0gMV0pIGVuZC0tOwogICAgICAgIHN0YXJ0Kys7CiAg\nICAgICAgZW5kLS07CiAgICAgIH0gZWxzZSBpZiAoc3VtID4gdGFyZ2V0KSB7\nCiAgICAgICAgZW5kLS07CiAgICAgIH0gZWxzZSB7CiAgICAgICAgc3RhcnQr\nKzsKICAgICAgfQogICAgfQogIH0KCiAgcmV0dXJuIHJlc3VsdDsKfQo=\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Combinatorics/15-3sum.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/ac3d6a06b6d43f25eb72085a30270448db5e95e1",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/15-3sum.ts"
+      }
+    },
+    {
+      "name": "1-tcp-server.js",
+      "path": "JavaScript/1-tcp-server.js",
+      "sha": "9675a13defee85dee253a78ddeeac46639999e1a",
+      "size": 460,
+      "url": "https://api.github.com/repos/HowProgrammingWorks/Socket/contents/JavaScript/1-tcp-server.js?ref=master",
+      "html_url": "https://github.com/HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js",
+      "git_url": "https://api.github.com/repos/HowProgrammingWorks/Socket/git/blobs/9675a13defee85dee253a78ddeeac46639999e1a",
+      "download_url": "https://raw.githubusercontent.com/HowProgrammingWorks/Socket/master/JavaScript/1-tcp-server.js",
+      "type": "file",
+      "content": "J3VzZSBzdHJpY3QnOwoKY29uc3QgbmV0ID0gcmVxdWlyZSgnbm9kZTpuZXQn\nKTsKCmNvbnN0IG9uRGF0YSA9IChkYXRhKSA9PiB7CiAgY29uc29sZS5sb2co\nJ/Cfk6g6JywgZGF0YSk7Cn07Cgpjb25zdCBvcHRpb25zID0geyBub0RlbGF5\nOiB0cnVlIH07Cgpjb25zdCBzZXJ2ZXIgPSBuZXQuY3JlYXRlU2VydmVyKChz\nb2NrZXQpID0+IHsKICBjb25zb2xlLmRpcihzb2NrZXQuYWRkcmVzcygpKTsK\nICBzb2NrZXQud3JpdGUoJ/CfkpcnKTsKICBzb2NrZXQub24oJ2RhdGEnLCBv\nbkRhdGEpOwogIHNvY2tldC5vbignZXJyb3InLCAoZXJyKSA9PiB7CiAgICBj\nb25zb2xlLmxvZygnU29ja2V0IGVycm9yJywgZXJyKTsKICB9KTsKfSk7Cgpz\nZXJ2ZXIubGlzdGVuKDIwMDAsIG9wdGlvbnMpOwoKc2VydmVyLm9uKCdlcnJv\ncicsIChlcnIpID0+IHsKICBjb25zb2xlLmxvZygnU2VydmVyIGVycm9yJywg\nZXJyKTsKfSk7Cg==\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/HowProgrammingWorks/Socket/contents/JavaScript/1-tcp-server.js?ref=master",
+        "git": "https://api.github.com/repos/HowProgrammingWorks/Socket/git/blobs/9675a13defee85dee253a78ddeeac46639999e1a",
+        "html": "https://github.com/HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js"
+      }
+    },
+    {
+      "name": "bubbleSort-while-swaps.ts",
+      "path": "src/Engineering/Sorting/bubbleSort-while-swaps.ts",
+      "sha": "b2f32ef07b6eee7f99db3aa8550a5263fc45e5ee",
+      "size": 555,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Sorting/bubbleSort-while-swaps.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Sorting/bubbleSort-while-swaps.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/b2f32ef07b6eee7f99db3aa8550a5263fc45e5ee",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Sorting/bubbleSort-while-swaps.ts",
+      "type": "file",
+      "content": "Ly8gV2lraXBlZGlhOiBodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9C\ndWJibGVfc29ydAovLyBBbmltYXRlZCBWaXN1YWw6IGh0dHBzOi8vd3d3LnRv\ncHRhbC5jb20vZGV2ZWxvcGVycy9zb3J0aW5nLWFsZ29yaXRobXMvYnViYmxl\nLXNvcnQKCmZ1bmN0aW9uIGJ1YmJsZVNvcnRXaGlsZVN3YXBzKGFycjogbnVt\nYmVyW10pIHsKICBsZXQgc3dhcHBlZCA9IHRydWU7CiAgbGV0IHJpZ2h0Qm91\nbmQgPSBhcnIubGVuZ3RoIC0gMTsKCiAgd2hpbGUgKHN3YXBwZWQpIHsKICAg\nIHN3YXBwZWQgPSBmYWxzZTsKCiAgICBmb3IgKGxldCBpID0gMDsgaSA8IHJp\nZ2h0Qm91bmQ7IGkrKykgewogICAgICBpZiAoYXJyW2ldID4gYXJyW2kgKyAx\nXSkgewogICAgICAgIGNvbnN0IHRlbXAgPSBhcnJbaV07CiAgICAgICAgYXJy\nW2ldID0gYXJyW2kgKyAxXTsKICAgICAgICBhcnJbaSArIDFdID0gdGVtcDsK\nICAgICAgICBzd2FwcGVkID0gdHJ1ZTsKICAgICAgfQogICAgfQoKICAgIGlm\nIChzd2FwcGVkKSB7CiAgICAgIHJpZ2h0Qm91bmQtLTsKICAgIH0KICB9Cgog\nIHJldHVybiBhcnI7Cn0K\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Sorting/bubbleSort-while-swaps.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/b2f32ef07b6eee7f99db3aa8550a5263fc45e5ee",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Sorting/bubbleSort-while-swaps.ts"
+      }
+    },
+    {
+      "name": "704-binary-search.ts",
+      "path": "src/Engineering/Arrays/704-binary-search.ts",
+      "sha": "0e1f05269a2f944f1459b3661a65ccb2706f73f8",
+      "size": 544,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/704-binary-search.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/704-binary-search.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/0e1f05269a2f944f1459b3661a65ccb2706f73f8",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Arrays/704-binary-search.ts",
+      "type": "file",
+      "content": "Ly8gNzA0LiBCaW5hcnkgU2VhcmNoCi8vIGh0dHBzOi8vbGVldGNvZGUuY29t\nL3Byb2JsZW1zL2JpbmFyeS1zZWFyY2gvCi8vIGltcGxlbWVudCBiaW5hcnkg\nc2VhcmNoIG9uIHNvcnRlZCBhcnJheQoKZnVuY3Rpb24gYmluYXJ5U2VhcmNo\nKG51bXM6IG51bWJlcltdLCB0YXJnZXQ6IG51bWJlcikgewogIGxldCBsZWZ0\nID0gMDsKICBsZXQgcmlnaHQgPSBudW1zLmxlbmd0aCAtIDE7CiAgbGV0IG1p\nZDsKCiAgd2hpbGUgKGxlZnQgPD0gcmlnaHQpIHsKICAgIC8vIG1pZCA9IChs\nZWZ0ICsgcmlnaHQpID4+IDE7CiAgICAvLyBtaWQgPSBNYXRoLmZsb29yKChy\naWdodCtsZWZ0KSAvIDIpOwogICAgbWlkID0gKChyaWdodCAtIGxlZnQpID4+\nIDEpICsgbGVmdDsKCiAgICBpZiAobnVtc1ttaWRdID09PSB0YXJnZXQpIHsK\nICAgICAgcmV0dXJuIG1pZDsKICAgIH0KCiAgICBpZiAodGFyZ2V0IDwgbnVt\nc1ttaWRdKSB7CiAgICAgIHJpZ2h0ID0gbWlkIC0gMTsKICAgIH0gZWxzZSB7\nCiAgICAgIGxlZnQgPSBtaWQgKyAxOwogICAgfQogIH0KCiAgcmV0dXJuIC0x\nOwp9Cg==\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/704-binary-search.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/0e1f05269a2f944f1459b3661a65ccb2706f73f8",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/704-binary-search.ts"
+      }
+    },
+    {
+      "name": "21-valid-parentheses.ts",
+      "path": "src/Engineering/Arrays/21-valid-parentheses.ts",
+      "sha": "775c472c059f4ffedfffa7f412da6a5b8901a406",
+      "size": 1005,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/21-valid-parentheses.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/21-valid-parentheses.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/775c472c059f4ffedfffa7f412da6a5b8901a406",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Arrays/21-valid-parentheses.ts",
+      "type": "file",
+      "content": "Ly8gMjAuIFZhbGlkIFBhcmVudGhlc2VzCi8vIGh0dHBzOi8vbGVldGNvZGUu\nY29tL3Byb2JsZW1zL3ZhbGlkLXBhcmVudGhlc2VzLwovLyBHaXZlbiBhIHN0\ncmluZyBzIGNvbnRhaW5pbmcganVzdCB0aGUgY2hhcmFjdGVycwovLyAnKCcs\nICcpJywgJ3snLCAnfScsICdbJyBhbmQgJ10nLAovLyBkZXRlcm1pbmUgaWYg\ndGhlIGlucHV0IHN0cmluZyBpcyB2YWxpZC4gQW4gaW5wdXQgc3RyaW5nIGlz\nIHZhbGlkIGlmOgovLyAxLiBPcGVuIGJyYWNrZXRzIG11c3QgYmUgY2xvc2Vk\nIGJ5IHRoZSBzYW1lIHR5cGUgb2YgYnJhY2tldHMuCi8vIDIuIE9wZW4gYnJh\nY2tldHMgbXVzdCBiZSBjbG9zZWQgaW4gdGhlIGNvcnJlY3Qgb3JkZXIuCi8v\nIElucHV0OiBzID0gIigpIgovLyBPdXRwdXQ6IHRydWUKLy8gSW5wdXQ6IHMg\nPSAiKF0iCi8vIE91dHB1dDogZmFsc2UKCmZ1bmN0aW9uIGlzVmFsaWQoczog\nc3RyaW5nKSB7CiAgLy8gdG8ga2VlcCBjb3JyZXNwb25kaW5nIGJyYWNrZXRz\nLCBsZXQncyBtYWtlIGEgbWF0Y2hpbmcgbWFwCiAgY29uc3Qgb3BlblRvQ2xv\nc2UgPSBuZXcgTWFwKFsKICAgIFsneycsICd9J10sCiAgICBbJygnLCAnKSdd\nLAogICAgWydbJywgJ10nXSwKICBdKTsKCiAgY29uc3Qgc3RhY2sgPSBbXTsK\nICBmb3IgKGxldCBpID0gMDsgaSA8IHMubGVuZ3RoOyBpKyspIHsKICAgIGlm\nIChvcGVuVG9DbG9zZS5oYXMoc1tpXSkpIHsKICAgICAgc3RhY2sucHVzaChz\nW2ldKTsgLy8gYWRkIG9wZW5pbmcgYnJhY2tldCBpbnRvIHRoZSBzdGFjawog\nICAgfSBlbHNlIHsKICAgICAgLy8gaXQgaGFzIHRvIGJlIGNsb3NpbmcgYnJh\nY2tldCBBTkQgbWF0Y2ggdGhlIGxhc3Qgb3BlbmluZyBicmFja2V0CiAgICAg\nIGNvbnN0IGxhc3QgPSBzdGFjay5wb3AoKTsKICAgICAgaWYgKHNbaV0gIT09\nIG9wZW5Ub0Nsb3NlLmdldChsYXN0KSkgcmV0dXJuIGZhbHNlOwogICAgfQog\nIH0KCiAgcmV0dXJuIHN0YWNrLmxlbmd0aCA9PT0gMDsgLy8gc3RhY2sgc2hv\ndWxkIGJlIGVtcHR5Cn0K\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/21-valid-parentheses.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/775c472c059f4ffedfffa7f412da6a5b8901a406",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/21-valid-parentheses.ts"
+      }
+    },
+    {
+      "name": "122-best-time-to-buy-and-sell-stock-ii.ts",
+      "path": "src/Engineering/Arrays/122-best-time-to-buy-and-sell-stock-ii.ts",
+      "sha": "6a8ee88211450904dc6d40005fd34e60113c3649",
+      "size": 360,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/122-best-time-to-buy-and-sell-stock-ii.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/122-best-time-to-buy-and-sell-stock-ii.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/6a8ee88211450904dc6d40005fd34e60113c3649",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Arrays/122-best-time-to-buy-and-sell-stock-ii.ts",
+      "type": "file",
+      "content": "Ly8gMTIyLiBCZXN0IFRpbWUgdG8gQnV5IGFuZCBTZWxsIFN0b2NrIElJCi8v\nIGh0dHBzOi8vbGVldGNvZGUuY29tL3Byb2JsZW1zL2Jlc3QtdGltZS10by1i\ndXktYW5kLXNlbGwtc3RvY2staWkvCi8vIEZpbmQgYW5kIHJldHVybiB0aGUg\nbWF4aW11bSBwcm9maXQgeW91IGNhbiBhY2hpZXZlLgovLyBZb3UgY2FuIG9u\nbHkgaG9sZCBhdCBtb3N0IG9uZSBzaGFyZSBvZiB0aGUgc3RvY2sgYXQgYW55\nIHRpbWUuCi8vIChObyBzaG9ydHMgcGxheWluZykKCmNvbnN0IG1heFByb2Zp\ndDIgPSAocDogbnVtYmVyW10pID0+IHAucmVkdWNlKChhLCBlLCBpKSA9PiAo\nZSA8IHBbaSArIDFdID8gKGEgKz0gcFtpICsgMV0gLSBlKSA6IGEpLCAwKTsK\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Arrays/122-best-time-to-buy-and-sell-stock-ii.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/6a8ee88211450904dc6d40005fd34e60113c3649",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Arrays/122-best-time-to-buy-and-sell-stock-ii.ts"
+      }
+    },
+    {
+      "name": "200-number-of-islands.ts",
+      "path": "src/Engineering/2d and Matrix/200-number-of-islands.ts",
+      "sha": "bb602070237aa70d314db091cd650bf4041b4333",
+      "size": 1076,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/2d%20and%20Matrix/200-number-of-islands.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/2d%20and%20Matrix/200-number-of-islands.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/bb602070237aa70d314db091cd650bf4041b4333",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/2d%20and%20Matrix/200-number-of-islands.ts",
+      "type": "file",
+      "content": "Ly8gMjAwLiBOdW1iZXIgb2YgSXNsYW5kcwovLyBodHRwczovL2xlZXRjb2Rl\nLmNvbS9wcm9ibGVtcy9udW1iZXItb2YtaXNsYW5kcy8KLy8gR2l2ZW4gYW4g\nbSB4IG4gMkQgYmluYXJ5IGdyaWQgZ3JpZCB3aGljaCByZXByZXNlbnRzIGEg\nbWFwIG9mICcxJ3MgKGxhbmQpIGFuZCAnMCdzICh3YXRlciksIHJldHVybiB0\naGUgbnVtYmVyIG9mIGlzbGFuZHMuCgpmdW5jdGlvbiBudW1Jc2xhbmRzKGdy\naWQ6IHN0cmluZ1tdW10pIHsKICBjb25zdCBtID0gZ3JpZFswXS5sZW5ndGg7\nCiAgY29uc3QgbiA9IGdyaWQubGVuZ3RoOwoKICBsZXQgY291bnQgPSAwOwog\nIGNvbnN0IGRpciA9IFsKICAgIFswLCAxXSwKICAgIFsxLCAwXSwKICAgIFsw\nLCAtMV0sCiAgICBbLTEsIDBdLAogIF07CgogIGZvciAobGV0IGkgPSAwOyBp\nIDwgbjsgaSsrKSB7CiAgICBmb3IgKGxldCBqID0gMDsgaiA8IG07IGorKykg\newogICAgICBpZiAoZ3JpZFtpXVtqXSA9PT0gJzEnKSB7CiAgICAgICAgY291\nbnQrKzsKCiAgICAgICAgY29uc3QgcXVldWUgPSBbW2ksIGpdXTsKCiAgICAg\nICAgd2hpbGUgKHF1ZXVlLmxlbmd0aCA+IDApIHsKICAgICAgICAgIGNvbnN0\nIFt5LCB4XSA9IHF1ZXVlLnNoaWZ0KCk7CiAgICAgICAgICBncmlkW3ldW3hd\nID0gJzAnOwoKICAgICAgICAgIGZvciAobGV0IGsgPSAwOyBrIDwgZGlyLmxl\nbmd0aDsgaysrKSB7CiAgICAgICAgICAgIGNvbnN0IG5leHRYID0geCArIGRp\ncltrXVswXTsKICAgICAgICAgICAgY29uc3QgbmV4dFkgPSB5ICsgZGlyW2td\nWzFdOwoKICAgICAgICAgICAgaWYgKG5leHRYID49IDAgJiYgbmV4dFggPCBt\nICYmIG5leHRZID49IDAgJiYgbmV4dFkgPCBuICYmIGdyaWRbbmV4dFldW25l\neHRYXSA9PT0gJzEnKSB7CiAgICAgICAgICAgICAgcXVldWUucHVzaChbbmV4\ndFksIG5leHRYXSk7CgogICAgICAgICAgICAgIC8vIHdoeSB0aGVyZSBpcyBh\nIGxvb3Agd2l0aG91dCBpdD8KICAgICAgICAgICAgICBncmlkW25leHRZXVtu\nZXh0WF0gPSAnMCc7CiAgICAgICAgICAgIH0KICAgICAgICAgIH0KICAgICAg\nICB9CiAgICAgIH0KICAgIH0KICB9CgogIHJldHVybiBjb3VudDsKfQo=\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/2d%20and%20Matrix/200-number-of-islands.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/bb602070237aa70d314db091cd650bf4041b4333",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/2d%20and%20Matrix/200-number-of-islands.ts"
+      }
+    },
+    {
+      "name": "1.c",
+      "path": "leetcode/src/1.c",
+      "sha": "53f260a10bb87e0bf4c7f4f1f566e0e08d7f6019",
+      "size": 402,
+      "url": "https://api.github.com/repos/TheAlgorithms/C/contents/leetcode/src/1.c?ref=master",
+      "html_url": "https://github.com/TheAlgorithms/C/blob/master/leetcode/src/1.c",
+      "git_url": "https://api.github.com/repos/TheAlgorithms/C/git/blobs/53f260a10bb87e0bf4c7f4f1f566e0e08d7f6019",
+      "download_url": "https://raw.githubusercontent.com/TheAlgorithms/C/master/leetcode/src/1.c",
+      "type": "file",
+      "content": "aW50ICp0d29TdW0oaW50ICpudW1zLCBpbnQgbnVtc1NpemUsIGludCB0YXJn\nZXQsIGludCAqcmV0dXJuU2l6ZSkKewogICAgaW50IGksIGo7CiAgICBpbnQg\nKnJldCA9IGNhbGxvYygyLCBzaXplb2YoaW50KSk7CiAgICBmb3IgKGkgPSAw\nOyBpIDwgbnVtc1NpemU7IGkrKykKICAgIHsKICAgICAgICBpbnQga2V5ID0g\ndGFyZ2V0IC0gbnVtc1tpXTsKICAgICAgICBmb3IgKGogPSBpICsgMTsgaiA8\nIG51bXNTaXplOyBqKyspCiAgICAgICAgICAgIGlmIChudW1zW2pdID09IGtl\neSkKICAgICAgICAgICAgewogICAgICAgICAgICAgICAgcmV0WzBdID0gaTsK\nICAgICAgICAgICAgICAgIHJldFsxXSA9IGo7CiAgICAgICAgICAgIH0KICAg\nIH0KICAgICpyZXR1cm5TaXplID0gMjsKICAgIHJldHVybiByZXQ7Cn0K\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/TheAlgorithms/C/contents/leetcode/src/1.c?ref=master",
+        "git": "https://api.github.com/repos/TheAlgorithms/C/git/blobs/53f260a10bb87e0bf4c7f4f1f566e0e08d7f6019",
+        "html": "https://github.com/TheAlgorithms/C/blob/master/leetcode/src/1.c"
+      }
+    },
+    {
+      "name": "SlowSort.java",
+      "path": "src/main/java/com/thealgorithms/sorts/SlowSort.java",
+      "sha": "1ab8ceea4fdf87d5b621b39847ba5422f5df19fd",
+      "size": 770,
+      "url": "https://api.github.com/repos/TheAlgorithms/Java/contents/src/main/java/com/thealgorithms/sorts/SlowSort.java?ref=master",
+      "html_url": "https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java",
+      "git_url": "https://api.github.com/repos/TheAlgorithms/Java/git/blobs/1ab8ceea4fdf87d5b621b39847ba5422f5df19fd",
+      "download_url": "https://raw.githubusercontent.com/TheAlgorithms/Java/master/src/main/java/com/thealgorithms/sorts/SlowSort.java",
+      "type": "file",
+      "content": "cGFja2FnZSBjb20udGhlYWxnb3JpdGhtcy5zb3J0czsKCi8qKgogKiBAYXV0\naG9yIEFtaXIgSGFzc2FuIChodHRwczovL2dpdGh1Yi5jb20vYWhzTlQpCiAq\nIEBzZWUgU29ydEFsZ29yaXRobQogKi8KcHVibGljIGNsYXNzIFNsb3dTb3J0\nIGltcGxlbWVudHMgU29ydEFsZ29yaXRobSB7CgogICAgQE92ZXJyaWRlCiAg\nICBwdWJsaWMgPFQgZXh0ZW5kcyBDb21wYXJhYmxlPFQ+PiBUW10gc29ydChU\nW10gdW5zb3J0ZWRBcnJheSkgewogICAgICAgIHNvcnQodW5zb3J0ZWRBcnJh\neSwgMCwgdW5zb3J0ZWRBcnJheS5sZW5ndGggLSAxKTsKICAgICAgICByZXR1\ncm4gdW5zb3J0ZWRBcnJheTsKICAgIH0KCiAgICBwcml2YXRlIDxUIGV4dGVu\nZHMgQ29tcGFyYWJsZTxUPj4gdm9pZCBzb3J0KFRbXSBhcnJheSwgaW50IGks\nIGludCBqKSB7CiAgICAgICAgaWYgKFNvcnRVdGlscy5ncmVhdGVyT3JFcXVh\nbChpLCBqKSkgewogICAgICAgICAgICByZXR1cm47CiAgICAgICAgfQogICAg\nICAgIGludCBtID0gKGkgKyBqKSAvIDI7CiAgICAgICAgc29ydChhcnJheSwg\naSwgbSk7CiAgICAgICAgc29ydChhcnJheSwgbSArIDEsIGopOwogICAgICAg\nIGlmIChTb3J0VXRpbHMubGVzcyhhcnJheVtqXSwgYXJyYXlbbV0pKSB7CiAg\nICAgICAgICAgIFQgdGVtcCA9IGFycmF5W2pdOwogICAgICAgICAgICBhcnJh\neVtqXSA9IGFycmF5W21dOwogICAgICAgICAgICBhcnJheVttXSA9IHRlbXA7\nCiAgICAgICAgfQogICAgICAgIHNvcnQoYXJyYXksIGksIGogLSAxKTsKICAg\nIH0KfQo=\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/TheAlgorithms/Java/contents/src/main/java/com/thealgorithms/sorts/SlowSort.java?ref=master",
+        "git": "https://api.github.com/repos/TheAlgorithms/Java/git/blobs/1ab8ceea4fdf87d5b621b39847ba5422f5df19fd",
+        "html": "https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java"
+      }
+    },
+    {
+      "name": "fibonacci.go",
+      "path": "dynamic/fibonacci.go",
+      "sha": "288b82b1c03e42a456ccf0dd1a78049eada511d1",
+      "size": 375,
+      "url": "https://api.github.com/repos/TheAlgorithms/Go/contents/dynamic/fibonacci.go?ref=master",
+      "html_url": "https://github.com/TheAlgorithms/Go/blob/master/dynamic/fibonacci.go",
+      "git_url": "https://api.github.com/repos/TheAlgorithms/Go/git/blobs/288b82b1c03e42a456ccf0dd1a78049eada511d1",
+      "download_url": "https://raw.githubusercontent.com/TheAlgorithms/Go/master/dynamic/fibonacci.go",
+      "type": "file",
+      "content": "cGFja2FnZSBkeW5hbWljCgovLyBodHRwczovL3d3dy5nZWVrc2ZvcmdlZWtz\nLm9yZy9wcm9ncmFtLWZvci1udGgtZmlib25hY2NpLW51bWJlci8KCi8vIE50\naEZpYm9uYWNjaSByZXR1cm5zIHRoZSBudGggRmlib25hY2NpIE51bWJlcgpm\ndW5jIE50aEZpYm9uYWNjaShuIHVpbnQpIHVpbnQgewoJaWYgbiA9PSAwIHsK\nCQlyZXR1cm4gMAoJfQoKCS8vIG4xIGFuZCBuMiBhcmUgdGhlIChpLTEpdGgg\nYW5kIGl0aCBGaWJvbmFjY2kgbnVtYmVycywgcmVzcGVjdGl2ZWx5Cgl2YXIg\nbjEsIG4yIHVpbnQgPSAwLCAxCgoJZm9yIGkgOj0gdWludCgxKTsgaSA8IG47\nIGkrKyB7CgkJbjMgOj0gbjEgKyBuMgoJCW4xID0gbjIKCQluMiA9IG4zCgl9\nCgoJcmV0dXJuIG4yCn0K\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/TheAlgorithms/Go/contents/dynamic/fibonacci.go?ref=master",
+        "git": "https://api.github.com/repos/TheAlgorithms/Go/git/blobs/288b82b1c03e42a456ccf0dd1a78049eada511d1",
+        "html": "https://github.com/TheAlgorithms/Go/blob/master/dynamic/fibonacci.go"
+      }
+    },
+    {
+      "name": "hanoi.rs",
+      "path": "src/general/hanoi.rs",
+      "sha": "e98f32b28c5fbc1da015e3b88d497b20c1bbe4b2",
+      "size": 594,
+      "url": "https://api.github.com/repos/TheAlgorithms/Rust/contents/src/general/hanoi.rs?ref=master",
+      "html_url": "https://github.com/TheAlgorithms/Rust/blob/master/src/general/hanoi.rs",
+      "git_url": "https://api.github.com/repos/TheAlgorithms/Rust/git/blobs/e98f32b28c5fbc1da015e3b88d497b20c1bbe4b2",
+      "download_url": "https://raw.githubusercontent.com/TheAlgorithms/Rust/master/src/general/hanoi.rs",
+      "type": "file",
+      "content": "cHViIGZuIGhhbm9pKG46IGkzMiwgZnJvbTogaTMyLCB0bzogaTMyLCB2aWE6\nIGkzMiwgbW92ZXM6ICZtdXQgVmVjPChpMzIsIGkzMik+KSB7CiAgICBpZiBu\nID4gMCB7CiAgICAgICAgaGFub2kobiAtIDEsIGZyb20sIHZpYSwgdG8sIG1v\ndmVzKTsKICAgICAgICBtb3Zlcy5wdXNoKChmcm9tLCB0bykpOwogICAgICAg\nIGhhbm9pKG4gLSAxLCB2aWEsIHRvLCBmcm9tLCBtb3Zlcyk7CiAgICB9Cn0K\nCiNbY2ZnKHRlc3QpXQptb2QgdGVzdHMgewogICAgdXNlIHN1cGVyOjoqOwoK\nICAgICNbdGVzdF0KICAgIGZuIGhhbm9pX3NpbXBsZSgpIHsKICAgICAgICBs\nZXQgY29ycmVjdF9zb2x1dGlvbjogVmVjPChpMzIsIGkzMik+ID0KICAgICAg\nICAgICAgdmVjIVsoMSwgMyksICgxLCAyKSwgKDMsIDIpLCAoMSwgMyksICgy\nLCAxKSwgKDIsIDMpLCAoMSwgMyldOwogICAgICAgIGxldCBtdXQgb3VyX3Nv\nbHV0aW9uOiBWZWM8KGkzMiwgaTMyKT4gPSBWZWM6Om5ldygpOwogICAgICAg\nIGhhbm9pKDMsIDEsIDMsIDIsICZtdXQgb3VyX3NvbHV0aW9uKTsKICAgICAg\nICBhc3NlcnRfZXEhKGNvcnJlY3Rfc29sdXRpb24sIG91cl9zb2x1dGlvbik7\nCiAgICB9Cn0K\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/TheAlgorithms/Rust/contents/src/general/hanoi.rs?ref=master",
+        "git": "https://api.github.com/repos/TheAlgorithms/Rust/git/blobs/e98f32b28c5fbc1da015e3b88d497b20c1bbe4b2",
+        "html": "https://github.com/TheAlgorithms/Rust/blob/master/src/general/hanoi.rs"
+      }
+    },
+    {
+      "name": "Permutations_Lexicg_Order.ts",
+      "path": "src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts",
+      "sha": "6f29aa17164c63f76a2dc064fceefbdbadaef8c1",
+      "size": 1261,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/6f29aa17164c63f76a2dc064fceefbdbadaef8c1",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts",
+      "type": "file",
+      "content": "Ly8gSW1wbGVtZW50YXRpb24gZXhhbXBsZXM6Ci8vIEphdmE6IEhlYXAncyBh\nbGdvcml0aG0sIFJlY3Vyc2l2ZSwgSXRlcmF0aXZlLCBSYW5kb21pemVkCi8v\nIGh0dHBzOi8vd3d3LnRlY2hpZWRlbGlnaHQuY29tL3N0ZF9uZXh0X3Blcm11\ndGF0aW9uLW92ZXJ2aWV3LWltcGxlbWVudGF0aW9uLwovLyBodHRwczovL3d3\ndy5iYWVsZHVuZy5jb20vamF2YS1hcnJheS1wZXJtdXRhdGlvbnMjOn46dGV4\ndD1QZXJtdXRhdGlvbnMlMjBvZiUyMGFuJTIwQXJyYXklMjBpbiUyMEphdmEl\nMjAxJTIwSW50cm9kdWN0aW9uLGxvb2slMjBhdCUyMGlzJTIwSGVhcCUyN3Ml\nMjBhbGdvcml0aG0uJTIwLi4uJTIwNCUyMENvbmNsdXNpb24KLy8gaHR0cHM6\nLy93d3cuZ2Vla3Nmb3JnZWVrcy5vcmcvd3JpdGUtYS1jLXByb2dyYW0tdG8t\ncHJpbnQtYWxsLXBlcm11dGF0aW9ucy1vZi1hLWdpdmVuLXN0cmluZy8KLy8g\naHR0cHM6Ly93d3cudGVjaGllZGVsaWdodC5jb20vZ2VuZXJhdGUtcGVybXV0\nYXRpb25zLXN0cmluZy1qYXZhLXJlY3Vyc2l2ZS1pdGVyYXRpdmUvCi8vCi8v\nICJQZXJtdXRhdGlvbiBHZW5lcmF0aW9uIE1ldGhvZHMiIFJPQkVSVCBTRURH\nRVdsQ0ssIDE5NzcKLy8gaHR0cDovL2hvbWVwYWdlLmRpdm1zLnVpb3dhLmVk\ndS9+Z29vZG1hbi8yMm0xNTAuZGlyLzIwMDcvUGVybXV0YXRpb24lMjBHZW5l\ncmF0aW9uJTIwTWV0aG9kcy5wZGYKLy8KLy8gTGV4aWNvZ3JhcGhpY2FsbHkg\ncHJldmlvdXMgcGVybXV0YXRpb24gKGxvb2tzIGxpa2UgaXQgbm90IHdvcmsg\ncHJvcGVybHkpCi8vIGh0dHBzOi8vd3d3LmdlZWtzZm9yZ2Vla3Mub3JnL2xl\neGljb2dyYXBoaWNhbGx5LXByZXZpb3VzLXBlcm11dGF0aW9uLWluLWMvCi8v\nCi8vIEl0ZXJhdGl2ZSBhcHByb2FjaCB0byBmaW5kIHBlcm11dGF0aW9ucyBv\nZiBhIHN0cmluZyBpbiBDKyssIEphdmEgYW5kIFB5dGhvbgovLyBodHRwczov\nL3d3dy50ZWNoaWVkZWxpZ2h0LmNvbS9maW5kLXBlcm11dGF0aW9ucy1zdHJp\nbmctY3BwLWphdmEtaXRlcmF0aXZlLwovLwovLyBMZXhpY29ncmFwaGljYWxs\neSBwcmV2aW91cyBwZXJtdXRhdGlvbiBXaXRoIE9uZSBzd2FwCi8vIGh0dHBz\nOi8vYWxnb3JpdGhtcy50dXRvcmlhbGhvcml6b24uY29tL2xleGljb2dyYXBo\naWNhbGx5LXByZXZpb3VzLXBlcm11dGF0aW9uLXdpdGgtb25lLXN3YXAvP3No\nYXJlPWZhY2Vib29rCgpleHBvcnQgZnVuY3Rpb24gcGVybXV0YXRpb25zTGV4\naWNnT3JkZXIobDogbnVtYmVyW10pOiBudW1iZXIgewogIHJldHVybiAwOwp9\nCg==\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/6f29aa17164c63f76a2dc064fceefbdbadaef8c1",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts"
+      }
+    },
+    {
+      "name": "BucketSort.js",
+      "path": "Sorts/BucketSort.js",
+      "sha": "a6cc2200fa35ef2d15db3e217a65fba2a8e28831",
+      "size": 2244,
+      "url": "https://api.github.com/repos/TheAlgorithms/JavaScript/contents/Sorts/BucketSort.js?ref=master",
+      "html_url": "https://github.com/TheAlgorithms/JavaScript/blob/master/Sorts/BucketSort.js",
+      "git_url": "https://api.github.com/repos/TheAlgorithms/JavaScript/git/blobs/a6cc2200fa35ef2d15db3e217a65fba2a8e28831",
+      "download_url": "https://raw.githubusercontent.com/TheAlgorithms/JavaScript/master/Sorts/BucketSort.js",
+      "type": "file",
+      "content": "LyoqCiAqIEJ1Y2tldFNvcnQgaW1wbGVtZW50YXRpb24uCiAqCiAqIFdpa2lw\nZWRpYSBzYXlzOiBCdWNrZXQgc29ydCwgb3IgYmluIHNvcnQsIGlzIGEgc29y\ndGluZyBhbGdvcml0aG0gdGhhdCB3b3JrcyBieSBkaXN0cmlidXRpbmcgdGhl\nIGVsZW1lbnRzIG9mIGFuIGFycmF5CiAqIGludG8gYSBudW1iZXIgb2YgYnVj\na2V0cy4gRWFjaCBidWNrZXQgaXMgdGhlbiBzb3J0ZWQgaW5kaXZpZHVhbGx5\nLCBlaXRoZXIgdXNpbmcgYSBkaWZmZXJlbnQgc29ydGluZyBhbGdvcml0aG0s\nIG9yIGJ5CiAqIHJlY3Vyc2l2ZWx5IGFwcGx5aW5nIHRoZSBidWNrZXQgc29y\ndGluZyBhbGdvcml0aG0uIEl0IGlzIGEgZGlzdHJpYnV0aW9uIHNvcnQsIGFu\nZCBpcyBhIGNvdXNpbiBvZiByYWRpeCBzb3J0IGluIHRoZQogKiBtb3N0IHRv\nIGxlYXN0IHNpZ25pZmljYW50IGRpZ2l0IGZsYXZvdXIuIEJ1Y2tldCBzb3J0\nIGlzIGEgZ2VuZXJhbGl6YXRpb24gb2YgcGlnZW9uaG9sZSBzb3J0LiBCdWNr\nZXQgc29ydCBjYW4gYmUKICogaW1wbGVtZW50ZWQgd2l0aCBjb21wYXJpc29u\ncyBhbmQgdGhlcmVmb3JlIGNhbiBhbHNvIGJlIGNvbnNpZGVyZWQgYSBjb21w\nYXJpc29uIHNvcnQgYWxnb3JpdGhtLiBUaGUgY29tcHV0YXRpb25hbAogKiBj\nb21wbGV4aXR5IGVzdGltYXRlcyBpbnZvbHZlIHRoZSBudW1iZXIgb2YgYnVj\na2V0cy4KICoKICogQHNlZSBodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lr\naS9CdWNrZXRfc29ydCM6fjp0ZXh0PUJ1Y2tldCUyMHNvcnQlMkMlMjBvciUy\nMGJpbiUyMHNvcnQsYXBwbHlpbmclMjB0aGUlMjBidWNrZXQlMjBzb3J0aW5n\nJTIwYWxnb3JpdGhtLiZ0ZXh0PVNvcnQlMjBlYWNoJTIwbm9uJTJEZW1wdHkl\nMjBidWNrZXQuCiAqCiAqIFRpbWUgQ29tcGxleGl0eSBvZiBTb2x1dGlvbjoK\nICogQmVzdCBDYXNlIE8obik7IEF2ZXJhZ2UgQ2FzZSBPKG4pOyBXb3JzdCBD\nYXNlIE8obikKICoKICogQHBhcmFtIHtudW1iZXJbXX0gbGlzdCBUaGUgYXJy\nYXkgb2YgbnVtYmVycyB0byBiZSBzb3J0ZWQuCiAqIEBwYXJhbSB7bnVtYmVy\nfSBzaXplIFRoZSBzaXplIG9mIHRoZSBidWNrZXRzIHVzZWQuIElmIG5vdCBw\ncm92aWRlZCwgc2l6ZSB3aWxsIGJlIDUuCiAqIEByZXR1cm4ge251bWJlcltd\nfSBBbiBhcnJheSBvZiBudW1iZXJzIHNvcnRlZCBpbiBpbmNyZWFzaW5nIG9y\nZGVyLgogKi8KZXhwb3J0IGZ1bmN0aW9uIGJ1Y2tldFNvcnQobGlzdCwgc2l6\nZSkgewogIGlmICh1bmRlZmluZWQgPT09IHNpemUpIHsKICAgIHNpemUgPSA1\nCiAgfQogIGlmIChsaXN0Lmxlbmd0aCA9PT0gMCkgewogICAgcmV0dXJuIGxp\nc3QKICB9CiAgbGV0IG1pbiA9IGxpc3RbMF0KICBsZXQgbWF4ID0gbGlzdFsw\nXQogIC8vIGZpbmQgbWluIGFuZCBtYXgKICBmb3IgKGxldCBpTGlzdCA9IDA7\nIGlMaXN0IDwgbGlzdC5sZW5ndGg7IGlMaXN0KyspIHsKICAgIGlmIChsaXN0\nW2lMaXN0XSA8IG1pbikgewogICAgICBtaW4gPSBsaXN0W2lMaXN0XQogICAg\nfSBlbHNlIGlmIChsaXN0W2lMaXN0XSA+IG1heCkgewogICAgICBtYXggPSBs\naXN0W2lMaXN0XQogICAgfQogIH0KICAvLyBob3cgbWFueSBidWNrZXRzIHdl\nIG5lZWQKICBjb25zdCBjb3VudCA9IE1hdGguZmxvb3IoKG1heCAtIG1pbikg\nLyBzaXplKSArIDEKCiAgLy8gY3JlYXRlIGJ1Y2tldHMKICBjb25zdCBidWNr\nZXRzID0gW10KICBmb3IgKGxldCBpQ291bnQgPSAwOyBpQ291bnQgPCBjb3Vu\ndDsgaUNvdW50KyspIHsKICAgIGJ1Y2tldHMucHVzaChbXSkKICB9CgogIC8v\nIGJ1Y2tldCBmaWxsCiAgZm9yIChsZXQgaUJ1Y2tldCA9IDA7IGlCdWNrZXQg\nPCBsaXN0Lmxlbmd0aDsgaUJ1Y2tldCsrKSB7CiAgICBjb25zdCBrZXkgPSBN\nYXRoLmZsb29yKChsaXN0W2lCdWNrZXRdIC0gbWluKSAvIHNpemUpCiAgICBi\ndWNrZXRzW2tleV0ucHVzaChsaXN0W2lCdWNrZXRdKQogIH0KICBjb25zdCBz\nb3J0ZWQgPSBbXQogIC8vIG5vdyBzb3J0IGV2ZXJ5IGJ1Y2tldCBhbmQgbWVy\nZ2UgaXQgdG8gdGhlIHNvcnRlZCBsaXN0CiAgZm9yIChsZXQgaUJ1Y2tldCA9\nIDA7IGlCdWNrZXQgPCBidWNrZXRzLmxlbmd0aDsgaUJ1Y2tldCsrKSB7CiAg\nICBjb25zdCBhcnIgPSBidWNrZXRzW2lCdWNrZXRdLnNvcnQoKGEsIGIpID0+\nIGEgLSBiKQogICAgZm9yIChsZXQgaVNvcnRlZCA9IDA7IGlTb3J0ZWQgPCBh\ncnIubGVuZ3RoOyBpU29ydGVkKyspIHsKICAgICAgc29ydGVkLnB1c2goYXJy\nW2lTb3J0ZWRdKQogICAgfQogIH0KICByZXR1cm4gc29ydGVkCn0K\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/TheAlgorithms/JavaScript/contents/Sorts/BucketSort.js?ref=master",
+        "git": "https://api.github.com/repos/TheAlgorithms/JavaScript/git/blobs/a6cc2200fa35ef2d15db3e217a65fba2a8e28831",
+        "html": "https://github.com/TheAlgorithms/JavaScript/blob/master/Sorts/BucketSort.js"
+      }
+    },
+    {
+      "name": "Types.ts",
+      "path": "src/Engineering/Types.ts",
+      "sha": "1f9339921e912cc7f1009940ddbb6bc70fdf4e1f",
+      "size": 104,
+      "url": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Types.ts?ref=master",
+      "html_url": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Types.ts",
+      "git_url": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/1f9339921e912cc7f1009940ddbb6bc70fdf4e1f",
+      "download_url": "https://raw.githubusercontent.com/Viktor286/code-samples/master/src/Engineering/Types.ts",
+      "type": "file",
+      "content": "ZXhwb3J0IHR5cGUgQWxwaGFudW1lcmljID0gbnVtYmVyIHwgc3RyaW5nOwoK\nZXhwb3J0IHR5cGUgU2VyaWFsaXplZEJpVHJlZSA9IEFycmF5PEFscGhhbnVt\nZXJpYyB8IG51bGw+Owo=\n",
+      "encoding": "base64",
+      "_links": {
+        "self": "https://api.github.com/repos/Viktor286/code-samples/contents/src/Engineering/Types.ts?ref=master",
+        "git": "https://api.github.com/repos/Viktor286/code-samples/git/blobs/1f9339921e912cc7f1009940ddbb6bc70fdf4e1f",
+        "html": "https://github.com/Viktor286/code-samples/blob/master/src/Engineering/Types.ts"
+      }
+    }
+  ]
+}

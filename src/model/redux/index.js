@@ -6,6 +6,7 @@ import { statsReducer as stats } from './stats';
 import { sampleReducer as sample } from './sample';
 import { uiReducer as ui } from './ui';
 import { userSettingsReducer as userSettings } from './userSettings';
+import { eventsReducer as events } from './events';
 
 export const reducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ export const reducer = combineReducers({
   sample,
   ui,
   userSettings,
+  events,
 });
 
 const initStore = () => {

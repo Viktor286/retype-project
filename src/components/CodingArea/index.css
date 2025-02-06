@@ -3,12 +3,12 @@ section.codingArea {
     font-weight: 300;
     position: relative;
     margin: 0 50px 190px;
-    background-color: hsl(223deg 5% 12%);
+    background-color: var(--main-bg);
     padding: 5px 30px 20px;
     border-radius: 20px;
     text-align: left;
     max-width: 80%;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 body.completed section.codingArea {
@@ -20,13 +20,15 @@ body.completed section.codingArea {
 
 div.line {
     display: flex;
+    position: relative;
     margin: 3px 0;
     padding: 0px;
 }
 
 div.line .code {
-    display: block;
+    display: inline;
     white-space: pre-wrap;
+    width: 100%; /* Adjusted to prevent overflow issues */
 }
 
 div.line.active {
@@ -37,16 +39,55 @@ div.line.active {
     color: hsl(217deg 15% 34%);
 }
 
+span.token {
+    position: relative;
+    /*white-space: nowrap;*/
+}
+
 /* Char Sections */
 span.char {
+    transition: color 0.2s ease;
     padding: 0 0 0 0;
+    position: relative;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translateY(-30px); opacity: 0; }
+}
+
+span.char div.char-bubble {
+    z-index: 99999;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 7px 15px;
+    border-radius: 6px;
+    text-align: left;
+    animation: floatUp 2s ease forwards;
+    will-change: transform, opacity;
+    white-space: nowrap;
+    color: #fff0cb;
+    /*color: #bfe098;*/
+    background: #333949;
+    border: 1px solid #62815f;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+span.char div.char-bubble span {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #768e98;
 }
 
 span.char.skip {
     color: hsl(199deg 10% 44%);
     font-style: italic;
     font-weight: 300;
-    font-size: .78em;
+    font-size: 1em; /* Adjusted for consistency */
 }
 
 span.char.tab.skip {

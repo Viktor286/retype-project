@@ -1,39 +1,211 @@
-.main-app-logo {
-    color: #9cc4e2;
-    margin: 40px 0 0 0;
+[class~='ant-col'] {
+    background: transparent;
+    border: 0;
 }
 
-.main-app-logo svg {
-    height: 150px;
-    width: 200px;
-}
-
-section.landingContent {
+[class~='ant-col'] > a > div {
     display: flex;
-    overflow: hidden;
-    align-items: center;
-    flex-direction: column;
     justify-content: center;
+    align-items: start;
+}
 
+pre {
+    padding: 8px 16px;
+    font-size: 13px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+pre.demo-code {
+    direction: ltr;
+}
+
+.ant-col {
+    padding: 0;
+}
+
+.withDefaultAnimation {
+    transition: all 0.2s, background 0s;
+    transition-behavior: normal, normal;
+    transition-duration: 0.2s, 0s;
+    transition-timing-function: ease, ease;
+    transition-delay: 0s, 0s;
+}
+
+.demo-logo-vertical {
+    height: 100px;
+}
+
+/*
+
+
+Coding sample:
+
+
+*/
+body {
+    background: #262b2f;
+}
+
+.callout {
+    color: white;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 150%;
+    margin: 25px 0 50px;
+}
+
+.callout h2 {
+    color: #b8d8ea;
+    margin: 0 0 10px;
+    font-weight: normal;
+}
+
+section pre {
+    font-family: monospace,monospace;
+    font-size: 1em;
+    background: none;
+    color: #9297ac;
+    padding: 20px;
+}
+
+section.spacer {
+    height: 150px;
+}
+
+a.code-link {
+    padding: 0;
+    margin: 0;
     width: 100%;
-    min-height: 100vh;
+    position: relative;
+    display: block;
+}
 
+.code-zone-box {
+    overflow: hidden;
+    height: 320px;
+    font-size: 14px;
+    line-height: 120px;
+    background: #2b3740;
+
+    border-radius: 8px;
+    padding: 7px;
     color: white;
 }
 
-section.landingContent section {
-    margin: 10px 0 30px 0;
+a.code-link:hover .code-zone-box {
+    background: #354856;
 }
 
-section.landingContent h2 {
-    font-size: 2.1rem;
-    font-weight: 100;
-    margin: 5px 0 15px;
-    text-align: center;
+a.code-link:hover .code-zone-box div.code-zone-border {
+    background: #354856;
 }
 
-section.landingContent h2 div.mainCategory {
-    font-size: 1.1rem;
-    margin: 0 10px 30px 10px;
-    color: #6a7487;
+div.code-zone-border {
+    height: 15px;
+    position: absolute;
+    width: calc(100% - 16px);
+    bottom: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: #2b3740;
+}
+
+div.code-shelf-row {
+    margin-bottom: 30px;
+}
+
+section.codeZone {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+    line-height: 120%;
+    margin: 10px 0 0 0;
+}
+
+h2.codePreview {
+    line-height: 120%;
+    text-align: left;
+    font-size: 1.5rem;
+    color: #dbf2ff;
+    font-weight: normal;
+    margin: 0 0 7px 0;
+}
+
+h2.codePreview span {
+    font-size: 12px;
+    color: #597082;
+}
+
+h2.codePreview {
+    color: white;
+}
+
+a.code-link:hover h2.codePreview {
+    color: #ffba6b;
+}
+
+section.codeZone div.line {
+    display: flex;
+    margin: 3px 0;
+    padding: 0px;
+    line-height: 15px;
+}
+
+section.codeZone div.line .code {
+    display: block;
+    white-space: pre-wrap;
+    width: calc(100% + 1px); /* fixing bug with wrap sometime things it needs to do break while we still have a room */
+}
+
+/* Char Sections */
+section.codeZone span.char {
+    padding: 0 0 0 0;
+}
+
+section.codeZone span.char.skip {
+    color: hsl(199deg 10% 44%);
+    font-style: italic;
+    font-weight: 300;
+    font-size: .78em;
+}
+
+section.codeZone span.char.tab.skip {
+    color: hsl(217deg 11% 27%);
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+section.codeZone div.char.lineNum {
+    color: #5f7593;
+    font-size: .8em;
+    font-style: italic;
+    font-weight: 300;
+    width: 1.8em;
+    margin-right: 0.2em;
+}
+
+section.codeZone div.line.active div.char.lineNum {
+    color: hsl(214deg 20% 50%);
+}
+
+section.codeZone .fade-in-typing-mode span.char.await {
+    color: hsl(217deg 11% 27%);
+}
+
+section.codeZone span.char.tab, span.char.lineBreak {
+    /*color: hsl(208deg 20% 50%);*/
+    color: hsl(208deg 18% 42%);
+
+}
+
+section.codeZone span.char.tab {
+    margin: 0 5px 0 0;
+}
+
+section.codeZone span.lineBreak {
+    margin: 0 5px;
 }

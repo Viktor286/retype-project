@@ -5,7 +5,10 @@ import convertMarkdownFile from './convertMarkdownFile';
 
 const textCharsLimit = 20000;
 
-export default async function CreateCodeSample({ fileName, content, html_url, credentials }) {
+// TODO: for the CodeSample model we will have to set the limit of content length as a rule for database
+//  there is no reason to parse the endpoint if it's too long
+
+export default async function CreateCodeSample({ fileName, content, html_url, credentials = {} }) {
   let text = decodeURIComponent(escape(window.atob(content)));
   text = text.replaceAll('\ufeff', '');
   if (text.length > textCharsLimit) text = text.slice(0, textCharsLimit);
@@ -24,17 +27,45 @@ export default async function CreateCodeSample({ fileName, content, html_url, cr
     }
   }
 
-  return {
+  const mainCodeSampleModel = {
     id: Math.random().toString(36).slice(2),
     title: fileName,
+    totalChars,
+    contentAsText: text,
+    contentLinesLen: contentAs2dArray.length,
+    createdAt: new Date().getTime(),
+    html_url,
+    credentialRefs: {
+      // todo: extract into converter
+      license: {
+        key: credentials?.license?.key,
+        name: credentials?.license?.name,
+        spdx_id: credentials?.license?.spdx_id,
+      },
+      licenseOriginUrl: credentials?.licenseOriginUrl,
+      owner: credentials?.owner,
+      repo: credentials?.repo,
+    },
+  };
+
+  // language: programming language of code (JavaScript, TypeScript),
+  //   difficulty: skill level required (beginner, intermediate, advanced),
+  //   tags: related topics, concepts or technologies (networking, sockets, server).
+  // rating: user-based score (1-5, 1-lowest, 5-highest).
+
+  // console.log('@@ mainCodeSampleModel', JSON.stringify(mainCodeSampleModel));
+
+  const viewCodeSampleModel = {
     contentAsLines,
     contentAs2dArray,
     skipMask2dArray,
     subDivisions,
-    totalChars,
-    contentLinesLen: contentAs2dArray.length,
-    createdAt: new Date().getTime(),
-    html_url,
     credentials,
+  };
+  // console.log('@@ viewCodeSampleModel', viewCodeSampleModel);
+
+  return {
+    ...mainCodeSampleModel,
+    ...viewCodeSampleModel,
   };
 }

@@ -1,222 +1,173 @@
+import React, { useEffect, useState } from 'react';
 import './index.css';
+import { Col, Layout, Row, theme } from 'antd';
+import useBreakpoint from '../../hooks/useBreakpoint';
+import { ShowcaseCode } from './ShowcaseCode';
+import { PostShowcaseContent } from './PostShowcaseContent';
+import { AsideDrawer } from './AsideDrawer';
 
-export default function LandingPage() {
-  return (
-    <div className="CodeTrainerApp">
-      <section className={'landingContent'}>
-        <section>
-          {/*<div dangerouslySetInnerHTML={{ __html: svgLogo }} className="main-app-logo" />*/}
-          {/*<h2>*/}
-          {/*  Retype Project*/}
-          {/*  <div className="mainCategory">typing trainer for opensource</div>*/}
-          {/*</h2>*/}
-        </section>
-        <section>
-          <h2>Improve programming skills by retyping code</h2>
-          <p>
-            Code writing requires special kind of typing skill, a bit different from regular text typing.
-            <br />
-            In order to get comfortable and fast in coding it's important to practice the special characters
-            flow of symbols like brackets, semicolons, math operators and others.
-            <br />
-            Typos and mistakes can significantly interrupt working process which decreases both dev speed and
-            dev experience.
-          </p>
-          <p>
-            The great way to achieve good results is retyping real-life code examples. Learn to write code
-            faster mastering your keyboarding technique.
-            <br />
-            With a great code-typing skill you will get more freedom in creating your projects without paying
-            attention the cost of complex code syntax patterns.
-            <br />
-          </p>
-        </section>
+const { Header, Content, Footer } = Layout;
 
-        <a href="HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js">
-          <img
-            src="https://d3ly1egw9wtkcf.cloudfront.net/img/rt-demo.gif"
-            alt="retype app demonstration"
-            width="1000px"
-          />
-        </a>
-
-        <section>
-          <h2>
-            Use "Retype Project" to exercise any open source code file from the largest repository in the
-            world! <br />
-            Python, Javascript, PHP, C, C++, Java — all top programming languages.
-          </h2>
-          <p>
-            Add "rt" text after the "github" domain name before ".com" to get github file as code typing
-            training session.
-          </p>
-          {/* eslint-disable no-script-url */}
-          <p>Or use bookmarklet to easy switch between github and retype: </p>
-          <pre>
-            {
-              "javascript:(() => {let l = window.location; let h = l.host; let c = l.href; let rt = 'retypeproject.com'; let g = 'github.com'; \n l.href = h == rt ? c.replace(rt, g) : h == g ? c.replace(g, rt) : 'https://' + rt})();"
-            }
-          </pre>
-          {/* cool image example */}
-        </section>
-
-        <section>
-          <h2>Get in touch with new programming languages, syntax and APIs quickly</h2>
-          <p>
-            The world has plenty of different code syntax, interfaces, special frameworks and sometimes you
-            need to quickly switch gears between something like python's NumPy and javascript's React.
-          </p>
-          <p>
-            Just a couple of exercise per day/week will help you to quickly adapt to a new programing
-            language, interface or framework pattern.
-          </p>
-          <p>
-            Example: i am rarely write SQL queries by hand but i don't want to forget how to write complex
-            JOINs constructions, so as part of my typing training routine from time to time i write several
-            SQL commands just to refresh my memory.
-            <br />
-          </p>
-        </section>
-
-        <section>
-          <h2>Try speed code typing training examples</h2>
-          <ul>
-            <li>
-              <a href="HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js">
-                HowProgrammingWorks/Socket/blob/master/JavaScript/1-tcp-server.js
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/C/blob/master/leetcode/src/1.c">
-                TheAlgorithms/C/blob/master/leetcode/src/1.c
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java">
-                TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/sorts/SlowSort.java
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl">
-                TheAlgorithms/Julia/blob/main/src/knapsack/dynamic_programming.jl
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Go/blob/master/dynamic/fibonacci.go">
-                TheAlgorithms/Go/blob/master/dynamic/fibonacci.go
-              </a>
-            </li>
-            <li>
-              <a href="facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js">
-                facebook/react/blob/main/packages/react-dom/src/client/ReactDOMHostConfig.js
-              </a>
-            </li>
-            <li>
-              <a href="numpy/numpy/blob/main/numpy/typing/_array_like.py">
-                numpy/numpy/blob/main/numpy/typing/_array_like.py
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/PHP/blob/master/String/EditDistance.php">
-                /TheAlgorithms/PHP/blob/master/String/EditDistance.php
-              </a>
-            </li>
-            <li>
-              <a href="AppFlowy-IO/AppFlowy-Server/blob/main/services/http_server/src/main.rs">
-                AppFlowy-IO/AppFlowy-Server/blob/main/services/http_server/src/main.rs
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Rust/blob/master/src/general/hanoi.rs">
-                TheAlgorithms/Rust/blob/master/src/general/hanoi.rs
-              </a>
-            </li>
-            <li>
-              <a href="Viktor286/code-samples/blob/master/src/Engineering/Types.ts">
-                Viktor286/code-samples/blob/master/src/Engineering/Types.ts
-              </a>
-            </li>
-            <li>
-              <a href="Viktor286/code-samples/blob/master/src/Engineering/Combinatorics/Permutations_Lexicg_Order.ts">
-                Long line Permutations_Lexicg_Order.ts
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js">
-                TheAlgorithms/Javascript/blob/master/Sorts/GnomeSort.js
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js">
-                TheAlgorithms/Javascript/blob/master/Sorts/InsertionSort.js
-              </a>
-            </li>
-            <li>
-              <a href="Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/02_PreOrder_Iterative.ts">
-                Viktor286/code-samples/blob/master/src/Engineering/BinaryTrees/02_PreOrder_Iterative.ts
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js">
-                TheAlgorithms/Javascript/blob/master/Sorts/BucketSort.js
-              </a>
-            </li>
-            <li>
-              <a href="TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py">
-                TheAlgorithms/Python/blob/master/cellular_automata/game_of_life.py
-              </a>
-            </li>
-            <li>
-              <a href="trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js">
-                trekhleb/javascript-algorithms/blob/master/src/data-structures/queue/Queue.js
-              </a>
-            </li>
-            <li>
-              <a href="megadose/holehe/blob/master/holehe/instruments.py">
-                megadose/holehe/blob/master/holehe/instruments.py
-              </a>
-            </li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Discover Github</h2>
-          <p>
-            Github is awesome community to discover new ideas, people, approaches, trends. <br />
-            Don't forget to checkout{' '}
-            <a href="https://github.com/trending?since=weekly">trending repos and developers</a> out there.
-          </p>
-        </section>
-
-        <section>
-          <h2>Create your own typing playlist</h2>
-          <p>
-            Make your own training program as collection of files in your github repository and have your own
-            custom coding exercise set.
-          </p>
-          <p>If you're logged in then you can have access to unlicensed files from your repository.</p>
-        </section>
-
-        <section>
-          <h2>Typing skill required!</h2>
-          <p>
-            If you are new in typing and if you want to learn how to increase your level of touch typing,
-            there is several great resources to start with:{' '}
-            <a href="https://www.typing.com/" target="_blank" rel="noreferrer">
-              one
-            </a>
-            ,{' '}
-            <a href="https://www.ratatype.com/learn/" target="_blank" rel="noreferrer">
-              two
-            </a>
-            ,{' '}
-            <a href="https://www.keybr.com/" target="_blank" rel="noreferrer">
-              three
-            </a>
-          </p>
-          {/*<p>You also can use touch typing exercises from github repository.</p>*/}
-        </section>
-      </section>
-    </div>
-  );
+async function loadFrontPageContent() {
+  const res = await fetch('/data/showcase/js-01.json');
+  return await res.json();
 }
+
+const LandingPage = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const [pageContent, setPageContent] = useState({ resourcesList: [] });
+  const currentBreakpoint = useBreakpoint((breakpoint) => {
+    setColCount(breakpointToColCount(breakpoint));
+  });
+  const [colCount, setColCount] = useState(breakpointToColCount(currentBreakpoint));
+
+  useEffect(() => {
+    loadFrontPageContent().then((result) => {
+      setPageContent(result);
+    });
+  }, []);
+
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
+  const numOfElements = pageContent.resourcesList.length;
+  const numOfRows = Math.ceil(numOfElements / colCount);
+
+  const table = [];
+  let idx = 0;
+  for (let row = 0; row < numOfRows; row++) {
+    const cols = [];
+    for (let col = 0; col < colCount; col++, idx++) {
+      cols.push(pageContent.resourcesList[idx]);
+    }
+    table.push(cols);
+  }
+
+  return (
+    <Layout hasSider style={{ background: 'var(--main-bg)' }}>
+      {/*<AsideDrawer collapsed={collapsed} setCollapsed={setCollapsed} />*/}
+      <Layout
+        className={`withDefaultAnimation`}
+        // style={{ marginLeft: collapsed ? 80 : 200, backgroundColor: 'var(--main-bg)' }}
+        style={{ marginLeft: 0, backgroundColor: 'var(--main-bg)' }}
+      >
+        <div className="header-backplate"></div>
+        <Header
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 1,
+            width: '100%',
+            height: '120px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'var(--lighter-bg)',
+          }}
+        >
+          {/*<a href="/" className="home-logo">*/}
+          <div className="box-logo" style={{ transform: 'scale(1)' }}>
+            <div className="retype-logo">
+              <div className="logo-icon">Rt</div>
+              <div className="left-side">
+                <div className="text-title">Retype_</div>
+                <div className="sub-title">project</div>
+              </div>
+            </div>
+          </div>
+          {/*</a>*/}
+          {/*<Menu*/}
+          {/*  theme="dark"*/}
+          {/*  mode="horizontal"*/}
+          {/*  defaultSelectedKeys={['2']}*/}
+          {/*  items={new Array(3).fill(null).map((_, index) => ({*/}
+          {/*    key: String(index + 1),*/}
+          {/*    label: `nav ${index + 1}`,*/}
+          {/*  }))}*/}
+          {/*/>*/}
+        </Header>
+
+        <Content style={{ margin: '24px 16px 0', overflow: 'initial', backgroundColor: 'var(--main-bg)' }}>
+          <section className="callout">
+            <h2>Improve code patterns, focus and fine motor skills by retyping stuff</h2>
+            <p>
+              In the digital world of global communications, AI, brain-computer interfaces... the ability to
+              type stuff seems to stay one of the main ways to create and research.
+            </p>
+          </section>
+          <div
+            style={{
+              padding: 24,
+              textAlign: 'center',
+            }}
+          >
+            {table.map((cols) => (
+              <Row gutter={[16, 16]} className="code-shelf-row">
+                {cols.map(
+                  (row) =>
+                    row?.sha && (
+                      <Col key={row.sha} span={24 / colCount}>
+                        <ShowcaseCode codeContent={row} />
+                      </Col>
+                    ),
+                )}
+              </Row>
+            ))}
+            {/*Another Row:*/}
+            {/*<Row gutter={[16, 16]}>{cols}</Row>*/}
+          </div>
+          <PostShowcaseContent />
+          <section className="spacer"></section>
+        </Content>
+
+        <Footer
+          className={`withDefaultAnimation`}
+          style={{
+            textAlign: 'center',
+            position: 'fixed',
+            bottom: 0,
+            zIndex: 100,
+            // width: `calc(100% - ${collapsed ? 80 : 200}px)`,
+            width: `calc(100% - 0px)`,
+            background: 'var(--lighter-bg)',
+            padding: '0',
+            height: '30px',
+          }}
+        >
+          ...
+        </Footer>
+      </Layout>
+    </Layout>
+  );
+};
+
+function breakpointToColCount(breakpoint) {
+  let targetColCount = 3;
+  switch (breakpoint) {
+    case 'xs':
+      targetColCount = 1;
+      break;
+    case 'sm':
+      targetColCount = 1;
+      break;
+    case 'md':
+      targetColCount = 1;
+      break;
+    case 'lg':
+      targetColCount = 2;
+      break;
+    case 'xl':
+      targetColCount = 2;
+      break;
+    case 'xxl':
+      targetColCount = 3;
+      break;
+    case 'xxxl':
+      targetColCount = 4;
+      break;
+  }
+  return targetColCount;
+}
+
+export default LandingPage;
