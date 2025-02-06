@@ -28,7 +28,7 @@ div.line {
 div.line .code {
     display: inline;
     white-space: pre-wrap;
-    width: calc(100% + 1px); /* fixing bug with wrap sometime things it needs to do break while we still have a room */
+    width: 100%; /* Adjusted to prevent overflow issues */
 }
 
 div.line.active {
@@ -41,11 +41,12 @@ div.line.active {
 
 span.token {
     position: relative;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 /* Char Sections */
 span.char {
+    transition: color 0.2s ease;
     padding: 0 0 0 0;
     position: relative;
 }
@@ -66,6 +67,7 @@ span.char div.char-bubble {
     border-radius: 6px;
     text-align: left;
     animation: floatUp 2s ease forwards;
+    will-change: transform, opacity;
     white-space: nowrap;
     color: #fff0cb;
     /*color: #bfe098;*/
@@ -85,7 +87,7 @@ span.char.skip {
     color: hsl(199deg 10% 44%);
     font-style: italic;
     font-weight: 300;
-    font-size: .78em;
+    font-size: 1em; /* Adjusted for consistency */
 }
 
 span.char.tab.skip {
