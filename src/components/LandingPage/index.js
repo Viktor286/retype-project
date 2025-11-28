@@ -90,7 +90,7 @@ const LandingPage = () => {
 
         <Content style={{ margin: '24px 16px 0', overflow: 'initial', backgroundColor: 'var(--main-bg)' }}>
           <section className="callout">
-            <h2>Improve code patterns, focus and fine motor skills by retyping stuff</h2>
+            <h2>Improve typing and code patterns by retyping stuff</h2>
             <p>
               In the digital world of global communications, AI, brain-computer interfaces... the ability to
               type stuff seems to stay one of the main ways to create and research.
